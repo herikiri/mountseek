@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140519091035) do
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
   create_table "pictures", force: true do |t|
-    t.string   "image"
+    t.string   "name"
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.datetime "created_at"
@@ -42,10 +42,6 @@ ActiveRecord::Schema.define(version: 20140519091035) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
