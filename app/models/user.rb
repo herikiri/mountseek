@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_one :picture, as: :imageable
+  has_one :profile
 
 	TEMP_EMAIL = 'change@me.com'
   TEMP_EMAIL_REGEX = /change@me.com/
@@ -26,13 +26,14 @@ class User < ActiveRecord::Base
       # Create the user if it is a new registration
       if user.nil?
         user = User.new(
-          username: auth.extra.raw_info.name,
+          username: auth.extra.raw_info.name.downcase,
           #username: auth.info.nickname || auth.uid,
           email: email ? email : TEMP_EMAIL,
           password: Devise.friendly_token[0,20],
         )
         if user.save!
-          user_avatar = user.build_picture
+          user_profile = user.create_profile
+          user_avatar = user_profile.build_picture
           user_avatar.remote_name_url = auth[:info][:image]
           user_avatar.save!
         end

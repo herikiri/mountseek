@@ -39,9 +39,15 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :production do
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor', '0.0.2'
+end
+
 gem 'devise'
-gem 'omniauth'
-gem 'omniauth-facebook'
+#gem 'jwt'
+#gem 'omniauth'
+#gem 'omniauth-facebook'
 gem 'carrierwave'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
