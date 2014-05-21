@@ -5,3 +5,49 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Type.delete_all
+Package.delete_all
+
+horse = Type.create(name: "Horse")
+stud = Type.create(name: "Stud")
+tack = Type.create(name: "Tack")
+trailer = Type.create(name: "Trailer")
+real_estate = Type.create(name: "Real Estate")
+service = Type.create(name: "Service")
+
+
+horse.packages.create([
+	{name: "Basic", price: 0, duration: 3, max_photo_upload: 0, max_video_upload: 0},
+	{name: "Premium", price: 9.95, duration: 3, max_photo_upload: 15, max_video_upload: 0},
+	{name: "Deluxe", price: 18.95, duration: 3, max_photo_upload: 15, max_video_upload: 2},
+	{name: "Exclusive", price: 29.95, duration: 3, max_photo_upload: 15, max_video_upload: 4}
+	])
+
+stud.packages.create([
+	{name: "Basic", price: 0, duration: 3, max_photo_upload: 0, max_video_upload: 0},
+	{name: "Premium", price: 9.95, duration: 3, max_photo_upload: 15, max_video_upload: 0},
+	{name: "Deluxe", price: 18.95, duration: 3, max_photo_upload: 15, max_video_upload: 2},
+	{name: "Exclusive", price: 49.95, duration: 6, max_photo_upload: 15, max_video_upload: 4}
+	])
+
+tack.packages.create([
+	{name: "Basic", price: 0, duration: 3, max_photo_upload: 0, max_video_upload: 0},
+	{name: "Premium", price: 2.95, duration: 3, max_photo_upload: 5, max_video_upload: 0}
+	])
+
+trailer.packages.create([
+	{name: "Basic", price: 0, duration: 3, max_photo_upload: 0, max_video_upload: 0},
+	{name: "Premium", price: 9.95, duration: 3, max_photo_upload: 15, max_video_upload: 0}
+	])
+
+real_estate.packages.create([
+	{name: "Basic", price: 0, duration: 3, max_photo_upload: 0, max_video_upload: 0},
+	{name: "Premium", price: 19.95, duration: 3, max_photo_upload: 12, max_video_upload: 0},
+	{name: "Deluxe", price: 29.95, duration: 3, max_photo_upload: 20, max_video_upload: 2}
+	])
+
+service.packages.create([
+	{name: "Basic", price: 0, duration: 12, max_photo_upload: 0, max_video_upload: 0},
+	{name: "Premium", price: 14.95, duration: 12, max_photo_upload: 10, max_video_upload: 2}
+	])
