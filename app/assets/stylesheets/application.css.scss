@@ -14,23 +14,21 @@
  *= require_self
  */
 
-
 .navbar-fixed-top {
 	margin-bottom: 0px;
-	
+}
 
-	.navbar-inner {
-		height: 60px;
+.navbar-inner {
+	height: 60px;
+}
 
-		.container {
-			margin-top: 10px;
-		}
-	}
+.navbar-inner  .container {
+	margin-top: 10px;
+}
 
-	#avatar {
-		width: 50px;
-		height: auto;
-		border-radius: 50%;
-	}
+#avatar {
+	width: 50px;
+	height: auto;
+	border-radius: 50%;
 }
 
