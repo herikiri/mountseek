@@ -42,7 +42,7 @@ gem 'spring'
  
 
 gem 'pg', '0.15.1'
-gem 'rails_12factor', '0.0.2'
+gem 'rails_12factor', '0.0.2',  group: :production
 
 
 gem 'devise'
@@ -54,3 +54,12 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 #gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: 'bootstrap3'
 #gem 'bootstrap-on-rails'
+
+
+group :development do
+	gem 'quiet_assets'
+	gem 'debugger'
+	gem 'better_errors'
+	gem 'binding_of_caller'
+	gem 'rails_best_practices'
+end
