@@ -37,6 +37,17 @@
       color: #49B198;
     }
 
+    .dropdown-menu {
+      li > a {
+        color: #49B198;
+      }
+
+      li > a:hover {
+        color: #fffffd;
+        background-color: #49B198;
+      }
+    }
+
 
 		#avatar {
 			width: 50px;

@@ -29,24 +29,24 @@
             
           </ul>
           <ul class="nav pull-right">
+            <li><a href="#"><i class="icon-plus icon-white"></i> Place Ad</a></li>
             <% unless user_signed_in? %>
-              <li><a href="#"><i class="icon-plus icon-white"></i> Place Ad</a></li>
               <li class="sign-up"><%= link_to "Sign up", new_user_registration_path %></li>
               <li class="sign-in"><%= link_to "Sign in", new_user_session_path %></li>
               <% else %>
               <li class="dropdown">
-                  <% if @user.profile.present? %>
-                    <img id="avatar" src=<%= @user.profile.picture.name_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
-                  <% else %>
-                    <img id="avatar" src="../../assets/grey1x1.png" class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
-                    
-                  <% end %>
-                 
-                  <ul class="dropdown-menu">
-                    <li><%= link_to "Dashboard", dashboard_path %></li>
-                    <li class="divider"></li>
-                    <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-                  </ul>
+                <% if @user.profile.present? %>
+                  <img id="avatar" src=<%= @user.profile.picture.name_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
+                <% else %>
+                  <img id="avatar" src="../../assets/grey1x1.png" class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
+                  
+                <% end %>
+               
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Dashboard", dashboard_path %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                </ul>
                 </li>
             <% end %>
           </ul>
