@@ -1,10 +1,10 @@
 <div class="container advanced-search">
 	<div class="row-fluid">
-	  <div class="span6">
+	  <div class="span8">
 			<form>
-				<h4>Tacks</h4>
+				<h4><i class="icon-shopping-cart"></i> Tacks</h4>
 				<div class="row-fluid">
-	      	<div class="span6">
+	      	<div class="span4">
 				    <label class="checkbox">
 				      <input type="checkbox"> All Tack
 				    </label>
@@ -29,7 +29,10 @@
 				    <label class="checkbox">
 				      <input type="checkbox"> Girths
 				    </label>
-				    <label class="checkbox">
+	      	</div>
+
+	      	<div class="span4">
+	      		<label class="checkbox">
 				      <input type="checkbox"> Grooming
 				    </label>
 				    <label class="checkbox">
@@ -41,10 +44,6 @@
 				    <label class="checkbox">
 				      <input type="checkbox"> Helmets
 				    </label>
-				    
-	      	</div>
-
-	      	<div class="span6">
 				    <label class="checkbox">
 				      <input type="checkbox"> Horse Boots
 				    </label>
@@ -57,7 +56,11 @@
 				    <label class="checkbox">
 				      <input type="checkbox"> Reins
 				    </label>
-				    <label class="checkbox">
+				   
+	      	</div>
+
+	      	<div class="span4">
+			     	<label class="checkbox">
 				      <input type="checkbox"> Saddle Bags
 				    </label>
 				    <label class="checkbox">
@@ -85,9 +88,9 @@
 	      </div>
     	</form>
 	  </div>
-	  <div class="span3">
+	  <div class="span2">
 			<form>
-				<h4>Types</h4>
+				<h4><i class="icon-flag"></i> Types</h4>
 				<div class="row-fluid">
 	      	<div class="span12">
 	      		<label class="checkbox">
@@ -106,9 +109,9 @@
       	</div>
     	</form>
 	  </div>
-	   <div class="span3">
+	   <div class="span2">
 			<form>
-				<h4>Conditions</h4>
+				<h4><i class="icon-question-sign"></i> Conditions</h4>
 				<div class="row-fluid">
 	      	<div class="span12">
 	      		<label class="checkbox">
@@ -132,7 +135,7 @@
 	  </div>
 	</div>
 	<hr class="divider">
-		<button type="submit" class="btn btn-primary" type="button">See Results</button>
-	<hr class="divider">
+	
+	<%= render "shared/search_category_button" %>
 
 </div>

@@ -20,6 +20,7 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li><%= link_to "Horses", horses_path %></li>
+          <li><%= link_to "Studs", studs_path %></li>
           <li><%= link_to "Trailers", trailers_path %></li>
           <li><%= link_to "Tacks", tacks_path %></li>
           <li><%= link_to "Real Estates", real_estates_path %></li>
@@ -31,7 +32,7 @@
             <li><%= link_to "Sign up", new_user_registration_path %></li>
             <li><%= link_to "Sign in", new_user_session_path %></li>
             <% else %>
-            <li><%= link_to "+ Place Ad",  "#" %></li>
+            <li><a href="#"><i class="icon-plus icon-white"></i> Place Ad</a></li>
             <li class="dropdown">
                 <img id="avatar" src=<%= @user.profile.picture.name_url %> class="dropdown-toggle" data-toggle="dropdown"/>
                 <ul class="dropdown-menu">
@@ -51,6 +52,33 @@
 
 <%= yield %>
 
+<div id="footer">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span6 join-us">
+        <div class="join-us">
+          <%= image_tag 'join-us.png' %>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="quick-links">
+          <ul class="nav nav-list">
+            <li class="nav-header">Quick Links</li>
+            <li><a href="#">Horses for sale</a></li>
+            <li><a href="#">Studs for sale</a></li>
+            <li><a href="#">Trailers for sale</a></li>
+            <li><a href="#">Tacks for sale</a></li>
+            <li><a href="#">Real Estates for sale</a></li>
+            <li><a href="#">Services</a></li>
+          </ul>
+          <span>© 2014 MountSeek. All Right Reserved</span>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>  
+</div>
 
 </body>
 </html>

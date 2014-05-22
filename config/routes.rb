@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'studs' => 'studs#index', via: [:get, :post], :as => :studs
   get 'services' => 'services#index', via: [:get, :post], :as => :services
   get 'real_estates' => 'real_estates#index', via: [:get, :post], :as => :real_estates
   get 'tacks' => 'tacks#index', via: [:get, :post], :as => :tacks

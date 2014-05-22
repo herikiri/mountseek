@@ -37,8 +37,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'debugger', group: [:development, :test]
 
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring'   
+   
  
 
 gem 'pg', '0.15.1'
@@ -57,6 +56,8 @@ gem "twitter-bootstrap-rails"
 
 
 group :development do
+	# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+	gem 'spring'
 	gem 'quiet_assets'
 	gem 'debugger'
 	gem 'better_errors'

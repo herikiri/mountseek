@@ -2,14 +2,47 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .jumbotron {
-	padding: 60px 0px 60px 0px;
+	padding: 100px 0px 0px 0px;
 	background-color: #eee;
-	height: auto;
-	margin-bottom: 20px;
+	height: 450px;
+	margin-bottom: 60px;
+	background: url("horse-banner.jpg") no-repeat 50%;;
 
 	#quick-search {
-		width: 500px;
-		height: 150px;
-		background-color: rgba(0, 221, 0, 0.1);
+		color: #fffffd;
+		width: 600px;
+		height: auto;
+		padding: 45px 20px;
+		background-color: rgba(0, 0, 0, 0.6);
+		border-top-right-radius: 0.5em;
+		border-bottom-right-radius:0.5em;
+
+		.nav-pills > li > a {
+				text-shadow: none;
+				color: #fffffd;
+		}
+
+		.nav-pills > li > a:hover {
+				background-color: #49b198;
+		}
+
+		.input-append .add-on {
+			background-color: #49b198;
+		}
+
+		
+	}
+
+	.form-search {
+		.input-append {
+			.input-large {
+				height: 25px;
+				width: 500px
+			}
+			.add-on {
+				width: 25px;
+				height: 25px;
+			}
+		}
 	}
 }
