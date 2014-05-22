@@ -4,10 +4,16 @@
 .jumbotron {
 	padding: 100px 0px 0px 0px;
 	background-color: #eee;
-	height: 450px;
+	height: 400px;
 	margin-bottom: 60px;
 	background-image: asset-url("horse-banner.jpg");
 	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
 
 	#quick-search {
 		color: #fffffd;
@@ -24,7 +30,7 @@
 		}
 
 		.nav-pills > li > a:hover {
-				background-color: #49b198;
+			background-color: #49b198;
 		}
 
 		.input-append .add-on {

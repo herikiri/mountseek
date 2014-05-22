@@ -17,28 +17,55 @@
 
 .navbar-fixed-top {
 	margin-bottom: 0px;
+
+	.navbar-inner {
+		padding: 5px 0px;
+    color: #fffffd;
+
+    background-image: linear-gradient(to bottom, #8DCBBC, #49B198);
+    border-bottom: solid 1px #49B198;
+
+    a {
+      color: #fffffd;
+    }
+
+    .nav > li > a {
+      color: #fffffd;
+    }
+
+    .nav > li > a:hover {
+      color: #49B198;
+    }
+
+
+		#avatar {
+			width: 50px;
+			height: auto;
+			border-radius: 50%;
+			background-color: #fffffd;
+		}
+
+    .sign-up {
+      a {
+        padding-right: 6px;
+      }
+    }
+
+    .sign-in {
+      border-left: 1px solid;
+      margin-top: 10px;
+
+      a {
+        padding: 0px 0px 0px 6px;
+      }
+    }
+
+	}
 }
 
-.navbar-inner {
-	height: 60px;
-}
 
-.navbar-inner  .container {
-	margin-top: 10px;
-}
 
-#avatar {
-	width: 50px;
-	height: auto;
-	border-radius: 50%;
-	background-color: #fffffd;
-}
 
-#avatar2 {
-	width: 50px;
-	height: auto;
-	background-color: #fffffd;
-}
 
 footer {
 
