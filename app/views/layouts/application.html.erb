@@ -8,77 +8,58 @@
 </head>
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="brand" href=<%= root_path %>>Mountseek</a>
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li><%= link_to "Horses", horses_path %></li>
-          <li><%= link_to "Studs", studs_path %></li>
-          <li><%= link_to "Trailers", trailers_path %></li>
-          <li><%= link_to "Tacks", tacks_path %></li>
-          <li><%= link_to "Real Estates", real_estates_path %></li>
-          <li><%= link_to "Services", services_path %></li>
-          
-        </ul>
-        <ul class="nav pull-right">
-          <% unless user_signed_in? %>
-            <li><%= link_to "Sign up", new_user_registration_path %></li>
-            <li><%= link_to "Sign in", new_user_session_path %></li>
-            <% else %>
-            <li><a href="#"><i class="icon-plus icon-white"></i> Place Ad</a></li>
-            <li class="dropdown">
-                <img id="avatar" src=<%= @user.profile.picture.name_url %> class="dropdown-toggle" data-toggle="dropdown"/>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "Dashboard", dashboard_path %></li>
-                  <li class="divider"></li>
-                  <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-                </ul>
-              </li>
-          <% end %>
-        </ul>
-      </div><!--/.nav-collapse -->
+<div id="wrapper">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="brand" href=<%= root_path %>>Mountseek</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><%= link_to "Horses", horses_path %></li>
+            <li><%= link_to "Studs", studs_path %></li>
+            <li><%= link_to "Trailers", trailers_path %></li>
+            <li><%= link_to "Tacks", tacks_path %></li>
+            <li><%= link_to "Real Estates", real_estates_path %></li>
+            <li><%= link_to "Services", services_path %></li>
+            
+          </ul>
+          <ul class="nav pull-right">
+            <% unless user_signed_in? %>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+              <% else %>
+              <li><a href="#"><i class="icon-plus icon-white"></i> Place Ad</a></li>
+              <li class="dropdown">
+                  <% if @user.profile.present? %>
+                    <img id="avatar" src=<%= @user.profile.picture.name_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
+                  <% else %>
+                    <img id="avatar" src="../../assets/grey1x1.png" class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
+                    
+                  <% end %>
+                 
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Dashboard", dashboard_path %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                  </ul>
+                </li>
+            <% end %>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </div>
   </div>
+
+  <%= yield %>
+
 </div>
 
 
-
-<%= yield %>
-
-<div id="footer">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span6 join-us">
-        <div class="join-us">
-          <%= image_tag 'join-us.png' %>
-        </div>
-      </div>
-      <div class="span6">
-        <div class="quick-links">
-          <ul class="nav nav-list">
-            <li class="nav-header">Quick Links</li>
-            <li><a href="#">Horses for sale</a></li>
-            <li><a href="#">Studs for sale</a></li>
-            <li><a href="#">Trailers for sale</a></li>
-            <li><a href="#">Tacks for sale</a></li>
-            <li><a href="#">Real Estates for sale</a></li>
-            <li><a href="#">Services</a></li>
-          </ul>
-          <span>© 2014 MountSeek. All Right Reserved</span>
-        </div>
-        
-      </div>
-    </div>
-    
-  </div>  
-</div>
 
 </body>
 </html>

@@ -14,6 +14,7 @@
  *= require_self
  */
 
+
 .navbar-fixed-top {
 	margin-bottom: 0px;
 }
@@ -30,11 +31,20 @@
 	width: 50px;
 	height: auto;
 	border-radius: 50%;
+	background-color: #fffffd;
 }
 
-#footer {
+#avatar2 {
+	width: 50px;
+	height: auto;
+	background-color: #fffffd;
+}
+
+footer {
+
 	color: #fffffd;
 	background-color: #393939;
+
 	.container {
 		padding: 20px 0px;
 
