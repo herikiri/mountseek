@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
@@ -33,13 +34,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-
-   
- 
-
 gem 'pg', '0.15.1'
 gem 'rails_12factor', '0.0.2',  group: :production
 
@@ -49,14 +43,12 @@ gem 'jwt'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'carrierwave'
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails"
-#gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: 'bootstrap3'
-#gem 'bootstrap-on-rails'
+gem 'less-rails' 
+gem 'twitter-bootstrap-rails'
+gem 'simple_form', '~> 3.0.2'
 
 
 group :development do
-	# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 	gem 'spring'
 	gem 'quiet_assets'
 	gem 'debugger'

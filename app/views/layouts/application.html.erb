@@ -20,16 +20,16 @@
         <a class="brand" href=<%= root_path %>>Mountseek</a>
         <div class="nav-collapse collapse">
           <ul class="nav">
-            <li><%= link_to "Horses", horses_path %></li>
-            <li><%= link_to "Studs", studs_path %></li>
-            <li><%= link_to "Trailers", trailers_path %></li>
-            <li><%= link_to "Tacks", tacks_path %></li>
-            <li><%= link_to "Real Estates", real_estates_path %></li>
-            <li><%= link_to "Services", services_path %></li>
+            <li><%= link_to "Horses", search_horses_path %></li>
+            <li><%= link_to "Studs", search_studs_path %></li>
+            <li><%= link_to "Trailers", search_trailers_path %></li>
+            <li><%= link_to "Tacks", search_tacks_path %></li>
+            <li><%= link_to "Real Estates", search_real_estates_path %></li>
+            <li><%= link_to "Services", search_services_path %></li>
             
           </ul>
           <ul class="nav pull-right">
-            <li><a href="#"><i class="icon-plus icon-white"></i> Place Ad</a></li>
+            <li><a href=<%= pricing_path %> ><i class="icon-plus icon-white"></i> Place Ad</a></li>
             <% unless user_signed_in? %>
               <li class="sign-up"><%= link_to "Sign up", new_user_registration_path %></li>
               <li class="sign-in"><%= link_to "Sign in", new_user_session_path %></li>

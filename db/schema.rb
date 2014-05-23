@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521040536) do
+ActiveRecord::Schema.define(version: 20140523065934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "ad_horses", force: true do |t|
+  create_table "horses", force: true do |t|
     t.string   "title"
     t.text     "description"
     t.string   "zip_code"
@@ -25,18 +25,21 @@ ActiveRecord::Schema.define(version: 20140521040536) do
     t.decimal  "price"
     t.boolean  "private_treaty"
     t.string   "ad_for"
-    t.string   "horse_name"
-    t.string   "horse_gender"
-    t.string   "horse_breed"
-    t.date     "horse_birth"
-    t.string   "horse_color"
-    t.decimal  "horse_height"
-    t.decimal  "horse_weight"
+    t.string   "name"
+    t.string   "gender"
+    t.string   "breed"
+    t.date     "birth"
+    t.string   "color"
+    t.decimal  "height"
+    t.decimal  "weight"
     t.integer  "package_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "horses", ["package_id"], name: "index_horses_on_package_id", using: :btree
+  add_index "horses", ["user_id"], name: "index_horses_on_user_id", using: :btree
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
