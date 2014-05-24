@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523065934) do
+ActiveRecord::Schema.define(version: 20140524063634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ads", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "adable_id"
+    t.string   "adable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
 
   create_table "horses", force: true do |t|
     t.string   "title"

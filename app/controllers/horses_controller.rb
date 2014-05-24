@@ -1,23 +1,36 @@
 class HorsesController < ApplicationController
+  before_action :set_user
 
   def create
-  	
-  	@horse = Horse.new(horse_params)
 
-    if @horse.save
-    	render :text => "<h1>Save Horse Success</h1></p>"
+  	horse = Horse.new(horse_params)
+    horse.user_id = @user.id
+    
+    ad = horse.ads.new
+    ad.user_id = @user.id
+    horse_pictures = horse.pictures.new(name: picture_param[:pictures])
 
-    	# redirect to preview ad
-      
-    else
-      render :text => "<h1>Save Horse Failed</h1></p>"
+    respond_to do |format|
+      if horse.save && ad.save! && horse_pictures.save!
+      	format.html { redirect_to preview_ad_url(horse), notice: 'Ad Horse Saved!' }
+      else
+        render :text => "<h1>Save Horse Failed</h1>"
+      end
     end
   end
 
   private 
   	def horse_params
-      params.require(:horse).permit(:title, :description, :zip_code, :city, :state, :price, :private_treaty, :ad_for, :name, :gender, :breed, :birth, :color, :height, :weight)
+      params.require(:horse).permit(:title, :description, :zip_code, :city, :state, :price, :private_treaty, :ad_for, :name, :gender, :breed, :birth, :color, :height, :weight, :user_id, :package_id)
     end
 
+    def picture_param
+      params.require(:horse).permit(:pictures)
+    end
+
+    def set_user
+      @user = current_user
+    end
 
 end
+

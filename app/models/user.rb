@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_one :profile
-  has_many :horses
+  has_many :ads
 
 	TEMP_EMAIL = 'change@me.com'
   TEMP_EMAIL_REGEX = /change@me.com/
