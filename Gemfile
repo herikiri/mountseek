@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+# ruby '2.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
@@ -46,7 +46,9 @@ gem 'carrierwave'
 gem 'less-rails' 
 gem 'twitter-bootstrap-rails'
 gem 'simple_form', '~> 3.0.2'
-
+gem "nprogress-rails", "~> 0.1.2.3"
+gem 'turbolinks_transitions'
+gem 'jquery-turbolinks'
 
 group :development do
 	gem 'spring'

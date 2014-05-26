@@ -11,7 +11,15 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+//= require nprogress
+//= require nprogress-turbolinks
+//= require turbolinks_transitions
 //= require_tree .
+
+$(document).on('page:fetch', function() { NProgress.start(); })
+$(document).on('page:change', function() { NProgress.done(); })
+$(document).on('page:restore', function() { NProgress.remove(); })
