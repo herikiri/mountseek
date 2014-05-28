@@ -1,10 +1,10 @@
 class AdsController < ApplicationController
 	before_action :set_package, except: [:pricing, :preview]
   before_action :set_user
+  before_action :authenticate_user!
 
   def horse
-    ad = @package.horses.new
-    @ad_horse = ad
+    @ad_horse = @package.horses.new
   end
 
   def stud
@@ -33,8 +33,18 @@ class AdsController < ApplicationController
   end
 
   def preview
-    ad_last = Ad.last
-    @ad = ad_last.adable_type.constantize.find(ad_last.adable_id)
+    @ad = Ad.last.adable_type.constantize.find(Ad.last.adable_id)
+  end
+
+  def publish
+    unless Ad.last.published?
+      Ad.last.publish!
+    end
+    @ad = Ad.last
+    redirect_to horse_ad_url(@ad)
+  end
+
+  def show
   end
 
 

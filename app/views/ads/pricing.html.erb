@@ -1,4 +1,5 @@
 <div class="container">
+  <br />
   <h4>Select Ad Type</h4>
   <ul class="nav nav-tabs" id="ads-tab">
     <li class="active"><a href="#horses">Horses</a></li>
@@ -11,71 +12,74 @@
    
   <h4>Select Ad Package</h4>
   <div class="tab-content">
-    <div class="tab-pane active" id="horses">
-      <dl>
+    <div class="row tab-pane active" id="horses">
+     
       <% @horsePackages.each do |package| %>
+      <dl class="span3 pricing-wrapper">
         <dt><%= link_to "Package #{package.name}", place_horse_path(package) %></dt>
           <dd>Price: <%= package.price %></dd>
           <dd>Duration: <%= package.duration %></dd>
           <dd>Max Photo Upload: <%= package.max_photo_upload %></dd>
           <dd>Max Video Upload: <%= package.max_video_upload %></dd>
-      <% end %>
       </dl>
+      <% end %>
+      
     </div>
-    <div class="tab-pane" id="studs">
-      <dl>
+    <div class="row tab-pane" id="studs">
       <% @studPackages.each do |package| %>
+      <dl class="span3 pricing-wrapper">
         <dt><%= link_to "Package #{package.name}", place_stud_path(package) %></dt>
           <dd>Price: <%= package.price %></dd>
           <dd>Duration: <%= package.duration %></dd>
           <dd>Max Photo Upload: <%= package.max_photo_upload %></dd>
           <dd>Max Video Upload: <%= package.max_video_upload %></dd>
-      <% end %>
       </dl>
+      <% end %>
+      
     </div>
-    <div class="tab-pane" id="trailers">
-      <dl>
+    <div class="row tab-pane" id="trailers">
       <% @trailerPackages.each do |package| %>
+      <dl class="span3 pricing-wrapper">
         <dt><%= link_to "Package #{package.name}", place_trailer_path(package) %></dt>
           <dd>Price: <%= package.price %></dd>
           <dd>Duration: <%= package.duration %></dd>
           <dd>Max Photo Upload: <%= package.max_photo_upload %></dd>
           <dd>Max Video Upload: <%= package.max_video_upload %></dd>
-      <% end %>
       </dl>
+      <% end %>
     </div>
-    <div class="tab-pane" id="tacks">
-      <dl>
+    <div class="row tab-pane" id="tacks">
       <% @tackPackages.each do |package| %>
+      <dl class="span3 pricing-wrapper">
         <dt><%= link_to "Package #{package.name}", place_tack_path(package) %></dt>
           <dd>Price: <%= package.price %></dd>
           <dd>Duration: <%= package.duration %></dd>
           <dd>Max Photo Upload: <%= package.max_photo_upload %></dd>
           <dd>Max Video Upload: <%= package.max_video_upload %></dd>
-      <% end %>
       </dl>
+      <% end %>
     </div>
-    <div class="tab-pane" id="real-estates">
-      <dl>
+    <div class="row tab-pane" id="real-estates"> 
       <% @realEstatePackages.each do |package| %>
+      <dl class="span3 pricing-wrapper">
         <dt><%= link_to "Package #{package.name}", place_real_estate_path(package) %></dt>
           <dd>Price: <%= package.price %></dd>
           <dd>Duration: <%= package.duration %></dd>
           <dd>Max Photo Upload: <%= package.max_photo_upload %></dd>
           <dd>Max Video Upload: <%= package.max_video_upload %></dd>
+         </dl>
       <% end %>
-      </dl>
     </div>
-    <div class="tab-pane" id="services">
-      <dl>
+    <div class="row tab-pane" id="services">
       <% @servicePackages.each do |package| %>
+      <dl class="span3 pricing-wrapper">
         <dt><%= link_to "Package #{package.name}", place_service_path(package) %></dt>
           <dd>Price: <%= package.price %></dd>
           <dd>Duration: <%= package.duration %></dd>
           <dd>Max Photo Upload: <%= package.max_photo_upload %></dd>
           <dd>Max Video Upload: <%= package.max_video_upload %></dd>
-      <% end %>
       </dl>
+      <% end %>
     </div>
   </div>
 

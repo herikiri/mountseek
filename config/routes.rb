@@ -2,9 +2,11 @@ Rails.application.routes.draw do
 
   resource :horses, :only => :create
 
+  get 'horse/:id' => 'ads#show', :as => :horse_ad
 
   get 'pricing' => 'ads#pricing', :as => :pricing
   get 'preview/:id' => 'ads#preview', :as => :preview_ad
+  get 'publish/:id' => 'ads#publish', :as => :publish_ad
   get 'place/horse/:id' => 'ads#horse', :as => :place_horse
   get 'place/stud/:id'  => 'ads#stud', :as => :place_stud
   get 'place/trailer/:id'  => 'ads#trailer', :as => :place_trailer

@@ -20,10 +20,13 @@ ActiveRecord::Schema.define(version: 20140524063634) do
     t.integer  "user_id"
     t.integer  "adable_id"
     t.string   "adable_type"
+    t.integer  "package_id"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "ads", ["package_id"], name: "index_ads_on_package_id", using: :btree
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
 
   create_table "horses", force: true do |t|

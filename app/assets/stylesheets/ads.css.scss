@@ -1,3 +1,64 @@
 // Place all the styles related to the ads controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+
+	.nav-tabs > li, .nav-pills > li {
+	  float:none;
+	  display:inline-block;
+	}
+
+	.nav-tabs {
+		text-align:center;
+	}
+
+	.tab-content {
+		.tab-pane {
+			width: auto;
+			margin: auto;
+			dl.pricing-wrapper {
+				width: auto;
+				padding: 10px;
+				
+			}
+		}
+	}
+
+}
+
+
+.form-wrapper {
+	
+	padding: 30px 10%;
+	border: dotted 1px;
+	margin-top:  40px;
+	text-align: center;
+
+	margin-bottom:  20px;
+	input {
+		width: 100%;
+	}
+
+	.checkbox {
+		text-align: left;
+	}
+
+	textarea {
+		width: 100%;
+	}
+
+	select {
+		width: 100%;
+	}
+
+	.span6 {
+		width: 46.8%;
+	}
+
+	.span4 {
+		width: 30%;
+	}
+
+		
+}

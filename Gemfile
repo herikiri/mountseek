@@ -49,6 +49,10 @@ gem 'simple_form', '~> 3.0.2'
 gem "nprogress-rails", "~> 0.1.2.3"
 gem 'turbolinks_transitions'
 gem 'jquery-turbolinks'
+gem 'carmen-rails', '~> 1.0.0'
+gem 'aasm'
+gem 'slim-rails'
+gem 'friendly_id', '~> 5.0.0'
 
 group :development do
 	gem 'spring'

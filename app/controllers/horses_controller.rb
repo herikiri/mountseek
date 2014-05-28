@@ -8,13 +8,14 @@ class HorsesController < ApplicationController
     
     ad = horse.ads.new
     ad.user_id = @user.id
+    ad.package_id = horse.package.id
     horse_pictures = horse.pictures.new(name: picture_param[:pictures])
 
     respond_to do |format|
       if horse.save && ad.save! && horse_pictures.save!
       	format.html { redirect_to preview_ad_url(horse), notice: 'Ad Horse Saved!' }
       else
-        render :text => "<h1>Save Horse Failed</h1>"
+        format.html { render place_horse_url(horse), notice: 'Save Horse Failed!'  }
       end
     end
   end
