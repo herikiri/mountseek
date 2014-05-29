@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140524063634) do
     t.string   "adable_type"
     t.integer  "package_id"
     t.string   "status"
+    t.integer  "picture_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

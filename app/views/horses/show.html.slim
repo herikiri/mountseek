@@ -1,0 +1,64 @@
+.container
+  .preview-wrapper
+    h1 Published Ad
+    - country = Carmen::Country.coded(@horse.city)
+    - subregion = country.subregions.coded(@horse.state)
+    .row-fluid
+      .span6
+        - unless @ad_banner.nil?
+          img src= @ad_banner.name_url
+      .span6
+        h4 
+          - unless @horse.name.nil?
+            = @horse.name
+          - else
+            | UNNAMED
+        .price
+          - unless @horse.private_treaty
+            = number_to_currency @horse.price
+          - else
+            | PRIVATE TREATY
+        hr
+
+        .short_detail
+          = "#{@horse.birth.year} #{@horse.breed} #{@horse.gender}"
+          br
+          = "#{@horse.height} Hands"
+          br
+          = "Located in #{subregion.name}"
+          br
+          = "#{@horse.ad_for} by #{@horse.user.username}"
+
+    .row-fluid
+      .span12.stats
+        h4 HORSES STATS
+        table.table.table-striped
+          tr
+            td Name
+            td= @horse.name
+          tr
+            td Color
+            td= @horse.color.titleize
+          tr
+            td Breed
+            td= @horse.breed
+          tr
+            td Gender
+            td= @horse.gender
+          tr
+            td Age
+            td= @horse.birth
+          tr
+            td Height
+            td= "#{@horse.height} hands"
+          tr
+            td Weight
+            td= "#{@horse.weight} lbs"
+
+    .row-fluid
+      .span12
+        h4= @horse.title.upcase
+        hr
+        p= @horse.description
+          
+ 

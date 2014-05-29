@@ -1,10 +1,11 @@
 class AdsController < ApplicationController
-	before_action :set_package, except: [:pricing, :preview]
+	before_action :set_package, except: [:pricing, :preview, :publish, :subregion_options]
   before_action :set_user
   before_action :authenticate_user!
+  before_action :set_ad, only: [:preview, :publish, :edit_horse]
 
   def horse
-    @ad_horse = @package.horses.new
+    @ad = @package.horses.new
   end
 
   def stud
@@ -33,20 +34,29 @@ class AdsController < ApplicationController
   end
 
   def preview
-    @ad = Ad.last.adable_type.constantize.find(Ad.last.adable_id)
+    @ad_banner = Picture.find(Ad.last.picture_id)
   end
 
   def publish
     unless Ad.last.published?
       Ad.last.publish!
     end
-    @ad = Ad.last
-    redirect_to horse_ad_url(@ad)
+    respond_to do |format|
+      if Ad.last.published?
+        format.html { redirect_to @ad, notice: 'Ad was successfully published.' }
+      else 
+        format.html { render action: 'preview' }
+      end
+    end
+
+  end
+ 
+  def edit_horse
   end
 
-  def show
+  def subregion_options
+    render partial: 'ads/shared/subregion_select'
   end
-
 
   private 
   	def set_package
@@ -55,5 +65,9 @@ class AdsController < ApplicationController
 
     def set_user
       @user = current_user
+    end
+
+    def set_ad
+      @ad = Ad.last.adable_type.constantize.find(Ad.last.adable_id)
     end
 end

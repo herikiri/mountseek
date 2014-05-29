@@ -1,6 +1,7 @@
 class Ad < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :package
+  has_one :picture, as: :imageable
 	include AASM
 
 	scope :is_draft, -> { where(status: 'draft') }

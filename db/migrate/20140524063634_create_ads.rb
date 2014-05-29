@@ -5,6 +5,7 @@ class CreateAds < ActiveRecord::Migration
       t.references :adable, polymorphic: true
       t.references :package, index: true
       t.string :status
+      t.references :picture
       t.timestamps
     end
   end

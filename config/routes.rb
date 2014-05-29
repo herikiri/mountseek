@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   resource :horses, :only => :create
 
-  get 'horse/:id' => 'ads#show', :as => :horse_ad
+  get 'horse/:id' => 'horses#show', :as => :horse
+
+  patch 'horse/:id' => 'horses#update'
+  get 'subregion_options' => 'ads#subregion_options'
+
+  get 'place/horse/:id/edit' => 'ads#edit_horse', :as => :place_horse_edit
 
   get 'pricing' => 'ads#pricing', :as => :pricing
   get 'preview/:id' => 'ads#preview', :as => :preview_ad
