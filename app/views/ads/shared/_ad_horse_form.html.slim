@@ -32,7 +32,8 @@ h4 THE BASICS ABOUT YOUR HORSE
     = f.input :height, label: false, wrapper_html: { class: 'span4' }, placeholder: "Height (optional)"
     = f.input :weight, label: false, wrapper_html: { class: 'span4' }, placeholder: "Weight (lbs) (optional)"
 
-  = f.input :pictures, as: :file, :label => 'Browse Image'
+  = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
+
 
   = f.input :package_id, :as => :hidden
   = f.input :user_id, :as => :hidden

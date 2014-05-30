@@ -1,0 +1,10 @@
+.container
+	=render 'nav_tabs'
+
+
+	- @ads.in_groups_of(4).each do |ads_group|
+		.row-fluid
+			- ads_group.each do |ad|
+				- unless ad.nil?
+					.span3= "#{ad.adable_type}, #{ad.status}"
+				

@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   get 'search-horses' => 'search#horses', :as => :search_horses
 
   get 'dashboard' => 'dashboard#index', :as => :dashboard
+  get 'dashboard/ads' => 'dashboard#ads', :as => :my_ads
+  get 'account' => 'dashboard#edit', :as => :account
+  patch 'profile/update' => 'dashboard#update', :as => :profile
 
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
 

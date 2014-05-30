@@ -1,0 +1,19 @@
+.container
+
+  =render 'nav_tabs'
+  
+  img.profile src= @user.profile.picture.name_url
+
+  - if @user.profile.name.nil?
+    h4= "About #{@user.username}"
+  - else
+    h4= "About #{@user.profile.name}"  
+
+  .about
+    p= @user.profile.about
+
+    .location
+      = "#{@user.profile.city}, #{@user.profile.state}"
+
+  br
+  = link_to 'Edit Profile', account_path, class: "btn btn-primary btn-inverse"

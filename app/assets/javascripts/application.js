@@ -18,7 +18,8 @@
 //= require nprogress
 //= require nprogress-turbolinks
 //= require turbolinks_transitions
-
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 
 $(document).on('page:fetch', function() { NProgress.start(); })
 $(document).on('page:change', function() { NProgress.done(); })

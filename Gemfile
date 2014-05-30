@@ -34,6 +34,16 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
+group :development do
+	gem 'spring'
+	gem 'quiet_assets'
+	gem 'debugger'
+	gem 'better_errors'
+	gem 'binding_of_caller'
+	gem 'rails_best_practices'
+end
+
 gem 'pg', '0.15.1'
 gem 'rails_12factor', '0.0.2',  group: :production
 
@@ -53,12 +63,6 @@ gem 'carmen-rails', '~> 1.0.0'
 gem 'aasm'
 gem 'slim-rails'
 gem 'friendly_id', '~> 5.0.0'
+gem 'jquery-fileupload-rails'
+gem 'rmagick'
 
-group :development do
-	gem 'spring'
-	gem 'quiet_assets'
-	gem 'debugger'
-	gem 'better_errors'
-	gem 'binding_of_caller'
-	gem 'rails_best_practices'
-end

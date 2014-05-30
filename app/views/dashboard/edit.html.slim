@@ -1,0 +1,14 @@
+.container
+  h3 Edit Profile
+  = simple_form_for @user.profile, :html => {:multipart => true} do |f|
+  	= f.input :name
+  	= f.input :farm_name
+  	= f.input :phone_number
+  	= f.input :alt_phone_number
+  	= f.input :website
+  	= f.input :zipcode
+  	= f.input :city
+  	= f.input :state
+  	= f.input :about
+
+  	= f.button :submit, 'Update Information'

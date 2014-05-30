@@ -9,11 +9,15 @@ class HorsesController < ApplicationController
     ad = @horse.ads.new
     ad.user_id = @user.id
     ad.package_id = @horse.package.id
-    horse_pictures = @horse.pictures.new(name: picture_param[:pictures])
+   
 
     respond_to do |format|
-      if @horse.save && horse_pictures.save
-        ad.picture_id = horse.pictures.first.id
+      if @horse.save 
+        params[:horse][:pictures].each do |picture|
+           @horse.pictures.create(name: picture)
+        end
+
+        ad.picture_id = @horse.pictures.first.id
         if ad.save!
       	 format.html { redirect_to preview_ad_url(@horse), notice: 'Ad Horse Saved!' }
         end
@@ -46,9 +50,6 @@ class HorsesController < ApplicationController
       params.require(:horse).permit(:title, :description, :zip_code, :city, :state, :price, :private_treaty, :ad_for, :name, :gender, :breed, :birth, :color, :height, :weight, :user_id, :package_id)
     end
 
-    def picture_param
-      params.require(:horse).permit(:pictures)
-    end
 
     def set_user
       @user = current_user
