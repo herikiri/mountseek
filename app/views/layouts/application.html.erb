@@ -35,6 +35,7 @@
               <li class="sign-in"><%= link_to "Sign in", new_user_session_path %></li>
               <% else %>
               <li class="dropdown">
+                <li><a href=<%= my_ads_path %> >My Ads</a></li>
                 <% if @user.profile.present? %>
                   <img id="avatar" src=<%= @user.profile.picture.name_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
                 <% else %>

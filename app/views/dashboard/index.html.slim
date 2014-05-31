@@ -1,8 +1,9 @@
 .container
 
   =render 'nav_tabs'
-  
-  img.profile src= @user.profile.picture.name_url
+
+  - if @user.profile.present?
+    img.profile src= @user.profile.picture.name_url
 
   - if @user.profile.name.nil?
     h4= "About #{@user.username}"

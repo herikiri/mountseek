@@ -1,3 +1,46 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.row-fluid {
+	.thumbnails {
+		margin: 20px 0;
+		.span4 {
+			.ad-thumbnail {
+				border: 1px solid grey;
+				padding: 10px;
+				height: auto;
+
+				.ad-title {
+					margin: 5px 0;
+				}
+
+				img {
+					height: auto;
+					width: 100%;
+				}
+
+				.row-fluid {
+					margin-top: 10px;
+					.span6 {
+						ul {
+							list-style: none;
+							margin: 0;
+						}
+					}
+				}
+
+				p {
+					padding: 10px;
+					background-color: #d3d3d3;
+				}
+			}
+
+			.ad-properties {
+				.span3 {
+					text-align: center;
+				}
+			}
+		}
+	}
+}

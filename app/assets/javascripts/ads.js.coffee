@@ -10,8 +10,3 @@ $(document).ready ->
   	country_code = $(this).val()
   	url = "/subregion_options?parent_region=#{country_code}"
   	select_wrapper.load(url)
-
-$(document).ready ->
-  $("#horse_pictures").fileupload
-  	dataType: "script"
-  	

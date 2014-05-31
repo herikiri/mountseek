@@ -2,9 +2,42 @@
 	=render 'nav_tabs'
 
 
-	- @ads.in_groups_of(4).each do |ads_group|
+	- @ads.in_groups_of(3).each do |ads_group|
 		.row-fluid
-			- ads_group.each do |ad|
-				- unless ad.nil?
-					.span3= "#{ad.adable_type}, #{ad.status}"
-				
+			ul.thumbnails
+				- ads_group.each do |ad|
+					- unless ad.nil?
+						- ad_type = ad.adable_type.constantize.find(ad.adable_id)
+						- ad_banner = Picture.find(ad.picture_id).name_url
+						- show_url = "/" + ad.adable_type.downcase + "/" + ad.adable_id.to_s
+						.li.span4
+							.ad-thumbnail.thumbnail
+								i.icon-heart
+								span.price.pull-right= number_to_currency ad_type.price
+								.ad-title= ad_type.title
+								a href=show_url
+									img src= ad_banner
+								.row-fluid
+									.span6
+										ul
+											li="Gender: #{ad_type.gender}"
+											li="Breed: #{ad_type.breed}"
+											li="Age: #{ad_type.birth}"
+									.span6
+										ul
+											li="Color: #{ad_type.color}"
+											li="Height: #{ad_type.height} hands"
+											li="Weight: #{ad_type.weight} lbs"
+								.ad-properties
+									.row-fluid
+										.span3
+											i.icon-eye-open
+										.span3
+											i.icon-heart
+										.span3
+											i.icon-camera
+										.span3
+											i.icon-facetime-video
+								hr
+								p= ad_type.description
+								=social_share_button_tag(ad_type.title)
