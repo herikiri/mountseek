@@ -54,3 +54,22 @@
 		}
 	}
 }
+
+.container {
+	.owl-item {
+		margin-right: 10px;
+		.thumbnail {
+			padding: 5px 8px;
+
+			ul {
+				list-style: none;
+			}
+		}
+	}
+
+	.empty-ad {
+		width: 200px;
+		height: auto;
+	}
+	
+}

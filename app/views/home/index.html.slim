@@ -1,5 +1,3 @@
-link href="//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css" rel="stylesheet" type="text/css" /
-
 header.jumbotron
   #quick-search
     h3 Mountseek
@@ -37,47 +35,50 @@ header.jumbotron
 .container 
   h4 Featured Horse
 
-  .slider.single-item.slick-initialized.slick-slider
-    .slick-list.draggable tabindex="0" 
-      .slick-track  style=("opacity: 1; width: 4480px; -webkit-transform: translate3d(-560px, 0px, 0px)");
-        .slick-slide.slick-cloned style=("width: 560px;") 
-          h3 6
-        .slick-slide.slick-active style=("width: 560px;") 
-          h3 1
-        .slick-slide style=("width: 560px;") 
-          h3 2
-        .slick-slide style=("width: 560px;") 
-          h3 3
-        .slick-slide style=("width: 560px;") 
-          h3 4
-        .slick-slide style=("width: 560px;") 
-          h3 5
-        .slick-slide style=("width: 560px;") 
-          h3 6
-        .slick-slide.slick-cloned style=("width: 560px;") 
-          h3 1
-    button.slick-prev style=("display: block;") type="button"  Previous
-    button.slick-next style=("display: block;") type="button"  Next
-    ul.slick-dots style=("display: block;") 
-      li
-        button type="button"  1
-      li
-        button type="button"  2
-      li
-        button type="button"  3
-      li
-        button type="button"  4
-      li
-        button type="button"  5
-      li
-        button type="button"  6
+  .owl-carousel
+    - unless @ads_horse.nil?
+      - @ads_horse.each do |ad|
+        - ad_type = ad.adable_type.constantize.find(ad.adable_id)
+        - ad_banner = Picture.find(ad.picture_id).name_url(:thumb)
+        - show_url = "/" + ad.adable_type.downcase + "/" + ad.adable_id.to_s
+        .ad-thumbnail.thumbnail
+          i.icon-heart
+          span.price.pull-right= number_to_currency ad_type.price
+          .ad-title= ad_type.title
+          a href=show_url
+            img src= ad_banner
+          .row-fluid
+            .span6
+              ul
+                li="Gender: #{ad_type.gender}"
+                li="Breed: #{ad_type.breed}"
+                li="Age: #{ad_type.birth}"
+            .span6
+              ul
+                li="Color: #{ad_type.color}"
+                li="Height: #{ad_type.height} hands"
+                li="Weight: #{ad_type.weight} lbs"
+          .ad-properties.pull-right
+            i.icon-eye-open
+              ="#{ad_type.impressionist_count(:filter=>:ip_address)}"
+            i.icon-heart
+              ="#{ad_type.get_likes.size}"
+            i.icon-camera
+              ="#{ad_type.pictures.size}"
+            i.icon-facetime-video
+              | &nbsp;
+          hr
+          p= truncate ad_type.description, size: 100
+          =social_share_button_tag(ad_type.title)
+    - else
+      .empty-ad
+        h4 Ad Not Available Yet
 
 
-
-
+  
 
 footer
   = render "layouts/shared/footer"
 
-script src="//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.min.js" type="text/javascript" data-turbolinks-track="true"
+
 = javascript_include_tag 'home', 'data-turbolinks-track' => true

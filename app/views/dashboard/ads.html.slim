@@ -32,7 +32,7 @@
 									i.icon-eye-open
 										="#{ad_type.impressionist_count(:filter=>:ip_address)}"
 									i.icon-heart
-										| &nbsp;
+										="#{ad_type.get_likes.size}"
 									i.icon-camera
 										="#{ad_type.pictures.size}"
 									i.icon-facetime-video
