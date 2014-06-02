@@ -1,7 +1,7 @@
 class HorsesController < ApplicationController
   before_action :set_user
   before_action :set_horse, only: [:show, :update]
-  impressionist :actions=>[:show]
+  
 
   def create
   	@horse = Horse.new(horse_params)
@@ -44,6 +44,7 @@ class HorsesController < ApplicationController
   def show
     ad = Ad.find_by(adable_id: @horse.id)
     @ad_banner = Picture.find(ad.picture_id)
+    impressionist(@horse)
   end
 
   private 

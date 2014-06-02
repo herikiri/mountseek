@@ -30,11 +30,11 @@
 											li="Weight: #{ad_type.weight} lbs"
 								.ad-properties.pull-right
 									i.icon-eye-open
-										| 23&nbsp;
+										="#{ad_type.impressionist_count(:filter=>:ip_address)}"
 									i.icon-heart
 										| &nbsp;
 									i.icon-camera
-										=" #{ad_type.pictures.size} "
+										="#{ad_type.pictures.size}"
 									i.icon-facetime-video
 										| &nbsp;
 								hr

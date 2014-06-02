@@ -5,6 +5,8 @@ class Horse < ActiveRecord::Base
 	has_many :videos, as: :videoable
 	has_many :ads, as: :adable
 
+	is_impressionable
+
 	validates :title, :description, :city, :state, :breed, :gender, presence: true
 
 end
