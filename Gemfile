@@ -47,6 +47,8 @@ end
 gem 'pg', '0.15.1'
 gem 'rails_12factor', '0.0.2',  group: :production
 
+gem 'thin'
+gem 'rails_config'
 
 gem 'devise'
 gem 'jwt'
