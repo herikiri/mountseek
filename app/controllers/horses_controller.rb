@@ -1,6 +1,7 @@
 class HorsesController < ApplicationController
   before_action :set_user
   before_action :set_horse, only: [:show, :update]
+  impressionist :actions=>[:show]
 
   def create
   	@horse = Horse.new(horse_params)

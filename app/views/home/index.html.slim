@@ -1,0 +1,83 @@
+link href="//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css" rel="stylesheet" type="text/css" /
+
+header.jumbotron
+  #quick-search
+    h3 Mountseek
+    ul.nav.nav-pills
+      li
+        a href="#" 
+          i.icon-fire
+          | Horses
+      li
+        a href="#" 
+          i.icon-plus-sign
+          | Studs
+      li
+        a href="#" 
+          i.icon-road
+          | Trailers
+      li
+        a href="#" 
+          i.icon-shopping-cart
+          | Tacks
+      li
+        a href="#" 
+          i.icon-home
+          | Real Estates
+      li
+        a href="#" 
+          i.icon-download
+          | Services
+    form.form-search
+      .input-append
+        input.input-large placeholder=("Search for a City or Zip") type="text" 
+          span.add-on
+            i.icon-search
+
+.container 
+  h4 Featured Horse
+
+  .slider.single-item.slick-initialized.slick-slider
+    .slick-list.draggable tabindex="0" 
+      .slick-track  style=("opacity: 1; width: 4480px; -webkit-transform: translate3d(-560px, 0px, 0px)");
+        .slick-slide.slick-cloned style=("width: 560px;") 
+          h3 6
+        .slick-slide.slick-active style=("width: 560px;") 
+          h3 1
+        .slick-slide style=("width: 560px;") 
+          h3 2
+        .slick-slide style=("width: 560px;") 
+          h3 3
+        .slick-slide style=("width: 560px;") 
+          h3 4
+        .slick-slide style=("width: 560px;") 
+          h3 5
+        .slick-slide style=("width: 560px;") 
+          h3 6
+        .slick-slide.slick-cloned style=("width: 560px;") 
+          h3 1
+    button.slick-prev style=("display: block;") type="button"  Previous
+    button.slick-next style=("display: block;") type="button"  Next
+    ul.slick-dots style=("display: block;") 
+      li
+        button type="button"  1
+      li
+        button type="button"  2
+      li
+        button type="button"  3
+      li
+        button type="button"  4
+      li
+        button type="button"  5
+      li
+        button type="button"  6
+
+
+
+
+
+footer
+  = render "layouts/shared/footer"
+
+script src="//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.min.js" type="text/javascript" data-turbolinks-track="true"
+= javascript_include_tag 'home', 'data-turbolinks-track' => true
