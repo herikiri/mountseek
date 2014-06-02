@@ -231,7 +231,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  config.omniauth :facebook, ENV["FACEBOOK_KEY"], ENV["FACEBOOK_SECRET"], secure_image_url: true, image_size: 'large'
+  #config.omniauth :facebook, ENV["FACEBOOK_KEY"], ENV["FACEBOOK_SECRET"], secure_image_url: true, image_size: 'large'
+  config.omniauth :facebook, Settings.facebook_key, Settings.facebook_secret, secure_image_url: true, image_size: 'large'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
