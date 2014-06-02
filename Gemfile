@@ -66,4 +66,5 @@ gem 'friendly_id', '~> 5.0.0'
 gem 'jquery-fileupload-rails'
 gem 'rmagick'
 gem 'social-share-button'
+gem 'impressionist'
 
