@@ -14,3 +14,13 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore all public content
+/public/*
+
+# Ignore database schema
+/db/schema.rb
+
+# Ignore database.yml
+/config/database.yml
+
