@@ -3,6 +3,7 @@ class AdsController < ApplicationController
   before_action :set_user
   before_action :authenticate_user!
   before_action :set_ad, only: [:preview, :publish, :edit_horse]
+  before_action :set_fav_ad, only: [:like, :dislike]
 
   def horse
     @ad = @package.horses.new
@@ -54,6 +55,17 @@ class AdsController < ApplicationController
   def edit_horse
   end
 
+
+  def like
+    @ad.liked_by @user
+    redirect_to root_url
+  end
+
+  def dislike
+    @ad.downvote_from @user
+    redirect_to root_url
+  end
+
   def subregion_options
     render partial: 'ads/shared/subregion_select'
   end
@@ -69,5 +81,9 @@ class AdsController < ApplicationController
 
     def set_ad
       @ad = Ad.last.adable_type.constantize.find(Ad.last.adable_id)
+    end
+
+    def set_fav_ad
+      @ad = Ad.find(params[:id])
     end
 end
