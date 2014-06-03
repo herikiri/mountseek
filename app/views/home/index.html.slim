@@ -2,35 +2,137 @@ header.jumbotron
   #quick-search
     h3 Mountseek
     ul.nav.nav-pills
-      li
-        a href="#" 
+      li.active
+        a href="#horses" data-toggle="pill" 
           i.icon-fire
           | Horses
       li
-        a href="#" 
+        a href="#studs" data-toggle="pill" 
           i.icon-plus-sign
           | Studs
       li
-        a href="#" 
+        a href="#trailers" data-toggle="pill" 
           i.icon-road
           | Trailers
       li
-        a href="#" 
+        a href="#tacks" data-toggle="pill" 
           i.icon-shopping-cart
           | Tacks
       li
-        a href="#" 
+        a href="#real-estates" data-toggle="pill" 
           i.icon-home
           | Real Estates
       li
-        a href="#" 
+        a href="#services" data-toggle="pill" 
           i.icon-download
           | Services
-    form.form-search
-      .input-append
-        input.input-large placeholder=("Search for a City or Zip") type="text" 
-          span.add-on
-            i.icon-search
+
+    .tab-content
+      #horses.row.tab-pane.active
+        form.form-horizontal
+           
+          = render 'quick_search_breed'
+
+          = render 'quick_search_location'
+
+          = render 'quick_search_price'
+     
+      #studs.row.tab-pane
+        form.form-horizontal
+
+          = render 'quick_search_breed' 
+
+          = render 'quick_search_location'
+
+          = render 'quick_search_price'
+
+          .control-group
+            label.control-label for="inputAiType"  AI Type
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputAiType placeholder="AI Type" type="text" 
+      
+      #trailers.row.tab-pane
+        form.form-horizontal
+          .control-group
+            label.control-label for="inputYear"  Year
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputYear placeholder="Year" type="text" 
+
+          = render 'quick_search_location'
+
+          .control-group
+            label.control-label for="inputCapacity"  Capacity
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputCapacity placeholder="Capacity" type="text" 
+
+      #tacks.row.tab-pane
+        form.form-horizontal
+          .control-group
+            label.control-label for="inputType"  Type
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputType placeholder="Type" type="text" 
+          .control-group
+            label.control-label for="inputCondition"  Condition
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputCondition placeholder="Condition" type="text" 
+        
+      #real-estates.row.tab-pane
+        form.form-horizontal
+          .control-group
+            label.control-label for="inputType"  Type
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputType placeholder="Type" type="text" 
+          
+          = render 'quick_search_location'
+
+          = render 'quick_search_price'
+           
+          .control-group
+            label.control-label for="inputAcres"  Acres
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputAcres placeholder="Acres" type="text" 
+      
+      #services.row.tab-pane
+        form.form-horizontal
+
+          = render 'quick_search_location'
+
+          .control-group
+            label.control-label for="inputKeyword"  Keyword
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputKeyword placeholder="KeyWord" type="text" 
+
+          .control-group
+            label.control-label for="inputServices"  Services
+            .controls
+              .input-prepend
+                span.add-on
+                  i.icon-search
+                input#inputServices placeholder="Services" type="text"              
 
 .container 
   h4 Featured Horse
@@ -42,7 +144,7 @@ header.jumbotron
         - ad_banner = Picture.find(ad.picture_id).name_url(:thumb)
         - show_url = "/" + ad.adable_type.downcase + "/" + ad.adable_id.to_s
         .ad-thumbnail.thumbnail
-          =link_to raw("<i class='icon-heart'></i>"), like_ad_path(ad), method: :put 
+          =link_to raw("<i class='icon-heart'></i>"), like_ad_path(ad), method: :put, :'data-toggle' => "tooltip", :'data-placement' => "bottom", :title => 'Ad To My Favorites', class: 'fav-icon', remote: true  
             
           span.price.pull-right= number_to_currency ad_type.price
           .ad-title= ad_type.title

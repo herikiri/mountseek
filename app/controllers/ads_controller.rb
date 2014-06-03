@@ -5,24 +5,18 @@ class AdsController < ApplicationController
   before_action :set_ad, only: [:preview, :publish, :edit_horse]
   before_action :set_fav_ad, only: [:like, :dislike]
 
+
+  # GET /ads/new
+  def new
+    @ad = Ad.new
+  end
+
+
+
   def horse
     @ad = @package.horses.new
   end
 
-  def stud
-  end
-
-  def trailer
-  end
-
-  def tack
-  end
-
-  def real_estate
-  end
-
-  def service
-  end
 
 
   def pricing
@@ -57,12 +51,17 @@ class AdsController < ApplicationController
 
 
   def like
-    @ad.liked_by @user
-    redirect_to root_url
+    
+    respond_to do |format|
+      if @ad.liked_by @user
+        format.html {redirect_to root_url}
+        format.js
+      end  
+    end 
   end
 
   def dislike
-    @ad.downvote_from @user
+    @ad.unliked_by @user
     redirect_to root_url
   end
 
