@@ -1,29 +1,19 @@
 class AdsController < ApplicationController
-	before_action :set_package, except: [:pricing, :preview, :publish, :subregion_options]
+	before_action :set_package, except: [:pricing, :preview, :publish, :subregion_options, :new]
   before_action :set_user
   before_action :authenticate_user!
   before_action :set_ad, only: [:preview, :publish, :edit_horse]
   before_action :set_fav_ad, only: [:like, :dislike]
 
-
-  # GET /ads/new
-  def new
-    @ad = Ad.new
-  end
-
-
-
   def horse
     @ad = @package.horses.new
   end
 
-
-
   def pricing
     @horsePackages = Package.where(type_id: 1)
     @studPackages = Package.where(type_id: 2)
-    @trailerPackages = Package.where(type_id: 3)
-    @tackPackages = Package.where(type_id: 4)
+    @trailerPackages = Package.where(type_id: 4)
+    @tackPackages = Package.where(type_id: 3)
     @realEstatePackages = Package.where(type_id: 5)
     @servicePackages = Package.where(type_id: 6)
   end

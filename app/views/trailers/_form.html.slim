@@ -1,0 +1,38 @@
+h4 THE BASICS ABOUT YOUR TRAILER
+= simple_form_for @trailer, :html => {:multipart => true} do |f|
+  = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
+  = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 }
+
+  .form-inputs.row-fluid
+    = f.input :brand, label: false, wrapper_html: { class: 'span4' }, placeholder: "Brand *"
+    = f.input :model, label: false, wrapper_html: { class: 'span4' }, placeholder: "Model *"
+    = f.input :material, label: false, wrapper_html: { class: 'span4' }, placeholder: "Material *"
+
+  .form-inputs.row-fluid
+    .span4
+      = f.country_select :city, label: false, wrapper_html: { class: 'span4' }, priority: %w(US CA), prompt: 'Please select a country'
+    .span4
+      = render partial: 'ads/shared/subregion_select', locals: {parent_region: f.object.city}
+      = f.input :zip_code, label: false, wrapper_html: { class: 'span4' }, placeholder: "Zip Code *"
+
+  .form-inputs.row-fluid
+   = f.input :year, label: false, :start_year => Date.today.year - 20, :end_year => Date.today.year, discard_day: true,  discard_month: true, input_html: { class: 'span4' }, prompt: { year: 'Year *' }
+    = f.input :price, label: false, wrapper_html: { class: 'span4' }, placeholder: "$ Price *"
+    = f.input :private_treaty, label: false, inline_label: true, wrapper_html: { class: 'span4' }
+
+  hr
+
+  h4 TRAILER DETAILS
+
+  .form-inputs.row
+    = f.input :color, label: false, wrapper_html: { class: 'span3' }, placeholder: "Color (optional)"
+    = f.input :hitch, label: false, wrapper_html: { class: 'span3' }, placeholder: "Hitcht (optional)"
+    = f.input :axles, label: false, wrapper_html: { class: 'span3' }, placeholder: "Axles (optional)"
+    = f.input :hauls, label: false, wrapper_html: { class: 'span3' }, placeholder: "Hauls (optional)"
+
+  = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
+
+
+  = f.input :package_id, :as => :hidden
+ 
+  = f.button :submit, 'Save & Preview'

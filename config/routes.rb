@@ -35,15 +35,17 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :ads, except: [:new] do
+  resources :ads do
     member do
       put "like", to: "ads#like"
       put "dislike", to: "ads#dislike"
     end
   end
 
-  resources :trailer do
-    resources :ads
+  resources :packages do
+    resources :studs, :trailers
   end
+
+  resources :trailers
   
 end
