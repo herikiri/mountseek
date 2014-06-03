@@ -43,9 +43,13 @@ Rails.application.routes.draw do
   end
 
   resources :packages do
-    resources :studs, :trailers
+    resources :studs, :only => :new
   end
 
-  resources :trailers
+  resources :packages do
+    resources :trailers, :only => :new
+  end
+
+  resources :trailers, :except => :new
   
 end

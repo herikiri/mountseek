@@ -26,11 +26,13 @@ h4 THE BASICS ABOUT YOUR TRAILER
 
   .form-inputs.row
     = f.input :color, label: false, wrapper_html: { class: 'span3' }, placeholder: "Color (optional)"
-    = f.input :hitch, label: false, wrapper_html: { class: 'span3' }, placeholder: "Hitcht (optional)"
+    = f.input :hitch, label: false, wrapper_html: { class: 'span3' }, placeholder: "Hitch (optional)"
     = f.input :axles, label: false, wrapper_html: { class: 'span3' }, placeholder: "Axles (optional)"
     = f.input :hauls, label: false, wrapper_html: { class: 'span3' }, placeholder: "Hauls (optional)"
 
   = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
+
+  = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true } 
 
 
   = f.input :package_id, :as => :hidden
