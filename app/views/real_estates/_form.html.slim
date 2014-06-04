@@ -1,0 +1,40 @@
+h4 REAL ESTATES
+= simple_form_for [@real_estate.package, @real_estate] , :html => {:multipart => true} do |f|
+
+  = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
+  = f.input :description, label: false,  placeholder: "Description", input_html: { rows: 8 }
+  
+  .form-inputs.row
+    = f.input :house_type, label: false, wrapper_html: { class: 'span6' }, placeholder: "Type"
+    = f.input :house_style, label: false, wrapper_html: { class: 'span6' }, placeholder: "Style"
+
+  .form-inputs.row
+    = f.input :city, label: false, wrapper_html: { class: 'span6' }, placeholder: "City"
+    = f.input :state, label: false, wrapper_html: { class: 'span6' }, placeholder: "State"
+
+  .form-inputs.row
+    = f.input :ad_for, label: false, wrapper_html: { class: 'span4' }, placeholder: "Ad For"
+    = f.input :price, label: false, wrapper_html: { class: 'span4' }, placeholder: "$ Price"
+    = f.input :private_treaty, label: false, inline_label: true,wrapper_html: { class: 'span4' }
+
+  hr
+
+  h4 DETAILS & BREED INFORMATION
+
+  = f.input :year, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true, discard_month: true,  input_html: { class: 'span6' }, prompt: {  year: 'Year' }
+
+  .form-inputs.row
+    = f.input :sqft, label: false, wrapper_html: { class: 'span6' }, placeholder: "$ Price"
+
+  .form-inputs.row
+    = f.input :floor, label: false, wrapper_html: { class: 'span3' }, placeholder: "Floor"
+    = f.input :bedroom, label: false, wrapper_html: { class: 'span3' }, placeholder: "Bedroom"
+    = f.input :bathroom, label: false, wrapper_html: { class: 'span3' }, placeholder: "Bathroom"
+    = f.input :garage, label: false, wrapper_html: { class: 'span3' }, placeholder: "Garage"
+
+
+  = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
+
+  = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true } 
+ 
+  = f.button :submit, 'Save & Preview'

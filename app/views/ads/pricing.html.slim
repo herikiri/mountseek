@@ -67,7 +67,7 @@
     #real-estates.row.tab-pane
       - @realEstatePackages.each do |package|
         dl.span3.pricing-wrapper
-          dt= link_to "Package #{package.name}", "new_package_real_estate_path(package)"
+          dt= link_to "Package #{package.name}", new_package_real_estate_path(package)
           dd
             | Price: #{package.price}
           dd

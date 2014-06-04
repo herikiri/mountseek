@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603092657) do
+ActiveRecord::Schema.define(version: 20140604074049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20140603092657) do
     t.datetime "updated_at"
   end
 
+  add_index "ads", ["adable_id"], name: "index_ads_on_adable_id", using: :btree
+  add_index "ads", ["adable_type"], name: "index_ads_on_adable_type", using: :btree
   add_index "ads", ["package_id"], name: "index_ads_on_package_id", using: :btree
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
 
@@ -109,6 +111,9 @@ ActiveRecord::Schema.define(version: 20140603092657) do
     t.datetime "updated_at"
   end
 
+  add_index "pictures", ["imageable_id"], name: "index_pictures_on_imageable_id", using: :btree
+  add_index "pictures", ["imageable_type"], name: "index_pictures_on_imageable_type", using: :btree
+
   create_table "profiles", force: true do |t|
     t.string   "name"
     t.string   "farm_name"
@@ -125,6 +130,57 @@ ActiveRecord::Schema.define(version: 20140603092657) do
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "real_estates", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "zip_code"
+    t.string   "country_location"
+    t.string   "city"
+    t.string   "state"
+    t.decimal  "price"
+    t.boolean  "private_treaty"
+    t.string   "ad_for"
+    t.string   "house_type"
+    t.string   "house_style"
+    t.date     "year"
+    t.decimal  "sqft"
+    t.integer  "bedroom"
+    t.integer  "floor"
+    t.integer  "garage"
+    t.integer  "bathroom"
+    t.integer  "package_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "real_estates", ["package_id"], name: "index_real_estates_on_package_id", using: :btree
+  add_index "real_estates", ["user_id"], name: "index_real_estates_on_user_id", using: :btree
+
+  create_table "studs", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "zip_code"
+    t.string   "city"
+    t.string   "state"
+    t.decimal  "price"
+    t.boolean  "private_treaty"
+    t.string   "ad_for"
+    t.string   "name"
+    t.string   "breed"
+    t.date     "birth"
+    t.string   "color"
+    t.decimal  "height"
+    t.decimal  "weight"
+    t.integer  "package_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "studs", ["package_id"], name: "index_studs_on_package_id", using: :btree
+  add_index "studs", ["user_id"], name: "index_studs_on_user_id", using: :btree
 
   create_table "trailers", force: true do |t|
     t.string   "title"
@@ -183,6 +239,9 @@ ActiveRecord::Schema.define(version: 20140603092657) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "videos", ["videoable_id"], name: "index_videos_on_videoable_id", using: :btree
+  add_index "videos", ["videoable_type"], name: "index_videos_on_videoable_type", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"

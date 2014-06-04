@@ -1,6 +1,7 @@
 class HorsesController < ApplicationController
   before_action :set_user
   before_action :set_horse, only: [:show, :preview, :publish, :edit, :update, :destroy]
+  impressionist
 
   def index
     @horses = Horse.all
@@ -53,10 +54,12 @@ class HorsesController < ApplicationController
   # PATCH/PUT /horses/:id
   # TODO -> update for horses picture & video
   def update
-    if @horse.update(horse_params)
-      format.html { redirect_to @horse, notice: 'Horse was successfully updated.' }
-    else
-      format.html { render action: 'edit' }
+    respond_to do |format|
+      if @horse.update(horse_params)
+        format.html { redirect_to @horse, notice: 'Horse was successfully updated.' }
+      else
+        format.html { render action: 'edit' }
+      end
     end
   end
 
@@ -75,10 +78,10 @@ class HorsesController < ApplicationController
   # PUT /horses/:id/publish
   def publish
     respond_to do |format|
-      if @horse.ad.publish!
-        format.html { redirect_to @horse, notice: 'Ad was successfully published.' }
+      if @horse.ad.draft?
+        @horse.ad.publish!
       else
-        format.html { render action: 'preview' }
+        format.html { redirect_to @horse, notice: 'Ad was successfully published.' }
       end
     end
   end

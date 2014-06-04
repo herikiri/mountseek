@@ -6,7 +6,6 @@ class Ad < ActiveRecord::Base
 
   acts_as_votable
 
-	scope :is_draft, -> { where(status: 'draft') }
   aasm column: 'status' do
     state :draft, initial: true
     state :published

@@ -1,0 +1,54 @@
+- unless @ads_horse.nil?
+  - @ads_horse.each do |ad|
+    - ad_type = ad.adable_type.constantize.find(ad.adable_id)
+    - ad_banner = Picture.find(ad.picture_id).name_url(:thumb)
+    - show_url = "/" + ad.adable_type.downcase + "/" + ad.adable_id.to_s
+    .ad-thumbnail.thumbnail
+      =link_to raw("<i class='icon-heart'></i>"), like_ad_path(ad), method: :put, :'data-toggle' => "tooltip", :'data-placement' => "bottom", :title => 'Ad To My Favorites', class: 'fav-icon', remote: true  
+        
+      span.price.pull-right= number_to_currency ad_type.price
+      .ad-title= ad_type.title
+      a href=show_url
+        img src= ad_banner
+      .row-fluid
+        .span6
+          ul
+            li="Gender: #{ad_type.gender}"
+            li="Breed: #{ad_type.breed}"
+            li="Age: #{ad_type.birth}"
+        .span6
+          ul
+            li="Color: #{ad_type.color}"
+            li="Height: #{ad_type.height} hands"
+            li="Weight: #{ad_type.weight} lbs"
+      .ad-properties.pull-right
+        i.icon-eye-open
+          ="#{ad_type.impressionist_count(:filter=>:ip_address)}"
+        i.icon-heart
+          ="#{ad.get_likes.size}"
+        i.icon-camera
+          ="#{ad_type.pictures.size}"
+        i.icon-facetime-video
+          | &nbsp;
+      hr
+      p= truncate ad_type.description, size: 100
+      =social_share_button_tag(ad_type.title)
+- else
+  .empty-ad
+    h4 Ad Not Available Yet
+  .empty-ad
+    h4 Ad Not Available Yet
+  .empty-ad
+    h4 Ad Not Available Yet
+  .empty-ad
+    h4 Ad Not Available Yet
+  .empty-ad
+    h4 Ad Not Available Yet
+  .empty-ad
+    h4 Ad Not Available Yet
+  .empty-ad
+    h4 Ad Not Available Yet
+  .empty-ad
+    h4 Ad Not Available Yet
+  .empty-ad
+    h4 Ad Not Available Yet
