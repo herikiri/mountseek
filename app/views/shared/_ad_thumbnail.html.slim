@@ -1,7 +1,7 @@
 - unless @ads_horse.nil?
   - @ads_horse.each do |ad|
     - ad_type = ad.adable_type.constantize.find(ad.adable_id)
-    - ad_banner = Picture.find(ad.picture_id).name_url(:thumb)
+    - ad_banner = Picture.find(ad.picture_id).name_url(:thumb) if ad.picture_id.present?
     - show_url = "/" + ad.adable_type.downcase + "/" + ad.adable_id.to_s
     .ad-thumbnail.thumbnail
       =link_to raw("<i class='icon-heart'></i>"), like_ad_path(ad), method: :put, :'data-toggle' => "tooltip", :'data-placement' => "bottom", :title => 'Ad To My Favorites', class: 'fav-icon', remote: true  
