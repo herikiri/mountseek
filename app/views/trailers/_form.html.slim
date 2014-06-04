@@ -1,7 +1,7 @@
-h4 THE BASICS ABOUT YOUR TRAILER
-= simple_form_for @trailer, :html => {:multipart => true} do |f|
+h4 THE BASICS ABOUT YOUR TRAILER 
+= simple_form_for [@trailer.package, @trailer] , :html => {:multipart => true} do |f|
   = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
-  = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 }
+  = f.input :description, label: false,  placeholder: "About Your Trailer *", input_html: { rows: 8 }
 
   .form-inputs.row-fluid
     = f.input :brand, label: false, wrapper_html: { class: 'span4' }, placeholder: "Brand *"
@@ -33,8 +33,5 @@ h4 THE BASICS ABOUT YOUR TRAILER
   = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
 
   = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true } 
-
-
-  = f.input :package_id, :as => :hidden
  
   = f.button :submit, 'Save & Preview'

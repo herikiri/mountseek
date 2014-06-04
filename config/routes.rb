@@ -2,16 +2,11 @@ Rails.application.routes.draw do
 
   resource :horses, :only => :create
 
-  get 'horse/:id' => 'horses#show', :as => :horse
-
-  patch 'horse/:id' => 'horses#update'
   get 'subregion_options' => 'ads#subregion_options'
 
-  get 'place/horse/:id/edit' => 'ads#edit_horse', :as => :place_horse_edit
-
+ 
   get 'pricing' => 'ads#pricing', :as => :pricing
-  get 'preview/:id' => 'ads#preview', :as => :preview_ad
-  get 'publish/:id' => 'ads#publish', :as => :publish_ad
+
   get 'place/horse/:id' => 'ads#horse', :as => :place_horse
   get 'place/stud/:id'  => 'ads#stud', :as => :place_stud
   get 'place/trailer/:id'  => 'ads#trailer', :as => :place_trailer
@@ -43,13 +38,59 @@ Rails.application.routes.draw do
   end
 
   resources :packages do
-    resources :studs, :only => :new
+    resources :horses, shallow: true do
+      member do 
+        get 'preview', to: "horses#preview"
+        get 'publish', to: "horses#publish"
+      end
+    end
   end
 
   resources :packages do
-    resources :trailers, :only => :new
+    resources :studs, shallow: true do
+      member do
+        get 'preview', to: "studs#preview"
+        get 'publish', to: "studs#publish"
+      end
+    end
   end
 
-  resources :trailers, :except => :new
+  
+  resources :packages do
+    resources :trailers, shallow: true do
+      member do 
+        get 'preview', to: "studs#preview"
+        get 'publish', to: "studs#publish"
+      end
+    end
+  end
+
+  resources :packages do
+    resources :tacks, shallow: true do
+      member do 
+        get 'preview', to: "tacks#preview"
+        get 'publish', to: "tacks#publish"
+      end
+    end
+  end
+
+  resources :packages do
+    resources :real_estates, shallow: true do
+      member do 
+        get 'preview', to: "real_estates#preview"
+        get 'publish', to: "real_estates#publish"
+      end
+    end
+  end
+
+  resources :packages do
+    resources :services, shallow: true do
+      member do 
+        get 'preview', to: "services#preview"
+        get 'publish', to: "services#publish"
+      end
+    end
+  end
+
   
 end

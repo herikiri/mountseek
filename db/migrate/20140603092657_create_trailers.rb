@@ -15,7 +15,7 @@ class CreateTrailers < ActiveRecord::Migration
       t.string	 :color
       t.string	 :hitch
       t.string	 :axles
-      t.string	 :hauls
+      t.integer	 :hauls
 
       t.references :package, index: true
       t.references :user, index: true

@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20140603092657) do
     t.string   "color"
     t.string   "hitch"
     t.string   "axles"
-    t.string   "hauls"
+    t.integer  "hauls"
     t.integer  "package_id"
     t.integer  "user_id"
     t.datetime "created_at"

@@ -1,12 +1,13 @@
 .container
   .preview-wrapper
-    h1 Published Ad
+    h1 Show Horse
     - country = Carmen::Country.coded(@horse.city)
     - subregion = country.subregions.coded(@horse.state)
+    - ad_banner = Picture.find(@horse.ad.picture_id)
     .row-fluid
       .span6
-        - unless @ad_banner.nil?
-          img src= @ad_banner.name_url
+        - unless ad_banner.nil?
+          img src= ad_banner.name_url
       .span6
         h4 
           - unless @horse.name.nil?

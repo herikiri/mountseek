@@ -19,7 +19,7 @@
     #horses.row.tab-pane.active
       - @horsePackages.each do |package|
         dl.span3.pricing-wrapper
-          dt= link_to "Package #{package.name}" , place_horse_path(package)
+          dt= link_to "Package #{package.name}", new_package_horse_path(package)
           dd
             | Price: #{package.price}
           dd
@@ -31,7 +31,7 @@
     #studs.row.tab-pane
       - @studPackages.each do |package|
         dl.span3.pricing-wrapper
-          dt= link_to "Package #{package.name}", place_stud_path(package)
+          dt= link_to "Package #{package.name}", new_package_stud_path(package)
           dd
             | Price: #{package.price}
           dd
@@ -55,7 +55,7 @@
     #tacks.row.tab-pane
       - @tackPackages.each do |package|
         dl.span3.pricing-wrapper
-          dt= link_to "Package #{package.name}", place_tack_path(package)
+          dt= link_to "Package #{package.name}", "new_package_tack_path(package)"
           dd
             | Price: #{package.price}
           dd
@@ -67,7 +67,7 @@
     #real-estates.row.tab-pane
       - @realEstatePackages.each do |package|
         dl.span3.pricing-wrapper
-          dt= link_to "Package #{package.name}", place_real_estate_path(package)
+          dt= link_to "Package #{package.name}", "new_package_real_estate_path(package)"
           dd
             | Price: #{package.price}
           dd
@@ -79,7 +79,7 @@
     #services.row.tab-pane
       - @servicePackages.each do |package|
         dl.span3.pricing-wrapper
-          dt= link_to "Package #{package.name}", place_service_path(package)
+          dt= link_to "Package #{package.name}", "new_package_service_path(package)"
           dd
             | Price: #{package.price}
           dd
