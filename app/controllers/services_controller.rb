@@ -14,6 +14,7 @@ class ServicesController < ApplicationController
   # GET /packages/:package_id/services/new
   def new
     @service = Package.find(params[:package_id]).services.new
+    @disciplines = Discipline.all
   end
 
   # GET /services/1/edit
@@ -34,16 +35,21 @@ class ServicesController < ApplicationController
       if @service.save
         unless params[:service][:pictures].nil?
           params[:service][:pictures].each do |picture|
-             @service.pictures.create(name: picture)
+            @service.pictures.create(name: picture)
           end
+          @ad.picture_id = @service.pictures.first.id
         end
 
         unless params[:service][:videos].nil?
           params[:service][:videos].each do |video|
-             @service.videos.create(name: picture)
+            @service.videos.create(name: picture)
           end
         end
-        @ad.picture_id = @service.pictures.first.id
+
+        unless params[:service][:disciplines].nil?
+          @service.disciplines << Discipline.where(id: params[:service][:disciplines])
+        end
+        
         if @ad.save!
          format.html { redirect_to preview_service_url(@service), notice: 'Ad Service Saved!' }
         end

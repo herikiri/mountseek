@@ -36,6 +36,7 @@ class StudsController < ApplicationController
           params[:stud][:pictures].each do |picture|
              @stud.pictures.create(name: picture)
           end
+          @ad.picture_id = @stud.pictures.first.id
         end
 
         unless params[:stud][:videos].nil?
@@ -44,7 +45,6 @@ class StudsController < ApplicationController
           end
         end
 
-        @ad.picture_id = @stud.pictures.first.id
         if @ad.save!
          format.html { redirect_to preview_stud_url(@stud), notice: 'Ad Horse Saved!' }
         end

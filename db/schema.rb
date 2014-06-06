@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606033901) do
+ActiveRecord::Schema.define(version: 20140606070106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,32 @@ ActiveRecord::Schema.define(version: 20140606033901) do
   add_index "ads", ["adable_type"], name: "index_ads_on_adable_type", using: :btree
   add_index "ads", ["package_id"], name: "index_ads_on_package_id", using: :btree
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
+
+  create_table "disciplines", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "disciplines_services", id: false, force: true do |t|
+    t.integer  "service_id"
+    t.integer  "discipline_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "disciplines_services", ["discipline_id"], name: "index_disciplines_services_on_discipline_id", using: :btree
+  add_index "disciplines_services", ["service_id"], name: "index_disciplines_services_on_service_id", using: :btree
+
+  create_table "disciplines_tacks", force: true do |t|
+    t.integer  "tack_id"
+    t.integer  "discipline_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "disciplines_tacks", ["discipline_id"], name: "index_disciplines_tacks_on_discipline_id", using: :btree
+  add_index "disciplines_tacks", ["tack_id"], name: "index_disciplines_tacks_on_tack_id", using: :btree
 
   create_table "horses", force: true do |t|
     t.string   "title"

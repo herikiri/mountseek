@@ -37,6 +37,7 @@ class TrailersController < ApplicationController
           params[:trailer][:pictures].each do |picture|
              @trailer.pictures.create(name: picture)
           end
+          @ad.picture_id = @trailer.pictures.first.id
         end
 
         unless params[:trailer][:videos].nil?
@@ -45,7 +46,6 @@ class TrailersController < ApplicationController
           end
         end
 
-        @ad.picture_id = @trailer.pictures.first.id
         if @ad.save!
          format.html { redirect_to preview_trailer_url(@trailer), notice: 'Ad Trailer Saved!' }
         end

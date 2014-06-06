@@ -8,6 +8,11 @@
 
 Type.delete_all
 Package.delete_all
+Discipline.delete_all
+
+Type.connection.execute('ALTER SEQUENCE types_id_seq RESTART WITH 1')
+Package.connection.execute('ALTER SEQUENCE packages_id_seq RESTART WITH 1')
+Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1')
 
 horse = Type.create(name: "Horse")
 stud = Type.create(name: "Stud")
@@ -50,4 +55,10 @@ real_estate.packages.create([
 service.packages.create([
 	{name: "Basic", price: 0, duration: 12, max_photo_upload: 0, max_video_upload: 0},
 	{name: "Premium", price: 14.95, duration: 12, max_photo_upload: 10, max_video_upload: 2}
+	])
+
+Discipline.create([
+	{name: "All Around"},{name: "All Purpose"},{name: "Barrel Racing"},{name: "Cutting"},{name: "Dressage"},{name: "Endurence"},
+	{name: "Eventing"},{name: "Hunter"},{name: "Show"},{name: "Polo"},{name: "Racing"},{name: "Reining"},
+	{name: "Roping"},{name: "Trail"},{name: "Training"},{name: "Pleasure"},{name: "Youth"},{name: "Other"}
 	])

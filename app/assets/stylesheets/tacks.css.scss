@@ -1,3 +1,14 @@
 // Place all the styles related to the tacks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.disciplines {
+	text-align: left;
+	input {
+		display: inline;
+	}
+
+	label {
+		float: left;
+	}
+}

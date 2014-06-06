@@ -36,6 +36,7 @@ class RealEstatesController < ApplicationController
           params[:real_estate][:pictures].each do |picture|
              @real_estate.pictures.create(name: picture)
           end
+          @ad.picture_id = @real_estate.pictures.first.id
         end
 
         unless params[:real_estate][:videos].nil?
@@ -44,7 +45,6 @@ class RealEstatesController < ApplicationController
           end
         end
 
-        @ad.picture_id = @real_estate.pictures.first.id
         if @ad.save!
          format.html { redirect_to preview_real_estate_url(@real_estate), notice: 'Ad Horse Saved!' }
         end

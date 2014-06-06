@@ -7,7 +7,8 @@
   h4 COMPANY DETAIL
 
   = f.input :company, label: false, placeholder: "Company Name"
-  = f.input :company_description, label: false, placeholder: "Company Description"
+  = f.input :company_description, label: false, placeholder: "Company Description", input_html: { rows: 8 }
+  = f.input :disciplines, as: :check_boxes, collection: @disciplines
 
   = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
 

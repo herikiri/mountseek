@@ -2,17 +2,14 @@
   = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
   = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 }
 
- 	.form-inputs.row
+  .form-inputs.row
     = f.input :name, label: false, wrapper_html: { class: 'span6' }, placeholder: "Horse's Name (optional)"
     = f.input :breed, label: false, wrapper_html: { class: 'span6' }, prompt: "Breed *", collection: ["Arabian", "Big Hair", "Colors & Spots", "Drafts", "Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse" ]
 
   .form-inputs.row
-    .span4
-      = f.country_select :city, label: false, wrapper_html: { class: 'span4' }, priority: %w(US CA), prompt: 'Please select a country'
-    .span4
-      = render partial: 'ads/shared/subregion_select', locals: {parent_region: f.object.city}
-    = f.input :zip_code, label: false, wrapper_html: { class: 'span4' }, placeholder: "Zip Code *"
-    
+    = f.input :city, label: false, wrapper_html: { class: 'span4' }, placeholder: "City"
+    = f.input :state, label: false, wrapper_html: { class: 'span4' }, placeholder: "State"
+    = f.input :zip_code, label: false, wrapper_html: { class: 'span4' }, placeholder: "Zip Code"
 
   .form-inputs.row
     = f.input :ad_for, label: false, wrapper_html: { class: 'span4' }, prompt: "Ad For *", collection: ["Sale", "Lease"]
@@ -23,6 +20,7 @@
 
   h4 DETAILS & BREED INFORMATION
   = f.input :birth, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true,  input_html: { class: 'span6' }, prompt: { month: 'Birth Month (optional)', year: 'Birth Year *' }
+
 
   .form-inputs.row
     = f.input :color, label: false, wrapper_html: { class: 'span4' }, placeholder: "Color (optional)"

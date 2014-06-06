@@ -8,9 +8,12 @@
   	= f.input :price, label: false, wrapper_html: { class: 'span4' }, placeholder: "Price"
 
   .form-inputs.row-fluid
-  	= f.input :condition, label: false, wrapper_html: { class: 'span6' }, placeholder: "Condition"
-  	= f.input :color, label: false, wrapper_html: { class: 'span6' }, placeholder: "Color"
-  
+  	= f.input :condition, label: false, wrapper_html: { class: 'span4' }, placeholder: "Condition"
+  	= f.input :color, label: false, wrapper_html: { class: 'span4' }, placeholder: "Color"
+
+  = f.input :disciplines, as: :check_boxes, collection: @disciplines
+ 
+
 
   = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
 

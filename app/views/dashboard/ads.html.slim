@@ -8,7 +8,7 @@
 				- ads_group.each do |ad|
 					- unless ad.nil?
 						- ad_type = ad.adable_type.constantize.find(ad.adable_id)
-						- ad_banner = Picture.find(ad.picture_id).name_url
+						- ad_banner = Picture.find(ad.picture_id).name_url unless ad.picture_id.blank?
 						- show_url = "/" + ad.adable_type.downcase + "/" + ad.adable_id.to_s
 						.li.span4
 							.ad-thumbnail.thumbnail
@@ -32,7 +32,7 @@
 									i.icon-eye-open
 										="#{ad_type.impressionist_count(:filter=>:ip_address)}"
 									i.icon-heart
-										="#{ad_type.get_likes.size}"
+										="#{ad.get_likes.size}"
 									i.icon-camera
 										="#{ad_type.pictures.size}"
 									i.icon-facetime-video

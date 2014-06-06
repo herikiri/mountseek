@@ -14,6 +14,7 @@ class TacksController < ApplicationController
   # GET /packages/:package_id/tacks/new
   def new
     @tack = Package.find(params[:package_id]).tacks.new
+    @disciplines = Discipline.all
   end
 
   # GET /tacks/:id/edit
@@ -34,16 +35,21 @@ class TacksController < ApplicationController
       if @tack.save
       	unless params[:tack][:pictures].nil?
           params[:tack][:pictures].each do |picture|
-             @tack.pictures.create(name: picture)
+            @tack.pictures.create(name: picture)
           end
+          @ad.picture_id = @tack.pictures.first.id
         end
 
         unless params[:tack][:videos].nil?
           params[:tack][:videos].each do |video|
-             @tack.videos.create(name: picture)
+            @tack.videos.create(name: picture)
           end
         end
-        @ad.picture_id = @tack.pictures.first.id
+
+        unless params[:service][:disciplines].nil?
+          @tack.disciplines << Discipline.where(id: params[:tack][:disciplines])
+        end
+
         if @ad.save!
          format.html { redirect_to preview_tack_url(@tack), notice: 'Ad Horse Saved!' }
         end
