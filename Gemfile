@@ -71,4 +71,5 @@ gem 'social-share-button'
 gem 'impressionist'
 gem 'acts_as_votable', '~> 0.9.0'
 gem 'owlcarousel-rails'
+gem "font-awesome-rails"
 

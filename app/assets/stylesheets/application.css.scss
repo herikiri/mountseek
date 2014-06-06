@@ -13,7 +13,7 @@
  *= require social-share-button
  *= require owl.carousel
  *= require owl.theme
- *
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
@@ -80,9 +80,6 @@
 }
 
 
-
-
-
 footer {
 
 	color: #fffffd;
@@ -119,6 +116,25 @@ footer {
 				margin-bottom: 40px;
 			}
 		}
+
+		.span1 {
+			a {
+					color: #fff;
+			}
+			.fa-stack {
+
+				.fa-circle {
+					color: #49b198;
+				}
+			}
+		} 
+
 	}
+
+
+}
+
+a:hover {
+	background-color: transparent;
 }
 

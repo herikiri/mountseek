@@ -80,6 +80,8 @@ GEM
     execjs (2.1.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    font-awesome-rails (4.1.0.0)
+      railties (>= 3.2, < 5.0)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
     hashie (2.1.1)
@@ -265,6 +267,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   debugger
   devise
+  font-awesome-rails
   friendly_id (~> 5.0.0)
   impressionist
   jbuilder (~> 2.0)

@@ -1,7 +1,6 @@
 .container
 	=render 'nav_tabs'
 
-
 	- @ads.in_groups_of(3).each do |ads_group|
 		.row-fluid
 			ul.thumbnails
@@ -40,3 +39,4 @@
 								hr
 								p= ad_type.description
 								=social_share_button_tag(ad_type.title)
+-
