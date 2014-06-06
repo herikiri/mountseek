@@ -55,7 +55,7 @@
     #tacks.row.tab-pane
       - @tackPackages.each do |package|
         dl.span3.pricing-wrapper
-          dt= link_to "Package #{package.name}", "new_package_tack_path(package)"
+          dt= link_to "Package #{package.name}", new_package_tack_path(package)
           dd
             | Price: #{package.price}
           dd
@@ -79,7 +79,7 @@
     #services.row.tab-pane
       - @servicePackages.each do |package|
         dl.span3.pricing-wrapper
-          dt= link_to "Package #{package.name}", "new_package_service_path(package)"
+          dt= link_to "Package #{package.name}", new_package_service_path(package)
           dd
             | Price: #{package.price}
           dd

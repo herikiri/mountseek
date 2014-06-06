@@ -6,9 +6,17 @@ class StudsController < ApplicationController
     @studs = Stud.all
   end
 
+   # GET /studs/1
+  def show
+  end
+
   # GET /packages/:package_id/studs/new
   def new
     @stud = Package.find(params[:package_id]).studs.new
+  end
+
+  # GET /studs/:id/edit
+  def edit
   end
 
   # POST /packages/:package_id/studs
@@ -44,10 +52,6 @@ class StudsController < ApplicationController
         format.html { render action: 'new', notice: 'Save Horse Failed!'  }
       end
     end
-  end
-
-  # GET /studs/:id/edit
-  def edit
   end
 
   # PATCH/PUT /studs/:id

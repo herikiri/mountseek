@@ -6,9 +6,18 @@ class TrailersController < ApplicationController
     @trailer = Trailer.all
   end
 
+  # GET /trailers/:id
+  def show
+  end
+
   # GET /packages/:package_id/trailers/new
   def new
   	@trailer = Package.find(params[:package_id]).trailers.new
+  end
+
+
+  # GET /trailers/:id/edit
+  def edit
   end
 
   # POST /packages/:package_id/trailers
@@ -44,10 +53,6 @@ class TrailersController < ApplicationController
         format.html { render action: 'new', notice: 'Save Trailer Failed!'  }
       end
     end
-  end
-
-  # GET /trailers/:id/edit
-  def edit
   end
 
   # PATCH/PUT /trailers/:id

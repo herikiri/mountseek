@@ -6,9 +6,17 @@ class RealEstatesController < ApplicationController
     @real_estates = RealEstate.all
   end
 
+   # GET /real_estates/1
+  def show
+  end
+
   # GET /packages/:package_id/real_estates/new
   def new
     @real_estate = Package.find(params[:package_id]).real_estates.new
+  end
+
+  # GET /real_estates/:id/edit
+  def edit
   end
 
   # POST /packages/:package_id/real_estates
@@ -46,9 +54,6 @@ class RealEstatesController < ApplicationController
     end
   end
 
-  # GET /real_estates/:id/edit
-  def edit
-  end
 
   # PATCH/PUT /real_estates/:id
   # TODO -> update for real_estates picture & video

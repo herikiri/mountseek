@@ -1,0 +1,16 @@
+= simple_form_for [@service.package, @service] , :html => {:multipart => true} do |f|
+  = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
+  = f.input :description, label: false,  placeholder: "Description", input_html: { rows: 8 }
+  
+  hr
+
+  h4 COMPANY DETAIL
+
+  = f.input :company, label: false, placeholder: "Company Name"
+  = f.input :company_description, label: false, placeholder: "Company Description"
+
+  = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
+
+  = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true } 
+ 
+  = f.button :submit, 'Save & Preview'

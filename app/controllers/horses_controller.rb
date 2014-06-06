@@ -7,9 +7,17 @@ class HorsesController < ApplicationController
     @horses = Horse.all
   end
 
+  # GET /horses/1
+  def show
+  end
+
   # GET /packages/:package_id/horses/new
   def new
     @horse = Package.find(params[:package_id]).horses.new
+  end
+
+    # GET /horses/:id/edit
+  def edit
   end
 
   # POST /packages/:package_id/horses
@@ -42,13 +50,9 @@ class HorsesController < ApplicationController
          format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
         end
       else
-        format.html { render action: 'new', notice: 'Save Horse Failed!'  }
+        format.html { render :new }
       end
     end
-  end
-
-  # GET /horses/:id/edit
-  def edit
   end
 
   # PATCH/PUT /horses/:id
@@ -87,19 +91,20 @@ class HorsesController < ApplicationController
   end
 
   private 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def horse_params
-      params.require(:horse).permit(:title, :description, :name, :gender, 
-        :breed, :city, :state, :zip_code, :ad_for, :price, :private_treaty,
-        :birth, :color, :height, :weight)
-    end
-
+    # Use callbacks to share common setup or constraints between actions.
     def set_horse
       @horse = Horse.find(params[:id])
     end
 
     def set_user
       @user = current_user
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def horse_params
+      params.require(:horse).permit(:title, :description, :name, :gender, 
+        :breed, :city, :state, :zip_code, :ad_for, :price, :private_treaty,
+        :birth, :color, :height, :weight)
     end
 
 end

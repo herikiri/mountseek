@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :services
+
+  resources :tacks
+
   resource :horses, :only => :create
 
   get 'subregion_options' => 'ads#subregion_options'

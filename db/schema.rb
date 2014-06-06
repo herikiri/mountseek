@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604074049) do
+ActiveRecord::Schema.define(version: 20140606033901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,20 @@ ActiveRecord::Schema.define(version: 20140604074049) do
   add_index "real_estates", ["package_id"], name: "index_real_estates_on_package_id", using: :btree
   add_index "real_estates", ["user_id"], name: "index_real_estates_on_user_id", using: :btree
 
+  create_table "services", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "company"
+    t.text     "company_description"
+    t.integer  "package_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "services", ["package_id"], name: "index_services_on_package_id", using: :btree
+  add_index "services", ["user_id"], name: "index_services_on_user_id", using: :btree
+
   create_table "studs", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -181,6 +195,24 @@ ActiveRecord::Schema.define(version: 20140604074049) do
 
   add_index "studs", ["package_id"], name: "index_studs_on_package_id", using: :btree
   add_index "studs", ["user_id"], name: "index_studs_on_user_id", using: :btree
+
+  create_table "tacks", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.decimal  "price"
+    t.string   "tack"
+    t.string   "tack_type"
+    t.string   "discipline"
+    t.string   "condition"
+    t.string   "color"
+    t.integer  "package_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tacks", ["package_id"], name: "index_tacks_on_package_id", using: :btree
+  add_index "tacks", ["user_id"], name: "index_tacks_on_user_id", using: :btree
 
   create_table "trailers", force: true do |t|
     t.string   "title"

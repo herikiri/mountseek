@@ -1,4 +1,3 @@
-h4 THE BASICS ABOUT YOUR TRAILER 
 = simple_form_for [@trailer.package, @trailer] , :html => {:multipart => true} do |f|
   = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
   = f.input :description, label: false,  placeholder: "About Your Trailer *", input_html: { rows: 8 }
@@ -24,7 +23,7 @@ h4 THE BASICS ABOUT YOUR TRAILER
 
   h4 TRAILER DETAILS
 
-  .form-inputs.row
+  .form-inputs.row-fluid
     = f.input :color, label: false, wrapper_html: { class: 'span3' }, placeholder: "Color (optional)"
     = f.input :hitch, label: false, wrapper_html: { class: 'span3' }, placeholder: "Hitch (optional)"
     = f.input :axles, label: false, wrapper_html: { class: 'span3' }, placeholder: "Axles (optional)"

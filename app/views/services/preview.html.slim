@@ -1,0 +1,7 @@
+.container
+  .preview-wrapper
+    h1 Preview Your Draft
+          
+    = link_to 'Edit', edit_service_path(@service), class: "btn btn-primary btn-inverse"
+    | &nbsp;
+    = link_to 'Publish Ad', publish_service_path(@service), class: "btn btn-primary btn-inverse"
