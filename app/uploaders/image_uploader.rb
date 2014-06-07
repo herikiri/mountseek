@@ -35,6 +35,13 @@ class ImageUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process :resize_to_fit => [50, 50]
   # end
+  version :cover do
+    process resize_to_fit: [400, 400]
+  end 
+
+  version :thumb do
+    process resize_to_fit: [128, 128]
+  end 
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -47,9 +54,5 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
-  version :thumb do
-    process resize_to_fill: [200, 200]
-  end 
 
 end

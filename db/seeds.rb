@@ -62,3 +62,4 @@ Discipline.create([
 	{name: "Eventing"},{name: "Hunter"},{name: "Show"},{name: "Polo"},{name: "Racing"},{name: "Reining"},
 	{name: "Roping"},{name: "Trail"},{name: "Training"},{name: "Pleasure"},{name: "Youth"},{name: "Other"}
 	])
+

@@ -7,6 +7,9 @@ class Horse < ActiveRecord::Base
 
 	is_impressionable
 
+	scope :published, -> { where(id: Ad.where(adable_type: "Horse", status: "published").map(&:adable_id)) }
+	
+
 	# TODO -> add validation
 	#validates :title, :description, :city, :state, :breed, :gender, presence: true
 
