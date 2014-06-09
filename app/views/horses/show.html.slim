@@ -1,7 +1,6 @@
 .container
   .preview-wrapper
     h1 Show Horse
-    - ad_banner = Picture.find(@horse.ad.picture_id)
     .row-fluid
       .span6
         - unless @horse.ad_banner.nil?

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  has_one :profile
-  has_many :ads
+  has_one :profile, dependent: :destroy
+  has_many :horses, dependent: :destroy
+
+  after_create :build_profile
 
 	TEMP_EMAIL = 'change@me.com'
   TEMP_EMAIL_REGEX = /change@me.com/
@@ -36,8 +38,8 @@ class User < ActiveRecord::Base
         )
         if user.save!
           user_profile = user.create_profile
-          user_avatar = user_profile.build_picture
-          user_avatar.remote_name_url = auth[:info][:image]
+          user_avatar = user_profile.build_user_picture
+          user_avatar.remote_avatar_url = auth[:info][:image]
           user_avatar.save!
         end
         
@@ -52,5 +54,10 @@ class User < ActiveRecord::Base
     user
   end
 
+
+  private
+    def build_profile
+      self.create_profile
+    end
 
 end

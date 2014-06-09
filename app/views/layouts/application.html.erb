@@ -36,10 +36,15 @@
               <% else %>
               <li class="dropdown">
                 <li><a href=<%= my_ads_path %> >My Ads</a></li>
-                <% if @user.profile.picture.present? %>
-                  <img id="avatar" src=<%= @user.profile.picture.name_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
+                <% if @user.profile.user_picture.present? %>
+                  <li><img id="avatar" src=<%= @user.profile.user_picture.avatar_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/></li>
                 <% else %>
-                  <img id="avatar" src="../../assets/grey1x1.png" class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
+                  <li class="dropdown-toggle"  data-toggle="dropdown">
+                    <span class="fa-stack fa-lg ">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </li>
                   
                 <% end %>
                

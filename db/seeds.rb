@@ -6,10 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Type.delete_all
-Package.delete_all
-Discipline.delete_all
 
+[Type, Package, Discipline].each(&:delete_all)
 
 Type.connection.execute('ALTER SEQUENCE types_id_seq RESTART WITH 1')
 Package.connection.execute('ALTER SEQUENCE packages_id_seq RESTART WITH 1')
@@ -20,7 +18,7 @@ stud = Type.create(name: "Stud")
 tack = Type.create(name: "Tack")
 trailer = Type.create(name: "Trailer")
 real_estate = Type.create(name: "Real Estate")
-service = Type.create(name: "Service")
+my_service = Type.create(name: "Service")
 
 
 horse.packages.create([
@@ -53,7 +51,7 @@ real_estate.packages.create([
 	{name: "Deluxe", price: 29.95, duration: 3, max_photo_upload: 20, max_video_upload: 2}
 	])
 
-service.packages.create([
+my_service.packages.create([
 	{name: "Basic", price: 0, duration: 12, max_photo_upload: 0, max_video_upload: 0},
 	{name: "Premium", price: 14.95, duration: 12, max_photo_upload: 10, max_video_upload: 2}
 	])

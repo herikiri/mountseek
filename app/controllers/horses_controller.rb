@@ -25,12 +25,8 @@ class HorsesController < ApplicationController
   def create
     @horse = Horse.new(horse_params)
     @horse.user_id = @user.id
+    @horse.package_id = params[:package_id]
     
-    @ad = @horse.build_ad
-    @ad.user_id = @user.id
-    @ad.package_id = params[:package_id]
-   
-
     respond_to do |format|
       if @horse.save 
         unless params[:horse][:pictures].nil?
@@ -44,9 +40,8 @@ class HorsesController < ApplicationController
              @horse.videos.create(name: picture)
           end
         end
-
-        @ad.picture_id = @horse.pictures.first.id
-        if @ad.save!
+        
+        if @horse.update(banner: @horse.pictures.first)
          format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
         end
       else
@@ -82,8 +77,8 @@ class HorsesController < ApplicationController
   # PUT /horses/:id/publish
   def publish
     respond_to do |format|
-      if @horse.ad.draft?
-        @horse.ad.publish!
+      if @horse.draft?
+        @horse.publish!
       else
         format.html { redirect_to @horse, notice: 'Ad was successfully published.' }
       end

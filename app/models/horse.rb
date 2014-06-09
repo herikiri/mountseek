@@ -1,25 +1,46 @@
 class Horse < ActiveRecord::Base
+	include AASM
+
 	belongs_to :package
 	belongs_to :user
 	has_many :pictures, as: :imageable, dependent: :destroy
 	has_many :videos, as: :videoable, dependent: :destroy
-	has_one :ad, as: :adable, dependent: :destroy
-
-	is_impressionable
-
-	# Ad Horse where -> package type delux(id: 3) or exclusive(id: 4) 
-	scope :featured_ad, -> { where(id: Ad.where(adable_type: "Horse", package_id: [3,4]).pluck(:adable_id)) }
-	
-	scope :newest_ad, -> { where(id: Ad.where(adable_type: "Horse").order(updated_at: :desc).pluck(:adable_id))}
-
-	scope :published, -> { where(id: Ad.where(adable_type: "Horse", status: "published").pluck(:adable_id)) }
-	
-	def ad_banner
-		self.pictures.find(self.ad.picture_id)
-	end
 
 
 	# TODO -> add validation
 	#validates :title, :description, :city, :state, :breed, :gender, presence: true
+
+	is_impressionable
+	acts_as_votable
+
+
+  aasm column: 'status' do
+    state :draft, initial: true
+    state :published
+
+    event :publish do
+      transitions from: :draft, to: :published
+    end
+
+    event :make_draft do
+      transitions from: :published, to: :draft
+    end
+
+  end
+
+
+	# Ad Horse where -> package type delux(id: 3) or exclusive(id: 4) 
+	scope :featured_ad, -> { where(package_id: [3,4]) }
+	
+	scope :newest_ad, -> { order(updated_at: :desc) }
+
+	scope :published, -> { where(status: "published") }
+	
+	def ad_banner
+		self.pictures.find(self.banner)
+	end
+
+
+	
 
 end
