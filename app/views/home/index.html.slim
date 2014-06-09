@@ -30,12 +30,9 @@ header.jumbotron
     .tab-content
       #horses.row.tab-pane.active
         form.form-horizontal
-           
-          = render 'quick_search_breed'
-
-          = render 'quick_search_location'
-
-          = render 'quick_search_price'
+          = search_form_for @search, url: horses_search_path do |f|
+            = f.search_field :breed_cont
+            = f.submit
      
       #studs.row.tab-pane
         form.form-horizontal

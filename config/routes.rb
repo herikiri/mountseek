@@ -46,5 +46,7 @@ Rails.application.routes.draw do
       put "dislike", to: "ads#dislike"
     end
   end
+
+  get 'horses/search' => 'index#search_horses_result'
   
 end
