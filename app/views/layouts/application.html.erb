@@ -36,7 +36,7 @@
               <% else %>
               <li class="dropdown">
                 <li><a href=<%= my_ads_path %> >My Ads</a></li>
-                <% if @user.profile.present? %>
+                <% if @user.profile.picture.present? %>
                   <img id="avatar" src=<%= @user.profile.picture.name_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>
                 <% else %>
                   <img id="avatar" src="../../assets/grey1x1.png" class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/>

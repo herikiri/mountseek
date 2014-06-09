@@ -136,9 +136,15 @@ header.jumbotron
 
 .container 
   h4 Featured Horse
-
   .owl-carousel
-    = render "shared/ad_thumbnail"
+    = render partial: "shared/ad_thumbnail", locals: {horses: @horses}
+
+
+  h4 Newest Horse
+  .owl-carousel
+    = render partial: "shared/ad_thumbnail", locals: {horses: @newest_horses}
+
+
 
   
 

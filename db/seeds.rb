@@ -10,6 +10,7 @@ Type.delete_all
 Package.delete_all
 Discipline.delete_all
 
+
 Type.connection.execute('ALTER SEQUENCE types_id_seq RESTART WITH 1')
 Package.connection.execute('ALTER SEQUENCE packages_id_seq RESTART WITH 1')
 Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1')
@@ -62,4 +63,3 @@ Discipline.create([
 	{name: "Eventing"},{name: "Hunter"},{name: "Show"},{name: "Polo"},{name: "Racing"},{name: "Reining"},
 	{name: "Roping"},{name: "Trail"},{name: "Training"},{name: "Pleasure"},{name: "Youth"},{name: "Other"}
 	])
-

@@ -1,13 +1,11 @@
 .container
   .preview-wrapper
     h1 Show Horse
-    - country = Carmen::Country.coded(@horse.city)
-    - subregion = country.subregions.coded(@horse.state)
     - ad_banner = Picture.find(@horse.ad.picture_id)
     .row-fluid
       .span6
-        - unless ad_banner.nil?
-          img src= ad_banner.name_url
+        - unless @horse.ad_banner.nil?
+          img src= @horse.ad_banner.name_url
       .span6
         h4 
           - unless @horse.name.nil?
@@ -26,7 +24,7 @@
           br
           = "#{@horse.height} Hands"
           br
-          = "Located in #{subregion.name}"
+          = "Located in #{@horse.state}"
           br
           = "#{@horse.ad_for} by #{@horse.user.username}"
 

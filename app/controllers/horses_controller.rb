@@ -1,7 +1,7 @@
 class HorsesController < ApplicationController
   before_action :set_user
   before_action :set_horse, only: [:show, :preview, :publish, :edit, :update, :destroy]
-  impressionist
+  impressionist :actions=>[:show]
 
   def index
     @horses = Horse.all
