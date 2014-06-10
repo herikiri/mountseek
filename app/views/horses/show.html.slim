@@ -5,6 +5,8 @@
       .span6
         - unless @horse.ad_banner.nil?
           img src= @horse.ad_banner.name_url
+        - else
+          =image_tag( 'horse1.jpg')
       .span6
         h4 
           - unless @horse.name.nil?
