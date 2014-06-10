@@ -3,6 +3,9 @@ class HorsesController < ApplicationController
   before_action :set_horse, only: [:show, :preview, :publish, :edit, :update, :destroy]
   impressionist :actions=>[:show]
 
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
+
   def index
     @horses = Horse.all
   end
@@ -31,13 +34,13 @@ class HorsesController < ApplicationController
       if @horse.save 
         unless params[:horse][:pictures].nil?
           params[:horse][:pictures].each do |picture|
-             @horse.pictures.create(name: picture)
+            @horse.pictures.create(name: picture)
           end
         end
 
         unless params[:horse][:videos].nil?
           params[:horse][:videos].each do |video|
-             @horse.videos.create(name: picture)
+            @horse.videos.create(name: picture)
           end
         end
         
@@ -83,6 +86,19 @@ class HorsesController < ApplicationController
         format.html { redirect_to @horse, notice: 'Ad was successfully published.' }
       end
     end
+  end
+
+
+  def search
+    unless params[:q].empty?
+      @search = Horse.search(params[:q])
+      @horses =  @search.result
+    else
+      @horses = Horse.all.published
+    end
+
+    smart_listing_create(:horses, @horses, partial: "horses/list", array: true)
+
   end
 
   private 

@@ -74,3 +74,5 @@ gem 'owlcarousel-rails'
 gem "font-awesome-rails"
 gem 'faker', '~> 1.3.0'
 gem "ransack" 
+gem "smart_listing"
+gem 'filterrific'

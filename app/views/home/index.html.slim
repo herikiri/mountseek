@@ -29,11 +29,31 @@ header.jumbotron
 
     .tab-content
       #horses.row.tab-pane.active
-        form.form-horizontal
-          = search_form_for @search, url: quick_search_horses_path do |f|
-            = f.search_field :breed_cont
-            = f.submit
+          = search_form_for @search, url: search_horses_path, :html => {:class => "form-horizontal"} do |f|
+            label.control-label for="inputBreed" Breed
+            .control-group
+              .controls
+                = f.search_field :breed_cont, placeholder: "Horse's Breed", input_html: {id: "inputBreed"}
+
+            .control-group
+              label.control-label for="inputLocation" Location
+              .controls
+                = f.search_field :state_cont, placeholder: "State", input_html: {id: "inputLocation"}
+                | &nbsp;
+                = f.search_field :city_cont, placeholder: "City", input_html: {id: "inputLocation"} 
+
+            .control-group
+              label.control-label for="inputPrice" Price
+              .controls
+                = f.search_field :price_gteq, placeholder: "Price Low", input_html: {id: "inputPrice"}   
+                | to  
+                = f.search_field :price_lteq, placeholder: "Price Hight", input_html: {id: "inputPrice"}        
+ 
+            .control-group
+              .controls
+                = f.submit
      
+
       #studs.row.tab-pane
         form.form-horizontal
 
@@ -134,7 +154,7 @@ header.jumbotron
 .container 
   h4 Featured Horse
   .owl-carousel
-    = render partial: "shared/ad_thumbnail", locals: {horses: @horses}
+    = render partial: "shared/ad_thumbnail", locals: {horses: @featured_horses}
 
 
   h4 Newest Horse

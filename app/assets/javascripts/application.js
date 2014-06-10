@@ -22,6 +22,8 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require social-share-button
 //= require owl.carousel
+//= require smart_listing
+
 
 $(document).on('page:fetch', function() { NProgress.start(); })
 $(document).on('page:change', function() { NProgress.done(); })

@@ -82,7 +82,7 @@ horse_images = []
 end
 
 packages_id_for_horse = [1, 2, 3, 4]
-ad_status = ["published", "draft"]
+ad_status = ["published"]
 
 [User, Horse, Ad, Picture].each(&:delete_all)
 Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
@@ -110,7 +110,7 @@ User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
     )
 end
 
-(1..50).each do |num|
+(1..200).each do |num|
   horse = Horse.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 

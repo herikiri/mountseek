@@ -1,5 +1,6 @@
 class Horse < ActiveRecord::Base
 	include AASM
+	
 
 	belongs_to :package
 	belongs_to :user
