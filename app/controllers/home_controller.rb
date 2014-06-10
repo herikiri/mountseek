@@ -7,5 +7,10 @@ class HomeController < ApplicationController
   end
 
 
+  def search_horses
+
+  end
+
+
 end
 

@@ -47,6 +47,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'horses/search' => 'index#search_horses_result'
+  get 'search/horses' => 'home#search_horses', :as => :quick_search_horses
   
 end
