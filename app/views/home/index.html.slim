@@ -30,8 +30,9 @@ header.jumbotron
     .tab-content
       #horses.row.tab-pane.active
           = search_form_for @search, url: search_horses_path, :html => {:class => "form-horizontal"} do |f|
-            label.control-label for="inputBreed" Breed
+            
             .control-group
+              label.control-label for="inputBreed" Breed
               .controls
                 = f.search_field :breed_cont, placeholder: "Horse's Breed", input_html: {id: "inputBreed"}
 
@@ -55,21 +56,38 @@ header.jumbotron
      
 
       #studs.row.tab-pane
-        form.form-horizontal
+          = search_form_for @search, url: search_studs_path, :html => {:class => "form-horizontal"} do |f|
+            
+            .control-group
+              label.control-label for="inputBreed" Breed
+              .controls
+                = f.search_field :breed_cont, placeholder: "Horse's Breed", input_html: {id: "inputBreed"}
 
-          = render 'quick_search_breed' 
+            .control-group
+              label.control-label for="inputLocation" Location
+              .controls
+                = f.search_field :state_cont, placeholder: "State", input_html: {id: "inputLocation"}
+                | &nbsp;
+                = f.search_field :city_cont, placeholder: "City", input_html: {id: "inputLocation"} 
 
-          = render 'quick_search_location'
+            .control-group
+              label.control-label for="inputPrice" Price
+              .controls
+                = f.search_field :price_gteq, placeholder: "Price Low", input_html: {id: "inputPrice"}   
+                | to  
+                = f.search_field :price_lteq, placeholder: "Price Hight", input_html: {id: "inputPrice"}  
 
-          = render 'quick_search_price'
-
-          .control-group
-            label.control-label for="inputAiType"  AI Type
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputAiType placeholder="AI Type" type="text" 
+            .control-group
+              label.control-label for="inputAiType"  AI Type
+              .controls
+                .input-prepend
+                  span.add-on
+                    i.icon-search
+                  input#inputAiType placeholder="AI Type" type="text"       
+ 
+            .control-group
+              .controls
+                = f.submit
       
       #trailers.row.tab-pane
         form.form-horizontal

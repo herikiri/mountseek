@@ -2,6 +2,9 @@ class StudsController < ApplicationController
   before_action :set_user
   before_action :set_stud, only: [:show, :preview, :publish, :edit, :update, :destroy]
 
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
+
   def index
     @studs = Stud.all
   end
@@ -87,6 +90,19 @@ class StudsController < ApplicationController
         format.html { redirect_to @stud, notice: 'Ad was successfully published.' }
       end
     end
+  end
+
+
+  def search
+    unless params[:q].empty?
+      @search = Stud.search(params[:q])
+      @studs =  @search.result
+    else
+      @studs = Stud.all.published
+    end
+
+    smart_listing_create(:studs, @studs, partial: "studs/list", array: true)
+
   end
 
   private 

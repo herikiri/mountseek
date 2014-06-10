@@ -1,0 +1,312 @@
+[33mcommit 968bca9ee9ab3de6868a944d95425b3fcfd40ebc[m
+Author: Hery <heri@41studio.com>
+Date:   Tue Jun 10 16:29:45 2014 +0700
+
+    add funtionality to quick search horses
+
+[33mcommit 8c7e94b6c1bebfcce9c9af3c81a161cc857cee43[m
+Author: Hery <heri@41studio.com>
+Date:   Tue Jun 10 11:00:53 2014 +0700
+
+    handle if ad banner not present in homepage
+
+[33mcommit 7f9000e6f5e3cede86d4829117ec38e39fdd64e4[m
+Author: Hery <heri@41studio.com>
+Date:   Tue Jun 10 10:33:38 2014 +0700
+
+    Fix data on homepage
+
+[33mcommit 0bcfc7055a07e262b63c634c3ed2a1cd590565bc[m
+Author: Hery <heri@41studio.com>
+Date:   Tue Jun 10 01:02:15 2014 +0700
+
+    move populate db script to seed file
+
+[33mcommit ebfb931375d6aa107592832ca4666c313c935bdd[m
+Author: Hery <heri@41studio.com>
+Date:   Tue Jun 10 00:47:35 2014 +0700
+
+    Move ad attribute to items model
+
+[33mcommit 643ee159fc10ca3c7a9fee9598f16217d3bd72bc[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 9 17:17:55 2014 +0700
+
+    Add Quick Search form in the homepage using ransack
+
+[33mcommit a34f3b4938a4824fbcdad5fcf6113a86901b6298[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 9 16:20:38 2014 +0700
+
+    Add Newest Horse to homepage
+
+[33mcommit 7f1a43ae9c106c53523dd129a6c9a70289ad77ca[m
+Author: Hery <heri@41studio.com>
+Date:   Sat Jun 7 14:59:50 2014 +0700
+
+    fix footer
+
+[33mcommit db76f8ea6d146cf3a263f5b96ce09b0a0b9f1e66[m
+Author: Hery <heri@41studio.com>
+Date:   Fri Jun 6 17:14:15 2014 +0700
+
+    Add Social icon in footer using Font Awesome
+
+[33mcommit 48529120a2bd47019100ce5661344fabe28bea5f[m
+Author: Hery <heri@41studio.com>
+Date:   Fri Jun 6 16:05:14 2014 +0700
+
+    add discipline field to tack and service item
+
+[33mcommit 9a9a9dbaa92230dca3ec36c0a8d4fe2d2329d544[m
+Author: Hery <heri@41studio.com>
+Date:   Fri Jun 6 11:11:31 2014 +0700
+
+    create CRUD for tack and service item
+
+[33mcommit d71ce671b84acb83635b482d73d35f8a5dd65c4a[m
+Author: Hery <heri@41studio.com>
+Date:   Wed Jun 4 17:01:30 2014 +0700
+
+    change backend advertisement proccess flow
+
+[33mcommit 3eed4bcba5fde4cc44bb9232a337de4fae7e999e[m
+Author: Hery <heri@41studio.com>
+Date:   Wed Jun 4 16:43:08 2014 +0700
+
+    Fix Featured Ad thumbnail
+
+[33mcommit 553eafd70778a5aaaa45e187b16356618185601e[m
+Author: Hery <heri@41studio.com>
+Date:   Wed Jun 4 16:36:08 2014 +0700
+
+    create crud for real estate item
+
+[33mcommit 07361adfd64b32000c54237406dcf442db6468e4[m
+Author: Hery <heri@41studio.com>
+Date:   Wed Jun 4 13:16:26 2014 +0700
+
+    Create crud for Trailer item
+
+[33mcommit 0ef57c19dc08d454076fe4fb2d41e6f386eacb51[m
+Author: Hery <heri@41studio.com>
+Date:   Tue Jun 3 17:13:27 2014 +0700
+
+    Add video filed on trailer form
+
+[33mcommit 4733058a7c899b33cf0a4bd6f57e96cbe491a769[m
+Author: Hery <heri@41studio.com>
+Date:   Tue Jun 3 16:56:21 2014 +0700
+
+    add trailer model & initial trailer form
+
+[33mcommit b1223099cb50c1f0362c220860e56d6dc235d594[m
+Author: Hery <heri@41studio.com>
+Date:   Tue Jun 3 13:40:49 2014 +0700
+
+    Add Initial Quick Search Attribute on homepage mockup
+
+[33mcommit de1cc370eb5769aacec18054dd572a7e32a960b7[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 17:19:48 2014 +0700
+
+    Implement Add to Favorites Button on ad thumbnail
+
+[33mcommit 6e39d141f32fd8ad9c2842d909cb766aef38ee9c[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 16:19:12 2014 +0700
+
+    add initial featured ad thumbnail in homepage
+
+[33mcommit ce7dc08e1ae3dddda2ce0db0227a8c8d4ef0eb13[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 13:31:46 2014 +0700
+
+    ad views count using impressionist
+
+[33mcommit b39707e2fb53cca12eff72fe820c2c0eb57f47b7[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 13:08:47 2014 +0700
+
+    refactor code in identity.rb
+
+[33mcommit 0a9ea2225a9ac69239567869806766d15cd00147[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 11:59:35 2014 +0700
+
+    move omniauth key using rails_config
+
+[33mcommit 165a02b3cb31bcbc2cc381b3582a0e9ab91bd79f[m
+Merge: 8e4c2e4 230ad3f
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 11:24:19 2014 +0700
+
+    Merge branch 'master' of gitlab.com:41studio/mountseek
+
+[33mcommit 8e4c2e41eeba25b2a28cc748a8acf2c58e5cda02[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 11:23:49 2014 +0700
+
+    add gitignore list file
+
+[33mcommit 52306a9fb310e4987c17d65ab5c091213b939fa3[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 11:21:58 2014 +0700
+
+    Add impresionist gem
+
+[33mcommit fe21faba612899fcccbe08021b4a642135516eaf[m
+Author: Hery <heri@41studio.com>
+Date:   Mon Jun 2 11:21:09 2014 +0700
+
+    add impresionist gem
+
+[33mcommit 230ad3fd39c5114fdaa27baa49decf661568371e[m
+Author: Mada Aryakusumah <mada@41studio.com>
+Date:   Mon Jun 2 11:18:20 2014 +0700
+
+    add gem and TODO
+
+[33mcommit 228cfc4e55a7eb9d4ffa05aaecb03467273da76f[m
+Author: Hery <heri@41studio.com>
+Date:   Sat May 31 15:08:34 2014 +0700
+
+    Create add thumbnail for horse item
+
+[33mcommit 95ea575107f25eb8983dcb7c4575798b9de354aa[m
+Author: Hery <heri@41studio.com>
+Date:   Fri May 30 17:05:51 2014 +0700
+
+    create backend system for dashboard
+
+[33mcommit 8286e6c60c376a08f37d4b86b1a98ab50b399505[m
+Author: Hery <heri@41studio.com>
+Date:   Thu May 29 17:09:04 2014 +0700
+
+    create preview page and show-ad page for horse item
+
+[33mcommit 01b14a677ba0c9d5f54068cf01899729895b2d35[m
+Author: Hery <heri@41studio.com>
+Date:   Wed May 28 17:27:35 2014 +0700
+
+    create backend advertisement system for horse item
+
+[33mcommit 4db7e35c1ff870b0432db3079cb1a911e53b3d9b[m
+Author: Mada Aryakusumah <mada@41studio.com>
+Date:   Mon May 26 12:21:50 2014 +0700
+
+    add loader page
+
+[33mcommit cba36996d2ad33e8e0fcb3611b979588771782d7[m
+Author: Hery <heri@41studio.com>
+Date:   Sat May 24 14:52:46 2014 +0700
+
+    create initial ad preview & change custom root definition
+
+[33mcommit 8c7471e1398a3fdebfda427afc9f754c9b24b8e5[m
+Author: Hery <heri@41studio.com>
+Date:   Fri May 23 17:10:48 2014 +0700
+
+    create initial ad horse form & define some custom routes
+
+[33mcommit bf3259fc231ff53427196ce5644c73ddb71d9802[m
+Author: Hery <heriynt89@gmail.com>
+Date:   Fri May 23 00:21:25 2014 +0700
+
+    fix avatar issue
+
+[33mcommit 6696f3f7e13c4ee3b1a5444cd0147d9d14d61386[m
+Author: Hery <heriynt89@gmail.com>
+Date:   Thu May 22 23:19:36 2014 +0700
+
+    change navbar color & background header attachment
+
+[33mcommit fd3baba93d362e63deb75a865c40ed4bf13de60f[m
+Author: Hery <heri@41studio.com>
+Date:   Thu May 22 17:01:51 2014 +0700
+
+    Fix footer & fix avatar for manual sign-in process
+
+[33mcommit 4d6ba381b1e755c667409018f31f934c4cee974a[m
+Author: Hery <heri@41studio.com>
+Date:   Thu May 22 14:55:04 2014 +0700
+
+    fix header image not found on heroku 3rd try
+
+[33mcommit eb20c6b43da21f438f65f303bf9ad020950fd6f3[m
+Author: Hery <heri@41studio.com>
+Date:   Thu May 22 14:52:35 2014 +0700
+
+    fix header image not found on heroku 2nd try
+
+[33mcommit fee268be9c04514e25f69e02fcc8d0b39fcc8977[m
+Author: Hery <heri@41studio.com>
+Date:   Thu May 22 14:47:30 2014 +0700
+
+    fix header image not found on heroku
+
+[33mcommit f0cccbc283d1a5406fa522de75f9844b4584cf2c[m
+Author: Hery <heri@41studio.com>
+Date:   Thu May 22 14:27:11 2014 +0700
+
+    create initial mockup for homepage
+
+[33mcommit 5a840a10e3bb4c6f61f155cae75ebc19ec50a508[m
+Author: Hery <heri@41studio.com>
+Date:   Thu May 22 09:34:40 2014 +0700
+
+    separate social keys for dev & production
+
+[33mcommit 9d55ed5318c22365109f907e3c9077d964fef354[m
+Author: Hery <heri@41studio.com>
+Date:   Wed May 21 17:02:39 2014 +0700
+
+    add Feature search mockup interface
+
+[33mcommit 9611a32a08514b280a091d5217b0554cd0472350[m
+Author: Hery <heri@41studio.com>
+Date:   Wed May 21 13:18:01 2014 +0700
+
+    Add models : type, package, ad_horse
+
+[33mcommit 583bd5f159a521a4505959af19eae42e93414b74[m
+Author: Hery <heri@41studio.com>
+Date:   Wed May 21 09:31:57 2014 +0700
+
+    Fix css
+
+[33mcommit bf15b57c72bdc93d4521f2c3588c6a1bc87ad9c0[m
+Author: Hery <heri@41studio.com>
+Date:   Wed May 21 09:31:40 2014 +0700
+
+    Fix css
+
+[33mcommit a230a3623d8518cdfff8ae85f96d1dc32f7d3366[m
+Author: Hery <heri@41studio.com>
+Date:   Tue May 20 16:37:50 2014 +0700
+
+    migration database to postgreesql
+
+[33mcommit a6aba218b7a27cc818f78724de5c0c6e610d2f4c[m
+Author: Hery <heri@41studio.com>
+Date:   Tue May 20 15:48:03 2014 +0700
+
+    Add Profile model for user
+
+[33mcommit de9c9b9f6eb81edbf3c04d301db06079d450fa7f[m
+Author: Hery <heriynt89@gmail.com>
+Date:   Tue May 20 00:24:06 2014 +0700
+
+    Add Twitter Bootstrap 2.2.8 for styling
+
+[33mcommit b70ca0f32b1c47d45e5fc4650b1fea4f51811ba0[m
+Author: Hery <heri@41studio.com>
+Date:   Mon May 19 17:02:13 2014 +0700
+
+    facebook login
+
+[33mcommit 5470b8ce7669c8565e2061f661fc84569cb69a69[m
+Author: Hery <heri@41studio.com>
+Date:   Mon May 19 15:35:32 2014 +0700
+
+    Initial commit

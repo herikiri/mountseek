@@ -1,0 +1,18 @@
+- unless smart_listing.empty?
+  table.table.table-striped
+    thead
+      th.col-md-3= "Name"
+      th.col-md-3= "Breed"
+      th.col-md-4= "Price"
+      th.col-md-2= "Location"
+    tbody
+      - smart_listing.collection.each do |stud|
+        tr
+          td= "#{stud.name}"
+          td= stud.breed
+          td= stud.price
+          td= "#{stud.state}, #{stud.city}"
+  = smart_listing.paginate
+  = smart_listing.pagination_per_page_links
+- else
+  p.warning No records!

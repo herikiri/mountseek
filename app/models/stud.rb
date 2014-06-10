@@ -6,4 +6,7 @@ class Stud < ActiveRecord::Base
 	has_one :ad, as: :adable, dependent: :destroy
 
 	# TODO -> add validation
+
+
+	scope :published, -> { where(status: "published") }
 end

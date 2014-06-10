@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'subregion_options' => 'ads#subregion_options'
+  get 'pricing' => 'ads#pricing', :as => :pricing
 
   resource :horses do 
     collection do
@@ -7,16 +9,19 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'subregion_options' => 'ads#subregion_options'
-  get 'pricing' => 'ads#pricing', :as => :pricing
+  resource :studs do 
+    collection do
+      get 'search'
+    end
+  end
 
  
-  get 'search-studs' => 'search#studs', :as => :search_studs
+  get 'search-studs' => 'home#studs'
   get 'search-services' => 'search#services', :as => :search_services
   get 'search-real-estates' => 'search#real_estates', :as => :search_real_estates
   get 'search-tacks' => 'search#tacks', :as => :search_tacks
-  get 'search-trailers' => 'search#trailers', :as => :search_trailers
-  # get 'search-horses' => 'search#horses', :as => :search_horses
+  get 'search-trailers' => 'search#trailers'
+  get 'search-horses' => 'home#horses'
 
   get 'dashboard' => 'dashboard#index', :as => :dashboard
   get 'dashboard/ads' => 'dashboard#ads', :as => :my_ads
@@ -40,6 +45,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+ 
 
   resources :ads do
     member do

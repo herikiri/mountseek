@@ -38,10 +38,7 @@ class Horse < ActiveRecord::Base
 	scope :published, -> { where(status: "published") }
 	
 	def ad_banner
-		self.pictures.find(self.banner)
+		self.pictures.find(self.banner) if self.pictures.present?
 	end
-
-
-	
 
 end

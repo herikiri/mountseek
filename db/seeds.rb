@@ -84,8 +84,9 @@ end
 packages_id_for_horse = [1, 2, 3, 4]
 ad_status = ["published"]
 
-[User, Horse, Ad, Picture].each(&:delete_all)
+[User, Horse, Stud, Ad, Picture].each(&:delete_all)
 Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
+Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
 Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
 Ad.connection.execute('ALTER SEQUENCE ads_id_seq RESTART WITH 1')
 User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
@@ -132,5 +133,30 @@ end
 
   horse.banner = horse.pictures.sample.id
   horse.save!
+  
+end
+
+(1..200).each do |num|
+  stud = Stud.create(
+    { title: Faker::Company.catch_phrase, 
+      description: Faker::Lorem.paragraphs(3, true).join(","), 
+      name: Faker::Name.name,
+      breed: breeds.sample, city: Faker::Address.city,
+      state: Faker::Address.state, zip_code: Faker::Address.zip_code,
+      ad_for: ad_for.sample, price: random_dec(5, 200).round(2),
+      private_treaty: false, birth: birth,
+      color: colors.sample, height: random_dec(5, 200).round(2), weight: random_dec(5, 200).round(2),
+      package_id: packages_id_for_horse.sample,
+      user_id: User.all.pluck(:id).sample,
+      status: ad_status.sample
+    })
+
+
+  horse_images.each do |img|
+    stud.pictures.create(name: img)
+  end
+
+  stud.banner = stud.pictures.sample.id
+  stud.save!
   
 end
