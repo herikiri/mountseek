@@ -1,12 +1,39 @@
+script#img-wrapper-tmpl type="text/x-jquery-tmpl" 
+  .rg-image-wrapper
+    | {{if itemsCount > 1}}
+    .rg-image-nav
+      a.rg-image-nav-prev href="#"  Previous Image
+      a.rg-image-nav-next href="#"  Next Image
+    | {{/if}}
+    .rg-image
+    .rg-loading
+    .rg-caption-wrapper
+      .rg-caption style="display:none;" 
+        p
+
 .container
   .preview-wrapper
     h1 Show Horse
     .row-fluid
       .span6
-        - unless @horse.ad_banner.nil?
-          img src= @horse.ad_banner.name_url
-        - else
-          =image_tag( 'horse1.jpg')
+        
+          - unless @horse.ad_banner.nil?
+            img src= @horse.ad_banner.name_url
+          - else
+            =image_tag( 'horse1.jpg')
+          #rg-gallery.rg-gallery
+            .rg-thumbs
+            .es-carousel-wrapper
+              es-nav
+                span.es-nav-prev
+                span.es-nav-next
+
+              .es-carousel
+                ul
+                  - @horse.pictures.each do |horse_pic|
+                    li
+                      a href="#"
+                        img src=horse_pic.name.url, data-large="images/1.jpg" alt="image01"
       .span6
         h4 
           - unless @horse.name.nil?
@@ -60,5 +87,10 @@
         h4= @horse.title.upcase
         hr
         p= @horse.description
-          
+
+
+
+  
+              
+
  

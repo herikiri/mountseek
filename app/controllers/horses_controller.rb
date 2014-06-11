@@ -1,6 +1,7 @@
 class HorsesController < ApplicationController
   before_action :set_user
-  before_action :set_horse, only: [:show, :preview, :publish, :edit, :update, :destroy]
+  before_action :set_horse, except: [:index, :create, :search]
+
   impressionist :actions=>[:show]
 
   include SmartListing::Helper::ControllerExtensions
@@ -107,6 +108,14 @@ class HorsesController < ApplicationController
 
     smart_listing_create(:horses, @horses, partial: "horses/list")
 
+  end
+
+  def like
+    @horse.liked_by @user
+  end
+
+  def dislike
+    @horse.unliked_by @user
   end
 
   private 

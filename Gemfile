@@ -76,3 +76,4 @@ gem 'faker', '~> 1.3.0'
 gem "ransack" 
 gem "smart_listing"
 gem "fog"
+gem 'rails-gallery'

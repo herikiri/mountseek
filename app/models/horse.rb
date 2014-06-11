@@ -1,7 +1,6 @@
 class Horse < ActiveRecord::Base
 	include AASM
 	
-
 	belongs_to :package
 	belongs_to :user
 	has_many :pictures, as: :imageable, dependent: :destroy
@@ -13,7 +12,6 @@ class Horse < ActiveRecord::Base
 
 	is_impressionable
 	acts_as_votable
-
 
   aasm column: 'status' do
     state :draft, initial: true

@@ -41,12 +41,13 @@ Rails.application.routes.draw do
         member do
           get 'preview', to: "#{item}#preview"
           get 'publish', to: "#{item}#publish"
+          get "like", to: "#{item}#like"
+          get "dislike", to: "#{item}#dislike"
         end
       end
     end
   end
 
- 
 
   resources :ads do
     member do
