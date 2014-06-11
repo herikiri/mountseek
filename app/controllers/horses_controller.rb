@@ -90,14 +90,22 @@ class HorsesController < ApplicationController
 
 
   def search
-    unless params[:q].empty?
+    unless params[:q].blank?
+      @params_q = params[:q]
       @search = Horse.search(params[:q])
-      @horses =  @search.result
+      @horses = @search.result
     else
-      @horses = Horse.all.published
+      @horses =  Horse.all
     end
 
-    smart_listing_create(:horses, @horses, partial: "horses/list", array: true)
+    sort_by = {updated_at: :desc} if params[:sort_by] == "newest" || params[:sort_by].nil?
+    sort_by = {updated_at: :asc} if params[:sort_by] == "oldest"
+    sort_by = {price: :desc} if params[:sort_by] == "high_to_low"
+    sort_by = {price: :asc} if params[:sort_by] == "low_to_high"
+
+    @horses = @horses.order(sort_by).published
+
+    smart_listing_create(:horses, @horses, partial: "horses/list")
 
   end
 

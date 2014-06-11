@@ -1,18 +1,39 @@
-- unless smart_listing.empty?
-  table.table.table-striped
-    thead
-      th.col-md-3= "Name"
-      th.col-md-3= "Breed"
-      th.col-md-4= "Price"
-      th.col-md-2= "Location"
-    tbody
-      - smart_listing.collection.each do |horse|
-        tr
-          td= "#{horse.name}"
-          td= horse.breed
-          td= horse.price
-          td= "#{horse.state}, #{horse.city}"
-  = smart_listing.paginate
-  = smart_listing.pagination_per_page_links
-- else
-  p.warning No records!
+.container
+  - unless smart_listing.empty?
+    = smart_listing.paginate
+    = smart_listing.pagination_per_page_links
+    - smart_listing.collection.in_groups_of(4).each do |horses_group|
+      .row-fluid
+        ul.thumbnails
+          - horses_group.each do |horse|
+            - unless horse.nil?
+              .li.span3
+                .ad-thumbnail.thumbnail
+                  i.icon-heart
+                  span.price.pull-right= number_to_currency horse.price
+                  .ad-title= horse.title
+                  a href="#"
+                    img src= horse.ad_banner.name.thumb.url
+                  .row-fluid
+                    .span6
+                      ul
+                        li="Gender: #{horse.gender}"
+                        li="Breed: #{horse.breed}"
+                        li="Age: #{horse.birth}"
+                    .span6
+                      ul
+                        li="Color: #{horse.color}"
+                        li="Height: #{horse.height} hands"
+                        li="Weight: #{horse.weight} lbs"
+                  .ad-properties.pull-right
+                    i.icon-eye-open
+                      ="#{horse.impressionist_count(:filter=>:ip_address)}"
+                    i.icon-heart
+                      ="#{horse.get_likes.size}"
+                    i.icon-camera
+                      ="#{horse.pictures.size}"
+                    i.icon-facetime-video
+                      | &nbsp;
+                  hr
+                  p= truncate(horse.description, length: 150)
+                  =social_share_button_tag(horse.title)
