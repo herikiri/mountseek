@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/radar/by_star
+  revision: 8c22f5108b9379adc7fc80d7c5b8b163027eee10
+  specs:
+    by_star (2.2.1)
+      activesupport
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -305,6 +312,7 @@ DEPENDENCIES
   acts_as_votable (~> 0.9.0)
   better_errors
   binding_of_caller
+  by_star!
   carmen-rails (~> 1.0.0)
   carrierwave
   coffee-rails (~> 4.0.0)

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'subregion_options' => 'ads#subregion_options'
-  get 'pricing' => 'ads#pricing', :as => :pricing
+  get 'pricing' => 'home#pricing', :as => :pricing
 
   resource :horses do 
     collection do
@@ -41,6 +41,7 @@ Rails.application.routes.draw do
         member do
           get 'preview', to: "#{item}#preview"
           get 'publish', to: "#{item}#publish"
+          get 'activate', to: "#{item}#activate"
           get "like", to: "#{item}#like"
           get "dislike", to: "#{item}#dislike"
         end
@@ -48,14 +49,5 @@ Rails.application.routes.draw do
     end
   end
 
-
-  resources :ads do
-    member do
-      put "like", to: "ads#like"
-      put "dislike", to: "ads#dislike"
-    end
-  end
-
-  
 
 end

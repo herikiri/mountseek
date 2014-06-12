@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609141224) do
+ActiveRecord::Schema.define(version: 20140612023535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20140609141224) do
     t.datetime "updated_at"
     t.string   "status"
     t.integer  "banner"
+    t.date     "published_at"
+    t.date     "published_end"
   end
 
   add_index "horses", ["package_id"], name: "index_horses_on_package_id", using: :btree
@@ -183,6 +185,8 @@ ActiveRecord::Schema.define(version: 20140609141224) do
     t.datetime "updated_at"
     t.string   "status"
     t.integer  "banner"
+    t.date     "published_at"
+    t.date     "published_end"
   end
 
   add_index "real_estates", ["package_id"], name: "index_real_estates_on_package_id", using: :btree
@@ -199,6 +203,8 @@ ActiveRecord::Schema.define(version: 20140609141224) do
     t.datetime "updated_at"
     t.string   "status"
     t.integer  "banner"
+    t.date     "published_at"
+    t.date     "published_end"
   end
 
   add_index "services", ["package_id"], name: "index_services_on_package_id", using: :btree
@@ -225,6 +231,8 @@ ActiveRecord::Schema.define(version: 20140609141224) do
     t.datetime "updated_at"
     t.string   "status"
     t.integer  "banner"
+    t.date     "published_at"
+    t.date     "published_end"
   end
 
   add_index "studs", ["package_id"], name: "index_studs_on_package_id", using: :btree
@@ -245,6 +253,8 @@ ActiveRecord::Schema.define(version: 20140609141224) do
     t.datetime "updated_at"
     t.string   "status"
     t.integer  "banner"
+    t.date     "published_at"
+    t.date     "published_end"
   end
 
   add_index "tacks", ["package_id"], name: "index_tacks_on_package_id", using: :btree

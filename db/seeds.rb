@@ -82,7 +82,9 @@ horse_images = []
 end
 
 packages_id_for_horse = [1, 2, 3, 4]
-ad_status = ["published"]
+ad_status = ["published", "draft"]
+month_durations = [0, 1, 3, 4, 5, 6]
+days_duration = [0, 7, 30]
 
 [User, Horse, Stud, Ad, Picture].each(&:delete_all)
 Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
@@ -123,7 +125,9 @@ end
       color: colors.sample, height: random_dec(5, 200).round(2), weight: random_dec(5, 200).round(2),
       package_id: packages_id_for_horse.sample,
       user_id: User.all.pluck(:id).sample,
-      status: ad_status.sample
+      status: ad_status.sample,
+      published_at: DateTime.now - days_duration.sample.days,
+      published_end: DateTime.now + month_durations.sample.month
     })
 
 
@@ -148,7 +152,9 @@ end
       color: colors.sample, height: random_dec(5, 200).round(2), weight: random_dec(5, 200).round(2),
       package_id: packages_id_for_horse.sample,
       user_id: User.all.pluck(:id).sample,
-      status: ad_status.sample
+      status: ad_status.sample,
+      published_at: DateTime.now - days_duration.sample.days,
+      published_end: DateTime.now + month_durations.sample.month,
     })
 
 

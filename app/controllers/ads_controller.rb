@@ -6,34 +6,10 @@ class AdsController < ApplicationController
   before_action :set_fav_ad, only: [:like, :dislike]
 
  
-  def pricing
-    @horsePackages = Package.where(type_id: 1)
-    @studPackages = Package.where(type_id: 2)
-    @trailerPackages = Package.where(type_id: 4)
-    @tackPackages = Package.where(type_id: 3)
-    @realEstatePackages = Package.where(type_id: 5)
-    @servicePackages = Package.where(type_id: 6)
-  end
+  
 
 
-  def like
-    respond_to do |format|
-      if @ad.liked_by @user
-        format.html {redirect_to root_url}
-        format.js
-      end  
-    end 
-  end
-
-  def dislike
-    @ad.unliked_by @user
-    redirect_to root_url
-  end
-
-  def subregion_options
-    render partial: 'ads/shared/subregion_select'
-  end
-
+ 
   private 
   	def set_package
   		@package = Package.find(params[:id])

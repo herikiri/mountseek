@@ -1,8 +1,8 @@
 .container
-  .preview-wrapper
-    h1 Preview Your Draft
-    
-          
-    = link_to 'Edit', edit_horse_path(@horse), class: "btn btn-primary btn-inverse"
-    | &nbsp;
-    = link_to 'Publish Ad', publish_horse_path(@horse), class: "btn btn-primary btn-inverse"
+  h1 Preview Your Draft
+  
+  = render "horse_detail"
+        
+  = link_to 'Edit', edit_horse_path(@horse), class: "btn btn-primary btn-inverse"
+  | &nbsp;
+  = link_to 'Continue', publish_horse_path(@horse), class: "btn btn-primary btn-inverse"

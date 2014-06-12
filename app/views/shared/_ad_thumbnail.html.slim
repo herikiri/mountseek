@@ -30,7 +30,7 @@
           | &nbsp;
       hr
       p= truncate horse.description, size: 100
-      =social_share_button_tag(horse.title)
+      =social_share_button_tag(horse.title, :url => horse_url(horse), :image => horse.ad_banner.name.thumb.url, :'data-type' => 'photo' )
 - else
   .empty-ad
     h4 Ad Not Available Yet

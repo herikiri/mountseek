@@ -1,6 +1,6 @@
 class HorsesController < ApplicationController
   before_action :set_user
-  before_action :set_horse, except: [:index, :create, :search]
+  before_action :set_horse, except: [:index, :create, :search, :new]
 
   impressionist :actions=>[:show]
 
@@ -24,18 +24,18 @@ class HorsesController < ApplicationController
   def edit
   end
 
-  # POST /packages/:package_id/horses
+  # POST /packages/horses
   # TODO -> Refactor this method
   def create
     @horse = Horse.new(horse_params)
     @horse.user_id = @user.id
-    @horse.package_id = params[:package_id]
     
     respond_to do |format|
       if @horse.save 
         unless params[:horse][:pictures].nil?
           params[:horse][:pictures].each do |picture|
             @horse.pictures.create(name: picture)
+            @horse.update(banner: @horse.pictures.first.id)
           end
         end
 
@@ -45,9 +45,7 @@ class HorsesController < ApplicationController
           end
         end
         
-        if @horse.update(banner: @horse.pictures.first)
-         format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
-        end
+        format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
       else
         format.html { render :new }
       end
@@ -59,7 +57,7 @@ class HorsesController < ApplicationController
   def update
     respond_to do |format|
       if @horse.update(horse_params)
-        format.html { redirect_to @horse, notice: 'Horse was successfully updated.' }
+        format.html { redirect_to preview_horse_url(@horse), notice: 'Horse was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end
@@ -78,13 +76,20 @@ class HorsesController < ApplicationController
   def preview
   end
 
-  # PUT /horses/:id/publish
+  # GET /horses/:id/publish
   def publish
+  end
+
+  # GET /horses/:id/active
+  def activate
     respond_to do |format|
       if @horse.draft?
         @horse.publish!
-      else
+        @horse.update(published_at: DateTime.now,
+          published_end: DateTime.now + @horse.package.duration.month)
         format.html { redirect_to @horse, notice: 'Ad was successfully published.' }
+      else
+        format.html { render :preview }
       end
     end
   end
@@ -104,7 +109,7 @@ class HorsesController < ApplicationController
     sort_by = {price: :desc} if params[:sort_by] == "high_to_low"
     sort_by = {price: :asc} if params[:sort_by] == "low_to_high"
 
-    @horses = @horses.order(sort_by).published
+    @horses = @horses.order(sort_by).published.active
 
     smart_listing_create(:horses, @horses, partial: "horses/list")
 
@@ -132,7 +137,7 @@ class HorsesController < ApplicationController
     def horse_params
       params.require(:horse).permit(:title, :description, :name, :gender, 
         :breed, :city, :state, :zip_code, :ad_for, :price, :private_treaty,
-        :birth, :color, :height, :weight)
+        :birth, :color, :height, :weight, :package_id)
     end
 
 end

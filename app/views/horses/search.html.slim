@@ -1,5 +1,5 @@
 .container
-  h4 Search Result
+  h4= "#{@horses.count} Horses Found" 
 
   = smart_listing_controls_for(:horses, {class: "form-inline text-right"}) do
     =select_tag :sort_by, options_for_select([["Newest", "newest"], ["Oldest", "oldest"], ["Price High to Low", "high_to_low"], ["Price Low to High", "low_to_high"] ], "newest")

@@ -77,3 +77,4 @@ gem "ransack"
 gem "smart_listing"
 gem "fog"
 gem 'rails-gallery'
+gem 'by_star', :git => "git://github.com/radar/by_star"

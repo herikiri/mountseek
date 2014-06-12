@@ -1,0 +1,21 @@
+.container
+  .prublish-wrapper
+    h1 Publish Your Horse
+    
+    img src=@horse.ad_banner.name.thumb.url
+
+    p= "#{@horse.package.name} Ad Package"
+    p= "TOTAL #{number_to_currency @horse.package.price}"
+
+    h4= "YOUR #{@horse.package.name.upcase} AD INCLUDES"
+    ul
+    	li= "#{@horse.package.duration} Month Ad Duration"
+    	- if @horse.package.max_photo_upload > 0
+    		li= "Up To #{@horse.package.max_photo_upload} Photos"
+    	- if @horse.package.max_video_upload > 0
+    		li= "Up To #{@horse.package.max_video_upload} Videos"
+
+          
+    = link_to 'Edit', edit_horse_path(@horse), class: "btn btn-primary btn-inverse"
+    | &nbsp;
+    = link_to 'Publish', activate_horse_path(@horse), class: "btn btn-primary btn-inverse"
