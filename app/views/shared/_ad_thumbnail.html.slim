@@ -5,9 +5,9 @@
       span.price.pull-right= number_to_currency horse.price
       .ad-title= horse.title
       - unless horse.ad_banner.nil?
-        =link_to raw("<img src="+horse.ad_banner.name.thumb.url+" />"), horse
-      - else 
-        =link_to image_tag( 'horse1.jpg'), horse
+        =link_to image_tag(horse.ad_banner.name.thumb), horse
+      - else
+        =link_to image_tag("horse1.jpg"), horse
       .row-fluid
         .span6
           ul

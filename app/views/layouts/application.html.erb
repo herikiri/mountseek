@@ -20,8 +20,8 @@
         <a class="brand" href=<%= root_path %>>Mountseek</a>
         <div class="nav-collapse collapse">
           <ul class="nav">
-            <li><%= link_to "Horses", search_horses_path %></li>
-            <li><%= link_to "Studs", search_studs_path %></li>
+            <li><%= link_to "Horses", home_horses_path %></li>
+            <li><%= link_to "Studs", home_studs_path %></li>
             <li><%= link_to "Trailers", search_trailers_path %></li>
             <li><%= link_to "Tacks", search_tacks_path %></li>
             <li><%= link_to "Real Estates", search_real_estates_path %></li>
@@ -36,8 +36,8 @@
               <% else %>
               <li class="dropdown">
                 <li><a href=<%= my_ads_path %> >My Ads</a></li>
-                <% if @user.profile.user_picture.present? %>
-                  <li><img id="avatar" src=<%= @user.profile.user_picture.avatar_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/></li>
+                <% if current_user.profile.user_picture.present? %>
+                  <li><img id="avatar" src=<%= current_user.profile.user_picture.avatar_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/></li>
                 <% else %>
                   <li class="dropdown-toggle"  data-toggle="dropdown">
                     <span class="fa-stack fa-lg ">
@@ -49,7 +49,7 @@
                 <% end %>
                
                 <ul class="dropdown-menu">
-                  <li><%= link_to "Dashboard", dashboard_path %></li>
+                  <li><%= link_to "Dashboard", "#" %></li>
                   <li class="divider"></li>
                   <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
                 </ul>

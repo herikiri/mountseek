@@ -106,7 +106,7 @@
           | &nbsp;&nbsp;
         - if @horse.user.profile.name.present?
           li
-            a href="#"
+            =link_to user_ads_path(@horse.user)
               i.fa.fa-bookmark.fa-2x&nbsp
               br VIEW ALL ADS
           | &nbsp;&nbsp;

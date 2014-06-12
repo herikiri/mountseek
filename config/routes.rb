@@ -16,12 +16,11 @@ Rails.application.routes.draw do
   end
 
  
-  get 'search-studs' => 'home#studs'
   get 'search-services' => 'search#services', :as => :search_services
   get 'search-real-estates' => 'search#real_estates', :as => :search_real_estates
   get 'search-tacks' => 'search#tacks', :as => :search_tacks
   get 'search-trailers' => 'search#trailers'
-  get 'search-horses' => 'home#horses'
+ 
 
   get 'dashboard' => 'dashboard#index', :as => :dashboard
   get 'dashboard/ads' => 'dashboard#ads', :as => :my_ads
@@ -33,7 +32,6 @@ Rails.application.routes.draw do
   root 'home#index'
 
   items = %w( horses studs trailers tacks real_estates services )
-
  
   resources :packages do
     items.each do |item|
@@ -49,5 +47,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'profile/:id/ads' => 'profiles#ads', :as => :user_ads
+
+
+  get 'search-horses' => 'home#horses', as: :home_horses
+  get 'search-studs' => 'home#studs', as: :home_studs
 
 end
