@@ -74,8 +74,45 @@
       hr
       p= @horse.description
 
+  .row-fluid
+    .span12
+      h4 CONTACT SELLER
+      hr
+      - if @horse.user.profile.user_picture.present?
+        img src=  @horse.user.profile.user_picture.avatar.url
+      - else
+        .fa-stack.fa-4x
+          i.fa.fa-circle.fa-stack-2x
+          i.fa.fa-user.fa-stack-1x.fa-inverse
 
+     
+      - if @horse.user.profile.name.present?
+        p= "FOR SALE BY #{@horse.user.profile.name.upcase}"
+      - else
+        p= "FOR SALE BY #{@horse.user.username.upcase}"
 
+      - if @horse.user.profile.state && @horse.user.profile.city
+        p= "#{@horse.user.profile.state}, #{@horse.user.profile.city}"
 
-            
+      ul.nav.nav-tabs
+        li
+          i.fa.fa-envelope.fa-2x
+          br EMAIL SELLER
+        | &nbsp;&nbsp;
+        - if @horse.user.profile.phone_number.present?
+          li
+            i.fa.fa-phone.fa-2x&nbsp
+            br= @horse.user.profile.phone_number
+          | &nbsp;&nbsp;
+        - if @horse.user.profile.name.present?
+          li
+            a href="#"
+              i.fa.fa-bookmark.fa-2x&nbsp
+              br VIEW ALL ADS
+          | &nbsp;&nbsp;
+        - if @horse.user.profile.name.present?
+          li
+            a href="http://#{@horse.user.profile.website}"
+              i.fa.fa-globe.fa-2x&nbsp
+              br VIEW WEBSITE
 
