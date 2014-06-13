@@ -10,7 +10,7 @@ class Horse < ActiveRecord::Base
 	# TODO -> add validation
 	#validates :title, :description, :city, :state, :breed, :gender, presence: true
 
-	is_impressionable
+	is_impressionable :counter_cache => true, :column_name => :views_count
 	acts_as_votable
 
   aasm column: 'status' do
