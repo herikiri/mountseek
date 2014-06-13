@@ -3,4 +3,20 @@
     =render 'sidebar'
     .span9
       .row-fluid
-				h3 About User
+				- if @user.profile.user_picture.present?
+					img.profile src= @user.profile.user_picture.name_url
+
+				- if @user.profile.name.nil?
+					h4= "About #{@user.username}"
+				- else
+					h4= "About #{@user.profile.name}"
+
+				.about
+					- if @user.profile.about.present?
+						p= @user.profile.about
+
+				.location
+					- if @user.profile.city.present? && @user.profile.state.present?
+						= "#{@user.profile.city}, #{@user.profile.state}"
+
+

@@ -105,6 +105,7 @@ class HorsesController < ApplicationController
       @horses =  Horse.all
     end
 
+
     sort_by = {updated_at: :desc} if params[:sort_by] == "newest" || params[:sort_by].nil?
     sort_by = {updated_at: :asc} if params[:sort_by] == "oldest"
     sort_by = {price: :desc} if params[:sort_by] == "high_to_low"

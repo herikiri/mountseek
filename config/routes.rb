@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+    member do
+      get 'search'
+    end
   end
 
   resource :studs do 
@@ -27,8 +30,6 @@ Rails.application.routes.draw do
           get 'preview', to: "#{item}#preview"
           get 'publish', to: "#{item}#publish"
           get 'activate', to: "#{item}#activate"
-          get "like", to: "#{item}#like"
-          get "dislike", to: "#{item}#dislike"
         end
       end
     end
@@ -43,7 +44,6 @@ Rails.application.routes.draw do
     end
   end
   
-
   resources :profiles do
     member do
       get 'ads'

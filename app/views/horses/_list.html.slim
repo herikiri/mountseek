@@ -8,7 +8,10 @@
             - unless horse.nil?
               .li.span3
                 .ad-thumbnail.thumbnail
-                  =link_to raw("<i class='icon-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', class: 'fav-icon like-horse-button', data: {url: like_user_horse_path(current_user, horse), toggle: 'tooltip', placement: 'bottom'}
+                  - if current_user
+                    =link_to raw("<i class='icon-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', class: 'fav-icon like-horse-button', data: {url: like_user_horse_path(current_user, horse), toggle: 'tooltip', placement: 'bottom'}
+                  - else
+                    =link_to raw("<i class='icon-heart'></i>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-horse-button', data: {toggle: 'tooltip', placement: 'bottom'}
                   span.price.pull-right= number_to_currency horse.price
                   .ad-title= horse.title
                   - unless horse.ad_banner.nil?

@@ -65,6 +65,12 @@
     .span12.galleries
       h4 PHOTO & VIDEO GALLERY
       hr
+      - @items_gallery.in_groups_of(4).each do |item_group|
+        .row-fluid
+          - item_group.each do |item|
+            - unless item.nil?
+              .span3
+                =image_tag item.name.thumb
 
   .row-fluid
     .span12
