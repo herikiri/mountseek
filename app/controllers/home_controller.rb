@@ -1,8 +1,4 @@
 class HomeController < ApplicationController
-	before_action :set_user
-
-	include SmartListing::Helper::ControllerExtensions
-	helper  SmartListing::Helper
 
   def index
   	@user = current_user
@@ -20,17 +16,21 @@ class HomeController < ApplicationController
     @servicePackages = Package.where(type_id: 6)
   end
 
-
   def horses
   end
 
   def studs
   end
 
+  def trailers
+  end
 
-  private 
-  	def set_user
-  		@user = current_user
-  	end
+  def tacks
+  end
+
+  def real_estates
+  end
+
+
 end
 

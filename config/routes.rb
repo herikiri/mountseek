@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'subregion_options' => 'ads#subregion_options'
-  get 'pricing' => 'home#pricing', :as => :pricing
 
-  resource :horses do 
+  resources :horses do 
     collection do
       get 'search'
     end
@@ -16,17 +14,6 @@ Rails.application.routes.draw do
   end
 
  
-  get 'search-services' => 'search#services', :as => :search_services
-  get 'search-real-estates' => 'search#real_estates', :as => :search_real_estates
-  get 'search-tacks' => 'search#tacks', :as => :search_tacks
-  get 'search-trailers' => 'search#trailers'
- 
-
-  get 'dashboard' => 'dashboard#index', :as => :dashboard
-  get 'dashboard/ads' => 'dashboard#ads', :as => :my_ads
-  get 'account' => 'dashboard#edit', :as => :account
-  patch 'profile/update' => 'dashboard#update', :as => :profile
-
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
 
   root 'home#index'
@@ -47,10 +34,37 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'profile/:id/ads' => 'profiles#ads', :as => :user_ads
+  resources :users do
+    resources :horses do
+      member do
+        get "like"
+        get "dislike"
+      end
+    end
+  end
+  
+
+  resources :profiles do
+    member do
+      get 'ads'
+      get 'about'
+      get 'favorites'
+    end
+    collection do
+      get 'ads'
+      get 'about'
+      get 'favorites'
+    end
+  end
 
 
+  get 'pricing' => 'home#pricing', :as => :pricing
   get 'search-horses' => 'home#horses', as: :home_horses
   get 'search-studs' => 'home#studs', as: :home_studs
+  get 'search-tacks' => 'home#tacks', as: :home_tacks
+  get 'search-real-estates' => 'home#real_estates', as: :home_real_estates
+  get 'search-services' => 'home#services', as: :home_services
+  get 'search-trailers' => 'home#trailers', as: :home_trailers
+
 
 end

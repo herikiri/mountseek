@@ -22,10 +22,10 @@
           <ul class="nav">
             <li><%= link_to "Horses", home_horses_path %></li>
             <li><%= link_to "Studs", home_studs_path %></li>
-            <li><%= link_to "Trailers", search_trailers_path %></li>
-            <li><%= link_to "Tacks", search_tacks_path %></li>
-            <li><%= link_to "Real Estates", search_real_estates_path %></li>
-            <li><%= link_to "Services", search_services_path %></li>
+            <li><%= link_to "Trailers", home_trailers_path %></li>
+            <li><%= link_to "Tacks", home_tacks_path %></li>
+            <li><%= link_to "Real Estates",  home_real_estates_path %></li>
+            <li><%= link_to "Services", home_services_path %></li>
             
           </ul>
           <ul class="nav pull-right">
@@ -35,7 +35,7 @@
               <li class="sign-in"><%= link_to "Sign in", new_user_session_path %></li>
               <% else %>
               <li class="dropdown">
-                <li><a href=<%= my_ads_path %> >My Ads</a></li>
+                <li><a href=<%= ads_profiles_path %> >My Ads</a></li>
                 <% if current_user.profile.user_picture.present? %>
                   <li><img id="avatar" src=<%= current_user.profile.user_picture.avatar_url %> class="dropdown-toggle" data-toggle="dropdown" alt="avatar"/></li>
                 <% else %>

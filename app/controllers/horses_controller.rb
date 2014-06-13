@@ -1,5 +1,5 @@
 class HorsesController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:like, :dislike]
   before_action :set_horse, except: [:index, :create, :search, :new]
 
   impressionist :actions=>[:show]
@@ -13,6 +13,7 @@ class HorsesController < ApplicationController
 
   # GET /horses/1
   def show
+    @items_gallery = @horse.pictures + @horse.videos
   end
 
   # GET /packages/:package_id/horses/new
@@ -28,7 +29,7 @@ class HorsesController < ApplicationController
   # TODO -> Refactor this method
   def create
     @horse = Horse.new(horse_params)
-    @horse.user_id = @user.id
+    @horse.user_id = current_user.id
     
     respond_to do |format|
       if @horse.save 
@@ -130,7 +131,7 @@ class HorsesController < ApplicationController
     end
 
     def set_user
-      @user = current_user
+      @user = User.find(params[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,0 +1,19 @@
+.span3
+  .well.sidebar-nav
+    ul.nav.nav-list
+      li.nav-header
+        | Sidebar
+      - if params[:id]
+        li
+          =link_to 'MY ADS', ads_profile_path(@user)
+        li
+          =link_to 'ABOUT', about_profile_path(@user)
+        li
+          =link_to 'FAVORITES', favorites_profile_path(@user)
+      - else
+        li
+          =link_to 'MY ADS', ads_profiles_path
+        li
+          =link_to 'ABOUT', about_profiles_path
+        li
+          =link_to 'FAVORITES', favorites_profiles_path
