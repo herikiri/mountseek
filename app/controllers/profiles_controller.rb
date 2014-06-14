@@ -14,12 +14,12 @@ class ProfilesController < ApplicationController
 
   def favorites
     @horses = Horse.favorited_by(@user)
-    @horses = @horses.order(@sort_by).published.active
+    @horses = @horses.order(@sort_by)
     smart_listing_create(:horses, @horses, partial: "profiles/horse_list")
   end
 
 	def ads
-    @horses = @horses.order(@sort_by).active
+    @horses = @horses.order(@sort_by)
     smart_listing_create(:horses, @horses, partial: "profiles/horse_list")
   end
 
@@ -35,7 +35,7 @@ class ProfilesController < ApplicationController
 
     def set_horse
       if params[:id]
-        @horses = User.find(params[:id]).horses
+        @horses = User.find(params[:id]).horses.published
       else 
         @horses = current_user.horses
       end

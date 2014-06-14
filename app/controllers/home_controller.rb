@@ -2,8 +2,8 @@ class HomeController < ApplicationController
 
   def index
   	@user = current_user
-  	@featured_horses = Horse.active.published.featured_ad.limit(20)
-  	@newest_horses = Horse.active.published.newest_ad.limit(10)
+  	@featured_horses = Horse.published.featured_ad.limit(20)
+  	@newest_horses = Horse.published.newest_ad.limit(10)
   	@search = Horse.search(params[:q])
   end
 

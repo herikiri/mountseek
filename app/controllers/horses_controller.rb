@@ -1,6 +1,7 @@
 class HorsesController < ApplicationController
   before_action :set_user, only: [:like, :dislike]
   before_action :set_horse, except: [:index, :create, :search, :new]
+  before_action :authenticate_user!, only: [:new, :like, :dislike]
 
   impressionist :actions=>[:show]
 
@@ -25,8 +26,6 @@ class HorsesController < ApplicationController
   def edit
   end
 
-  # POST /packages/horses
-  # TODO -> Refactor this method
   def create
     @horse = Horse.new(horse_params)
     @horse.user_id = current_user.id
@@ -75,6 +74,7 @@ class HorsesController < ApplicationController
 
   # GET /horses/:id/preview
   def preview
+    @items_gallery = @horse.pictures + @horse.videos
   end
 
   # GET /horses/:id/publish
@@ -111,7 +111,7 @@ class HorsesController < ApplicationController
     sort_by = {price: :desc} if params[:sort_by] == "high_to_low"
     sort_by = {price: :asc} if params[:sort_by] == "low_to_high"
 
-    @horses = @horses.order(sort_by).published.active
+    @horses = @horses.order(sort_by).published
 
     smart_listing_create(:horses, @horses, partial: "horses/list")
 

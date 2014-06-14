@@ -1,4 +1,13 @@
 = simple_form_for @horse, :html => {:multipart => true} do |f|
+
+  - if @horse.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@horse.errors.count, "error")} prohibited this horse from being saved:"
+      ul
+        - @horse.errors.full_messages.each do |message|
+          li = message
+
+
   = f.hidden_field :package_id, value: @horse.package_id
   = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
   = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 }
@@ -11,8 +20,8 @@
 
   .form-inputs.row
     = f.input :city, label: false, wrapper_html: { class: 'span4' }, placeholder: "City"
-    = f.input :state, label: false, wrapper_html: { class: 'span4' }, placeholder: "State"
-    = f.input :zip_code, label: false, wrapper_html: { class: 'span4' }, placeholder: "Zip Code"
+    = f.input :state, label: false, wrapper_html: { class: 'span4' }, placeholder: "State/Province*"
+    = f.input :zip_code, label: false, wrapper_html: { class: 'span4' }, placeholder: "*Zip Code*"
 
   .form-inputs.row
     = f.input :ad_for, label: false, wrapper_html: { class: 'span4' }, prompt: "Ad For *", collection: ["Sale", "Lease"]
