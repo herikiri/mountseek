@@ -4,7 +4,7 @@
     .span9
       .row-fluid
 				- if @user.profile.user_picture.present?
-					img.profile src= @user.profile.user_picture.name_url
+					img.profile src= @user.profile.user_picture.avatar_url
 
 				- if @user.profile.name.nil?
 					h4= "About #{@user.username}"
