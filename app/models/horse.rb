@@ -10,7 +10,7 @@ class Horse < ActiveRecord::Base
 	# TODO -> add validation
 	#validates :title, :description, :city, :state, :breed, :gender, presence: true
 
-	is_impressionable :counter_cache => true, :column_name => :views_count
+	is_impressionable :counter_cache => true, :column_name => :views_count, :unique => :ip_address
 	acts_as_votable
 
   aasm column: 'status' do
@@ -36,6 +36,8 @@ class Horse < ActiveRecord::Base
 	scope :featured_ad, -> { where(package_id: [3,4]) }
 	
 	scope :newest_ad, -> { order(published_at: :desc) }
+
+	scope :favorited_by, ->(user) { where(id: user.find_liked_items.map(&:id)) }
 
 	
 	def ad_banner
