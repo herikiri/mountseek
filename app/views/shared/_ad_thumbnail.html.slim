@@ -2,9 +2,9 @@
   - horses.each do |horse|
     .ad-thumbnail.thumbnail
       - if current_user
-        =link_to raw("<i class='icon-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', class: 'fav-icon like-horse-button', data: {url: like_user_horse_path(current_user, horse), toggle: 'tooltip', placement: 'bottom'}
+        =link_to raw("<span class='fa fa-heart'></span>"), "javascript:void(0)", :title => 'Ad To My Favorites', class: 'fav-icon like-horse-button', data: {url: like_user_horse_path(current_user, horse), toggle: 'tooltip', placement: 'bottom'}
       - else
-        =link_to raw("<i class='icon-heart'></i>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-horse-button', data: {toggle: 'tooltip', placement: 'bottom'}
+        =link_to raw("<span class='fa fa-heart'></span>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-horse-button', data: {toggle: 'tooltip', placement: 'bottom'}
        
       span.price.pull-right= number_to_currency horse.price
       .ad-title= horse.title
@@ -12,25 +12,28 @@
         =link_to image_tag(horse.ad_banner.name.thumb), horse
       - else
         =link_to image_tag("horse1.jpg"), horse
-      .row-fluid
-        .span6
+      .row
+        .col-md-6
           ul
             li="Gender: #{horse.gender}"
             li="Breed: #{horse.breed}"
             li="Age: #{horse.birth}"
-        .span6
+        .col-md-6
           ul
             li="Color: #{horse.color}"
             li="Height: #{horse.height} hands"
             li="Weight: #{horse.weight} lbs"
       .ad-properties.pull-right
-        i.icon-eye-open
+        i.fa.fa-eye
           ="#{horse.impressionist_count(:filter=>:ip_address)}"
-        i.icon-heart class="like-count-#{horse.id}"
+          | &nbsp;
+        i.fa.fa-heart class="like-count-#{horse.id}"
           ="#{horse.get_likes.size}"
-        i.icon-camera
+          | &nbsp;
+        i.fa.fa-camera
           ="#{horse.pictures.size}"
-        i.icon-facetime-video
+          | &nbsp;
+        i.fa.fa-video-camera
           | &nbsp;
       hr
       p= truncate horse.description, size: 100

@@ -6,6 +6,10 @@
 $(document).ready ->
   $(".owl-carousel").owlCarousel
   	items : 4
+  	autoPlay : 3000,
+    stopOnHover : true,
+    autoHeight : true,
+    transitionStyle:"fade"
 
 $(document).ready ->
 	$("a.fav-icon").tooltip('hide')

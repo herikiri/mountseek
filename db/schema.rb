@@ -27,8 +27,6 @@ ActiveRecord::Schema.define(version: 20140613104533) do
     t.datetime "updated_at"
   end
 
-  add_index "ads", ["adable_id"], name: "index_ads_on_adable_id", using: :btree
-  add_index "ads", ["adable_type"], name: "index_ads_on_adable_type", using: :btree
   add_index "ads", ["package_id"], name: "index_ads_on_package_id", using: :btree
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
 
@@ -141,9 +139,6 @@ ActiveRecord::Schema.define(version: 20140613104533) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "pictures", ["imageable_id"], name: "index_pictures_on_imageable_id", using: :btree
-  add_index "pictures", ["imageable_type"], name: "index_pictures_on_imageable_type", using: :btree
 
   create_table "profiles", force: true do |t|
     t.string   "name"
@@ -330,9 +325,6 @@ ActiveRecord::Schema.define(version: 20140613104533) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "videos", ["videoable_id"], name: "index_videos_on_videoable_id", using: :btree
-  add_index "videos", ["videoable_type"], name: "index_videos_on_videoable_type", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"

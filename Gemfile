@@ -55,8 +55,10 @@ gem 'jwt'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'carrierwave'
-gem 'less-rails' 
-gem 'twitter-bootstrap-rails'
+#gem 'less-rails' 
+#gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass', '~> 3.1.1'
+
 gem 'simple_form', '~> 3.0.2'
 gem "nprogress-rails", "~> 0.1.2.3"
 gem 'turbolinks_transitions'
@@ -77,5 +79,4 @@ gem "ransack"
 gem "smart_listing"
 gem "fog"
 gem 'rails-gallery'
-gem 'by_star', :git => "git://github.com/radar/by_star"
 gem 'html2slim'

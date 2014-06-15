@@ -1,4 +1,4 @@
-header.jumbotron
+.jumbotron
   #quick-search
     h3 Mountseek
     ul.nav.nav-pills
@@ -27,69 +27,72 @@ header.jumbotron
           i.icon-download
           | Services
 
+
+
+
     .tab-content
-      #horses.row.tab-pane.active
-          = search_form_for @search, url: search_horses_path, :html => {:class => "form-horizontal"} do |f|
+      #horses.tab-pane.fade.in.active
+          = search_form_for @search, url: search_horses_path, :html => {:class => "form-horizontal", role: "form"} do |f|
             
-            .control-group
-              label.control-label for="inputBreed" Breed
-              .controls
-                = f.search_field :breed_cont, placeholder: "Horse's Breed", input_html: {id: "inputBreed"}
+            .form-group
+              label.col-sm-2.control-label for="inputBreed" Breed
+              .col-sm-10
+                = f.search_field :breed_cont, placeholder: "Horse's Breed", class: "form-control", id: "inputBreed" 
 
-            .control-group
-              label.control-label for="inputLocation" Location
-              .controls
-                = f.search_field :state_cont, placeholder: "State", input_html: {id: "inputLocation"}
-                | &nbsp;
-                = f.search_field :city_cont, placeholder: "City", input_html: {id: "inputLocation"} 
+            .form-group
+              label.col-sm-2.control-label for="inputLocation" Location
+              .col-sm-5
+                = f.search_field :state_cont, placeholder: "State", class: "form-control", id: "inputLocation"
+              .col-sm-5
+                = f.search_field :city_cont, placeholder: "City", class: "form-control", id: "inputLocation"
 
-            .control-group
-              label.control-label for="inputPrice" Price
-              .controls
-                = f.search_field :price_gteq, placeholder: "Price Low", input_html: {id: "inputPrice"}   
-                | to  
-                = f.search_field :price_lteq, placeholder: "Price Hight", input_html: {id: "inputPrice"}        
+            .form-group
+              label.col-sm-2.control-label for="inputPrice" Price
+              .col-sm-5
+                = f.search_field :price_gteq, placeholder: "Price Low", class: "form-control", id: "inputPrice"   
+              .col-sm-5
+                = f.search_field :price_lteq, placeholder: "Price High", class: "form-control", id: "inputPrice"       
  
-            .control-group
-              .controls
-                = f.submit
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-default type="submit"
+                  | Submit
      
 
-      #studs.row.tab-pane
-          = search_form_for @search, url: search_studs_path, :html => {:class => "form-horizontal"} do |f|
+      #studs.tab-pane.fade
+          = search_form_for @search, url: search_studs_path, :html => {:class => "form-horizontal", role: "form"} do |f|
             
-            .control-group
-              label.control-label for="inputBreed" Breed
-              .controls
-                = f.search_field :breed_cont, placeholder: "Horse's Breed", input_html: {id: "inputBreed"}
+            .form-group
+              label.col-sm-2.control-label for="inputBreed" Breed
+              .col-sm-10
+                = f.search_field :breed_cont, placeholder: "Horse's Breed", class: "form-control", id: "inputBreed" 
 
-            .control-group
-              label.control-label for="inputLocation" Location
-              .controls
-                = f.search_field :state_cont, placeholder: "State", input_html: {id: "inputLocation"}
-                | &nbsp;
-                = f.search_field :city_cont, placeholder: "City", input_html: {id: "inputLocation"} 
+            .form-group
+              label.col-sm-2.control-label for="inputLocation" Location
+              .col-sm-5
+                = f.search_field :state_cont, placeholder: "State", class: "form-control", id: "inputLocation"
+              .col-sm-5
+                = f.search_field :city_cont, placeholder: "City", class: "form-control", id: "inputLocation"
 
-            .control-group
-              label.control-label for="inputPrice" Price
-              .controls
-                = f.search_field :price_gteq, placeholder: "Price Low", input_html: {id: "inputPrice"}   
-                | to  
-                = f.search_field :price_lteq, placeholder: "Price Hight", input_html: {id: "inputPrice"}  
-
-            .control-group
-              label.control-label for="inputAiType"  AI Type
-              .controls
-                .input-prepend
-                  span.add-on
-                    i.icon-search
-                  input#inputAiType placeholder="AI Type" type="text"       
+            .form-group
+              label.col-sm-2.control-label for="inputPrice" Price
+              .col-sm-5
+                = f.search_field :price_gteq, placeholder: "Price Low", class: "form-control", id: "inputPrice"   
+              .col-sm-5
+                = f.search_field :price_lteq, placeholder: "Price High", class: "form-control", id: "inputPrice"       
  
-            .control-group
-              .controls
-                = f.submit
+            .form-group
+              label.col-sm-2.control-label for="inputAiType" AI Type
+              .col-sm-10
+                = f.search_field :breed_cont, placeholder: "AI Type", class: "form-control", id: "inputAiType"
+
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-default type="submit"
+                  | Submit 
+
       
-      #trailers.row.tab-pane
+      #trailers.tab-pane.fade
         form.form-horizontal
           .control-group
             label.control-label for="inputYear"  Year
@@ -109,7 +112,7 @@ header.jumbotron
                   i.icon-search
                 input#inputCapacity placeholder="Capacity" type="text" 
 
-      #tacks.row.tab-pane
+      #tacks.tab-pane.fade
         form.form-horizontal
           .control-group
             label.control-label for="inputType"  Type
@@ -126,7 +129,7 @@ header.jumbotron
                   i.icon-search
                 input#inputCondition placeholder="Condition" type="text" 
         
-      #real-estates.row.tab-pane
+      #real-estates.tab-pane.fade
         form.form-horizontal
           .control-group
             label.control-label for="inputType"  Type
@@ -148,7 +151,7 @@ header.jumbotron
                   i.icon-search
                 input#inputAcres placeholder="Acres" type="text" 
       
-      #services.row.tab-pane
+      #services.tab-pane.fade
         form.form-horizontal
 
           = render 'quick_search_location'
@@ -174,11 +177,13 @@ header.jumbotron
   .owl-carousel
     = render partial: "shared/ad_thumbnail", locals: {horses: @featured_horses}
 
+  hr
 
   h4 Newest Horse
   .owl-carousel
     = render partial: "shared/ad_thumbnail", locals: {horses: @newest_horses}
 
+  hr
 
 
   

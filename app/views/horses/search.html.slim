@@ -1,14 +1,5 @@
 .container
   h4= "#{@horses.count} Horses Found" 
 
-  = smart_listing_controls_for(:horses, {class: "form-inline text-right"}) do
-    =select_tag :sort_by, options_for_select([["Newest", "newest"], ["Oldest", "oldest"], ["Price High to Low", "high_to_low"], ["Price Low to High", "low_to_high"] ], "newest")
-
-   	=hidden_field_tag "q[breed_cont]", @params_q["breed_cont"]
-   	=hidden_field_tag "q[state_cont]", @params_q["state_cont"]
-   	=hidden_field_tag "q[city_cont]", @params_q["city_cont"]
-   	=hidden_field_tag "q[price_gteq]", @params_q["price_gteq"]
-   	=hidden_field_tag "q[price_lteq]", @params_q["price_lteq"]
-
-
   = smart_listing_render :horses
+  
