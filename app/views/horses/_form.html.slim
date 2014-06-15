@@ -1,4 +1,4 @@
-= simple_form_for @horse, :html => {:multipart => true} do |f|
+= simple_form_for @horse, html: {multipart: true, class: 'form-horizontal'} do |f|
 
   - if @horse.errors.any?
     #error_explanation
@@ -9,38 +9,44 @@
 
 
   = f.hidden_field :package_id, value: @horse.package_id
-  = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
-  = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 }
+  .row
+    = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
+    = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 } 
 
-  .form-inputs.row
-    = f.input :name, label: false, wrapper_html: { class: 'span4' }, placeholder: "Horse's Name (optional)"
-    = f.input :gender, label: false, wrapper_html: { class: 'span4' }, prompt: "Gender *", 
-    collection: ["Males", "Females", "Fillies", "Geldings", "Ridglings", "Stallions", "Uboarn Foals", "Broodmares", "Ridglings", "Weanlings", "Yearlings", "Folas", "Unknown" ]
-    = f.input :breed, label: false, wrapper_html: { class: 'span4' }, prompt: "Breed *", collection: ["Arabian", "Big Hair", "Colors & Spots", "Drafts", "Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse" ]
+  .row
+    = f.input :name, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Horse's Name (optional)"
+    = f.input :gender, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Gender *", collection: ["Males", "Females", "Fillies", "Geldings", "Ridglings", "Stallions", "Uboarn Foals", "Broodmares", "Ridglings", "Weanlings", "Yearlings", "Folas", "Unknown" ]
+    = f.input :breed, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Breed *", collection: ["Arabian", "Big Hair", "Colors & Spots", "Drafts", "Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse" ]
 
-  .form-inputs.row
-    = f.input :city, label: false, wrapper_html: { class: 'span4' }, placeholder: "City"
-    = f.input :state, label: false, wrapper_html: { class: 'span4' }, placeholder: "State/Province*"
-    = f.input :zip_code, label: false, wrapper_html: { class: 'span4' }, placeholder: "*Zip Code*"
+  .row
+    = f.input :city, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "City"
+    = f.input :state, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "State/Province*"
+    = f.input :zip_code, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "*Zip Code*"
 
-  .form-inputs.row
-    = f.input :ad_for, label: false, wrapper_html: { class: 'span4' }, prompt: "Ad For *", collection: ["Sale", "Lease"]
-    = f.input :price, label: false, wrapper_html: { class: 'span4' }, placeholder: "$ Price *"
-    = f.input :private_treaty, label: false, inline_label: true, wrapper_html: { class: 'span4' }
+  .row
+    = f.input :ad_for, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Ad For *", collection: ["Sale", "Lease"]
+    = f.input :price, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Price *"
+    = f.input :private_treaty, label: false, inline_label: true, wrapper_html: { class: 'col-md-4' }
 
   hr
 
   h4 DETAILS & BREED INFORMATION
-  = f.input :birth, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true,  input_html: { class: 'span6' }, prompt: { month: 'Birth Month (optional)', year: 'Birth Year *' }
+
+  .row
+    = f.input :birth, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true, prompt: { month: 'Birth Month (optional)', year: 'Birth Year *' }
 
 
-  .form-inputs.row
-    = f.input :color, label: false, wrapper_html: { class: 'span4' }, placeholder: "Color (optional)"
-    = f.input :height, label: false, wrapper_html: { class: 'span4' }, placeholder: "Height (optional)"
-    = f.input :weight, label: false, wrapper_html: { class: 'span4' }, placeholder: "Weight (lbs) (optional)"
+  .row
+    = f.input :color, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Color (optional)"
+    = f.input :height, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Height (optional)"
+    = f.input :weight, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Weight (lbs) (optional)"
 
-  = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
+  .row
+    = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true }
 
-  = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true } 
+    = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
  
   = f.button :submit, 'Save & Preview'
+
+javascript:
+  $('select[id*="horse_birth"]').wrap('<div class="col-md-6">');

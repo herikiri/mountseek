@@ -1,24 +1,24 @@
 .container
   br/
   h4 Select Ad Type
-  ul#ads-tab.nav.nav-tabs
+  ul.nav.nav-tabs
     li.active
-      a href="#horses"  Horses
+      a href="#horses" data-toggle="tab" Horses
     li
-      a href="#studs"  Studs
+      a href="#studs" data-toggle="tab" Studs
     li
-      a href="#trailers"  Trailers
+      a href="#trailers" data-toggle="tab" Trailers
     li
-      a href="#tacks"  Tacks
+      a href="#tacks" data-toggle="tab" Tacks
     li
-      a href="#real-estates"  Real Estates
+      a href="#real-estates" data-toggle="tab" Real Estates
     li
-      a href="#services"  Services
+      a href="#services" data-toggle="tab" Services
   h4 Select Ad Package
   .tab-content
-    #horses.row.tab-pane.active
+    #horses.row.tab-pane.fade.in.active
       - @horsePackages.each do |package|
-        dl.span3.pricing-wrapper
+        dl.col-md-3.pricing-wrapper
           dt= link_to "Package #{package.name}", new_package_horse_path(package)
           dd
             | Price: #{package.price}
@@ -28,9 +28,9 @@
             | Max Photo Upload: #{package.max_photo_upload}
           dd
             | Max Video Upload: #{package.max_video_upload}
-    #studs.row.tab-pane
+    #studs.row.tab-pane.fade
       - @studPackages.each do |package|
-        dl.span3.pricing-wrapper
+        dl.col-md-3.pricing-wrapper
           dt= link_to "Package #{package.name}", new_package_stud_path(package)
           dd
             | Price: #{package.price}
@@ -40,9 +40,9 @@
             | Max Photo Upload: #{package.max_photo_upload}
           dd
             | Max Video Upload: #{package.max_video_upload}
-    #trailers.row.tab-pane
+    #trailers.row.tab-pane.fade
       - @trailerPackages.each do |package|
-        dl.span3.pricing-wrapper
+        dl.col-md-3.pricing-wrapper
           dt= link_to "Package #{package.name}", new_package_trailer_path(package)
           dd
             | Price: #{package.price}
@@ -52,9 +52,9 @@
             | Max Photo Upload: #{package.max_photo_upload}
           dd
             | Max Video Upload: #{package.max_video_upload}
-    #tacks.row.tab-pane
+    #tacks.row.tab-pane.fade
       - @tackPackages.each do |package|
-        dl.span3.pricing-wrapper
+        dl.col-md-3.pricing-wrapper
           dt= link_to "Package #{package.name}", new_package_tack_path(package)
           dd
             | Price: #{package.price}
@@ -64,9 +64,9 @@
             | Max Photo Upload: #{package.max_photo_upload}
           dd
             | Max Video Upload: #{package.max_video_upload}
-    #real-estates.row.tab-pane
+    #real-estates.row.tab-pane.fade
       - @realEstatePackages.each do |package|
-        dl.span3.pricing-wrapper
+        dl.col-md-3.pricing-wrapper
           dt= link_to "Package #{package.name}", new_package_real_estate_path(package)
           dd
             | Price: #{package.price}
@@ -76,9 +76,9 @@
             | Max Photo Upload: #{package.max_photo_upload}
           dd
             | Max Video Upload: #{package.max_video_upload}
-    #services.row.tab-pane
+    #services.row.tab-pane.fade
       - @servicePackages.each do |package|
-        dl.span3.pricing-wrapper
+        dl.col-md-3.pricing-wrapper
           dt= link_to "Package #{package.name}", new_package_service_path(package)
           dd
             | Price: #{package.price}
@@ -88,6 +88,3 @@
             | Max Photo Upload: #{package.max_photo_upload}
           dd
             | Max Video Upload: #{package.max_video_upload}
-
-
-= javascript_include_tag 'ads', 'data-turbolinks-track' => true

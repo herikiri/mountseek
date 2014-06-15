@@ -237,7 +237,7 @@ GEM
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
     sexp_processor (4.4.3)
-    simple_form (3.0.2)
+    simple_form (3.1.0.rc1)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
     slim (2.0.2)
@@ -331,7 +331,7 @@ DEPENDENCIES
   rmagick
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  simple_form (~> 3.0.2)
+  simple_form (= 3.1.0.rc1)
   slim-rails
   smart_listing
   social-share-button
