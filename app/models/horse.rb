@@ -6,10 +6,10 @@ class Horse < ActiveRecord::Base
 	has_many :pictures, as: :imageable, dependent: :destroy
 	has_many :videos, as: :videoable, dependent: :destroy
 
-	has_many :adisciplines, dependent: :destroy
+	has_many :disciplines, as: :discipline, dependent: :destroy
 	has_many :rideabilities, dependent: :destroy
 
-	accepts_nested_attributes_for :adisciplines
+	accepts_nested_attributes_for :disciplines
 	accepts_nested_attributes_for :rideabilities
 	
 	validates :title, :description, :city, :state, :ad_for, :zip_code,
@@ -30,6 +30,10 @@ class Horse < ActiveRecord::Base
 
     event :make_draft do
       transitions from: :published, to: :draft
+    end
+
+    event :make_sold do
+      transitions from: :published, to: :sold
     end
 
   end

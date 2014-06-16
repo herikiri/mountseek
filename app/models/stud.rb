@@ -1,12 +1,54 @@
 class Stud < ActiveRecord::Base
+	include AASM
+
 	belongs_to :package
 	belongs_to :user
 	has_many :pictures, as: :imageable, dependent: :destroy
 	has_many :videos, as: :videoable, dependent: :destroy
-	has_one :ad, as: :adable, dependent: :destroy
 
-	# TODO -> add validation
+	has_many :disciplines, as: :discipline, dependent: :destroy
+
+	validates :title, :description, :city, :state, :ad_for, :zip_code,
+		:breed, :birth, presence: true
+
+	validates :price, numericality: { greater_than_or_equal_to: 0 }
+
+	accepts_nested_attributes_for :disciplines
+
+	is_impressionable :counter_cache => true, :column_name => :views_count, :unique => :ip_address
+	acts_as_votable
+
+	aasm column: 'status' do
+    state :draft, initial: true
+    state :published
+
+    event :publish do
+      transitions from: :draft, to: :published
+    end
+
+    event :make_draft do
+      transitions from: :published, to: :draft
+    end
+
+    event :make_booked do
+      transitions from: :published, to: :booked
+    end
+
+  end
 
 
-	scope :published, -> { where(status: "published") }
+	# Ad Horse in range of duration
+	scope :published, -> { where("published_end > ?", "%#{DateTime.now}%" ) }
+
+	# Ad Horse where -> package type delux(id: 3) or exclusive(id: 4) 
+	scope :featured_ad, -> { where(package_id: [3,4]) }
+	
+	scope :newest_ad, -> { order(published_at: :desc) }
+
+	scope :favorited_by, ->(user) { where(id: user.find_liked_items.map(&:id)) }
+
+	
+	def ad_banner
+		self.pictures.find(self.banner) if self.pictures.present?
+	end
 end

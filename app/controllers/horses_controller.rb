@@ -20,7 +20,7 @@ class HorsesController < ApplicationController
   # GET /packages/:package_id/horses/new
   def new
     @horse = Package.find(params[:package_id]).horses.new
-    @horse.adisciplines.new
+    @horse.disciplines.new
     @horse.rideabilities.new
   end
 
@@ -121,7 +121,7 @@ class HorsesController < ApplicationController
 
     @horses = @horses.order(sort_by).published
 
-    smart_listing_create(:horses, @horses, partial: "horses/list")
+    smart_listing_create(:horses, @horses, partial: "horses/horse_list")
 
   end
 
@@ -149,7 +149,7 @@ class HorsesController < ApplicationController
         :breed, :city, :state, :zip_code, :ad_for, :price, :private_treaty,
         :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament,
-        adisciplines_attributes: [:id, :name, :experience, :_destroy])
+        disciplines_attributes: [:id, :name, :experience, :_destroy])
         
     end
 

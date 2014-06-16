@@ -175,13 +175,23 @@
 .container 
   h4 Featured Horse
   .owl-carousel
-    = render partial: "shared/ad_thumbnail", locals: {horses: @featured_horses}
+    - unless @featured_horses.nil?
+      - @featured_horses.each do |horse|
+        = render partial: "shared/ad_thumbnail", locals: {horse: horse}
+    - else
+      .empty-ad
+        h4 Ad Not Available Yet
 
   hr
 
   h4 Newest Horse
   .owl-carousel
-    = render partial: "shared/ad_thumbnail", locals: {horses: @newest_horses}
+    - unless @newest_horses.nil?
+      - @newest_horses.each do |horse|
+        = render partial: "shared/ad_thumbnail", locals: {horse: horse}
+    - else
+      .empty-ad
+        h4 Ad Not Available Yet
 
   hr
 
