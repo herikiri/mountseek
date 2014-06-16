@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613104533) do
+ActiveRecord::Schema.define(version: 20140616064435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adisciplines", force: true do |t|
+    t.string   "name"
+    t.string   "experience"
+    t.integer  "horse_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "adisciplines", ["horse_id"], name: "index_adisciplines_on_horse_id", using: :btree
 
   create_table "ads", force: true do |t|
     t.integer  "user_id"
@@ -27,6 +37,8 @@ ActiveRecord::Schema.define(version: 20140613104533) do
     t.datetime "updated_at"
   end
 
+  add_index "ads", ["adable_id"], name: "index_ads_on_adable_id", using: :btree
+  add_index "ads", ["adable_type"], name: "index_ads_on_adable_type", using: :btree
   add_index "ads", ["package_id"], name: "index_ads_on_package_id", using: :btree
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
 
@@ -81,6 +93,13 @@ ActiveRecord::Schema.define(version: 20140613104533) do
     t.date     "published_at"
     t.date     "published_end"
     t.integer  "views_count"
+    t.string   "registration"
+    t.integer  "registration_num"
+    t.string   "second_reg"
+    t.integer  "second_reg_num"
+    t.string   "other_markings"
+    t.string   "second_breed"
+    t.string   "temperament"
   end
 
   add_index "horses", ["package_id"], name: "index_horses_on_package_id", using: :btree
@@ -140,6 +159,9 @@ ActiveRecord::Schema.define(version: 20140613104533) do
     t.datetime "updated_at"
   end
 
+  add_index "pictures", ["imageable_id"], name: "index_pictures_on_imageable_id", using: :btree
+  add_index "pictures", ["imageable_type"], name: "index_pictures_on_imageable_type", using: :btree
+
   create_table "profiles", force: true do |t|
     t.string   "name"
     t.string   "farm_name"
@@ -189,6 +211,15 @@ ActiveRecord::Schema.define(version: 20140613104533) do
   add_index "real_estates", ["package_id"], name: "index_real_estates_on_package_id", using: :btree
   add_index "real_estates", ["user_id"], name: "index_real_estates_on_user_id", using: :btree
 
+  create_table "rideabilities", force: true do |t|
+    t.string   "name"
+    t.integer  "horse_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rideabilities", ["horse_id"], name: "index_rideabilities_on_horse_id", using: :btree
+
   create_table "services", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -232,6 +263,13 @@ ActiveRecord::Schema.define(version: 20140613104533) do
     t.date     "published_at"
     t.date     "published_end"
     t.integer  "views_count"
+    t.string   "registration"
+    t.integer  "registration_num"
+    t.string   "second_reg"
+    t.integer  "second_reg_num"
+    t.string   "other_markings"
+    t.string   "second_breed"
+    t.string   "temperament"
   end
 
   add_index "studs", ["package_id"], name: "index_studs_on_package_id", using: :btree
@@ -325,6 +363,9 @@ ActiveRecord::Schema.define(version: 20140613104533) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "videos", ["videoable_id"], name: "index_videos_on_videoable_id", using: :btree
+  add_index "videos", ["videoable_type"], name: "index_videos_on_videoable_type", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"

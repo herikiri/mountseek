@@ -1,12 +1,12 @@
 
 .preview-wrapper
-  .row-fluid
-    .span6
+  .row
+    .col-md-6
       - unless @horse.ad_banner.nil?
-        img src= @horse.ad_banner.name_url
+        img src= @horse.ad_banner.name.thumb.url
       - else
         =image_tag( 'horse1.jpg')
-    .span6
+    .col-md-6
       h4 
         - unless @horse.name.nil?
           = @horse.name
@@ -28,8 +28,8 @@
         br
         = "#{@horse.ad_for} by #{@horse.user.username}"
 
-  .row-fluid
-    .span12.stats
+  .row
+    .col-md-12.stats
       h4 HORSES STATS
       hr
       table.table.table-striped
@@ -55,25 +55,25 @@
           td Weight
           td= "#{@horse.weight} lbs"
 
-  .row-fluid
-    .span12
+  .row
+    .col-md-12
       h4= @horse.title.upcase
       hr
       p= @horse.description
 
-  .row-fluid
-    .span12.galleries
+  .row
+    .col-md-12.galleries
       h4 PHOTO & VIDEO GALLERY
       hr
       - @items_gallery.in_groups_of(4).each do |item_group|
-        .row-fluid
+        .row
           - item_group.each do |item|
             - unless item.nil?
-              .span3
+              .col-md-3
                 =image_tag item.name.thumb
 
-  .row-fluid
-    .span12
+  .row
+    .col-md-12
       h4 CONTACT SELLER
       hr
       - if @horse.user.profile.user_picture.present?

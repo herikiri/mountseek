@@ -1,4 +1,4 @@
-= simple_form_for @horse, html: {multipart: true, class: 'form-horizontal'} do |f|
+= simple_nested_form_for @horse, html: {multipart: true, class: 'form-horizontal'} do |f|
 
   - if @horse.errors.any?
     #error_explanation
@@ -14,14 +14,14 @@
     = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 } 
 
   .row
-    = f.input :name, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Horse's Name (optional)"
-    = f.input :gender, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Gender *", collection: ["Males", "Females", "Fillies", "Geldings", "Ridglings", "Stallions", "Uboarn Foals", "Broodmares", "Ridglings", "Weanlings", "Yearlings", "Folas", "Unknown" ]
-    = f.input :breed, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Breed *", collection: ["Arabian", "Big Hair", "Colors & Spots", "Drafts", "Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse" ]
+    = f.input :name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Horse's Name (optional)"
+    = f.input :gender, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Gender *", collection: ["Males", "Females", "Fillies", "Geldings", "Ridglings", "Stallions", "Uboarn Foals", "Broodmares", "Ridglings", "Weanlings", "Yearlings", "Folas", "Unknown" ]
 
   .row
+    = f.input :zip_code, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "*Zip Code*"
     = f.input :city, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "City"
     = f.input :state, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "State/Province*"
-    = f.input :zip_code, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "*Zip Code*"
+    
 
   .row
     = f.input :ad_for, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Ad For *", collection: ["Sale", "Lease"]
@@ -37,14 +37,55 @@
 
 
   .row
-    = f.input :color, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Color (optional)"
-    = f.input :height, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Height (optional)"
-    = f.input :weight, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Weight (lbs) (optional)"
+    = f.input :color, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Color (optional)"
+    = f.input :other_markings, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Other Markings (optional)"
+
+  .row
+    = f.input :height, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Height (optional)"
+    = f.input :weight, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Weight (lbs) (optional)"
+
+  .row
+    = f.input :breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Breed *", collection: ["Arabian", "Big Hair", "Colors & Spots", "Drafts", "Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse" ]
+    = f.input :second_breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Secondary Breed (optional)", collection: ["Arabian", "Big Hair", "Colors & Spots", "Drafts", "Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse" ]
+
+  hr
+
+  h4 REGISTRY INFORMATIOIN
+  .row
+    = f.input :registration, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration (optional)"
+    = f.input :registration_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
+
+  .row
+    = f.input :second_reg, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Second Registration (optional)"
+    = f.input :second_reg_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
+
+  h4 PERSONALITY & EXPERIENCE
+  .row
+    = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: ["Boomproof", "Extremly Calm", "Calm", "Mild Mannered", "Average", "Energetic", "Spirited", "Extremly Spirited", "Hot", "Professionals Only"]
+  
+  = f.simple_fields_for :adisciplines do |fd|
+    .row
+      = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: Discipline.all
+      = fd.input :experience , label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ["Prospect", "Trained", "Competed & Shown", "Champion"]
+      = fd.link_to_remove "Remove this discipline"
+
+  = f.link_to_add "Add a Discipline", :adisciplines
+
+  h4 RIDEABILITY
+  p WHO IS YOUR HORSE SUITABLE FOR?
+  .row
+    = f.simple_fields_for :rideabilities do |fr|
+      = fr.collection_check_boxes :name, [['beginner', 'BEGINNER'] ,['intermediate', 'INTERMEDIATE'], ['advanced', 'ADVANCED']], :first, :last
+
+
+  hr
 
   .row
     = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true }
 
     = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
+
+  hr
  
   = f.button :submit, 'Save & Preview'
 

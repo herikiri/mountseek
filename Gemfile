@@ -78,3 +78,4 @@ gem "smart_listing"
 gem "fog"
 gem 'rails-gallery'
 gem 'html2slim'
+gem "nested_form"

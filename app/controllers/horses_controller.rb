@@ -20,6 +20,8 @@ class HorsesController < ApplicationController
   # GET /packages/:package_id/horses/new
   def new
     @horse = Package.find(params[:package_id]).horses.new
+    @horse.adisciplines.new
+    @horse.rideabilities.new
   end
 
     # GET /horses/:id/edit
@@ -27,6 +29,8 @@ class HorsesController < ApplicationController
   end
 
   def create
+
+
     @horse = Horse.new(horse_params)
     @horse.user_id = current_user.id
     
@@ -42,6 +46,12 @@ class HorsesController < ApplicationController
         unless params[:horse][:videos].nil?
           params[:horse][:videos].each do |video|
             @horse.videos.create(name: picture)
+          end
+        end
+
+        unless params[:horse][:rideabilities_attributes]["0"][:name].nil?
+          params[:horse][:rideabilities_attributes]["0"][:name].each do |rideability|
+             @horse.rideabilities.create(name: rideability) unless rideability.empty?
           end
         end
         
@@ -139,7 +149,10 @@ class HorsesController < ApplicationController
     def horse_params
       params.require(:horse).permit(:title, :description, :name, :gender, 
         :breed, :city, :state, :zip_code, :ad_for, :price, :private_treaty,
-        :birth, :color, :height, :weight, :package_id)
+        :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
+        :second_reg, :second_reg_num, :other_markings, :second_breed, 
+        adisciplines_attributes: [:id, :name, :experience, :_destroy])
+        
     end
 
 end

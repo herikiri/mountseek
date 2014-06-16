@@ -6,7 +6,12 @@ class Horse < ActiveRecord::Base
 	has_many :pictures, as: :imageable, dependent: :destroy
 	has_many :videos, as: :videoable, dependent: :destroy
 
+	has_many :adisciplines, dependent: :destroy
+	has_many :rideabilities, dependent: :destroy
 
+	accepts_nested_attributes_for :adisciplines
+	accepts_nested_attributes_for :rideabilities
+	
 	validates :title, :description, :city, :state, :ad_for, :zip_code,
 		:breed, :gender, :birth, :price, presence: true
 
