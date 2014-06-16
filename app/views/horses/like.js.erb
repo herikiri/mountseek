@@ -1,1 +1,3 @@
 $(".like-count-<%= @horse.id %>").text("<%= @horse.get_likes.size %>");
+$("a#fav-horse-<%= @horse.id %>").attr('title', 'Remove From My Favorites');
+$("a#fav-horse-<%= @horse.id %>").attr('data-url', "<%= dislike_user_horse_path(current_user, @horse) %>");

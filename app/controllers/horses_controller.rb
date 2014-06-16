@@ -29,8 +29,6 @@ class HorsesController < ApplicationController
   end
 
   def create
-
-
     @horse = Horse.new(horse_params)
     @horse.user_id = current_user.id
     
@@ -150,7 +148,7 @@ class HorsesController < ApplicationController
       params.require(:horse).permit(:title, :description, :name, :gender, 
         :breed, :city, :state, :zip_code, :ad_for, :price, :private_treaty,
         :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
-        :second_reg, :second_reg_num, :other_markings, :second_breed, 
+        :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament,
         adisciplines_attributes: [:id, :name, :experience, :_destroy])
         
     end

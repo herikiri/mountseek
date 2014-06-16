@@ -65,8 +65,8 @@
   
   = f.simple_fields_for :adisciplines do |fd|
     .row
-      = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: Discipline.all
-      = fd.input :experience , label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ["Prospect", "Trained", "Competed & Shown", "Champion"]
+      = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: Discipline.all, value_method: :name
+      = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ["Prospect", "Trained", "Competed & Shown", "Champion"]
       = fd.link_to_remove "Remove this discipline"
 
   = f.link_to_add "Add a Discipline", :adisciplines
@@ -76,8 +76,6 @@
   .row
     = f.simple_fields_for :rideabilities do |fr|
       = fr.collection_check_boxes :name, [['beginner', 'BEGINNER'] ,['intermediate', 'INTERMEDIATE'], ['advanced', 'ADVANCED']], :first, :last
-
-
   hr
 
   .row

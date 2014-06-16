@@ -23,9 +23,13 @@
             .li.col-md-3
               .ad-thumbnail.thumbnail
                 - if current_user
-                  =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', class: 'fav-icon like-horse-button', data: {url: like_user_horse_path(current_user, horse), toggle: 'tooltip', placement: 'bottom'}
+                  - if current_user.voted_up_on? horse
+                      =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Remove From My Favorites', id: "fav-horse-#{horse.id}", class: 'fav-horse-button', data: {url: dislike_user_horse_path(current_user, horse), toggle: 'tooltip', placement: 'bottom'}
+                  - else
+                      =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', id: "fav-horse-#{horse.id}", class: 'fav-horse-button', data: {url: like_user_horse_path(current_user, horse), toggle: 'tooltip', placement: 'bottom'}        
                 - else
-                  =link_to raw("<i class='fa fa-heart'></i>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-horse-button', data: {toggle: 'tooltip', placement: 'bottom'}
+                  =link_to raw("<span class='fa fa-heart'></span>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-horse-button', data: {toggle: 'tooltip', placement: 'bottom'}
+
                 span.price.pull-right= number_to_currency horse.price
                 .ad-title= horse.title
                 - unless horse.ad_banner.nil?
@@ -62,7 +66,7 @@
 
 
 javascript:
-  $(".like-horse-button").on("click", function(){
+  $(".fav-horse-button").on("click", function(){
     $.get( $(this).attr('data-url'), function( data ) {
       //
     });
