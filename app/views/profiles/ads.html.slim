@@ -8,10 +8,4 @@
 			= smart_listing_render :horses
 
 
-javascript:
-  $(".like-horse-button").on("click", function(){
-    $.get( $(this).attr('data-url'), function( data ) {
-      //
-    });
-  });
-
+= javascript_include_tag 'fav_button', 'data-turbolinks-track' => true

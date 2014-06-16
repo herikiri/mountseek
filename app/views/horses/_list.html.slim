@@ -62,12 +62,3 @@
                 hr
                 p= truncate(horse.description, length: 150)
                 =social_share_button_tag(horse.title)
-
-
-
-javascript:
-  $(".fav-horse-button").on("click", function(){
-    $.get( $(this).attr('data-url'), function( data ) {
-      //
-    });
-  });
