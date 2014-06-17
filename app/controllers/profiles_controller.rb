@@ -3,7 +3,8 @@ class ProfilesController < ApplicationController
   helper  SmartListing::Helper
 
   before_action :set_user
-  before_action :set_horse, only: [:ads]
+  before_action :set_horses, only: [:ads]
+  before_action :set_studs, only: [:ads]
   before_action :set_smart_listing_filter, only: [:ads, :favorites]
 
   def index
@@ -33,11 +34,19 @@ class ProfilesController < ApplicationController
       end
     end
 
-    def set_horse
+    def set_horses
       if params[:id]
         @horses = User.find(params[:id]).horses.published
       else 
         @horses = current_user.horses
+      end
+    end
+
+    def set_studs
+      if params[:id]
+        @studs = User.find(params[:id]).studs.published
+      else 
+        @studs = current_user.studs
       end
     end
 

@@ -1,8 +1,12 @@
 .container
   .publish-wrapper
     h1 Publish Your Horse
+
+    - unless @horse.ad_banner.nil?
+      img src= @horse.ad_banner.name.thumb.url
+    - else
+      =image_tag( 'horse1.jpg')
     
-    img src=@horse.ad_banner.name.thumb.url
 
     p= "#{@horse.package.name} Ad Package"
     p= "TOTAL #{number_to_currency @horse.package.price}"

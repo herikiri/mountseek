@@ -2,6 +2,7 @@ class HorsesController < ApplicationController
   before_action :set_user, only: [:like, :dislike]
   before_action :set_horse, except: [:index, :create, :search, :new]
   before_action :authenticate_user!, only: [:new, :like, :dislike]
+  before_action :set_items_gallery, only: [:show, :preview]
 
   impressionist :actions=>[:show]
 
@@ -14,7 +15,6 @@ class HorsesController < ApplicationController
 
   # GET /horses/1
   def show
-    @items_gallery = @horse.pictures + @horse.videos
   end
 
   # GET /packages/:package_id/horses/new
@@ -37,13 +37,13 @@ class HorsesController < ApplicationController
         unless params[:horse][:pictures].nil?
           params[:horse][:pictures].each do |picture|
             @horse.pictures.create(name: picture)
-            @horse.update(banner: @horse.pictures.first.id)
           end
+          @horse.update(banner: @horse.pictures.first.id)
         end
 
         unless params[:horse][:videos].nil?
           params[:horse][:videos].each do |video|
-            @horse.videos.create(name: picture)
+            @horse.videos.create(name: video)
           end
         end
 
@@ -82,7 +82,6 @@ class HorsesController < ApplicationController
 
   # GET /horses/:id/preview
   def preview
-    @items_gallery = @horse.pictures + @horse.videos
   end
 
   # GET /horses/:id/publish
@@ -137,6 +136,14 @@ class HorsesController < ApplicationController
     end
   end
 
+  def like
+    @horse.liked_by @user
+  end
+
+  def dislike
+    @horse.unliked_by @user
+  end
+
   def search
     unless params[:q].blank?
       @params_q = params[:q]
@@ -146,23 +153,14 @@ class HorsesController < ApplicationController
       @horses =  Horse.all
     end
 
-
     sort_by = {updated_at: :desc} if params[:sort_by] == "newest" || params[:sort_by].nil?
     sort_by = {updated_at: :asc} if params[:sort_by] == "oldest"
     sort_by = {price: :desc} if params[:sort_by] == "high_to_low"
     sort_by = {price: :asc} if params[:sort_by] == "low_to_high"
 
-    @horses = @horses.order(sort_by).published
+    @horses = @horses.order(sort_by).published.live
 
     smart_listing_create(:horses, @horses, partial: "horses/horse_list")
-  end
-
-  def like
-    @horse.liked_by @user
-  end
-
-  def dislike
-    @horse.unliked_by @user
   end
 
   private 
@@ -175,6 +173,10 @@ class HorsesController < ApplicationController
       @user = User.find(params[:user_id])
     end
 
+    def set_items_gallery
+      @items_gallery = @horse.pictures + @horse.videos
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def horse_params
       params.require(:horse).permit(:title, :description, :name, :gender, 
@@ -182,7 +184,6 @@ class HorsesController < ApplicationController
         :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament,
         disciplines_attributes: [:id, :name, :experience, :_destroy])
-        
     end
 
 end

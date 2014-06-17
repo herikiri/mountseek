@@ -51,7 +51,10 @@ class Horse < ActiveRecord::Base
 
 
   # Ad Horse in range of duration
-	scope :published, -> { where("published_end > ?", "%#{DateTime.now}%" ) }
+	scope :live, -> { where("published_end > ?", "%#{DateTime.now}%" ) }
+
+	# Ad Horse in range of duration
+	scope :published, -> { where(status: 'published') }
 
 	# Ad Horse where -> package type delux(id: 3) or exclusive(id: 4) 
 	scope :featured_ad, -> { where(package_id: [3,4]) }

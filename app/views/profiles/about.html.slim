@@ -1,22 +1,21 @@
-.container-fluid
-  .row-fluid
-    =render 'sidebar'
-    .span9
-      .row-fluid
-				- if @user.profile.user_picture.present?
-					img.profile src= @user.profile.user_picture.avatar_url
+.container
+	h4 About User
+	=render 'navbar'
 
-				- if @user.profile.name.nil?
-					h4= "About #{@user.username}"
-				- else
-					h4= "About #{@user.profile.name}"
+	- if @user.profile.user_picture.present?
+		img.profile src= @user.profile.user_picture.avatar_url
 
-				.about
-					- if @user.profile.about.present?
-						p= @user.profile.about
+	- if @user.profile.name.nil?
+		h4= "About #{@user.username}"
+	- else
+		h4= "About #{@user.profile.name}"
 
-				.location
-					- if @user.profile.city.present? && @user.profile.state.present?
-						= "#{@user.profile.city}, #{@user.profile.state}"
+	.about
+		- if @user.profile.about.present?
+			p= @user.profile.about
+
+	.location
+		- if @user.profile.city.present? && @user.profile.state.present?
+			= "#{@user.profile.city}, #{@user.profile.state}"
 
 

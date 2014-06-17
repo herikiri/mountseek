@@ -8,10 +8,11 @@ class Stud < ActiveRecord::Base
 
 	has_many :disciplines, as: :discipline, dependent: :destroy
 
-	validates :title, :description, :city, :state, :ad_for, :zip_code,
+	accepts_nested_attributes_for :disciplines
+
+	validates :title, :description, :city, :state, :zip_code,
 		:breed, :birth, presence: true
 
-	validates :price, numericality: { greater_than_or_equal_to: 0 }
 
 	accepts_nested_attributes_for :disciplines
 
@@ -21,6 +22,8 @@ class Stud < ActiveRecord::Base
 	aasm column: 'status' do
     state :draft, initial: true
     state :published
+    state :removed
+    state :booked
 
     event :publish do
       transitions from: :draft, to: :published
@@ -34,13 +37,20 @@ class Stud < ActiveRecord::Base
       transitions from: :published, to: :booked
     end
 
+    event :to_booked do
+      transitions from: :removed, to: :booked
+    end
+
   end
 
 
-	# Ad Horse in range of duration
-	scope :published, -> { where("published_end > ?", "%#{DateTime.now}%" ) }
+  # Ad Stud in range of duration
+	scope :live, -> { where("published_end > ?", "%#{DateTime.now}%" ) }
 
-	# Ad Horse where -> package type delux(id: 3) or exclusive(id: 4) 
+	# Ad Stud in range of duration
+	scope :published, -> { where(status: 'published') }
+
+	# Ad Stud where -> package type delux(id: 3) or exclusive(id: 4) 
 	scope :featured_ad, -> { where(package_id: [3,4]) }
 	
 	scope :newest_ad, -> { order(published_at: :desc) }

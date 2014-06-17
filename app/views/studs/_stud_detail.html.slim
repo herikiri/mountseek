@@ -1,0 +1,114 @@
+.preview-wrapper
+  .row
+    .col-md-6
+      - unless @stud.ad_banner.nil?
+        img src= @stud.ad_banner.name.thumb.url
+      - else
+        =image_tag( 'horse1.jpg')
+    .col-md-6
+      h4 
+        - unless @stud.name.nil?
+          = @stud.name
+        - else
+          | UNNAMED
+      .price
+        - unless @stud.private_treaty
+          = "Stud Fee: #{number_to_currency @stud.stud_fee}"
+          = "Booking Fee: #{number_to_currency @stud.booking_fee}"
+          = "Shipping Fee:  #{number_to_currency @stud.shipping_fee}"
+        - else
+          | PRIVATE TREATY
+      hr
+
+      .short_detail
+        = "#{@stud.birth.year} #{@stud.breed} stallion"
+        br
+        = "#{@stud.height} Hands"
+        br
+        = "Located in #{@stud.state}"
+        br
+        = "#{@stud.ad_for} by #{@stud.user.username}"
+
+  .row
+    .col-md-12.stats
+      h4 HORSES STATS
+      hr
+      table.table.table-striped
+        tr
+          td Name
+          td= @stud.name
+        tr
+          td Color
+          td= @stud.color.titleize
+        tr
+          td Breed
+          td= @stud.breed
+        tr
+          td Age
+          td= @stud.birth
+        tr
+          td Height
+          td= "#{@stud.height} hands"
+        tr
+          td Weight
+          td= "#{@stud.weight} lbs"
+
+  .row
+    .col-md-12
+      h4= @stud.title.upcase
+      hr
+      p= @stud.description
+
+  .row
+    .col-md-12.galleries
+      h4 PHOTO & VIDEO GALLERY
+      hr
+      - @items_gallery.in_groups_of(4).each do |item_group|
+        .row
+          - item_group.each do |item|
+            - unless item.nil?
+              .col-md-3
+                =image_tag item.name.thumb
+
+  .row
+    .col-md-12
+      h4 CONTACT SELLER
+      hr
+      - if @stud.user.profile.user_picture.present?
+        img src=  @stud.user.profile.user_picture.avatar.url
+      - else
+        .fa-stack.fa-4x
+          i.fa.fa-circle.fa-stack-2x
+          i.fa.fa-user.fa-stack-1x.fa-inverse
+
+     
+      - if @stud.user.profile.name.present?
+        p= "FOR SALE BY #{@stud.user.profile.name.upcase}"
+      - else
+        p= "FOR SALE BY #{@stud.user.username.upcase}"
+
+      - if @stud.user.profile.state && @stud.user.profile.city
+        p= "#{@stud.user.profile.state}, #{@stud.user.profile.city}"
+
+      ul.nav.nav-tabs
+        li
+          i.fa.fa-envelope.fa-2x
+          br EMAIL SELLER
+        | &nbsp;&nbsp;
+        - if @stud.user.profile.phone_number.present?
+          li
+            i.fa.fa-phone.fa-2x&nbsp
+            br= @stud.user.profile.phone_number
+          | &nbsp;&nbsp;
+        - if @stud.user.profile.name.present?
+          li
+            =link_to ads_profile_path(@stud.user)
+              i.fa.fa-bookmark.fa-2x&nbsp
+              br VIEW ALL ADS
+          | &nbsp;&nbsp;
+        - if @stud.user.profile.name.present?
+          li
+            a href="http://#{@horse.user.profile.website}"
+              i.fa.fa-globe.fa-2x&nbsp
+              br VIEW WEBSITE
+

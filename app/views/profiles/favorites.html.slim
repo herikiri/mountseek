@@ -1,16 +1,8 @@
-.container-fluid
-  .row-fluid
-    =render 'sidebar'
-    .span9
-      .row-fluid
-				= smart_listing_controls_for(:horses, {class: "form-inline text-right"}) do
-				    =select_tag :sort_by, options_for_select([["Newest", "newest"], ["Oldest", "oldest"], ["Price High to Low", "high_to_low"], ["Price Low to High", "low_to_high"] ], "newest")
-				= smart_listing_render :horses
+.container
+  h4= "Favorite Horse" 
+  =render 'navbar'
 
+  = smart_listing_render :horses
+  
+= javascript_include_tag 'fav_button', 'data-turbolinks-track' => true
 
-javascript:
-  $(".like-horse-button").on("click", function(){
-    $.get( $(this).attr('data-url'), function( data ) {
-      //
-    });
-  });

@@ -1,37 +1,76 @@
 .container
+	=render 'navbar'
+
+
 	h4= "#{@horses.count} HORSE LISTINGS"
 	table.table.table-striped
 		tr
 			th
-				| Ad Title
+				| Ad Horse Title
 			th
 				| Price
 			th
 				| Status
 			th
-				| Expired
-			th
-				| Action
+				| Active Until
+			- if @user == current_user
+				th
+					| Action
 		- @horses.each do |horse|
 			tr
 				td= horse.title
 				td= horse.price
 				td= horse.status
 				td= horse.published_end
-				td.list_actions
-				  = link_to 'Show', horse
-				  = link_to 'Edit', edit_horse_path(horse)
-				  - if horse.status == 'draft'
-				  	= link_to 'Publish', publish_horse_path(horse)
-				  - if horse.status == 'published' || horse.status == 'removed'
-				  	= link_to 'Sold', sold_horse_path(horse)
-				  	- if horse.status == 'published'
-				  		= link_to 'Unpublish', unpublish_horse_path(horse)
-				  	
+				- if @user == current_user
+					td.list_actions
+					  = link_to 'Show', horse
+					  | |
+					  = link_to 'Edit', edit_horse_path(horse)
+					  - if horse.status == 'draft'
+					  	| |
+					  	= link_to 'Publish', publish_horse_path(horse)
+					  - if horse.status == 'published' || horse.status == 'removed'
+					  	| |
+					  	= link_to 'Sold', sold_horse_path(horse)
 
-				  	
+					  	- if horse.status == 'published'
+					  		| |
+					  		= link_to 'Unpublish', unpublish_horse_path(horse)
+					  		
 
+	h4= "#{@studs.count} STUD LISTINGS"
+	table.table.table-striped
+		tr
+			th
+				| Ad Stud Title
+			th
+				| Stud Fee
+			th
+				| Status
+			th
+				| Active Until
+			- if @user == current_user
+				th
+					| Action
+		- @studs.each do |stud|
+			tr
+				td= stud.title
+				td= stud.stud_fee
+				td= stud.status
+				td= stud.published_end
+				- if @user == current_user
+					td.list_actions
+					  = link_to 'Show', stud
+					  | |
+					  = link_to 'Edit', edit_stud_path(stud)
+					  - if stud.status == 'draft'
+					  	| |
+					  	= link_to 'Publish', publish_stud_path(stud)
+					  - if stud.status == 'published' || stud.status == 'removed'
+					  	| |
+					  	= link_to 'Sold', sold_stud_path(stud)
 
-
-
-= javascript_include_tag 'fav_button', 'data-turbolinks-track' => true
+					  	- if stud.status == 'published'
+					  		| |
+					  		= link_to 'Unpublish', unpublish_stud_path(stud)

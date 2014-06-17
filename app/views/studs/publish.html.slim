@@ -1,0 +1,24 @@
+.container
+  .publish-wrapper
+    h1 Publish Your Stud
+    
+    - unless @stud.ad_banner.nil?
+      img src= @stud.ad_banner.name.thumb.url
+    - else
+      =image_tag( 'horse1.jpg')
+
+    p= "#{@stud.package.name} Ad Package"
+    p= "TOTAL #{number_to_currency @stud.package.price}"
+
+    h4= "YOUR #{@stud.package.name.upcase} AD INCLUDES"
+    ul
+    	li= "#{@stud.package.duration} Month Ad Duration"
+    	- if @stud.package.max_photo_upload > 0
+    		li= "Up To #{@stud.package.max_photo_upload} Photos"
+    	- if @stud.package.max_video_upload > 0
+    		li= "Up To #{@stud.package.max_video_upload} Videos"
+
+          
+    = link_to 'Edit', edit_stud_path(@stud), class: "btn btn-primary btn-inverse"
+    | &nbsp;
+    = link_to 'Publish', activate_stud_path(@stud), class: "btn btn-primary btn-inverse"

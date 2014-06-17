@@ -1,0 +1,17 @@
+ul.nav.nav-pills
+  - if @user == current_user
+    li
+      =link_to 'MY ADS', ads_profiles_path
+    li
+      =link_to 'ABOUT', about_profiles_path
+    li
+      =link_to 'FAVORITES', favorites_profiles_path
+    
+  - else
+    li
+      =link_to 'MY ADS', ads_profile_path(@user)
+    li
+      =link_to 'ABOUT', about_profile_path(@user)
+    li
+      =link_to 'FAVORITES', favorites_profile_path(@user)
+    

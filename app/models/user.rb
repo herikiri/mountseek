@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_many :horses, dependent: :destroy
+  has_many :studs, dependent: :destroy
 
   after_create :build_profile
 

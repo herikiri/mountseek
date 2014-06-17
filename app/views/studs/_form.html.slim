@@ -1,14 +1,14 @@
-= simple_nested_form_for @studs, html: {multipart: true, class: 'form-horizontal'} do |f|
+= simple_nested_form_for @stud, html: {multipart: true, class: 'form-horizontal'} do |f|
 
-  - if @horse.errors.any?
+  - if @stud.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@studs.errors.count, "error")} prohibited this horse from being saved:"
+      h2 = "#{pluralize(@stud.errors.count, "error")} prohibited this horse from being saved:"
       ul
-        - @studs.errors.full_messages.each do |message|
+        - @stud.errors.full_messages.each do |message|
           li = message
 
 
-  = f.hidden_field :package_id, value: @horse.package_id
+  = f.hidden_field :package_id, value: @stud.package_id
   .row
     = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
     = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 } 
@@ -24,9 +24,20 @@
     
 
   .row
-    = f.input :ad_for, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Ad For *", collection: ["Sale", "Lease"]
-    = f.input :price, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Price *"
+    = f.input :stud_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Stud Fee *"
+    = f.input :booking_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ booking Fee *"
+
+  .row
+    = f.input :shipping_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Shipping Fee"
     = f.input :private_treaty, label: false, inline_label: true, wrapper_html: { class: 'col-md-4' }
+
+  h4 Breeding Available
+
+  .row
+    = f.input :available, label: false, discard_year: true, prompt: { month: 'Month Available (optional)', day: 'Day Available (optional)' }
+
+    = f.input :until, label: false, discard_year: true, prompt: { month: 'Month Until (optional)', day: 'Day Until (optional)' }
+
 
   hr
 
@@ -35,9 +46,8 @@
   .row
     = f.input :birth, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true, prompt: { month: 'Birth Month (optional)', year: 'Birth Year *' }
 
-
   .row
-    = f.input :color, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Color (optional)"
+    = f.input :color, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Color (optional)", collection: ColorOption.all
     = f.input :other_markings, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Other Markings (optional)"
 
   .row
@@ -45,8 +55,8 @@
     = f.input :weight, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Weight (lbs) (optional)"
 
   .row
-    = f.input :breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Breed *", collection: ["Arabian", "Big Hair", "Colors & Spots", "Drafts", "Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse" ]
-    = f.input :second_breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Secondary Breed (optional)", collection: ["Arabian", "Big Hair", "Colors & Spots", "Drafts", "Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse" ]
+    = f.input :breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Breed *", collection: BreedOption.all, value_method: :name
+    = f.input :second_breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Secondary Breed (optional)", collection: BreedOption.all, value_method: :name
 
   hr
 
@@ -61,7 +71,7 @@
 
   h4 PERSONALITY & EXPERIENCE
   .row
-    = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: ["Boomproof", "Extremly Calm", "Calm", "Mild Mannered", "Average", "Energetic", "Spirited", "Extremly Spirited", "Hot", "Professionals Only"]
+    = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: TemperamentOption.all
   
   = f.simple_fields_for :disciplines do |fd|
     .row
@@ -70,13 +80,6 @@
       = fd.link_to_remove "Remove this discipline"
 
   = f.link_to_add "Add a Discipline", :disciplines
-
-  h4 RIDEABILITY
-  p WHO IS YOUR HORSE SUITABLE FOR?
-  .row
-    = f.simple_fields_for :rideabilities do |fr|
-      = fr.collection_check_boxes :name, [['beginner', 'BEGINNER'] ,['intermediate', 'INTERMEDIATE'], ['advanced', 'ADVANCED']], :first, :last
-  hr
 
   .row
     = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true }
@@ -88,4 +91,6 @@
   = f.button :submit, 'Save & Preview'
 
 javascript:
-  $('select[id*="horse_birth"]').wrap('<div class="col-md-6">');
+  $('select[id*="stud_birth"]').wrap('<div class="col-md-6">');
+  $('select[id*="stud_available"]').wrap('<div class="col-md-6">');
+  $('select[id*="stud_until"]').wrap('<div class="col-md-6">');
