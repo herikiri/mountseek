@@ -15,7 +15,7 @@
 
   .row
     = f.input :name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Horse's Name (optional)"
-    
+    = f.input :ai_type, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "AI Type *", collection: AiTypeOption.all
 
   .row
     = f.input :zip_code, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "*Zip Code*"

@@ -180,7 +180,7 @@ class StudsController < ApplicationController
         :breed, :city, :state, :zip_code, :private_treaty,
         :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament, 
-        :stud_fee, :booking_fee, :shipping_fee, :available, :until,
+        :stud_fee, :booking_fee, :shipping_fee, :available, :until, :ai_type,
         disciplines_attributes: [:id, :name, :experience, :_destroy])
     end
 end

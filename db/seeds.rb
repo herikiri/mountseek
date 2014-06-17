@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-[Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, TemperamentOption, ExperienceOption].each(&:delete_all)
+items = [Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, TemperamentOption, ExperienceOption, AiTypeOption]
+items.each(&:delete_all)
 
 Type.connection.execute('ALTER SEQUENCE types_id_seq RESTART WITH 1')
 Package.connection.execute('ALTER SEQUENCE packages_id_seq RESTART WITH 1')
@@ -17,6 +17,7 @@ BreedOption.connection.execute('ALTER SEQUENCE breed_options_id_seq RESTART WITH
 ColorOption.connection.execute('ALTER SEQUENCE color_options_id_seq RESTART WITH 1')
 TemperamentOption.connection.execute('ALTER SEQUENCE temperament_options_id_seq RESTART WITH 1')
 ExperienceOption.connection.execute('ALTER SEQUENCE experience_options_id_seq RESTART WITH 1')
+AiTypeOption.connection.execute('ALTER SEQUENCE ai_type_options_id_seq RESTART WITH 1')
 
 
 horse = Type.create(name: "Horse")
@@ -30,11 +31,13 @@ genders = %w( Males Females Fillies Geldings Ridglings Stallions Uboarn Foals Br
 breeds = ["Arabian", "Big Hair", "Colors & Spots", "Drafts Gaited", "Baroque Mustang", "Pinto Quarter", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse"]
 ad_for = ["Sale", "Lease"]
 
+
 colors = ["Bay", "Bay Overo", "Bay Roan", "Black", "Black Overo","Blue Grulla", "Blue Roan", "Brindle", "Brown", "Bucksin", "Bucksin Overo", "Champagne", "Chesnut", "Chestnut Overo", "Chocolate",
   "Cremello", "Dun", "Dun With Black Point", "Dunalino", "Dunskin", "Grey", "Grulla", "Liver Chestnut", "Overo", "Palomino", "Perlino", "Piebalo", "Pinto", "Red Dun", "Red Roan", "Roan", "Sabino", 
   "Silver Dapple", "Smokey Black", "Sorrel", "Sorrel Overo", "Tobiano", "Tovero", "White", "Other"]
 temperaments = ["Boomproof", "Extremly Calm", "Calm", "Mild Mannered", "Average", "Energetic", "Spirited", "Extremly Spirited", "Hot", "Professionals Only"]
 experiences =  ["Prospect", "Trained", "Competed & Shown", "Champion"]
+ai_types = ["Cooled", "Frozen", "Both"]
 
 birth = "2004-03-01"
 
@@ -99,6 +102,10 @@ end
 experiences.each do |experience|
   ExperienceOption.create(name: experience)
 end  
+
+ai_types.each do |ai|
+  AiTypeOption.create(name: ai)
+end
 
 =begin
 def random_dec (min, max)

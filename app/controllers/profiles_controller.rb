@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   before_action :set_user
   before_action :set_horses, only: [:ads]
   before_action :set_studs, only: [:ads]
-  before_action :set_smart_listing_filter, only: [:ads, :favorites]
+  before_action :set_smart_listing_filter, only: [:favorites]
 
   def index
   end

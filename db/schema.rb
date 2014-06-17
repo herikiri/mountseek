@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616165410) do
+ActiveRecord::Schema.define(version: 20140617091812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 20140616165410) do
   add_index "ads", ["adable_type"], name: "index_ads_on_adable_type", using: :btree
   add_index "ads", ["package_id"], name: "index_ads_on_package_id", using: :btree
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
+
+  create_table "ai_type_options", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "breed_options", force: true do |t|
     t.string   "name"
@@ -279,7 +285,6 @@ ActiveRecord::Schema.define(version: 20140616165410) do
     t.string   "city"
     t.string   "state"
     t.boolean  "private_treaty"
-    t.string   "ad_for"
     t.string   "name"
     t.string   "breed"
     t.date     "birth"
@@ -307,6 +312,7 @@ ActiveRecord::Schema.define(version: 20140616165410) do
     t.decimal  "shipping_fee"
     t.date     "available"
     t.date     "until"
+    t.string   "ai_type"
   end
 
   add_index "studs", ["package_id"], name: "index_studs_on_package_id", using: :btree
