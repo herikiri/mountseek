@@ -1,0 +1,15 @@
+.container
+  .unpublish-wrapper
+    h1 MARK YOUR AD AS SOLD
+
+
+    h4 CONGRATULATIONS ON SELLING YOUR HORSE!
+
+    p 
+      | We are so happy for you! Was the sale helped by Epona Exchange? Thank you for contributing to a horse rescue group! Every ad you create on Epona Exchange helps a rescue horse succeed.
+
+    = link_to 'Cancel', ads_profiles_path, class: "btn"
+    = link_to 'Mark As Sold', mark_sold_horse_path(@horse), class: "btn"
+
+
+

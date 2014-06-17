@@ -23,9 +23,15 @@ class Horse < ActiveRecord::Base
   aasm column: 'status' do
     state :draft, initial: true
     state :published
+    state :sold
+    state :removed
 
     event :publish do
       transitions from: :draft, to: :published
+    end
+
+    event :remove do
+      transitions from: :published, to: :removed
     end
 
     event :make_draft do
@@ -35,6 +41,11 @@ class Horse < ActiveRecord::Base
     event :make_sold do
       transitions from: :published, to: :sold
     end
+
+    event :to_sold do
+      transitions from: :removed, to: :sold
+    end
+
 
   end
 

@@ -76,7 +76,7 @@ class HorsesController < ApplicationController
   def destroy
     @horse.destroy
     respond_to do |format|
-      format.html { redirect_to root_url }
+      format.html { redirect_to ads_profiles_url }
     end
   end
 
@@ -89,7 +89,12 @@ class HorsesController < ApplicationController
   def publish
   end
 
-  # GET /horses/:id/active
+  # GET /horses/:id/unpublish
+  def unpublish
+  end
+
+
+  # GET /horses/:id/activate
   def activate
     respond_to do |format|
       if @horse.draft?
@@ -103,6 +108,34 @@ class HorsesController < ApplicationController
     end
   end
 
+  # GET /horses/:id/unactivate
+  def unactivate
+    respond_to do |format|
+      if @horse.published?
+        @horse.remove!
+        format.html { redirect_to ads_profiles_url, notice: 'Ad was successfully unpublished.' }
+      else
+        format.html { redirect_to unpublish_horse_url }
+      end
+    end
+  end
+
+  # GET /horses/:id/sold
+  def sold
+  end
+
+  # GET /horses/:id/mark-sold
+  def mark_sold
+    respond_to do |format|
+      if @horse.published? || @horse.removed?
+        @horse.make_sold! if @horse.published?
+        @horse.to_sold! if @horse.removed?
+        format.html { redirect_to ads_profiles_url, notice: 'Ad was successfully Mark As Sold' }
+      else
+        format.html { redirect_to sold_horse_url }
+      end
+    end
+  end
 
   def search
     unless params[:q].blank?
@@ -122,7 +155,6 @@ class HorsesController < ApplicationController
     @horses = @horses.order(sort_by).published
 
     smart_listing_create(:horses, @horses, partial: "horses/horse_list")
-
   end
 
   def like

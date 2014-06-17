@@ -29,7 +29,11 @@ Rails.application.routes.draw do
         member do
           get 'preview', to: "#{item}#preview"
           get 'publish', to: "#{item}#publish"
+          get 'unpublish', to: "#{item}#unpublish"
+          get 'sold', to: "#{item}#sold"
           get 'activate', to: "#{item}#activate"
+          get 'unactivate', to: "#{item}#unactivate"
+          get 'mark-sold', to: "#{item}#mark_sold"
         end
       end
     end

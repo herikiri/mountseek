@@ -19,8 +19,8 @@ class ProfilesController < ApplicationController
   end
 
 	def ads
-    @horses = @horses.order(@sort_by)
-    smart_listing_create(:horses, @horses, partial: "profiles/horse_list")
+    #@horses = @horses.order(@sort_by)
+    #smart_listing_create(:horses, @horses, partial: "profiles/horse_list")
   end
 
 

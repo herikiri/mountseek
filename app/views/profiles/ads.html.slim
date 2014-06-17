@@ -1,11 +1,37 @@
-.row
-  .col-md-3
-    =render 'sidebar'
-  .col-md-9
-    .row
-			= smart_listing_controls_for(:horses, {class: "form-inline text-right"}) do
-			    =select_tag :sort_by, options_for_select([["Newest", "newest"], ["Oldest", "oldest"], ["Price High to Low", "high_to_low"], ["Price Low to High", "low_to_high"] ], "newest")
-			= smart_listing_render :horses
+.container
+	h4= "#{@horses.count} HORSE LISTINGS"
+	table.table.table-striped
+		tr
+			th
+				| Ad Title
+			th
+				| Price
+			th
+				| Status
+			th
+				| Expired
+			th
+				| Action
+		- @horses.each do |horse|
+			tr
+				td= horse.title
+				td= horse.price
+				td= horse.status
+				td= horse.published_end
+				td.list_actions
+				  = link_to 'Show', horse
+				  = link_to 'Edit', edit_horse_path(horse)
+				  - if horse.status == 'draft'
+				  	= link_to 'Publish', publish_horse_path(horse)
+				  - if horse.status == 'published' || horse.status == 'removed'
+				  	= link_to 'Sold', sold_horse_path(horse)
+				  	- if horse.status == 'published'
+				  		= link_to 'Unpublish', unpublish_horse_path(horse)
+				  	
+
+				  	
+
+
 
 
 = javascript_include_tag 'fav_button', 'data-turbolinks-track' => true
