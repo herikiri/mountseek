@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617091812) do
+ActiveRecord::Schema.define(version: 20140618023748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,12 @@ ActiveRecord::Schema.define(version: 20140617091812) do
     t.string   "other_markings"
     t.string   "second_breed"
     t.string   "temperament"
+    t.string   "user_name"
+    t.string   "farm_name"
+    t.string   "website"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "alt_phone_number"
   end
 
   add_index "horses", ["package_id"], name: "index_horses_on_package_id", using: :btree
@@ -245,6 +251,12 @@ ActiveRecord::Schema.define(version: 20140617091812) do
     t.date     "published_at"
     t.date     "published_end"
     t.integer  "views_count"
+    t.string   "user_name"
+    t.string   "farm_name"
+    t.string   "website"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "alt_phone_number"
   end
 
   add_index "real_estates", ["package_id"], name: "index_real_estates_on_package_id", using: :btree
@@ -273,6 +285,12 @@ ActiveRecord::Schema.define(version: 20140617091812) do
     t.date     "published_at"
     t.date     "published_end"
     t.integer  "views_count"
+    t.string   "user_name"
+    t.string   "farm_name"
+    t.string   "website"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "alt_phone_number"
   end
 
   add_index "services", ["package_id"], name: "index_services_on_package_id", using: :btree
@@ -313,6 +331,12 @@ ActiveRecord::Schema.define(version: 20140617091812) do
     t.date     "available"
     t.date     "until"
     t.string   "ai_type"
+    t.string   "user_name"
+    t.string   "farm_name"
+    t.string   "website"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "alt_phone_number"
   end
 
   add_index "studs", ["package_id"], name: "index_studs_on_package_id", using: :btree
@@ -336,6 +360,12 @@ ActiveRecord::Schema.define(version: 20140617091812) do
     t.date     "published_at"
     t.date     "published_end"
     t.integer  "views_count"
+    t.string   "user_name"
+    t.string   "farm_name"
+    t.string   "website"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "alt_phone_number"
   end
 
   add_index "tacks", ["package_id"], name: "index_tacks_on_package_id", using: :btree

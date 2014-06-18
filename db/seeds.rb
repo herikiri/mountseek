@@ -32,6 +32,8 @@ breeds = ["Arabian", "Big Hair", "Colors & Spots", "Drafts Gaited", "Baroque Mus
 ad_for = ["Sale", "Lease"]
 
 
+disciplines = ["All Around", "Barrel Racing",  "Cutting", "Dressage", "Endurance", "Eventing",
+  "Hunter", "Show", "Polo", "Racing", "Reining", "Roping", "Trail", "Training", "Pleasure", "Youth", "Other"]
 colors = ["Bay", "Bay Overo", "Bay Roan", "Black", "Black Overo","Blue Grulla", "Blue Roan", "Brindle", "Brown", "Bucksin", "Bucksin Overo", "Champagne", "Chesnut", "Chestnut Overo", "Chocolate",
   "Cremello", "Dun", "Dun With Black Point", "Dunalino", "Dunskin", "Grey", "Grulla", "Liver Chestnut", "Overo", "Palomino", "Perlino", "Piebalo", "Pinto", "Red Dun", "Red Roan", "Roan", "Sabino", 
   "Silver Dapple", "Smokey Black", "Sorrel", "Sorrel Overo", "Tobiano", "Tovero", "White", "Other"]
@@ -77,11 +79,7 @@ my_service.packages.create([
 	{name: "Premium", price: 14.95, duration: 12, max_photo_upload: 10, max_video_upload: 2}
 	])
 
-DisciplineOption.create([
-	{name: "All Around"},{name: "All Purpose"},{name: "Barrel Racing"},{name: "Cutting"},{name: "Dressage"},{name: "Endurence"},
-	{name: "Eventing"},{name: "Hunter"},{name: "Show"},{name: "Polo"},{name: "Racing"},{name: "Reining"},
-	{name: "Roping"},{name: "Trail"},{name: "Training"},{name: "Pleasure"},{name: "Youth"},{name: "Other"}
-	])
+
 
 genders.each do |gender|
   GenderOption.create(name: gender)
@@ -103,11 +101,15 @@ experiences.each do |experience|
   ExperienceOption.create(name: experience)
 end  
 
+disciplines.each do |discipline|
+  DisciplineOption.create(name: discipline)
+end
+
 ai_types.each do |ai|
   AiTypeOption.create(name: ai)
 end
 
-=begin
+
 def random_dec (min, max)
   rand * (max-min) + min
 end
@@ -123,11 +125,12 @@ ad_status = ["published", "draft"]
 month_durations = [0, 1, 3, 4, 5, 6]
 days_duration = [0, 7, 30]
 
-[User, Horse, Stud,  Picture].each(&:delete_all)
+[User, Horse, Stud, Discipline, Picture].each(&:delete_all)
 Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
 Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
 Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
 User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
+Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1')
 
 (1..10).each do |num|
   user = User.create(
@@ -161,11 +164,19 @@ end
       color: colors.sample, height: random_dec(5, 200).round(2), weight: random_dec(5, 200).round(2),
       package_id: packages_id_for_horse.sample,
       user_id: User.all.pluck(:id).sample,
-      status: ad_status.sample,
+      status: ad_status.sample, temperament: temperaments.sample,
       published_at: DateTime.now - days_duration.sample.days,
       published_end: DateTime.now + month_durations.sample.month
     })
 
+
+  horse.user_name = horse.user.profile_name 
+  horse.farm_name = horse.user.profile_farm_name
+  horse.website = horse.user.profile_website
+  horse.email = horse.user.email
+  horse.phone_number = horse.user.profile_phone_number
+
+  horse.disciplines.create(name: disciplines.sample, experience: experiences.sample)
 
   horse_images.each do |img|
     horse.pictures.create(name: img)
@@ -175,4 +186,3 @@ end
   horse.save!
   
 end
-=end

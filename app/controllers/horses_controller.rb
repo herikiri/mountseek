@@ -183,6 +183,7 @@ class HorsesController < ApplicationController
         :breed, :city, :state, :zip_code, :ad_for, :price, :private_treaty,
         :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament,
+        :user_name, :farm_name, :email, :website, :phone_number, :alt_phone_number,
         disciplines_attributes: [:id, :name, :experience, :_destroy])
     end
 

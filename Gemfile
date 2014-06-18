@@ -80,3 +80,4 @@ gem "fog"
 gem 'rails-gallery'
 gem 'html2slim'
 gem "nested_form"
+gem 'validates_email_format_of'

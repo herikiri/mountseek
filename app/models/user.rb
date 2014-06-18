@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   has_many :horses, dependent: :destroy
   has_many :studs, dependent: :destroy
 
+
+  delegate :name, :farm_name, :phone_number, :alt_phone_number, :website,
+    to: :profile, prefix: true
+
   after_create :build_profile
 
 	TEMP_EMAIL = 'change@me.com'
