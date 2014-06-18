@@ -1,36 +1,23 @@
 Rails.application.routes.draw do
 
-
-  resources :horses do 
-    collection do
-      get 'search'
-    end
-    member do
-      get 'search'
-    end
-  end
-
-  resource :studs do 
-    collection do
-      get 'search'
-    end
-  end
-
-  resources :trailers do 
-    collection do
-      get 'search'
-    end
-    member do
-      get 'search'
-    end
-  end
-
  
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
 
   root 'home#index'
 
   items = %w( horses studs trailers tacks real_estates services )
+ 
+  
+  items.each do |item|
+    resources item.to_sym do
+      collection do
+        get 'search'
+      end
+      member do
+        get 'search'
+      end
+    end
+  end
  
   resources :packages do
     items.each do |item|

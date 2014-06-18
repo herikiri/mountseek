@@ -1,40 +1,100 @@
 h4 REAL ESTATES
-= simple_form_for [@real_estate.package, @real_estate] , :html => {:multipart => true} do |f|
+= simple_form_for @real_estate, :html => {:multipart => true, class: 'form-horizontal'} do |f|
+
+  - if @real_estate.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@real_estate.errors.count, "error")} prohibited this real_estate from being saved:"
+      ul
+        - @@real_estate.errors.full_messages.each do |message|
+          li = message
+
+  = f.hidden_field :package_id, value: @real_estate.package_id
 
   = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
   = f.input :description, label: false,  placeholder: "Description", input_html: { rows: 8 }
   
-  .form-inputs.row
-    = f.input :house_type, label: false, wrapper_html: { class: 'span6' }, placeholder: "Type"
-    = f.input :house_style, label: false, wrapper_html: { class: 'span6' }, placeholder: "Style"
+  .row
+    = f.input :house_type, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Type"
+    = f.input :house_style, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Style"
 
-  .form-inputs.row
-    = f.input :city, label: false, wrapper_html: { class: 'span6' }, placeholder: "City"
-    = f.input :state, label: false, wrapper_html: { class: 'span6' }, placeholder: "State"
+  .row
+    = f.input :city, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "City"
+    = f.input :state, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "State"
 
-  .form-inputs.row
-    = f.input :ad_for, label: false, wrapper_html: { class: 'span4' }, placeholder: "Ad For"
-    = f.input :price, label: false, wrapper_html: { class: 'span4' }, placeholder: "$ Price"
-    = f.input :private_treaty, label: false, inline_label: true,wrapper_html: { class: 'span4' }
+  .row
+    = f.input :zip_code, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Zip Code"
+
+    
+
+  .row
+    = f.input :ad_for, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Ad For"
+    = f.input :price, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Price"
+    = f.input :private_treaty, label: false, inline_label: true,wrapper_html: { class: 'col-md-4' }
 
   hr
 
-  h4 DETAILS & BREED INFORMATION
+  h4 DETAILS REAL ESTATE INFORMATION
 
-  = f.input :year, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true, discard_month: true,  input_html: { class: 'span6' }, prompt: {  year: 'Year' }
+  .row
+    = f.input :year, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true, discard_month: true,  prompt: {  year: 'Year' }
 
-  .form-inputs.row
-    = f.input :sqft, label: false, wrapper_html: { class: 'span6' }, placeholder: "$ Price"
+    = f.input :sqft, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Sqft"
+    = f.input :floor, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Floor"
 
-  .form-inputs.row
-    = f.input :floor, label: false, wrapper_html: { class: 'span3' }, placeholder: "Floor"
-    = f.input :bedroom, label: false, wrapper_html: { class: 'span3' }, placeholder: "Bedroom"
-    = f.input :bathroom, label: false, wrapper_html: { class: 'span3' }, placeholder: "Bathroom"
-    = f.input :garage, label: false, wrapper_html: { class: 'span3' }, placeholder: "Garage"
+  .row
+    = f.input :bedroom, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Bedroom"
+    = f.input :bathroom, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Bathroom"
+    = f.input :garage, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Garage"
 
+  hr
+
+  h4 YOUR CONTACT INFORMATIOIN
+
+  .row
+
+    - if current_user.profile_name.present?
+      = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *", input_html: { value: current_user.profile_name}
+    - else
+      = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *"
+
+    - if current_user.profile_farm_name.present?
+      = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)", input_html: { value: current_user.profile_farm_name}
+    - else
+      = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)"
+   
+
+  .row
+    - if current_user.email.present?
+      = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *", input_html: { value: current_user.email}
+    - else
+      = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *"
+
+    - if current_user.profile_website.present?
+      = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)", input_html: { value: current_user.profile_website }
+    - else
+      = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)"
+
+
+  .row
+    - if current_user.profile_phone_number.present?
+      = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)", input_html: { value: current_user.profile_phone_number }
+    - else
+      = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)"
+
+    - if current_user.profile_alt_phone_number.present?
+      = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)", input_html: { value: current_user.profile_alt_phone_number }
+    - else
+      = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"
+    
+  hr
 
   = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
 
   = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true } 
+
+  hr
  
   = f.button :submit, 'Save & Preview'
+
+javascript:
+  $('select[id*="real_estate_year"]').wrap('<div class="col-md-6">');

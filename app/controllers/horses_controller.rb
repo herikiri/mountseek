@@ -55,7 +55,7 @@ class HorsesController < ApplicationController
         
         format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
       else
-        format.html { render :new }
+        format.html { render :new, notice: 'Save Horse Failed!' }
       end
     end
   end
