@@ -37,7 +37,7 @@
 
 
   .row
-    = f.input :color, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Color (optional)", collection: ColorOption.all
+    = f.input :color, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Color (optional)", collection: ColorOption.all, value_method: :name
     = f.input :other_markings, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Other Markings (optional)"
 
   .row
@@ -50,7 +50,7 @@
 
   hr
 
-  h4 REGISTRY INFORMATIOIN
+  h4 REGISTRY INFORMATION
   .row
     = f.input :registration, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration (optional)"
     = f.input :registration_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
@@ -61,12 +61,12 @@
 
   h4 PERSONALITY & EXPERIENCE
   .row
-    = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: TemperamentOption.all
+    = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: TemperamentOption.all, value_method: :name
   
   = f.simple_fields_for :disciplines do |fd|
     .row
       = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: DisciplineOption.all, value_method: :name
-      = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all
+      = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all, value_method: :name
       = fd.link_to_remove "Remove this discipline"
 
   = f.link_to_add "Add a Discipline", :disciplines
@@ -123,8 +123,6 @@
     - else
       = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"
     
-
-
   hr
  
   = f.button :submit, 'Save & Preview'
@@ -133,3 +131,18 @@
 
 javascript:
   $('select[id*="horse_birth"]').wrap('<div class="col-md-6">');
+
+  /*
+  $("input#horse_city").geocomplete({
+    country: 'US'
+  });
+
+   $("input#horse_state").geocomplete({
+    country: 'US'
+  });
+  */
+
+
+
+
+  

@@ -14,8 +14,11 @@
       .price
         - unless @stud.private_treaty
           = "Stud Fee: #{number_to_currency @stud.stud_fee}"
+          br /
           = "Booking Fee: #{number_to_currency @stud.booking_fee}"
+          br /
           = "Shipping Fee:  #{number_to_currency @stud.shipping_fee}"
+          br /
         - else
           | PRIVATE TREATY
       hr
@@ -27,7 +30,7 @@
         br
         = "Located in #{@stud.state}"
         br
-        = "#{@stud.ad_for} by #{@stud.user.username}"
+        = "Stud by #{@stud.user.username}"
 
   .row
     .col-md-12.stats

@@ -60,7 +60,7 @@ class StudsController < ApplicationController
   def update
     respond_to do |format|
       if @stud.update(stud_params)
-        format.html { redirect_to preview_stud_url(@horse), notice: 'Stud was successfully updated.' }
+        format.html { redirect_to preview_stud_url(@stud), notice: 'Stud was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end
@@ -181,6 +181,7 @@ class StudsController < ApplicationController
         :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament, 
         :stud_fee, :booking_fee, :shipping_fee, :available, :until, :ai_type,
+        :user_name, :farm_name, :email, :website, :phone_number, :alt_phone_number,
         disciplines_attributes: [:id, :name, :experience, :_destroy])
     end
 end

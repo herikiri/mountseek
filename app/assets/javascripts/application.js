@@ -37,6 +37,7 @@
 //= require jquery/jquery.elastislide
 //= require jquery/jquery.tmpl.min
 //= require jquery_nested_form
+//= require jquery.geocomplete.min
 
 
 $(document).on('page:fetch', function() { NProgress.start(); })

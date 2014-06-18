@@ -16,6 +16,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :trailers do 
+    collection do
+      get 'search'
+    end
+    member do
+      get 'search'
+    end
+  end
+
  
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
 

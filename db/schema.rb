@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618023748) do
+ActiveRecord::Schema.define(version: 20140618093301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,10 @@ ActiveRecord::Schema.define(version: 20140618023748) do
     t.string   "email"
     t.string   "phone_number"
     t.string   "alt_phone_number"
+    t.decimal  "latitude"
+    t.decimal  "longtitude"
+    t.string   "country"
+    t.string   "viewport"
   end
 
   add_index "horses", ["package_id"], name: "index_horses_on_package_id", using: :btree
@@ -257,6 +261,10 @@ ActiveRecord::Schema.define(version: 20140618023748) do
     t.string   "email"
     t.string   "phone_number"
     t.string   "alt_phone_number"
+    t.decimal  "latitude"
+    t.decimal  "longtitude"
+    t.string   "country"
+    t.string   "viewport"
   end
 
   add_index "real_estates", ["package_id"], name: "index_real_estates_on_package_id", using: :btree
@@ -291,6 +299,10 @@ ActiveRecord::Schema.define(version: 20140618023748) do
     t.string   "email"
     t.string   "phone_number"
     t.string   "alt_phone_number"
+    t.decimal  "latitude"
+    t.decimal  "longtitude"
+    t.string   "country"
+    t.string   "viewport"
   end
 
   add_index "services", ["package_id"], name: "index_services_on_package_id", using: :btree
@@ -337,6 +349,10 @@ ActiveRecord::Schema.define(version: 20140618023748) do
     t.string   "email"
     t.string   "phone_number"
     t.string   "alt_phone_number"
+    t.decimal  "latitude"
+    t.decimal  "longtitude"
+    t.string   "country"
+    t.string   "viewport"
   end
 
   add_index "studs", ["package_id"], name: "index_studs_on_package_id", using: :btree
@@ -366,6 +382,10 @@ ActiveRecord::Schema.define(version: 20140618023748) do
     t.string   "email"
     t.string   "phone_number"
     t.string   "alt_phone_number"
+    t.decimal  "latitude"
+    t.decimal  "longtitude"
+    t.string   "country"
+    t.string   "viewport"
   end
 
   add_index "tacks", ["package_id"], name: "index_tacks_on_package_id", using: :btree
@@ -397,6 +417,21 @@ ActiveRecord::Schema.define(version: 20140618023748) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "latitude"
+    t.decimal  "longtitude"
+    t.string   "country"
+    t.string   "viewport"
+    t.string   "user_name"
+    t.string   "farm_name"
+    t.string   "website"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "alt_phone_number"
+    t.string   "status"
+    t.integer  "banner"
+    t.date     "published_at"
+    t.date     "published_end"
+    t.integer  "views_count"
   end
 
   add_index "trailers", ["package_id"], name: "index_trailers_on_package_id", using: :btree

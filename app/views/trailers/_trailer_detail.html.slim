@@ -1,63 +1,44 @@
 .row
   .col-md-6
-    - unless @horse.ad_banner.nil?
-      img src= @horse.ad_banner.name.thumb.url
+    - unless @trailer.ad_banner.nil?
+      img src= @trailer.ad_banner.name.thumb.url
     - else
-      =image_tag( 'horse1.jpg')
+      =image_tag( 'trailer.jpg')
   .col-md-6
     h4 
-      - unless @horse.name.nil?
-        = @horse.name
+      - unless @trailer.brand.nil?
+        = @trailer.brand
       - else
         | UNNAMED
     .price
-      - unless @horse.private_treaty
-        = number_to_currency @horse.price
+      - unless @trailer.private_treaty
+        = number_to_currency @trailer.price
       - else
         | PRIVATE TREATY
     hr
 
     .short_detail
-      = "#{@horse.birth.year} #{@horse.breed} #{@horse.gender}"
-      br
-      = "#{@horse.height} Hands"
-      br
-      = "Located in #{@horse.state}"
-      br
-      = "#{@horse.ad_for} by #{@horse.user.username}"
+
+      = "Sale by #{@trailer.user.username}"
 
 .row
   .col-md-12.stats
-    h4 HORSES STATS
+    h4 TRAILER STATS
     hr
     table.table.table-striped
       tr
         td Name
-        td= @horse.name
+        td= @trailer.brand
       tr
         td Color
-        td= @horse.color.titleize
-      tr
-        td Breed
-        td= @horse.breed
-      tr
-        td Gender
-        td= @horse.gender
-      tr
-        td Age
-        td= @horse.birth
-      tr
-        td Height
-        td= "#{@horse.height} hands"
-      tr
-        td Weight
-        td= "#{@horse.weight} lbs"
+        td= @trailer.color.titleize
+     
 
 .row
   .col-md-12
-    h4= @horse.title.upcase
+    h4= @trailer.title.upcase
     hr
-    p= @horse.description
+    p= @trailer.description
 
 .row
   .col-md-12.galleries
@@ -74,8 +55,8 @@
   .col-md-12
     h4 CONTACT SELLER
     hr
-    - if @horse.user.profile.user_picture.present?
-      img src=  @horse.user.profile.user_picture.avatar.url
+    - if @trailer.user.profile.user_picture.present?
+      img src=  @trailer.user.profile.user_picture.avatar.url
     - else
       .fa-stack.fa-4x
         i.fa.fa-circle.fa-stack-2x
@@ -84,7 +65,7 @@
    
       p= "FOR SALE BY #{@horse.user_name.upcase}"
 
-    - if @horse.user.profile.state && @horse.user.profile.city
+    - if @trailer.user.profile.state && @horse.user.profile.city
       p= "#{@horse.user.profile.state}, #{@horse.user.profile.city}"
 
     ul.nav.nav-tabs
@@ -92,17 +73,17 @@
         i.fa.fa-envelope.fa-2x
         br EMAIL SELLER
       | &nbsp;&nbsp;
-      - if @horse.phone_number.present?
+      - if @trailer.phone_number.present?
         li
           i.fa.fa-phone.fa-2x&nbsp
-          br= @horse.phone_number
+          br= @trailer.phone_number
         | &nbsp;&nbsp;
       li
-        =link_to ads_profile_path(@horse.user)
+        =link_to ads_profile_path(@trailer.user)
           i.fa.fa-bookmark.fa-2x&nbsp
           br VIEW ALL ADS
       | &nbsp;&nbsp;
-      - if @horse.website.present?
+      - if @trailer.website.present?
         li
           a href="http://#{@horse.website}"
             i.fa.fa-globe.fa-2x&nbsp

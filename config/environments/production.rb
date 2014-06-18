@@ -81,5 +81,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.assets.precompile += %w( ads.js home.js )
+  config.assets.precompile += %w( home.js fav_button.js jquery.geocomplete.min.js )
 end

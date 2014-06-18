@@ -1,0 +1,23 @@
+.container
+  .publish-wrapper
+    h1 Publish Your Trailer
+
+    - unless @trailer.ad_banner.nil?
+      img src= @trailer.ad_banner.name.thumb.url
+    
+
+    p= "#{@trailer.package.name} Ad Package"
+    p= "TOTAL #{number_to_currency @trailer.package.price}"
+
+    h4= "YOUR #{@trailer.package.name.upcase} AD INCLUDES"
+    ul
+    	li= "#{@trailer.package.duration} Month Ad Duration"
+    	- if @trailer.package.max_photo_upload > 0
+    		li= "Up To #{@trailer.package.max_photo_upload} Photos"
+    	- if @trailer.package.max_video_upload > 0
+    		li= "Up To #{@trailer.package.max_video_upload} Videos"
+
+          
+    = link_to 'Edit', edit_trailer_path(@trailer), class: "btn btn-primary btn-inverse"
+    | &nbsp;
+    = link_to 'Publish', activate_trailer_path(@trailer), class: "btn btn-primary btn-inverse"

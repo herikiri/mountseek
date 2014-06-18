@@ -2,7 +2,8 @@
   .preview-wrapper
     h1 Preview Your Draft
     
+    = render "trailer_detail"
           
     = link_to 'Edit', edit_trailer_path(@trailer), class: "btn btn-primary btn-inverse"
     | &nbsp;
-    = link_to 'Publish Ad', publish_trailer_path(@trailer), class: "btn btn-primary btn-inverse"
+    = link_to 'Continue', publish_trailer_path(@trailer), class: "btn btn-primary btn-inverse"
