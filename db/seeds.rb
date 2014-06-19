@@ -120,14 +120,21 @@ horse_images = []
   horse_images << File.open(Rails.application.config.assets.paths[0]+"/horse"+num.to_s+".jpg")
 end
 
+trailer_images = []
+(1..4).each do |num|
+  trailer_images << File.open(Rails.application.config.assets.paths[0]+"/trailer"+num.to_s+".jpg")
+end
+
 packages_id_for_horse = [1, 2, 3, 4]
 packages_id_for_stud = [5, 6, 7, 8]
+packages_id_for_trailer = [11, 12]
 ad_status = ["published", "draft"]
 month_durations = [0, 1, 3, 4, 5, 6]
 days_duration = [0, 7, 30]
 
-[User, Discipline].each(&:delete_all)
 
+=begin
+[User, Discipline].each(&:delete_all)
 
 User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
 
@@ -153,7 +160,7 @@ Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1'
     )
 end
 
-=begin
+
 Picture.delete_all
 Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
 
@@ -194,7 +201,6 @@ Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
   horse.save!
   
 end
-=end
 
 Stud.delete_all
 Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
@@ -230,6 +236,49 @@ Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
 
   stud.banner = stud.pictures.sample.id
   stud.save!
+  
+end
+
+=end
+
+models = ["Classic", "Stratus Express", "Ranchhand", "Baron" ,"Renegade"]
+materials = ["Fiberglass", "Aluminum", "ombination"]
+hitchs = ["Bumper Pull", "Gooseneck"]
+brands = ["Charmac", "Trails West", "Bison", "Other", "Merhow", "Silver Star"]
+
+Trailer.delete_all
+Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
+(1..200).each do |num|
+  trailer = Trailer.create(
+    { title: Faker::Company.catch_phrase, 
+      description: Faker::Lorem.paragraphs(3, true).join(","), 
+      city: Faker::Address.city,
+      state: Faker::Address.state, zip_code: Faker::Address.zip_code,
+      price: random_dec(5, 200).round(2),
+      private_treaty: false,
+      color: "white",  
+      brand: brands.sample, model: models.sample, year: [2001..2014].sample.to_s,
+      material: materials.sample, hitch: hitchs.sample, axles: [1..3].sample.to_s, hauls: [1..6].sample.to_s,
+      package_id: packages_id_for_trailer.sample,
+      user_id: User.all.pluck(:id).sample,
+      status: "published",
+      published_at: DateTime.now - days_duration.sample.days,
+      published_end: DateTime.now + month_durations.sample.month
+    })
+
+
+  trailer.user_name = trailer.user.profile_name 
+  trailer.farm_name = trailer.user.profile_farm_name
+  trailer.website = trailer.user.profile_website
+  trailer.email = trailer.user.email
+  trailer.phone_number = trailer.user.profile_phone_number
+
+  trailer_images.each do |img|
+    trailer.pictures.create(name: img)
+  end
+
+  trailer.banner = trailer.pictures.sample.id
+  trailer.save!
   
 end
 
