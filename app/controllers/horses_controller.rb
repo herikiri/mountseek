@@ -146,8 +146,7 @@ class HorsesController < ApplicationController
   def search
     unless params[:q].blank?
       @params_q = params[:q]
-      @search = Horse.search(params[:q])
-      @horses = @search.result
+      @horses = Horse.search(params[:q]).result
     else
       @horses =  Horse.all
     end

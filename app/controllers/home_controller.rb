@@ -4,7 +4,12 @@ class HomeController < ApplicationController
   	@user = current_user
   	@featured_horses = Horse.published.featured_ad.limit(20)
   	@newest_horses = Horse.published.newest_ad.limit(12)
-  	@search = Horse.search(params[:q])
+  	@search_horse = Horse.search(params[:q])
+    @search_stud = Stud.search(params[:q])
+    @search_trailer = Trailer.search(params[:q])
+    @search_real_estate = RealEstate.search(params[:q])
+    @search_tack = Tack.search(params[:q])
+    @search_service = Service.search(params[:q])
   end
 
   def pricing

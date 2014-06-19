@@ -142,12 +142,10 @@ class StudsController < ApplicationController
   def search
     unless params[:q].empty?
       @params_q = params[:q]
-      @search = Stud.search(params[:q])
-      @studs =  @search.result
+      @studs =  Stud.search(params[:q]).result
     else
       @studs = Stud.all
     end
-
 
     sort_by = {updated_at: :desc} if params[:sort_by] == "newest" || params[:sort_by].nil?
     sort_by = {updated_at: :asc} if params[:sort_by] == "oldest"
@@ -177,7 +175,7 @@ class StudsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def stud_params
       params.require(:stud).permit(:title, :description, :name,
-        :breed, :city, :state, :zip_code, :private_treaty,
+        :breed, :city, :state, :zip_code, :private_treaty, :ai_type,
         :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament, 
         :stud_fee, :booking_fee, :shipping_fee, :available, :until, :ai_type,

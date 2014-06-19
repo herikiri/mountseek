@@ -121,15 +121,16 @@ horse_images = []
 end
 
 packages_id_for_horse = [1, 2, 3, 4]
+packages_id_for_stud = [5, 6, 7, 8]
 ad_status = ["published", "draft"]
 month_durations = [0, 1, 3, 4, 5, 6]
 days_duration = [0, 7, 30]
 
-[User, Horse, Stud, Discipline, Picture].each(&:delete_all)
-Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
-Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
-Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
+[User, Discipline].each(&:delete_all)
+
+
 User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
+
 Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1')
 
 (1..10).each do |num|
@@ -151,6 +152,13 @@ Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1'
     about: Faker::Lorem.paragraphs(3, true).join(",")
     )
 end
+
+=begin
+Picture.delete_all
+Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
+
+Horse.delete_all
+Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
 
 (1..200).each do |num|
   horse = Horse.create(
@@ -186,3 +194,43 @@ end
   horse.save!
   
 end
+=end
+
+Stud.delete_all
+Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
+(1..200).each do |num|
+  stud = Stud.create(
+    { title: Faker::Company.catch_phrase, 
+      description: Faker::Lorem.paragraphs(3, true).join(","), 
+      name: Faker::Name.name, gender: "Stallions", ai_type: ai_types.sample,
+      breed: breeds.sample, city: Faker::Address.city,
+      state: Faker::Address.state, zip_code: Faker::Address.zip_code,
+      price: random_dec(5, 200).round(2),
+      private_treaty: false, birth: birth,
+      color: colors.sample, height: random_dec(5, 200).round(2), weight: random_dec(5, 200).round(2),
+      package_id: packages_id_for_stud.sample,
+      user_id: User.all.pluck(:id).sample,
+      status: ad_status.sample, temperament: temperaments.sample,
+      published_at: DateTime.now - days_duration.sample.days,
+      published_end: DateTime.now + month_durations.sample.month
+    })
+
+
+  stud.user_name = stud.user.profile_name 
+  stud.farm_name = stud.user.profile_farm_name
+  stud.website = stud.user.profile_website
+  stud.email = stud.user.email
+  stud.phone_number = stud.user.profile_phone_number
+
+  stud.disciplines.create(name: disciplines.sample, experience: experiences.sample)
+
+  horse_images.each do |img|
+    stud.pictures.create(name: img)
+  end
+
+  stud.banner = stud.pictures.sample.id
+  stud.save!
+  
+end
+
+

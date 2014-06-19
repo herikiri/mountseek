@@ -32,145 +32,168 @@
 
     .tab-content
       #horses.tab-pane.fade.in.active
-          = search_form_for @search, url: search_horses_path, :html => {:class => "form-horizontal", role: "form"} do |f|
-            
-            .form-group
-              label.col-sm-2.control-label for="inputBreed" Breed
-              .col-sm-10
-                = f.search_field :breed_cont, placeholder: "Horse's Breed", class: "form-control", id: "inputBreed" 
+        = search_form_for @search_horse, url: search_horses_path, :html => {:class => "form-horizontal", role: "form"} do |f|
+          
+          .form-group
+            label.col-sm-2.control-label for="inputBreed" Breed
+            .col-sm-10
+              = f.search_field :breed_cont, placeholder: "Horse's Breed", class: "form-control", id: "inputBreed" 
 
-            .form-group
-              label.col-sm-2.control-label for="inputLocation" Location
-              .col-sm-5
-                = f.search_field :state_cont, placeholder: "State", class: "form-control", id: "inputLocation"
-              .col-sm-5
-                = f.search_field :city_cont, placeholder: "City", class: "form-control", id: "inputLocation"
+          .form-group
+            label.col-sm-2.control-label for="inputLocation" Location
+            .col-sm-5
+              = f.search_field :state_cont, placeholder: "State", class: "form-control", id: "inputLocation"
+            .col-sm-5
+              = f.search_field :city_cont, placeholder: "City", class: "form-control", id: "inputLocation"
 
-            .form-group
-              label.col-sm-2.control-label for="inputPrice" Price
-              .col-sm-5
-                = f.search_field :price_gteq, placeholder: "Price Low", class: "form-control", id: "inputPrice"   
-              .col-sm-5
-                = f.search_field :price_lteq, placeholder: "Price High", class: "form-control", id: "inputPrice"       
- 
-            .form-group
-              .col-sm-offset-2.col-sm-10
-                button.btn.btn-default type="submit"
-                  | Submit
+          .form-group
+            label.col-sm-2.control-label for="inputPrice" Price
+            .col-sm-5
+              = f.search_field :price_gteq, placeholder: "Price Low", class: "form-control", id: "inputPrice"   
+            .col-sm-5
+              = f.search_field :price_lteq, placeholder: "Price High", class: "form-control", id: "inputPrice"       
+
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-default type="submit"
+                | Submit
      
 
       #studs.tab-pane.fade
-          = search_form_for @search, url: search_studs_path, :html => {:class => "form-horizontal", role: "form"} do |f|
-            
-            .form-group
-              label.col-sm-2.control-label for="inputBreed" Breed
-              .col-sm-10
-                = f.search_field :breed_cont, placeholder: "Horse's Breed", class: "form-control", id: "inputBreed" 
+        = search_form_for @search_stud, url: search_studs_path, :html => {:class => "form-horizontal", role: "form"} do |f|
+          
+          .form-group
+            label.col-sm-2.control-label for="inputBreed" Breed
+            .col-sm-10
+              = f.search_field :breed_cont, placeholder: "Horse's Breed", class: "form-control", id: "inputBreed" 
 
-            .form-group
-              label.col-sm-2.control-label for="inputLocation" Location
-              .col-sm-5
-                = f.search_field :state_cont, placeholder: "State", class: "form-control", id: "inputLocation"
-              .col-sm-5
-                = f.search_field :city_cont, placeholder: "City", class: "form-control", id: "inputLocation"
+          .form-group
+            label.col-sm-2.control-label for="inputLocation" Location
+            .col-sm-5
+              = f.search_field :state_cont, placeholder: "State", class: "form-control", id: "inputLocation"
+            .col-sm-5
+              = f.search_field :city_cont, placeholder: "City", class: "form-control", id: "inputLocation"
 
-            .form-group
-              label.col-sm-2.control-label for="inputPrice" Price
-              .col-sm-5
-                = f.search_field :price_gteq, placeholder: "Price Low", class: "form-control", id: "inputPrice"   
-              .col-sm-5
-                = f.search_field :price_lteq, placeholder: "Price High", class: "form-control", id: "inputPrice"       
- 
-            .form-group
-              label.col-sm-2.control-label for="inputAiType" AI Type
-              .col-sm-10
-                = f.search_field :breed_cont, placeholder: "AI Type", class: "form-control", id: "inputAiType"
+          .form-group
+            label.col-sm-2.control-label for="inputPrice" Price
+            .col-sm-5
+              = f.search_field :price_gteq, placeholder: "Price Low", class: "form-control", id: "inputPrice"   
+            .col-sm-5
+              = f.search_field :price_lteq, placeholder: "Price High", class: "form-control", id: "inputPrice"       
 
-            .form-group
-              .col-sm-offset-2.col-sm-10
-                button.btn.btn-default type="submit"
-                  | Submit 
+          .form-group
+            label.col-sm-2.control-label for="inputAiType" AI Type
+            .col-sm-5
+              = f.select :ai_type_cont, options_from_collection_for_select(AiTypeOption.all, "name", "name", @search_stud.ai_type_cont), {:prompt => '- Select AI Type -'} , { class: 'form-control' }
+
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-default type="submit"
+                | Submit 
 
       
       #trailers.tab-pane.fade
-        form.form-horizontal
-          .control-group
-            label.control-label for="inputYear"  Year
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputYear placeholder="Year" type="text" 
+        = search_form_for @search_trailer, url: search_trailers_path, :html => {:class => "form-horizontal", role: "form"} do |f|
 
-          = render 'quick_search_location'
+          .form-group
+            label.col-sm-2.control-label for="inputYear" Year
+            .col-sm-5
+              = f.search_field :year_cont, placeholder: "Year", class: "form-control", id: "inputYear"
 
-          .control-group
-            label.control-label for="inputCapacity"  Capacity
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputCapacity placeholder="Capacity" type="text" 
+          .form-group
+            label.col-sm-2.control-label for="inputLocation" Location
+            .col-sm-5
+              = f.search_field :state_cont, placeholder: "State", class: "form-control", id: "inputLocation"
+            .col-sm-5
+              = f.search_field :city_cont, placeholder: "City", class: "form-control", id: "inputLocation"
+
+          .form-group
+            label.col-sm-2.control-label for="inputCapacity" Hauls
+            .col-sm-5
+              = f.search_field :hauls_eq, placeholder: "Horse Capacity", class: "form-control", id: "inputCapacity"
+       
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-default type="submit"
+                | Submit 
 
       #tacks.tab-pane.fade
-        form.form-horizontal
-          .control-group
-            label.control-label for="inputType"  Type
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputType placeholder="Type" type="text" 
-          .control-group
-            label.control-label for="inputCondition"  Condition
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputCondition placeholder="Condition" type="text" 
-        
+        = search_form_for @search_tack, url: search_tacks_path, :html => {:class => "form-horizontal", role: "form"} do |f|
+
+          .form-group
+            label.col-sm-2.control-label for="inputTack" Tack
+            .col-sm-5
+              = f.search_field :tack_cont, placeholder: "Tack Type", class: "form-control", id: "inputTack"
+
+          .form-group
+            label.col-sm-2.control-label for="inputCondition" Condition
+            .col-sm-5
+              = f.search_field :condition_cont, placeholder: "Condition", class: "form-control", id: "inputCondition"
+
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-default type="submit"
+                | Submit 
+       
       #real-estates.tab-pane.fade
-        form.form-horizontal
-          .control-group
-            label.control-label for="inputType"  Type
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputType placeholder="Type" type="text" 
-          
-          = render 'quick_search_location'
+        = search_form_for  @search_real_estate, url: search_real_estates_path, :html => {:class => "form-horizontal", role: "form"} do |f|
 
-          = render 'quick_search_price'
-           
-          .control-group
-            label.control-label for="inputAcres"  Acres
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputAcres placeholder="Acres" type="text" 
+          .form-group
+            label.col-sm-2.control-label for="inputLocation" Location
+            .col-sm-5
+              = f.search_field :state_cont, placeholder: "State", class: "form-control", id: "inputLocation"
+            .col-sm-5
+              = f.search_field :city_cont, placeholder: "City", class: "form-control", id: "inputLocation"
+
+          .form-group
+            label.col-sm-2.control-label for="inputPrice" Price
+            .col-sm-5
+              = f.search_field :price_gteq, placeholder: "Price Low", class: "form-control", id: "inputPrice"   
+            .col-sm-5
+              = f.search_field :price_lteq, placeholder: "Price High", class: "form-control", id: "inputPrice" 
+
+          .form-group
+            label.col-sm-2.control-label for="inputType" Type
+            .col-sm-5
+              = f.search_field :house_type_cont, placeholder: "Type", class: "form-control", id: "inputType"
+
+          .form-group
+            label.col-sm-2.control-label for="inputAcres" Acres
+            .col-sm-5
+              = f.search_field :sqft_cont, placeholder: "Acres", class: "form-control", id: "inputAcres"
+
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-default type="submit"
+                | Submit 
       
+
       #services.tab-pane.fade
-        form.form-horizontal
+        = search_form_for @search_service, url: search_services_path, :html => {:class => "form-horizontal", role: "form"} do |f|
 
-          = render 'quick_search_location'
+          .form-group
+            label.col-sm-2.control-label for="inputLocation" Location
+            .col-sm-5
+              = f.search_field "company_cont", placeholder: "State", class: "form-control", id: "inputLocation"
+            .col-sm-5
+              = f.search_field "company_cont", placeholder: "City", class: "form-control", id: "inputLocation"
 
-          .control-group
-            label.control-label for="inputKeyword"  Keyword
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputKeyword placeholder="KeyWord" type="text" 
 
-          .control-group
-            label.control-label for="inputServices"  Services
-            .controls
-              .input-prepend
-                span.add-on
-                  i.icon-search
-                input#inputServices placeholder="Services" type="text"              
+          .form-group
+            label.col-sm-2.control-label for="inputKeyword" Keyword
+            .col-sm-5
+              = f.search_field "company_cont", placeholder: "Keyword", class: "form-control", id: "inputKeyword"
+
+          .form-group
+            label.col-sm-2.control-label for="inputServices" Services
+            .col-sm-5
+              = f.search_field "company_cont", placeholder: "Services", class: "form-control", id: "inputServices"
+
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-default type="submit"
+                | Submit
+           
 
 .container 
   h4 Featured Horse
@@ -194,9 +217,6 @@
         h4 Ad Not Available Yet
 
   hr
-
-
-  
 
 footer
   = render "layouts/shared/footer"

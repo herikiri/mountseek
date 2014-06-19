@@ -1,3 +1,6 @@
 .container
-	h4 Search Result
-	= smart_listing_render :studs
+  h4= "#{@studs.count} Stallion Found" 
+
+  = smart_listing_render :studs
+  
+= javascript_include_tag 'fav_button', 'data-turbolinks-track' => true
