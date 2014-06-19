@@ -1,6 +1,6 @@
 class RealEstatesController < ApplicationController
   before_action :set_user, only: [:like, :dislike]
-  before_action :set_real_setate, except: [:index, :create, :search, :new]
+  before_action :set_real_estate, except: [:index, :create, :search, :new]
   before_action :authenticate_user!, only: [:new, :like, :dislike]
   before_action :set_items_gallery, only: [:show, :preview]
 
@@ -173,7 +173,7 @@ class RealEstatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def real_estate_params
       params.require(:real_estate).permit(:title, :description, :house_style, :house_type, :package_id,
-        :country, :city, :state, :zip_code, :ad_for, :price, :private_treaty,
+        :country, :city, :state, :zip_code, :price, :private_treaty,
         :year, :sqft, :bedroom, :bathroom, :floor, :garage, 
         :user_name, :farm_name, :email, :website, :phone_number, :alt_phone_number)
     end

@@ -1,0 +1,23 @@
+.container
+  .publish-wrapper
+    h1 Publish Your Real Estate
+
+    - unless @real_estate.ad_banner.nil?
+      img src= @real_estate.ad_banner.name.thumb.url
+    
+
+    p= "#{@real_estate.package.name} Ad Package"
+    p= "TOTAL #{number_to_currency @real_estate.package.price}"
+
+    h4= "YOUR #{@real_estate.package.name.upcase} AD INCLUDES"
+    ul
+    	li= "#{@real_estate.package.duration} Month Ad Duration"
+    	- if @real_estate.package.max_photo_upload > 0
+    		li= "Up To #{@real_estate.package.max_photo_upload} Photos"
+    	- if @real_estate.package.max_video_upload > 0
+    		li= "Up To #{@real_estate.package.max_video_upload} Videos"
+
+          
+    = link_to 'Edit', edit_real_estate_path(@real_estate), class: "btn btn-primary btn-inverse"
+    | &nbsp;
+    = link_to 'Publish', activate_real_estate_path(@real_estate), class: "btn btn-primary btn-inverse"

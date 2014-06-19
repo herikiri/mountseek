@@ -1,25 +1,24 @@
 .row
   .col-md-6
-    - unless @trailer.ad_banner.nil?
-      img src= @trailer.ad_banner.name.thumb.url
+    - unless @real_estate.ad_banner.nil?
+      img src= @real_estate.ad_banner.name.thumb.url
     - else
-      =image_tag( 'trailer.jpg')
+      =image_tag( 'real_estate.jpg')
   .col-md-6
     h4 
-      - unless @trailer.brand.nil?
-        = @trailer.brand
+      - unless @real_estate.title.nil?
+        = @real_estate.title
       - else
         | UNNAMED
     .price
-      - unless @trailer.private_treaty
-        = number_to_currency @trailer.price
+      - unless @real_estate.private_treaty
+        = number_to_currency @real_estate.price
       - else
         | PRIVATE TREATY
     hr
 
     .short_detail
-
-      = "Sale by #{@trailer.user.username}"
+      = "Sale by #{@real_estate.user.username}"
 
 .row
   .col-md-12.stats
@@ -28,17 +27,15 @@
     table.table.table-striped
       tr
         td Name
-        td= @trailer.brand
       tr
         td Color
-        td= @trailer.color.titleize
      
 
 .row
   .col-md-12
-    h4= @trailer.title.upcase
+    h4= @real_estate.title.upcase
     hr
-    p= @trailer.description
+    p= @real_estate.description
 
 .row
   .col-md-12.galleries
@@ -55,37 +52,37 @@
   .col-md-12
     h4 CONTACT SELLER
     hr
-    - if @trailer.user.profile.user_picture.present?
-      img src=  @trailer.user.profile.user_picture.avatar.url
+    - if @real_estate.user.profile.user_picture.present?
+      img src=  @real_estate.user.profile.user_picture.avatar.url
     - else
       .fa-stack.fa-4x
         i.fa.fa-circle.fa-stack-2x
         i.fa.fa-user.fa-stack-1x.fa-inverse
 
    
-      p= "FOR SALE BY #{@trailer.user_name.upcase}"
+      p= "FOR SALE BY #{@real_estate.user_name.upcase}"
 
-    - if @trailer.user.profile.state && @trailer.user.profile.city
-      p= "#{@trailer.user.profile.state}, #{@trailer.user.profile.city}"
+    - if @real_estate.user.profile.state && @real_estate.user.profile.city
+      p= "#{@real_estate.user.profile.state}, #{@real_estate.user.profile.city}"
 
     ul.nav.nav-tabs
       li
         i.fa.fa-envelope.fa-2x
         br EMAIL SELLER
       | &nbsp;&nbsp;
-      - if @trailer.phone_number.present?
+      - if @real_estate.phone_number.present?
         li
           i.fa.fa-phone.fa-2x&nbsp
-          br= @trailer.phone_number
+          br= @real_estate.phone_number
         | &nbsp;&nbsp;
       li
-        =link_to ads_profile_path(@trailer.user)
+        =link_to ads_profile_path(@real_estate.user)
           i.fa.fa-bookmark.fa-2x&nbsp
           br VIEW ALL ADS
       | &nbsp;&nbsp;
-      - if @trailer.website.present?
+      - if @real_estate.website.present?
         li
-          a href="http://#{@trailer.website}"
+          a href="http://#{@real_estate.website}"
             i.fa.fa-globe.fa-2x&nbsp
             br VIEW WEBSITE
 

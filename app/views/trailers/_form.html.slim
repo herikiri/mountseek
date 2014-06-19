@@ -25,7 +25,7 @@
 
 
   .row
-   = f.input :year, label: false, :start_year => Date.today.year - 20, :end_year => Date.today.year, discard_day: true,  discard_month: true, prompt: { year: 'Year *' }
+    = f.input :year, label: false, :start_year => Date.today.year - 20, :end_year => Date.today.year, discard_day: true,  discard_month: true, prompt: { year: 'Year *' }
     = f.input :price, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Price *"
     = f.input :private_treaty, label: false, inline_label: true, wrapper_html: { class: 'col-md-4' }
 
@@ -83,5 +83,10 @@
   = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
 
   = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true } 
+
+  hr
  
   = f.button :submit, 'Save & Preview'
+
+javascript:
+  $('select[id*="trailer_year"]').wrap('<div class="col-md-4">');

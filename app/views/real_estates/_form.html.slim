@@ -5,7 +5,7 @@ h4 REAL ESTATES
     #error_explanation
       h2 = "#{pluralize(@real_estate.errors.count, "error")} prohibited this real_estate from being saved:"
       ul
-        - @@real_estate.errors.full_messages.each do |message|
+        - @real_estate.errors.full_messages.each do |message|
           li = message
 
   = f.hidden_field :package_id, value: @real_estate.package_id
@@ -27,9 +27,8 @@ h4 REAL ESTATES
     
 
   .row
-    = f.input :ad_for, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Ad For"
-    = f.input :price, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Price"
-    = f.input :private_treaty, label: false, inline_label: true,wrapper_html: { class: 'col-md-4' }
+    = f.input :price, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "$ Price"
+    = f.input :private_treaty, label: false, inline_label: true,wrapper_html: { class: 'col-md-6' }
 
   hr
 

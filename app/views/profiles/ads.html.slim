@@ -116,3 +116,39 @@
 					  	- if trailer.status == 'published'
 					  		| |
 					  		= link_to 'Unpublish', unpublish_trailer_path(trailer)
+
+	h4= "#{@real_estates.count} Real Estate LISTINGS"
+	table.table.table-striped
+		tr
+			th
+				| Real Estate Title
+			th
+				| Price
+			th
+				| Status
+			th
+				| Active Until
+			- if @user == current_user
+				th
+					| Action
+		- @real_estates.each do |real_estate|
+			tr
+				td= real_estate.title
+				td= number_to_currency real_estate.price
+				td= real_estate.status
+				td= real_estate.published_end
+				- if @user == current_user
+					td.list_actions
+					  = link_to 'Show', real_estate
+					  | |
+					  = link_to 'Edit', edit_real_estate_path(real_estate)
+					  - if real_estate.status == 'draft'
+					  	| |
+					  	= link_to 'Publish', publish_real_estate_path(real_estate)
+					  - if real_estate.status == 'published' || real_estate.status == 'removed'
+					  	| |
+					  	= link_to 'Sold', sold_real_estate_path(real_estate)
+
+					  	- if real_estate.status == 'published'
+					  		| |
+					  		= link_to 'Unpublish', unpublish_real_estate_path(real_estate)

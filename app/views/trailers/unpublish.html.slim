@@ -1,0 +1,12 @@
+.container
+  .unpublish-wrapper
+    h1 Unpublish Your Trailer
+
+
+    h4 UNPUBLISH YOUR AD
+
+    p 
+      | Unpublishing your ad will hide it from public view. However, you will be able to republish it at any time before your ad's expiration date.
+
+    = link_to 'Cancel', ads_profiles_path, class: "btn"
+    = link_to 'Unpublish', unactivate_trailer_path(@trailer), class: "btn"

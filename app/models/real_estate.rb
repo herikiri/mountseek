@@ -6,7 +6,7 @@ class RealEstate < ActiveRecord::Base
 	has_many :pictures, as: :imageable, dependent: :destroy
 	has_many :videos, as: :videoable, dependent: :destroy
 
-	validates :title, :description, :city, :state, :zip_code, :ad_for, :price, :user_name, :email, presence: true
+	validates :title, :description, :city, :state, :zip_code, :price, :user_name, :email, presence: true
 
 	validates :email, :email_format => {:message => 'is not looking good'}
 
