@@ -140,10 +140,9 @@ class TrailersController < ApplicationController
   def search
     unless params[:q].blank?
       @params_q = params[:q]
-      @search = Trailer.search(params[:q])
-      @trailer = @search.result
+      @trailers = Trailer.search(params[:q]).result
     else
-      @trailer =  Trailer.all
+      @trailers =  Trailer.all
     end
 
     sort_by = {updated_at: :desc} if params[:sort_by] == "newest" || params[:sort_by].nil?
@@ -151,9 +150,9 @@ class TrailersController < ApplicationController
     sort_by = {price: :desc} if params[:sort_by] == "high_to_low"
     sort_by = {price: :asc} if params[:sort_by] == "low_to_high"
 
-    @trailer = @trailers.order(sort_by).published.live
+    @trailers = @trailers.order(sort_by).published.live
 
-    smart_listing_create(:horses, @trailers, partial: "horses/horse_list")
+    smart_listing_create(:trailers, @trailers, partial: "trailers/trailer_list")
   end
 
   private 

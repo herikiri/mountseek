@@ -1,0 +1,6 @@
+.container
+  h4= "#{@trailers.count} Trailers Found" 
+
+  = smart_listing_render :trailers
+  
+= javascript_include_tag 'fav_button', 'data-turbolinks-track' => true

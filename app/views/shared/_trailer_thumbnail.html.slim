@@ -1,0 +1,43 @@
+.ad-thumbnail.thumbnail
+  - if current_user
+    - if current_user.voted_up_on? trailer
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Remove From My Favorites', id: "fav-trailer-#{trailer.id}", class: 'fav-trailer-button', data: {url: dislike_user_trailer_path(current_user, trailer), toggle: 'tooltip', placement: 'bottom'}
+    - else
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', id: "fav-trailer-#{trailer.id}", class: 'fav-trailer-button', data: {url: like_user_trailer_path(current_user, trailer), toggle: 'tooltip', placement: 'bottom'}        
+  - else
+    =link_to raw("<span class='fa fa-heart'></span>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-trailer-button', data: {toggle: 'tooltip', placement: 'bottom'}
+
+  span.price.pull-right= number_to_currency trailer.price
+  .ad-title= trailer.title
+  - unless trailer.ad_banner.nil?
+    =link_to image_tag(trailer.ad_banner.name.thumb), trailer
+  - else
+    =link_to image_tag("trailer1.jpg"), trailer
+  .row
+    .col-md-6
+      ul
+        li="Year: #{trailer.year}"
+        li="Hauls: #{trailer.hauls}"
+        li="Material: #{trailer.material}"
+        li="Brand: #{trailer.brand}"
+    .col-md-6
+      ul
+      	li="Model: #{trailer.model}"
+        li="Hitch: #{trailer.hitch}"
+        li="Axles: #{trailer.axles}"
+  .ad-properties.pull-right
+    i.fa.fa-eye
+      ="#{trailer.impressionist_count(:filter=>:ip_address)}"
+      | &nbsp;
+    i.fa.fa-heart class="like-count-#{trailer.id}"
+      ="#{trailer.get_likes.size}"
+      | &nbsp;
+    i.fa.fa-camera
+      ="#{trailer.pictures.size}"
+      | &nbsp;
+    i.fa.fa-video-camera
+      | &nbsp;
+  hr
+  p= truncate trailer.description, size: 100
+
+  =social_share_button_tag(trailer.title, :url => trailer_url(trailer))

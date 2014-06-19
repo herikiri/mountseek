@@ -245,6 +245,7 @@ models = ["Classic", "Stratus Express", "Ranchhand", "Baron" ,"Renegade"]
 materials = ["Fiberglass", "Aluminum", "ombination"]
 hitchs = ["Bumper Pull", "Gooseneck"]
 brands = ["Charmac", "Trails West", "Bison", "Other", "Merhow", "Silver Star"]
+axles = ["One", "Two", "Three", "Four"]
 
 Trailer.delete_all
 Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
@@ -257,8 +258,8 @@ Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
       price: random_dec(5, 200).round(2),
       private_treaty: false,
       color: "white",  
-      brand: brands.sample, model: models.sample, year: [2001..2014].sample.to_s,
-      material: materials.sample, hitch: hitchs.sample, axles: [1..3].sample.to_s, hauls: [1..6].sample.to_s,
+      brand: brands.sample, model: models.sample, year: birth,
+      material: materials.sample, hitch: hitchs.sample, axles: axles.sample, hauls: [1..6].sample,
       package_id: packages_id_for_trailer.sample,
       user_id: User.all.pluck(:id).sample,
       status: "published",
