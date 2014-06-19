@@ -1,22 +1,80 @@
-= simple_form_for [@tack.package, @tack] , :html => {:multipart => true} do |f|
+= simple_nested_form_for @tack, :html => {:multipart => true,  class: 'form-horizontal'} do |f|
+
+  - if @tack.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@tack.errors.count, "error")} prohibited this tack from being saved:"
+      ul
+        - @tack.errors.full_messages.each do |message|
+          li = message
+
+  = f.hidden_field :package_id, value: @tack.package_id
+
   = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
   = f.input :description, label: false,  placeholder: "About Your Tack *", input_html: { rows: 8 }
 
-  .form-inputs.row-fluid
-  	= f.input :tack, label: false, wrapper_html: { class: 'span4' }, placeholder: "Tack"
-  	= f.input :tack_type, label: false, wrapper_html: { class: 'span4' }, placeholder: "Type"
-  	= f.input :price, label: false, wrapper_html: { class: 'span4' }, placeholder: "Price"
+  .row
+  	= f.input :tack, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Tack"
+  	= f.input :tack_type, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Type"
+  	= f.input :price, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Price"
 
-  .form-inputs.row-fluid
-  	= f.input :condition, label: false, wrapper_html: { class: 'span4' }, placeholder: "Condition"
-  	= f.input :color, label: false, wrapper_html: { class: 'span4' }, placeholder: "Color"
+  .row
+  	= f.input :condition, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Condition"
+  	= f.input :color, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Color"
 
-  = f.input :disciplines, as: :check_boxes, collection: @disciplines
+  = f.simple_fields_for :disciplines do |fd|
+    .row
+      = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: DisciplineOption.all, value_method: :name
+      = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all, value_method: :name
+      = fd.link_to_remove "Remove this discipline"
+
+  = f.link_to_add "Add a Discipline", :disciplines
  
+  hr
 
+  h4 YOUR CONTACT INFORMATIOIN
+
+  .row
+
+    - if current_user.profile_name.present?
+      = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *", input_html: { value: current_user.profile_name}
+    - else
+      = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *"
+
+    - if current_user.profile_farm_name.present?
+      = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)", input_html: { value: current_user.profile_farm_name}
+    - else
+      = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)"
+   
+
+  .row
+    - if current_user.email.present?
+      = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *", input_html: { value: current_user.email}
+    - else
+      = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *"
+
+    - if current_user.profile_website.present?
+      = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)", input_html: { value: current_user.profile_website }
+    - else
+      = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)"
+
+
+  .row
+    - if current_user.profile_phone_number.present?
+      = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)", input_html: { value: current_user.profile_phone_number }
+    - else
+      = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)"
+
+    - if current_user.profile_alt_phone_number.present?
+      = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)", input_html: { value: current_user.profile_alt_phone_number }
+    - else
+      = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"
+    
+  hr
 
   = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
 
   = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true } 
+
+  hr
  
   = f.button :submit, 'Save & Preview'

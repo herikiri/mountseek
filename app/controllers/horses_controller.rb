@@ -67,7 +67,7 @@ class HorsesController < ApplicationController
       if @horse.update(horse_params)
         format.html { redirect_to preview_horse_url(@horse), notice: 'Horse was successfully updated.' }
       else
-        format.html { render action: 'edit' }
+        format.html { render  :edit }
       end
     end
   end
@@ -91,7 +91,6 @@ class HorsesController < ApplicationController
   # GET /horses/:id/unpublish
   def unpublish
   end
-
 
   # GET /horses/:id/activate
   def activate

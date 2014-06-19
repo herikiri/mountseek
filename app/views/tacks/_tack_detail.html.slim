@@ -1,0 +1,87 @@
+.row
+  .col-md-6
+    - unless @tack.ad_banner.nil?
+      img src= @tack.ad_banner.name.thumb.url
+    - else
+      =image_tag( 'tack.jpg')
+  .col-md-6
+    h4 
+      - unless @tack.title.nil?
+        = @tack.title
+      - else
+        | UNNAMED
+    .price
+			= number_to_currency @tack.price
+
+    hr
+
+    .short_detail
+
+      = "Sale by #{@tack.user.username}"
+
+.row
+  .col-md-12.stats
+    h4 TRAILER STATS
+    hr
+    table.table.table-striped
+      tr
+        td Name
+
+      tr
+        td Color     
+
+.row
+  .col-md-12
+    h4= @tack.title.upcase
+    hr
+    p= @tack.description
+
+.row
+  .col-md-12.galleries
+    h4 PHOTO & VIDEO GALLERY
+    hr
+    - @items_gallery.in_groups_of(4).each do |item_group|
+      .row
+        - item_group.each do |item|
+          - unless item.nil?
+            .col-md-3
+              =image_tag item.name.thumb
+
+.row
+  .col-md-12
+    h4 CONTACT SELLER
+    hr
+    - if @tack.user.profile.user_picture.present?
+      img src=  @tack.user.profile.user_picture.avatar.url
+    - else
+      .fa-stack.fa-4x
+        i.fa.fa-circle.fa-stack-2x
+        i.fa.fa-user.fa-stack-1x.fa-inverse
+
+   
+      p= "FOR SALE BY #{@tack.user_name.upcase}"
+
+    - if @tack.user.profile.state && @tack.user.profile.city
+      p= "#{@tack.user.profile.state}, #{@tack.user.profile.city}"
+
+    ul.nav.nav-tabs
+      li
+        i.fa.fa-envelope.fa-2x
+        br EMAIL SELLER
+      | &nbsp;&nbsp;
+      - if @tack.phone_number.present?
+        li
+          i.fa.fa-phone.fa-2x&nbsp
+          br= @tack.phone_number
+        | &nbsp;&nbsp;
+      li
+        =link_to ads_profile_path(@tack.user)
+          i.fa.fa-bookmark.fa-2x&nbsp
+          br VIEW ALL ADS
+      | &nbsp;&nbsp;
+      - if @tack.website.present?
+        li
+          a href="http://#{@tack.website}"
+            i.fa.fa-globe.fa-2x&nbsp
+            br VIEW WEBSITE
+

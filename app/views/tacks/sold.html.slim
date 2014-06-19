@@ -1,0 +1,8 @@
+.container
+  .sold-wrapper
+    h1 MARK YOUR AD AS SOLD
+
+    h4 CONGRATULATIONS ON SELLING YOUR TACK!
+
+    = link_to 'Cancel', ads_profiles_path, class: "btn"
+    = link_to 'Mark As Sold', mark_sold_tack_path(@tack), class: "btn"

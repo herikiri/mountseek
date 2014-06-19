@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :studs, dependent: :destroy
   has_many :trailers, dependent: :destroy
   has_many :real_estates, dependent: :destroy
+  has_many :tacks, dependent: :destroy
+  has_many :services, dependent: :destroy
 
 
   delegate :name, :farm_name, :phone_number, :alt_phone_number, :website,

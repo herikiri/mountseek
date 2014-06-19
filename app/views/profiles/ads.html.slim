@@ -117,6 +117,43 @@
 					  		| |
 					  		= link_to 'Unpublish', unpublish_trailer_path(trailer)
 
+
+	h4= "#{@tacks.count} TACK LISTINGS"
+	table.table.table-striped
+		tr
+			th
+				| Tack Title
+			th
+				| Price
+			th
+				| Status
+			th
+				| Active Until
+			- if @user == current_user
+				th
+					| Action
+		- @tacks.each do |tack|
+			tr
+				td= tack.title
+				td= number_to_currency tack.price
+				td= tack.status
+				td= tack.published_end
+				- if @user == current_user
+					td.list_actions
+					  = link_to 'Show', tack
+					  | |
+					  = link_to 'Edit', edit_tack_path(tack)
+					  - if tack.status == 'draft'
+					  	| |
+					  	= link_to 'Publish', publish_tack_path(tack)
+					  - if tack.status == 'published' || tack.status == 'removed'
+					  	| |
+					  	= link_to 'Sold', sold_tack_path(tack)
+
+					  	- if tack.status == 'published'
+					  		| |
+					  		= link_to 'Unpublish', unpublish_tack_path(tack)
+
 	h4= "#{@real_estates.count} Real Estate LISTINGS"
 	table.table.table-striped
 		tr

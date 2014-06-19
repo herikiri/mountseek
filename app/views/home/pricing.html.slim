@@ -55,7 +55,7 @@
     #tacks.row.tab-pane.fade
       - @tackPackages.each do |package|
         dl.col-md-3.pricing-wrapper
-          dt= link_to "Package #{package.name}", "#new_package_tack_path(package)"
+          dt= link_to "Package #{package.name}", new_package_tack_path(package)
           dd
             | Price: #{package.price}
           dd

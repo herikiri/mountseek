@@ -1,0 +1,23 @@
+.container
+  .publish-wrapper
+    h1 Publish Your Tack
+
+    - unless @tack.ad_banner.nil?
+      img src= @tack.ad_banner.name.thumb.url
+    
+
+    p= "#{@tack.package.name} Ad Package"
+    p= "TOTAL #{number_to_currency @tack.package.price}"
+
+    h4= "YOUR #{@tack.package.name.upcase} AD INCLUDES"
+    ul
+    	li= "#{@tack.package.duration} Month Ad Duration"
+    	- if @tack.package.max_photo_upload > 0
+    		li= "Up To #{@tack.package.max_photo_upload} Photos"
+    	- if @tack.package.max_video_upload > 0
+    		li= "Up To #{@tack.package.max_video_upload} Videos"
+
+          
+    = link_to 'Edit', edit_tack_path(@tack), class: "btn btn-primary btn-inverse"
+    | &nbsp;
+    = link_to 'Publish', activate_tack_path(@tack), class: "btn btn-primary btn-inverse"
