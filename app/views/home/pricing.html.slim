@@ -79,7 +79,7 @@
     #services.row.tab-pane.fade
       - @servicePackages.each do |package|
         dl.col-md-3.pricing-wrapper
-          dt= link_to "Package #{package.name}", "#new_package_service_path(package)"
+          dt= link_to "Package #{package.name}", new_package_service_path(package)
           dd
             | Price: #{package.price}
           dd

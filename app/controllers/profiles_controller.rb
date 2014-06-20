@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   before_action :set_user
   before_action :set_horses, :set_studs, 
     :set_trailers, :set_real_estates, 
-    :set_tacks, only: [:ads]
+    :set_tacks, :set_services, only: [:ads]
   before_action :set_smart_listing_filter, only: [:favorites]
 
   def index
@@ -72,6 +72,14 @@ class ProfilesController < ApplicationController
         @tacks = User.find(params[:id]).tacks.published
       else 
         @tacks = current_user.tacks
+      end
+    end
+
+    def set_services
+      if params[:id]
+        @services = User.find(params[:id]).services.published
+      else 
+        @services = current_user.services
       end
     end
 

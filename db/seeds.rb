@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 items = [Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, 
-  TemperamentOption, ExperienceOption, AiTypeOption, TackOption, TackTypeOption, ConditionOption]
+  TemperamentOption, ExperienceOption, AiTypeOption, TackOption, TackTypeOption, ConditionOption, ServiceTypeOption]
 items.each(&:delete_all)
 
 Type.connection.execute('ALTER SEQUENCE types_id_seq RESTART WITH 1')
@@ -23,6 +23,7 @@ AiTypeOption.connection.execute('ALTER SEQUENCE ai_type_options_id_seq RESTART W
 TackOption.connection.execute('ALTER SEQUENCE tack_options_id_seq RESTART WITH 1')
 TackTypeOption.connection.execute('ALTER SEQUENCE tack_type_options_id_seq RESTART WITH 1')
 ConditionOption.connection.execute('ALTER SEQUENCE condition_options_id_seq RESTART WITH 1')
+ServiceTypeOption.connection.execute('ALTER SEQUENCE service_type_options_id_seq RESTART WITH 1')
 
 
 horse = Type.create(name: "Horse")
@@ -89,10 +90,10 @@ tacks = ["Apparel", "Accessories",
   "Saddle Pads", "Saddle Racks", "Show Apparel", "Show Tack", "Spurs", "Stirrups", "Other"]
 tack_types = ["Australian", "English", "Western"]
 conditions = ["New", "Excellent", "Used"]
+service_types = ["Trainer", "Boarding Facility", "Farrier", 
+  "Veterinarian", "Chiropractor", "Hauling", "Photographer", "Feed store", "Tack Store"]
 
 birth = "2004-03-01"
-
-
 
 genders.each do |gender|
   GenderOption.create(name: gender)
@@ -132,6 +133,10 @@ end
 
 conditions.each do |condition|
   ConditionOption.create(name: condition)
+end
+
+service_types.each do |service_type|
+  ServiceTypeOption.create(name: service_type)
 end
 
 
@@ -357,7 +362,7 @@ RealEstate.connection.execute('ALTER SEQUENCE real_estates_id_seq RESTART WITH 1
   
 end
 
-=end
+
 
 Tack.delete_all
 Tack.connection.execute('ALTER SEQUENCE tacks_id_seq RESTART WITH 1')
@@ -393,7 +398,7 @@ Tack.connection.execute('ALTER SEQUENCE tacks_id_seq RESTART WITH 1')
   
 end
 
-
+=end
 
 
 

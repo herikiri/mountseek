@@ -76,7 +76,7 @@ class HorsesController < ApplicationController
   def destroy
     @horse.destroy
     respond_to do |format|
-      format.html { redirect_to ads_profiles_url }
+      format.html { redirect_to ads_profiles_url, notice: 'Horse was successfully destroyed.' }
     end
   end
 

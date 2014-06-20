@@ -189,3 +189,36 @@
 					  	- if real_estate.status == 'published'
 					  		| |
 					  		= link_to 'Unpublish', unpublish_real_estate_path(real_estate)
+
+
+	h4= "#{@services.count} Service LISTINGS"
+	table.table.table-striped
+		tr
+			th Service Type
+			th Company
+			th Status
+			th Active Until
+			
+			- if @user == current_user
+				th Action
+		- @services.each do |serv|
+			tr
+				td= serv.service_type
+				td= serv.company
+				td= serv.status
+				td= serv.published_end
+				- if @user == current_user
+					td.list_actions
+					  = link_to 'Show', serv
+					  | |
+					  = link_to 'Edit', edit_service_path(serv)
+					  - if serv.status == 'draft'
+					  	| |
+					  	= link_to 'Publish', publish_service_path(serv)
+					  - if serv.status == 'published' || serv.status == 'removed'
+					  	| |
+					  	= link_to 'Sold', sold_service_path(serv)
+
+					  	- if serv.status == 'published'
+					  		| |
+					  		= link_to 'Unpublish', unpublish_service_path(serv)

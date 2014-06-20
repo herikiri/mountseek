@@ -13,8 +13,8 @@
   = f.input :description, label: false,  placeholder: "About Your Tack *", input_html: { rows: 8 }
 
   .row
-  	= f.input :tack, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Tack"
-  	= f.input :tack_type, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Type"
+  	= f.input :tack, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Tack", collection: TackOption.all, value_method: :name
+  	= f.input :tack_type, label: false, wrapper_html: { class: 'col-md-4' }, prompt: "Type", collection: TackTypeOption.all, value_method: :name
   	= f.input :price, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "Price"
 
   .row

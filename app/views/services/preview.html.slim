@@ -1,6 +1,8 @@
 .container
   .preview-wrapper
     h1 Preview Your Draft
+
+    = render "service_detail"
           
     = link_to 'Edit', edit_service_path(@service), class: "btn btn-primary btn-inverse"
     | &nbsp;
