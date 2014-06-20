@@ -140,8 +140,7 @@ class RealEstatesController < ApplicationController
   def search
     unless params[:q].blank?
       @params_q = params[:q]
-      @search = real_estate.search(params[:q])
-      @real_estates = @search.result
+      @real_estates = RealEstate.search(params[:q]).result
     else
       @real_estates =  RealEstate.all
     end

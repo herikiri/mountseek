@@ -1,0 +1,43 @@
+.ad-thumbnail.thumbnail
+  - if current_user
+    - if current_user.voted_up_on? real_estate
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Remove From My Favorites', id: "fav-real_estate-#{real_estate.id}", class: 'fav-real_estate-button', data: {url: dislike_user_trailer_path(current_user, real_estate), toggle: 'tooltip', placement: 'bottom'}
+    - else
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', id: "fav-real_estate-#{real_estate.id}", class: 'fav-real_estate-button', data: {url: like_user_trailer_path(current_user, real_estate), toggle: 'tooltip', placement: 'bottom'}        
+  - else
+    =link_to raw("<span class='fa fa-heart'></span>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-real_estate-button', data: {toggle: 'tooltip', placement: 'bottom'}
+
+  span.price.pull-right= number_to_currency real_estate.price
+  .ad-title= real_estate.title
+  - unless real_estate.ad_banner.nil?
+    =link_to image_tag(real_estate.ad_banner.name.thumb), real_estate
+  - else
+    =link_to image_tag("real_estate1.jpg"), real_estate
+  .row
+    .col-md-6
+      ul
+        li="Year: #{real_estate.year}"
+        li="Type: #{real_estate.house_type}"
+        li="Floor: #{real_estate.floor}"
+    .col-md-6
+      ul
+        li="Acres: #{real_estate.total_acres}"
+      	li="Bedroom: #{real_estate.bedroom}"
+        li="Bathroom: #{real_estate.bathroom}"
+        
+  .ad-properties.pull-right
+    i.fa.fa-eye
+      ="#{real_estate.impressionist_count(:filter=>:ip_address)}"
+      | &nbsp;
+    i.fa.fa-heart class="like-count-#{real_estate.id}"
+      ="#{real_estate.get_likes.size}"
+      | &nbsp;
+    i.fa.fa-camera
+      ="#{real_estate.pictures.size}"
+      | &nbsp;
+    i.fa.fa-video-camera
+      | &nbsp;
+  hr
+  p= truncate real_estate.description, size: 100
+
+  =social_share_button_tag(real_estate.title, :url => real_estate_url(real_estate))

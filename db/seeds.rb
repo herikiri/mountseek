@@ -125,9 +125,16 @@ trailer_images = []
   trailer_images << File.open(Rails.application.config.assets.paths[0]+"/trailer"+num.to_s+".jpg")
 end
 
+
+real_estate_images = []
+(1..4).each do |num|
+  real_estate_images << File.open(Rails.application.config.assets.paths[0]+"/real_estate"+num.to_s+".jpg")
+end
+
 packages_id_for_horse = [1, 2, 3, 4]
 packages_id_for_stud = [5, 6, 7, 8]
 packages_id_for_trailer = [11, 12]
+packages_id_for_real_estate = [13, 14, 15]
 ad_status = ["published", "draft"]
 month_durations = [0, 1, 3, 4, 5, 6]
 days_duration = [0, 7, 30]
@@ -259,7 +266,7 @@ Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
       private_treaty: false,
       color: "white",  
       brand: brands.sample, model: models.sample, year: birth,
-      material: materials.sample, hitch: hitchs.sample, axles: axles.sample, hauls: [1..6].sample,
+      material: materials.sample, hitch: hitchs.sample, axles: axles.sample, hauls: (1..6).to_a.sample,
       package_id: packages_id_for_trailer.sample,
       user_id: User.all.pluck(:id).sample,
       status: "published",
@@ -284,3 +291,44 @@ Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
 end
 
 
+
+
+house_types = ["Acreage With Home", "Acreage With Home"]
+house_styles = ["Contemporary", "Victorian", "Cape Cod", "Ranch"]
+
+RealEstate.delete_all
+RealEstate.connection.execute('ALTER SEQUENCE real_estates_id_seq RESTART WITH 1')
+(1..200).each do |num|
+  real_estate = RealEstate.create(
+    { title: Faker::Company.catch_phrase, 
+      description: Faker::Lorem.paragraphs(3, true).join(","), 
+      city: Faker::Address.city,
+      state: Faker::Address.state, zip_code: Faker::Address.zip_code,
+      price: random_dec(5, 200).round(2),
+      private_treaty: false,
+      package_id: packages_id_for_real_estate.sample,
+      user_id: User.all.pluck(:id).sample,
+      status: "published",
+      published_at: DateTime.now - days_duration.sample.days,
+      published_end: DateTime.now + month_durations.sample.month,
+      house_type: house_types.sample, house_style: house_styles.sample,
+      year: birth, sqft: random_dec(5, 200).round(2), bedroom: (1..6).to_a.sample, 
+      floor: (1..4).to_a.sample, garage: (1..4).to_a.sample, bathroom: (1..3).to_a.sample,
+      total_acres: (20..400).to_a.sample
+    })
+
+
+  real_estate.user_name = real_estate.user.profile_name 
+  real_estate.farm_name = real_estate.user.profile_farm_name
+  real_estate.website = real_estate.user.profile_website
+  real_estate.email = real_estate.user.email
+  real_estate.phone_number = real_estate.user.profile_phone_number
+
+  real_estate_images.each do |img|
+    real_estate.pictures.create(name: img)
+  end
+
+  real_estate.banner = real_estate.pictures.sample.id
+  real_estate.save!
+  
+end

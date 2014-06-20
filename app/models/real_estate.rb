@@ -6,11 +6,11 @@ class RealEstate < ActiveRecord::Base
 	has_many :pictures, as: :imageable, dependent: :destroy
 	has_many :videos, as: :videoable, dependent: :destroy
 
-	validates :title, :description, :city, :state, :zip_code, :price, :user_name, :email, presence: true
+	#validates :title, :description, :city, :state, :zip_code, :price, :user_name, :email, presence: true
 
-	validates :email, :email_format => {:message => 'is not looking good'}
+	#validates :email, :email_format => {:message => 'is not looking good'}
 
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  #validates :price, numericality: { greater_than_or_equal_to: 0 }
 
 	is_impressionable :counter_cache => true, :column_name => :views_count, :unique => :ip_address
 	acts_as_votable

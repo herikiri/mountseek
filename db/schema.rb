@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619063648) do
+ActiveRecord::Schema.define(version: 20140620034428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,6 +264,10 @@ ActiveRecord::Schema.define(version: 20140619063648) do
     t.decimal  "latitude"
     t.decimal  "longtitude"
     t.string   "viewport"
+    t.integer  "deeded_acres"
+    t.integer  "irrigated_acres"
+    t.integer  "leased_acres"
+    t.integer  "total_acres"
   end
 
   add_index "real_estates", ["package_id"], name: "index_real_estates_on_package_id", using: :btree

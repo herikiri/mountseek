@@ -1,0 +1,6 @@
+.container
+  h4= "#{@real_estates.count} Real Estate Found" 
+
+  = smart_listing_render :real_estates
+  
+= javascript_include_tag 'fav_button', 'data-turbolinks-track' => true
