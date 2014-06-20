@@ -142,8 +142,7 @@ class TacksController < ApplicationController
   def search
     unless params[:q].blank?
       @params_q = params[:q]
-      @search = Tack.search(params[:q])
-      @tacks = @search.result
+      @tacks = Tack.search(params[:q]).result
     else
       @tacks =  Tack.all
     end
@@ -155,7 +154,7 @@ class TacksController < ApplicationController
 
     @tacks = @tacks.order(sort_by).published.live
 
-    smart_listing_create(:horses, @horses, partial: "tacks/tack_list")
+    smart_listing_create(:tacks, @tacks, partial: "tacks/tack_list")
   end
 
   private

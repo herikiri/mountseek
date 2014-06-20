@@ -1,0 +1,6 @@
+.container
+  h4= "#{@tacks.count} Tacks Found" 
+
+  = smart_listing_render :tacks
+  
+= javascript_include_tag 'fav_button', 'data-turbolinks-track' => true

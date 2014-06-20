@@ -10,11 +10,11 @@ class Stud < ActiveRecord::Base
 
 	accepts_nested_attributes_for :disciplines
 
-	validates :title, :description, :city, :state, :zip_code,:breed, :birth, :user_name, :email, :stud_fee, :booking_fee, presence: true
+	#validates :title, :description, :city, :state, :zip_code,:breed, :birth, :user_name, :email, :stud_fee, :booking_fee, presence: true
 
-	validates :email, :email_format => {:message => 'is not looking good'}
+	#validates :email, :email_format => {:message => 'is not looking good'}
 
-	validates :stud_fee, :booking_fee, numericality: { greater_than_or_equal_to: 0 }
+	#validates :stud_fee, :booking_fee, numericality: { greater_than_or_equal_to: 0 }
 
 	accepts_nested_attributes_for :disciplines
 

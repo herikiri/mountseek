@@ -1,9 +1,9 @@
 .ad-thumbnail.thumbnail
   - if current_user
     - if current_user.voted_up_on? real_estate
-        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Remove From My Favorites', id: "fav-real_estate-#{real_estate.id}", class: 'fav-real_estate-button', data: {url: dislike_user_trailer_path(current_user, real_estate), toggle: 'tooltip', placement: 'bottom'}
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Remove From My Favorites', id: "fav-real_estate-#{real_estate.id}", class: 'fav-real_estate-button', data: {url: dislike_user_real_estate_path(current_user, real_estate), toggle: 'tooltip', placement: 'bottom'}
     - else
-        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', id: "fav-real_estate-#{real_estate.id}", class: 'fav-real_estate-button', data: {url: like_user_trailer_path(current_user, real_estate), toggle: 'tooltip', placement: 'bottom'}        
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', id: "fav-real_estate-#{real_estate.id}", class: 'fav-real_estate-button', data: {url: like_user_real_estate_path(current_user, real_estate), toggle: 'tooltip', placement: 'bottom'}        
   - else
     =link_to raw("<span class='fa fa-heart'></span>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-real_estate-button', data: {toggle: 'tooltip', placement: 'bottom'}
 

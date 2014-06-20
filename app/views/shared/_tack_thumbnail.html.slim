@@ -1,0 +1,42 @@
+.ad-thumbnail.thumbnail
+  - if current_user
+    - if current_user.voted_up_on? tack
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Remove From My Favorites', id: "fav-tack-#{tack.id}", class: 'fav-tack-button', data: {url: dislike_user_tack_path(current_user, tack), toggle: 'tooltip', placement: 'bottom'}
+    - else
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', id: "fav-tack-#{tack.id}", class: 'fav-tack-button', data: {url: like_user_tack_path(current_user, tack), toggle: 'tooltip', placement: 'bottom'}        
+  - else
+    =link_to raw("<span class='fa fa-heart'></span>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-tack-button', data: {toggle: 'tooltip', placement: 'bottom'}
+
+  span.price.pull-right= number_to_currency tack.price
+  .ad-title= tack.title
+  - unless tack.ad_banner.nil?
+    =link_to image_tag(tack.ad_banner.name.thumb), tack
+  - else
+    =link_to image_tag("tack1.jpg"), tack
+  .row
+    .col-md-6
+      ul
+        li="Gender: "
+
+    .col-md-6
+      ul
+        li="Color: "
+
+  .ad-properties.pull-right
+    i.fa.fa-eye
+      ="#{tack.impressionist_count(:filter=>:ip_address)}"
+      | &nbsp;
+    i.fa.fa-heart class="like-count-#{tack.id}"
+      ="#{tack.get_likes.size}"
+      | &nbsp;
+    i.fa.fa-camera
+      ="#{tack.pictures.size}"
+      | &nbsp;
+    i.fa.fa-video-camera
+      | &nbsp;
+  hr
+  p= truncate tack.description, size: 100
+  =social_share_button_tag(tack.title, :url => tack_url(tack))
+
+
+  

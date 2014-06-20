@@ -6,7 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-items = [Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, TemperamentOption, ExperienceOption, AiTypeOption]
+items = [Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, 
+  TemperamentOption, ExperienceOption, AiTypeOption, TackOption, TackTypeOption, ConditionOption]
 items.each(&:delete_all)
 
 Type.connection.execute('ALTER SEQUENCE types_id_seq RESTART WITH 1')
@@ -19,6 +20,10 @@ TemperamentOption.connection.execute('ALTER SEQUENCE temperament_options_id_seq 
 ExperienceOption.connection.execute('ALTER SEQUENCE experience_options_id_seq RESTART WITH 1')
 AiTypeOption.connection.execute('ALTER SEQUENCE ai_type_options_id_seq RESTART WITH 1')
 
+TackOption.connection.execute('ALTER SEQUENCE tack_options_id_seq RESTART WITH 1')
+TackTypeOption.connection.execute('ALTER SEQUENCE tack_type_options_id_seq RESTART WITH 1')
+ConditionOption.connection.execute('ALTER SEQUENCE condition_options_id_seq RESTART WITH 1')
+
 
 horse = Type.create(name: "Horse")
 stud = Type.create(name: "Stud")
@@ -27,21 +32,6 @@ trailer = Type.create(name: "Trailer")
 real_estate = Type.create(name: "Real Estate")
 my_service = Type.create(name: "Service")
 
-genders = %w( Males Females Fillies Geldings Ridglings Stallions Uboarn Foals Broodmares Ridglings Weanlings Yearlings Folas Unknown ) 
-breeds = ["Arabian", "Big Hair", "Colors & Spots", "Drafts Gaited", "Baroque Mustang", "Pinto Quarter", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse"]
-ad_for = ["Sale", "Lease"]
-
-
-disciplines = ["All Around", "Barrel Racing",  "Cutting", "Dressage", "Endurance", "Eventing",
-  "Hunter", "Show", "Polo", "Racing", "Reining", "Roping", "Trail", "Training", "Pleasure", "Youth", "Other"]
-colors = ["Bay", "Bay Overo", "Bay Roan", "Black", "Black Overo","Blue Grulla", "Blue Roan", "Brindle", "Brown", "Bucksin", "Bucksin Overo", "Champagne", "Chesnut", "Chestnut Overo", "Chocolate",
-  "Cremello", "Dun", "Dun With Black Point", "Dunalino", "Dunskin", "Grey", "Grulla", "Liver Chestnut", "Overo", "Palomino", "Perlino", "Piebalo", "Pinto", "Red Dun", "Red Roan", "Roan", "Sabino", 
-  "Silver Dapple", "Smokey Black", "Sorrel", "Sorrel Overo", "Tobiano", "Tovero", "White", "Other"]
-temperaments = ["Boomproof", "Extremly Calm", "Calm", "Mild Mannered", "Average", "Energetic", "Spirited", "Extremly Spirited", "Hot", "Professionals Only"]
-experiences =  ["Prospect", "Trained", "Competed & Shown", "Champion"]
-ai_types = ["Cooled", "Frozen", "Both"]
-
-birth = "2004-03-01"
 
 
 horse.packages.create([
@@ -79,6 +69,29 @@ my_service.packages.create([
 	{name: "Premium", price: 14.95, duration: 12, max_photo_upload: 10, max_video_upload: 2}
 	])
 
+genders = %w( Males Females Fillies Geldings Ridglings Stallions Uboarn Foals Broodmares Ridglings Weanlings Yearlings Folas Unknown ) 
+breeds = ["Arabian", "Big Hair", "Colors & Spots", "Drafts Gaited", "Baroque Mustang", "Pinto Quarter", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse"]
+ad_for = ["Sale", "Lease"]
+
+
+disciplines = ["All Around", "Barrel Racing",  "Cutting", "Dressage", "Endurance", "Eventing",
+  "Hunter", "Show", "Polo", "Racing", "Reining", "Roping", "Trail", "Training", "Pleasure", "Youth", "Other"]
+colors = ["Bay", "Bay Overo", "Bay Roan", "Black", "Black Overo","Blue Grulla", "Blue Roan", "Brindle", "Brown", "Bucksin", "Bucksin Overo", "Champagne", "Chesnut", "Chestnut Overo", "Chocolate",
+  "Cremello", "Dun", "Dun With Black Point", "Dunalino", "Dunskin", "Grey", "Grulla", "Liver Chestnut", "Overo", "Palomino", "Perlino", "Piebalo", "Pinto", "Red Dun", "Red Roan", "Roan", "Sabino", 
+  "Silver Dapple", "Smokey Black", "Sorrel", "Sorrel Overo", "Tobiano", "Tovero", "White", "Other"]
+temperaments = ["Boomproof", "Extremly Calm", "Calm", "Mild Mannered", "Average", "Energetic", "Spirited", "Extremly Spirited", "Hot", "Professionals Only"]
+experiences =  ["Prospect", "Trained", "Competed & Shown", "Champion"]
+ai_types = ["Cooled", "Frozen", "Both"]
+tacks = ["Apparel", "Accessories", 
+  "Barn Supplies", "Bits", "Breast Collars", "Bridles", "Browbands & Nosebands", 
+  "Chaps", "Cinches", "Girths", "Grooming", "Headstalls", "Headstalls",
+  "Helmets", "Horse Boots", "Horse Blankets", "Miniature", "Reins", "Saddle Bags",
+  "Saddle Pads", "Saddle Racks", "Show Apparel", "Show Tack", "Spurs", "Stirrups", "Other"]
+tack_types = ["Australian", "English", "Western"]
+conditions = ["New", "Excellent", "Used"]
+
+birth = "2004-03-01"
+
 
 
 genders.each do |gender|
@@ -109,6 +122,18 @@ ai_types.each do |ai|
   AiTypeOption.create(name: ai)
 end
 
+tacks.each do |tack|
+  TackOption.create(name: tack)
+end
+
+tack_types.each do |tack_type|
+  TackTypeOption.create(name: tack_type)
+end
+
+conditions.each do |condition|
+  ConditionOption.create(name: condition)
+end
+
 
 def random_dec (min, max)
   rand * (max-min) + min
@@ -116,36 +141,31 @@ end
 
 
 horse_images = []
+trailer_images = []
+real_estate_images = []
+tack_images = []
 (1..4).each do |num|
   horse_images << File.open(Rails.application.config.assets.paths[0]+"/horse"+num.to_s+".jpg")
-end
-
-trailer_images = []
-(1..4).each do |num|
   trailer_images << File.open(Rails.application.config.assets.paths[0]+"/trailer"+num.to_s+".jpg")
-end
-
-
-real_estate_images = []
-(1..4).each do |num|
   real_estate_images << File.open(Rails.application.config.assets.paths[0]+"/real_estate"+num.to_s+".jpg")
+  tack_images << File.open(Rails.application.config.assets.paths[0]+"/tack"+num.to_s+".jpg")
 end
+
 
 packages_id_for_horse = [1, 2, 3, 4]
 packages_id_for_stud = [5, 6, 7, 8]
 packages_id_for_trailer = [11, 12]
 packages_id_for_real_estate = [13, 14, 15]
+packages_id_for_tack = [9, 10]
+
 ad_status = ["published", "draft"]
 month_durations = [0, 1, 3, 4, 5, 6]
 days_duration = [0, 7, 30]
 
 
-=begin
-[User, Discipline].each(&:delete_all)
 
+User.delete_all
 User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
-
-Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1')
 
 (1..10).each do |num|
   user = User.create(
@@ -167,13 +187,16 @@ Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1'
     )
 end
 
+=begin
 
 Picture.delete_all
 Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
+Discipline.delete_all
+Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1')
+
 
 Horse.delete_all
 Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
-
 (1..200).each do |num|
   horse = Horse.create(
     { title: Faker::Company.catch_phrase, 
@@ -208,6 +231,8 @@ Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
   horse.save!
   
 end
+
+
 
 Stud.delete_all
 Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
@@ -246,7 +271,8 @@ Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
   
 end
 
-=end
+
+
 
 models = ["Classic", "Stratus Express", "Ranchhand", "Baron" ,"Renegade"]
 materials = ["Fiberglass", "Aluminum", "ombination"]
@@ -291,8 +317,6 @@ Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
 end
 
 
-
-
 house_types = ["Acreage With Home", "Acreage With Home"]
 house_styles = ["Contemporary", "Victorian", "Cape Cod", "Ranch"]
 
@@ -332,3 +356,44 @@ RealEstate.connection.execute('ALTER SEQUENCE real_estates_id_seq RESTART WITH 1
   real_estate.save!
   
 end
+
+=end
+
+Tack.delete_all
+Tack.connection.execute('ALTER SEQUENCE tacks_id_seq RESTART WITH 1')
+(1..200).each do |num|
+  tack = Tack.create(
+    { title: Faker::Company.catch_phrase, 
+      description: Faker::Lorem.paragraphs(3, true).join(","), 
+      price: random_dec(5, 200).round(2),
+      package_id: packages_id_for_tack.sample,
+      user_id: User.all.pluck(:id).sample,
+      status: "published",
+      published_at: DateTime.now - days_duration.sample.days,
+      published_end: DateTime.now + month_durations.sample.month,
+      tack: tacks.sample, tack_type: tack_types.sample, condition: conditions.sample
+    })
+
+
+  tack.user_name = tack.user.profile_name 
+  tack.farm_name = tack.user.profile_farm_name
+  tack.website = tack.user.profile_website
+  tack.email = tack.user.email
+  tack.phone_number = tack.user.profile_phone_number
+
+  #tack.disciplines.create(name: disciplines.sample, experience: experiences.sample)
+
+
+  tack_images.each do |img|
+    tack.pictures.create(name: img)
+  end
+
+  tack.banner = tack.pictures.sample.id
+  tack.save!
+  
+end
+
+
+
+
+

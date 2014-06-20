@@ -160,7 +160,7 @@
           .form-group
             label.col-sm-2.control-label for="inputAcres" Acres
             .col-sm-5
-              = f.search_field :sqft_cont, placeholder: "Acres", class: "form-control", id: "inputAcres"
+              = f.search_field :total_acres_cont, placeholder: "Acres", class: "form-control", id: "inputAcres"
 
           .form-group
             .col-sm-offset-2.col-sm-10
@@ -200,7 +200,7 @@
   .owl-carousel
     - unless @featured_horses.nil?
       - @featured_horses.each do |horse|
-        = render partial: "shared/ad_thumbnail", locals: {horse: horse}
+        = render partial: "shared/horse_thumbnail", locals: {horse: horse}
     - else
       .empty-ad
         h4 Ad Not Available Yet
@@ -211,7 +211,7 @@
   .owl-carousel
     - unless @newest_horses.nil?
       - @newest_horses.each do |horse|
-        = render partial: "shared/ad_thumbnail", locals: {horse: horse}
+        = render partial: "shared/horse_thumbnail", locals: {horse: horse}
     - else
       .empty-ad
         h4 Ad Not Available Yet

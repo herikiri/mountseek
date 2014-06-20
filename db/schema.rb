@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620034428) do
+ActiveRecord::Schema.define(version: 20140620072314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,12 @@ ActiveRecord::Schema.define(version: 20140620034428) do
   end
 
   create_table "color_options", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "condition_options", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -362,6 +368,18 @@ ActiveRecord::Schema.define(version: 20140620034428) do
 
   add_index "studs", ["package_id"], name: "index_studs_on_package_id", using: :btree
   add_index "studs", ["user_id"], name: "index_studs_on_user_id", using: :btree
+
+  create_table "tack_options", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tack_type_options", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tacks", force: true do |t|
     t.string   "title"
