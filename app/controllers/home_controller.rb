@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+   before_action :reset_select_option, only: [:horses, :studs]
+
   def index
   	@user = current_user
   	@featured_horses = Horse.published.featured_ad.limit(20)
@@ -22,21 +24,21 @@ class HomeController < ApplicationController
   end
 
   def horses
-    @search_horse = Horse.search(params[:q])
-    GenderOption.update_all(checked: false)
-    BreedOption.update_all(checked: false)
+    @search_horses = Horse.search(params[:q])
 
-    if params[:q]
-      BreedOption.where(name: params[:q][:breed_cont_any]).update_all(checked: true)
-      GenderOption.where(name: params[:q][:gender_cont_any]).update_all(checked: true)
-    end
-   
-    @breeds = BreedOption.all.order(name: :asc)
-    @genders = GenderOption.all.order(name: :asc)
-    @horses = @search_horse.result
+
+    
+    @horses = @search_horses.result
+    puts "************************"
+    puts params[:q]
+    puts "#{@horses.count} size"
+    puts "************************"
   end
 
   def studs
+    @search_studs = Stud.search(params[:q])
+    
+    @studs = @search_studs.result
   end
 
   def trailers
@@ -47,6 +49,20 @@ class HomeController < ApplicationController
 
   def real_estates
   end
+
+  private
+    def reset_select_option
+      GenderOption.update_all(checked: false)
+      BreedOption.update_all(checked: false)
+
+      if params[:q]
+        BreedOption.where(name: params[:q][:breed_cont_any]).update_all(checked: true)
+        GenderOption.where(name: params[:q][:gender_cont_any]).update_all(checked: true)
+      end
+     
+      @breeds = BreedOption.all.order(name: :asc)
+      @genders = GenderOption.all.order(name: :asc)
+    end
 
 
 end

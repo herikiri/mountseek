@@ -1,5 +1,5 @@
 .container.advanced-search
-	= search_form_for @search_horse, url: home_horses_path, :html => {role: "form"} do |f|
+	= search_form_for @search_horses, url: home_horses_path, :html => {role: "form"} do |f|
 
 		.row
 		  .col-md-6
@@ -30,5 +30,43 @@
 
 	hr
 
- 	h4= "#{@horses.count} Horses Found"
+ 	h4#result= "#{@horses.count} Horses Found"
+
+
+javascript:
+	var breeds = [];
+	var genders = [];
+	$('form :checkbox[id^="q_breed_cont_any_"]').click(function() {
+
+		if (this.checked) {
+			breeds.push(this.value);
+		} else {
+			breeds.splice( $.inArray(this.value,breeds) ,1 );
+		}
+		
+		console.log(breeds);
+		
+    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds }, function(data) {
+    	//
+    });
+    
+	});
+
+	$('form :checkbox[id^="q_gender_cont_any_"]').click(function() {
+
+		if (this.checked) {
+			genders.push(this.value);
+		} else {
+			genders.splice( $.inArray(this.value,genders) ,1 );
+		}
+		
+		console.log(genders);
+		
+    $.get( $('form').attr('action'), { "q[gender_cont_any][]": genders }, function(data) {
+    	//
+    });
+    
+	});
+
+
 
