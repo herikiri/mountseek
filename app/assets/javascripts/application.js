@@ -38,6 +38,7 @@
 //= require jquery/jquery.tmpl.min
 //= require jquery_nested_form
 //= require jquery.geocomplete.min
+//= require dropzone.min
 
 
 $(document).on('page:fetch', function() { NProgress.start(); })

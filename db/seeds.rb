@@ -70,8 +70,8 @@ my_service.packages.create([
 	{name: "Premium", price: 14.95, duration: 12, max_photo_upload: 10, max_video_upload: 2}
 	])
 
-genders = %w( Males Females Fillies Geldings Ridglings Stallions Uboarn Foals Broodmares Ridglings Weanlings Yearlings Folas Unknown ) 
-breeds = ["Arabian", "Big Hair", "Colors & Spots", "Drafts Gaited", "Baroque Mustang", "Pinto Quarter", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse"]
+genders =["Males", "Females", "Fillies", "Geldings", "Ridglings", "Stallions", "Uboarn", "Foals", "Broodmares", "Ridglings", "Weanlings", "Yearlings", "Unknown" ] 
+breeds = ["Arabian", "Big Hair", "Colors & Spots", "Drafts Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse"]
 ad_for = ["Sale", "Lease"]
 
 
@@ -96,11 +96,11 @@ service_types = ["Trainer", "Boarding Facility", "Farrier",
 birth = "2004-03-01"
 
 genders.each do |gender|
-  GenderOption.create(name: gender)
+  GenderOption.create(name: gender, checked: false)
 end
 
 breeds.each do |breed|
-  BreedOption.create(name: breed)
+  BreedOption.create(name: breed, checked: false)
 end
 
 colors.each do |color|
@@ -144,7 +144,7 @@ def random_dec (min, max)
   rand * (max-min) + min
 end
 
-
+=begin
 horse_images = []
 trailer_images = []
 real_estate_images = []
@@ -192,7 +192,7 @@ User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
     )
 end
 
-=begin
+
 
 Picture.delete_all
 Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')

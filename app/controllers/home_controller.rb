@@ -22,6 +22,18 @@ class HomeController < ApplicationController
   end
 
   def horses
+    @search_horse = Horse.search(params[:q])
+    GenderOption.update_all(checked: false)
+    BreedOption.update_all(checked: false)
+
+    if params[:q]
+      BreedOption.where(name: params[:q][:breed_cont_any]).update_all(checked: true)
+      GenderOption.where(name: params[:q][:gender_cont_any]).update_all(checked: true)
+    end
+   
+    @breeds = BreedOption.all.order(name: :asc)
+    @genders = GenderOption.all.order(name: :asc)
+    @horses = @search_horse.result
   end
 
   def studs

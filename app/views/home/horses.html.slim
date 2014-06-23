@@ -1,7 +1,34 @@
 .container.advanced-search
-	
-	= render "shared/horses_search_category" 
+	= search_form_for @search_horse, url: home_horses_path, :html => {role: "form"} do |f|
 
-	= render "shared/locations_search_category" 
+		.row
+		  .col-md-6
+	      h4 Breeds
+	      .row
+	      	- @breeds.in_groups_of(7).each do |breed_group|
+	      		.col-md-6
+	      			- breed_group.each do |breed|
+	      				- unless breed.nil?
+	      					= check_box_tag "q_breed_cont_any_#{breed.id}", breed.name, breed.checked, name: 'q[breed_cont_any][]'
 
-	= render "shared/search_category_button" 
+	      					= label_tag "q_breed_cont_any_#{breed.id}", breed.name
+	      					br
+
+			.col-md-6
+	      h4 Gender
+	      .row
+	      	- @genders.in_groups_of(7).each do |gender_group|
+	      		.col-md-6
+	      			- gender_group.each do |gender|
+	      				- unless gender.nil?
+	      					= check_box_tag "q_gender_cont_any_#{gender.id}", gender.name, gender.checked, name: 'q[gender_cont_any][]'
+	      					= label_tag "q_gender_cont_any_#{gender.id}", gender.name
+	      					br 					
+
+		= f.submit "Search"
+ 
+
+	hr
+
+ 	h4= "#{@horses.count} Horses Found"
+

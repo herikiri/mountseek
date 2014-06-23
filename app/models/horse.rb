@@ -53,19 +53,19 @@ class Horse < ActiveRecord::Base
   # Ad Horse in range of duration
 	scope :live, -> { where("published_end > ?", "%#{DateTime.now}%" ) }
 
-	# Ad Horse in range of duration
 	scope :published, -> { where(status: 'published') }
 
-	# Ad Horse where -> package type delux(id: 3) or exclusive(id: 4) 
-	scope :featured_ad, -> { where(package_id: [3,4]) }
-	
+	featured_packages = ["Deluxe", "Premium"]
+	scope :featured_ad, -> { where(package_id: Package.where(name: featured_packages).map(&:id)) }
+
 	scope :newest_ad, -> { order(published_at: :desc) }
 
 	scope :favorited_by, ->(user) { where(id: user.find_liked_items.map(&:id)) }
 
-	
+
 	def ad_banner
 		self.pictures.find(self.banner) if self.pictures.present?
 	end
 
+	
 end

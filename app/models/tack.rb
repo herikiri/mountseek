@@ -54,7 +54,8 @@ class Tack < ActiveRecord::Base
 
 	scope :published, -> { where(status: 'published') }
 
-	scope :featured_ad, -> { where(package_id: [3,4]) }
+	featured_packages = ["Deluxe", "Premium"]
+	scope :featured_ad, -> { where(package_id: Package.where(name: featured_packages).map(&:id)) }
 	
 	scope :newest_ad, -> { order(published_at: :desc) }
 

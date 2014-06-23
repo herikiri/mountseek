@@ -3,6 +3,7 @@ class HorsesController < ApplicationController
   before_action :set_horse, except: [:index, :create, :search, :new]
   before_action :authenticate_user!, only: [:new, :like, :dislike]
   before_action :set_items_gallery, only: [:show, :preview]
+  before_action :set_rideability_params, only: [:create]
 
   impressionist :actions=>[:show]
 
@@ -47,10 +48,8 @@ class HorsesController < ApplicationController
           end
         end
 
-        unless params[:horse][:rideabilities_attributes]["0"][:name].nil?
-          params[:horse][:rideabilities_attributes]["0"][:name].each do |rideability|
-             @horse.rideabilities.create(name: rideability) unless rideability.empty?
-          end
+        unless @rideability_params.empty?
+          @horse.rideabilities.create(@rideability_params) 
         end
         
         format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
@@ -183,6 +182,14 @@ class HorsesController < ApplicationController
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament,
         :user_name, :farm_name, :email, :website, :phone_number, :alt_phone_number,
         disciplines_attributes: [:id, :name, :experience, :_destroy])
+    end
+
+    def set_rideability_params
+      @rideability_params = []
+      params[:horse][:rideabilities_attributes]["0"][:name].each do |rideability|
+        @rideability_params << {name: rideability}
+      end
+      
     end
 
 end
