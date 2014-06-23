@@ -46,7 +46,7 @@ javascript:
 		
 		console.log(breeds);
 		
-    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds }, function(data) {
+    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders}, function(data) {
     	//
     });
     
@@ -62,7 +62,7 @@ javascript:
 		
 		console.log(genders);
 		
-    $.get( $('form').attr('action'), { "q[gender_cont_any][]": genders }, function(data) {
+    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders }, function(data) {
     	//
     });
     
