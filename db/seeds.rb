@@ -70,7 +70,7 @@ my_service.packages.create([
 	{name: "Premium", price: 14.95, duration: 12, max_photo_upload: 10, max_video_upload: 2}
 	])
 
-genders =["Males", "Females", "Fillies", "Geldings", "Ridglings", "Stallions", "Uboarn", "Foals", "Broodmares", "Ridglings", "Weanlings", "Yearlings", "Unknown" ] 
+genders =["Males", "Females", "Fillies", "Geldings", "Ridglings", "Stallions", "Uboarn", "Foals", "Broodmares","Weanlings", "Yearlings", "Unknown" ] 
 breeds = ["Arabian", "Big Hair", "Colors & Spots", "Drafts Gaited", "Baroque", "Mustang", "Pinto", "Quarter Horse", "Rare & Exotic", "Warmblood", "Thoroughbred", "Working Horse", "Non Horse"]
 ad_for = ["Sale", "Lease"]
 
@@ -138,6 +138,12 @@ end
 service_types.each do |service_type|
   ServiceTypeOption.create(name: service_type)
 end
+
+
+Carmen::Country.named('United States').subregions.each do |carmen_obj|
+  StateOption.create(name: carmen_obj.name, checked: false)
+end
+
 
 
 def random_dec (min, max)

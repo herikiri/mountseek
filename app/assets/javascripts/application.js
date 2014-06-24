@@ -33,12 +33,14 @@
 //= require offcanvas
 //= require owl.carousel
 //= require smart_listing
-//= require jquery/jquery.easing-1.3
-//= require jquery/jquery.elastislide
-//= require jquery/jquery.tmpl.min
+// require jquery/jquery.easing-1.3
+// require jquery/jquery.elastislide
+// require jquery/jquery.tmpl.min
 //= require jquery_nested_form
 //= require jquery.geocomplete.min
 //= require dropzone.min
+//= require spin.min
+//= require jquery.spin
 
 
 $(document).on('page:fetch', function() { NProgress.start(); })

@@ -74,7 +74,7 @@ gem 'faker', '~> 1.3.0'
 gem "ransack" 
 gem "smart_listing"
 gem "fog"
-gem 'rails-gallery'
 gem 'html2slim'
 gem "nested_form"
 gem 'validates_email_format_of'
+gem 'mailboxer'

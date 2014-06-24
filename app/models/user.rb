@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   has_many :services, dependent: :destroy
   has_many :real_estates, dependent: :destroy
 
+  #acts_as_messageable
+  acts_as_voter
+
 
   delegate :name, :farm_name, :phone_number, :alt_phone_number, :website,
     to: :profile, prefix: true
@@ -22,7 +25,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  acts_as_voter
+  
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
@@ -64,6 +67,9 @@ class User < ActiveRecord::Base
     user
   end
 
+  def mailboxer_email(object)
+   #return the model's email here
+  end
 
   private
     def build_profile
