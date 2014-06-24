@@ -41,8 +41,13 @@
 	hr
 
 	- if @horses
-		h4#result= "#{@horses.count} Horses Found"
+		- horses_found = @horses.count
+	- else 
+		- horses_found = 0 
+	h4#result= "#{horses_found} Horses Found"
 
+
+	- if @horses
 		- @horses.in_groups_of(4).each do |horses_group|
 			.row
 				ul.thumbnails
@@ -74,6 +79,8 @@ javascript:
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states}, function(data) {
     	target.hide();
     	$('.advanced-search').css({opacity: '1'});
+    	$('body').html(data);
+    	
     });
     
 	});
@@ -96,6 +103,7 @@ javascript:
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
     	$('.advanced-search').css({opacity: '1'});
+    	$('body').html(data);
     });
     
 	});
@@ -119,6 +127,7 @@ javascript:
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
     	$('.advanced-search').css({opacity: '1'});
+    	$('body').html(data);
     });
     
 	});
