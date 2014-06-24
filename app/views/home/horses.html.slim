@@ -40,7 +40,16 @@
 
 	hr
 
- 	h4#result= "#{@horses.count} Horses Found"
+	- if @horses
+		h4#result= "#{@horses.count} Horses Found"
+
+		- @horses.in_groups_of(4).each do |horses_group|
+			.row
+				ul.thumbnails
+					- horses_group.each do |horse|
+						- unless horse.nil?
+							.li.col-md-3
+								= render partial: "shared/horse_thumbnail", locals: {horse: horse}
 
 
 javascript:
@@ -52,6 +61,7 @@ javascript:
 
 		target.show();
 		new Spinner().spin(target[0]);
+		$('.advanced-search').css({opacity: '0.3'});
 		//new Spinner().spin(target);
 		if (this.checked) {
 			breeds.push(this.value);
@@ -63,6 +73,7 @@ javascript:
 		
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states}, function(data) {
     	target.hide();
+    	$('.advanced-search').css({opacity: '1'});
     });
     
 	});
@@ -72,6 +83,7 @@ javascript:
 
 		target.show();
 		new Spinner().spin(target[0]);
+		$('.advanced-search').css({opacity: '0.3'});
 
 		if (this.checked) {
 			genders.push(this.value);
@@ -83,6 +95,7 @@ javascript:
 		
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
+    	$('.advanced-search').css({opacity: '1'});
     });
     
 	});
@@ -93,6 +106,7 @@ javascript:
 
 		target.show();
 		new Spinner().spin(target[0]);
+		$('.advanced-search').css({opacity: '0.3'});
 
 		if (this.checked) {
 			states.push(this.value);
@@ -104,6 +118,7 @@ javascript:
 		
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
+    	$('.advanced-search').css({opacity: '1'});
     });
     
 	});

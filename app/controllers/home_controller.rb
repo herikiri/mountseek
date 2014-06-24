@@ -31,22 +31,33 @@ class HomeController < ApplicationController
   def horses
     @search_horses = Horse.search(params[:q])
 
-    @horses = @search_horses.result
-    puts "************************"
-    puts params[:q]
-    puts "#{@horses.count} size"
-    puts "************************"
+    if params[:q] 
+      @horses = @search_horses.result
+      puts "************************"
+      puts params[:q]
+      puts "#{@horses.count} size"
+      puts "************************"
+    else
+      @horses = nil;
+    end
+
+   
   end
 
   def studs
     @search_studs = Stud.search(params[:q])
     
-    @studs = @search_studs.result
+    if params[:q] 
+      @studs = @search_studs.result
+      puts "************************"
+      puts params[:q]
+      puts "#{@studs.count} size"
+      puts "************************"
+    else
+       @studs = nil;
+    end
 
-    puts "************************"
-    puts params[:q]
-    puts "#{@studs.count} size"
-    puts "************************"
+    
   end
 
   def trailers

@@ -38,7 +38,16 @@
 
 	hr
 
- 	h4= "#{@studs.count} Studs Found"
+	- if @studs
+		h4#result= "#{@studs.count} Studs Found"
+
+		- @studs.in_groups_of(4).each do |studs_group|
+			.row
+				ul.thumbnails
+					- studs_group.each do |horse|
+						- unless horse.nil?
+							.li.col-md-3
+								= render partial: "shared/horse_thumbnail", locals: {horse: horse}
 
 
 javascript:
@@ -50,7 +59,7 @@ javascript:
 
 		target.show();
 		new Spinner().spin(target[0]);
-
+		$('.advanced-search').css({opacity: '0.3'});
 		if (this.checked) {
 			breeds.push(this.value);
 		} else {
@@ -61,6 +70,7 @@ javascript:
 		
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
+    	$('.advanced-search').css({opacity: '1'});
     });
     
 	});
@@ -70,7 +80,7 @@ javascript:
 
 		target.show();
 		new Spinner().spin(target[0]);
-		
+		$('.advanced-search').css({opacity: '0.3'});
 		if (this.checked) {
 			ai_types.push(this.value);
 		} else {
@@ -81,6 +91,7 @@ javascript:
 		
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
+    	$('.advanced-search').css({opacity: '1'});
     });
     
 	});
@@ -91,7 +102,7 @@ javascript:
 
 		target.show();
 		new Spinner().spin(target[0]);
-
+		$('.advanced-search').css({opacity: '1'});
 		if (this.checked) {
 			states.push(this.value);
 		} else {
@@ -102,6 +113,7 @@ javascript:
 		
     $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
+    	$('.advanced-search').css({opacity: '0.3'});
     });
     
 	});

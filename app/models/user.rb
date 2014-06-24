@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :services, dependent: :destroy
   has_many :real_estates, dependent: :destroy
 
-  #acts_as_messageable
+  acts_as_messageable
   acts_as_voter
 
 
@@ -67,8 +67,12 @@ class User < ActiveRecord::Base
     user
   end
 
-  def mailboxer_email(object)
+  def notification_email(object)
    #return the model's email here
+  end
+
+  def display_name(object)
+
   end
 
   private
