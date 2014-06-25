@@ -59,12 +59,19 @@ Rails.application.routes.draw do
 
 
   get 'pricing' => 'home#pricing', :as => :pricing
+
   get 'search-horses' => 'home#horses', as: :home_horses
   get 'search-studs' => 'home#studs', as: :home_studs
   get 'search-tacks' => 'home#tacks', as: :home_tacks
   get 'search-real-estates' => 'home#real_estates', as: :home_real_estates
   get 'search-services' => 'home#services', as: :home_services
   get 'search-trailers' => 'home#trailers', as: :home_trailers
+
+  get 'horses-result' => 'home#horses_result', as: :horses_result
+  get 'studs-result' => 'home#studs_result', as: :studs_result
+
+  get 'horses-filter' => 'home#horses_filter', as: :horses_filter
+  get 'studs-filter' => 'home#studs_filter', as: :studs_filter
 
 
 end

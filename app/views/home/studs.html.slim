@@ -1,6 +1,6 @@
 .container.advanced-search
 	#spin style="display:none;"
-	= search_form_for @search_studs, url: home_studs_path, :html => {role: "form"} do |f|
+	= search_form_for @search_studs, url: studs_result_path, :html => {role: "form"} do |f|
 
 		.row
 		  .col-md-6
@@ -45,23 +45,11 @@
 	h4#result= "#{studs_found} Studs Found"
 
 
-	- if @studs
-		- @studs.in_groups_of(4).each do |studs_group|
-			.row
-				ul.thumbnails
-					- studs_group.each do |horse|
-						- unless horse.nil?
-							.li.col-md-3
-								= render partial: "shared/horse_thumbnail", locals: {horse: horse}
-
-
 javascript:
-	
 	var target = $('#spin');
 
 	var breeds = [];
 	$('form :checkbox[id^="q_breed_cont_any_"]').click(function() {
-
 		target.show();
 		new Spinner().spin(target[0]);
 		$('.advanced-search').css({opacity: '0.3'});
@@ -73,10 +61,9 @@ javascript:
 		
 		console.log(breeds);
 		
-    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
+    $.get( '/studs-filter', { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
     	$('.advanced-search').css({opacity: '1'});
-    	$('body').html(data);
     });
     
 	});
@@ -95,10 +82,9 @@ javascript:
 		
 		console.log(ai_types);
 		
-    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
+    $.get( '/studs-filter', { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
     	$('.advanced-search').css({opacity: '1'});
-    	$('body').html(data);
     });
     
 	});
@@ -106,10 +92,9 @@ javascript:
 
 	var states = [];
 	$('form :checkbox[id^="q_state_cont_any_"]').click(function() {
-
 		target.show();
 		new Spinner().spin(target[0]);
-		$('.advanced-search').css({opacity: '1'});
+		$('.advanced-search').css({opacity: '0.3'});
 		if (this.checked) {
 			states.push(this.value);
 		} else {
@@ -118,10 +103,9 @@ javascript:
 		
 		console.log(states);
 		
-    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
+    $.get( '/studs-filter', { "q[breed_cont_any][]": breeds, "q[ai_type_cont_any][]": ai_types, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
-    	$('.advanced-search').css({opacity: '0.3'});
-    	$('body').html(data);
+    	$('.advanced-search').css({opacity: '1'});
     });
     
 	});

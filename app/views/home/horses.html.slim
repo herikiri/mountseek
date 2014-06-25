@@ -1,6 +1,6 @@
 .container.advanced-search
 	#spin style="display:none;"  
-	= search_form_for @search_horses, url: home_horses_path, :html => {role: "form"} do |f|
+	= search_form_for @search_horses, url: horses_result_path, :html => {role: "form"} do |f|
 
 		.row
 		  .col-md-6
@@ -47,27 +47,15 @@
 	h4#result= "#{horses_found} Horses Found"
 
 
-	- if @horses
-		- @horses.in_groups_of(4).each do |horses_group|
-			.row
-				ul.thumbnails
-					- horses_group.each do |horse|
-						- unless horse.nil?
-							.li.col-md-3
-								= render partial: "shared/horse_thumbnail", locals: {horse: horse}
-
 
 javascript:
 	var target = $('#spin');
-	
 
 	var breeds = [];
 	$('form :checkbox[id^="q_breed_cont_any_"]').click(function() {
-
 		target.show();
 		new Spinner().spin(target[0]);
 		$('.advanced-search').css({opacity: '0.3'});
-		//new Spinner().spin(target);
 		if (this.checked) {
 			breeds.push(this.value);
 		} else {
@@ -76,10 +64,9 @@ javascript:
 		
 		console.log(breeds);
 		
-    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states}, function(data) {
+    $.get( '/horses-filter', { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states}, function(data) {
     	target.hide();
     	$('.advanced-search').css({opacity: '1'});
-    	$('body').html(data);
     	
     });
     
@@ -87,7 +74,6 @@ javascript:
 
 	var genders = [];
 	$('form :checkbox[id^="q_gender_cont_any_"]').click(function() {
-
 		target.show();
 		new Spinner().spin(target[0]);
 		$('.advanced-search').css({opacity: '0.3'});
@@ -100,10 +86,9 @@ javascript:
 		
 		console.log(genders);
 		
-    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states }, function(data) {
+    $.get( '/horses-filter', { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
     	$('.advanced-search').css({opacity: '1'});
-    	$('body').html(data);
     });
     
 	});
@@ -111,7 +96,6 @@ javascript:
 
 	var states = [];
 	$('form :checkbox[id^="q_state_cont_any_"]').click(function() {
-
 		target.show();
 		new Spinner().spin(target[0]);
 		$('.advanced-search').css({opacity: '0.3'});
@@ -124,10 +108,9 @@ javascript:
 		
 		console.log(states);
 		
-    $.get( $('form').attr('action'), { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states }, function(data) {
+    $.get( '/horses-filter', { "q[breed_cont_any][]": breeds, "q[gender_cont_any][]": genders, "q[state_cont_any][]": states }, function(data) {
     	target.hide();
     	$('.advanced-search').css({opacity: '1'});
-    	$('body').html(data);
     });
     
 	});

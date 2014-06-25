@@ -1,0 +1,75 @@
+var checkboxes_breed = $('form :checkbox[id^="q_breed_cont_any_"]');
+var checkboxes_state = $('form :checkbox[id^="q_state_cont_any_"]');
+var checkboxes_ai_type = $('form :checkbox[id^="q_ai_type_cont_any_"]');
+
+
+<% if @studs %>
+	<% stud_count = @studs.count  %>
+<% else %>	
+	<% stud_count = 0 %>
+<% end %>
+$('h4#result').text("<%= stud_count %> Studs Found");
+
+
+checkboxes_breed.prop('disabled', false);
+checkboxes_state.prop('disabled', false);
+checkboxes_ai_type.prop('disabled', false);
+
+
+<% if @studs %>
+
+	var check_breed = function() {
+		checkboxes_breed.prop('disabled', true);
+		for (index = 0; index < checkboxes_breed.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_breed_cont_any_"]:eq('+index+')');
+			<% @studs.each do |stud| %>
+				if (checkbox.is(':checked') || checkboxes_breed[index].value === "<%= stud.breed %>") {
+			  	checkbox.prop('disabled', false);
+				} 
+			<% end %>
+		}
+	}
+
+	var check_ai_type = function() {
+		checkboxes_ai_type.prop('disabled', true);
+		for (index = 0; index < checkboxes_ai_type.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_ai_type_cont_any_"]:eq('+index+')');
+			<% @studs.each do |stud| %>
+				if (checkbox.is(':checked') || checkboxes_ai_type[index].value === "<%= stud.ai_type %>") {
+			  	checkbox.prop('disabled', false);
+				}
+			<% end %>
+		}
+	}
+
+	var check_state =  function() {
+		checkboxes_state.prop('disabled', true);
+		for (index = 0; index < checkboxes_state.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_state_cont_any_"]:eq('+index+')');
+			<% @studs.each do |stud| %>
+				if (checkbox.is(':checked') || checkboxes_state[index].value === "<%= stud.state %>") {
+			  	checkbox.prop('disabled', false);
+				}
+			<% end %>
+		}
+	}
+
+
+	<% if params[:q][:breed_cont_any] %>
+		check_ai_type();
+		check_state();
+	<% end %>
+
+	<% if params[:q][:ai_type_cont_any] %>
+		check_breed();
+		check_state();
+	<% end %>
+
+	<% if params[:q][:state_cont_any] %>
+		check_breed();
+		check_ai_type();
+	<% end %>
+
+<% end %>
+
+
