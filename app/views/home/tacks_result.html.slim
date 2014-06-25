@@ -1,0 +1,16 @@
+.container
+	- if @tacks
+		- tacks_found = @tacks.count
+	- else 
+		- tacks_found = 0 
+
+	h4#result= "#{tacks_found} Tack Found"
+
+	- if @tacks
+			- @tacks.in_groups_of(4).each do |tacks_group|
+				.row
+					ul.thumbnails
+						- tacks_group.each do |tack|
+							- unless tack.nil?
+								.li.col-md-3
+									= render partial: "shared/tack_thumbnail", locals: {tack: tack}

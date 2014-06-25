@@ -1,126 +1,30 @@
 .container.advanced-search
-  .row
-    .col-md-8
-      form
-        h4
-          i.icon-shopping-cart
-          |  Tacks
-        .row-fluid
-          .col-md-4
-            label.checkbox
-              input[type="checkbox"]
-              |  All Tack 
-            label.checkbox
-              input[type="checkbox"]
-              |  Accessories 
-            label.checkbox
-              input[type="checkbox"]
-              |  Barn Supplies 
-            label.checkbox
-              input[type="checkbox"]
-              |  Breast Collars 
-            label.checkbox
-              input[type="checkbox"]
-              |  Browbands & Nosebands 
-            label.checkbox
-              input[type="checkbox"]
-              |  Chaps 
-            label.checkbox
-              input[type="checkbox"]
-              |  Cinches 
-            label.checkbox
-              input[type="checkbox"]
-              |  Girths 
-          .col-md-4
-            label.checkbox
-              input[type="checkbox"]
-              |  Grooming 
-            label.checkbox
-              input[type="checkbox"]
-              |  Halters 
-            label.checkbox
-              input[type="checkbox"]
-              |  Headstalls 
-            label.checkbox
-              input[type="checkbox"]
-              |  Helmets 
-            label.checkbox
-              input[type="checkbox"]
-              |  Horse Boots 
-            label.checkbox
-              input[type="checkbox"]
-              |  Horse Blankets 
-            label.checkbox
-              input[type="checkbox"]
-              |  Miniature 
-            label.checkbox
-              input[type="checkbox"]
-              |  Reins 
-          .col-md-4
-            label.checkbox
-              input[type="checkbox"]
-              |  Saddle Bags 
-            label.checkbox
-              input[type="checkbox"]
-              |  Saddle Pads 
-            label.checkbox
-              input[type="checkbox"]
-              |  Saddle Racks 
-            label.checkbox
-              input[type="checkbox"]
-              |  Show Apparel 
-            label.checkbox
-              input[type="checkbox"]
-              |  Show Tack 
-            label.checkbox
-              input[type="checkbox"]
-              |  Spurs 
-            label.checkbox
-              input[type="checkbox"]
-              |  Stirrups 
-            label.checkbox
-              input[type="checkbox"]
-              |  Other 
-    .col-md-2
-      form
-        h4
-          i.icon-flag
-          |  Types
-        .row
-          .col-md-12
-            label.checkbox
-              input[type="checkbox"]
-              |  All Types 
-            label.checkbox
-              input[type="checkbox"]
-              |  Australian 
-            label.checkbox
-              input[type="checkbox"]
-              |  English 
-            label.checkbox
-              input[type="checkbox"]
-              |  Western 
-    .col-md-2
-      form
-        h4
-          i.icon-question-sign
-          |  Conditions
-        .row-fluid
-          .col-md-12
-            label.checkbox
-              input[type="checkbox"]
-              |  All Conditions 
-            label.checkbox
-              input[type="checkbox"]
-              |  Antique 
-            label.checkbox
-              input[type="checkbox"]
-              |  New 
-            label.checkbox
-              input[type="checkbox"]
-              |  Used 
-            label.checkbox
-              input[type="checkbox"]
-              |  Excellent 
-  hr.divider
-  = render "shared/search_category_button"
+  #spin style="display:none;"  
+  = search_form_for @search_tacks, url: tacks_result_path, :html => {role: "form"} do |f|
+
+    .row
+      .col-md-4
+        h4 Tack
+        - @tack_categories.each do |tack_category|
+          = check_box_tag "q_tack_cont_any_#{tack_category.id}", tack_category.name, false, name: 'q[tack_cont_any][]'
+
+          = label_tag "q_tack_cont_any_#{tack_category.id}", tack_category.name
+          br
+
+      .col-md-4
+        h4 Type
+        - @tacks_type.each do |type|
+          = check_box_tag "q_tack_type_cont_any_#{type.id}", type.name, false, name: 'q[tack_type_cont_any][]'
+
+          = label_tag "q_tack_type_cont_any_#{type.id}", type.name
+          br
+         
+      .col-md-4
+        h4 Type
+        - @conditions.each do |condition|
+          = check_box_tag "q_condition_cont_any_#{condition.id}", condition.name, false, name: 'q[condition_cont_any][]'
+
+          = label_tag "q_condition_cont_any_#{condition.id}", condition.name
+          br 
+
+    = f.submit "Search"

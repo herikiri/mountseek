@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   items = %w( horses studs trailers tacks real_estates services )
  
-  
   items.each do |item|
     resources item.to_sym do
       collection do
@@ -68,10 +67,16 @@ Rails.application.routes.draw do
   get 'search-trailers' => 'home#trailers', as: :home_trailers
 
   get 'horses-result' => 'home#horses_result', as: :horses_result
-  get 'studs-result' => 'home#studs_result', as: :studs_result
-
   get 'horses-filter' => 'home#horses_filter', as: :horses_filter
+
+  get 'studs-result' => 'home#studs_result', as: :studs_result
   get 'studs-filter' => 'home#studs_filter', as: :studs_filter
+
+  get 'trailers-result' => 'home#trailers_result', as: :trailers_result
+  get 'trailers-filter' => 'home#trailers_filter', as: :trailers_filter
+
+  get 'tacks-result' => 'home#tacks_result', as: :tacks_result
+  get 'tacks-filter' => 'home#tacks_filter', as: :tacks_filter
 
 
 end

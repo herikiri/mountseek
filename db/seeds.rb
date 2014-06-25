@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 items = [Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, 
-  TemperamentOption, ExperienceOption, AiTypeOption, TackOption, TackTypeOption, ConditionOption, ServiceTypeOption]
+  TemperamentOption, ExperienceOption, AiTypeOption, TackOption, TackTypeOption, ConditionOption, ServiceTypeOption, StateOption]
 items.each(&:delete_all)
 
 Type.connection.execute('ALTER SEQUENCE types_id_seq RESTART WITH 1')
@@ -24,7 +24,7 @@ TackOption.connection.execute('ALTER SEQUENCE tack_options_id_seq RESTART WITH 1
 TackTypeOption.connection.execute('ALTER SEQUENCE tack_type_options_id_seq RESTART WITH 1')
 ConditionOption.connection.execute('ALTER SEQUENCE condition_options_id_seq RESTART WITH 1')
 ServiceTypeOption.connection.execute('ALTER SEQUENCE service_type_options_id_seq RESTART WITH 1')
-
+StateOption.connection.execute('ALTER SEQUENCE state_options_id_seq RESTART WITH 1')
 
 horse = Type.create(name: "Horse")
 stud = Type.create(name: "Stud")

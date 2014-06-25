@@ -1,138 +1,24 @@
 .container.advanced-search
-  .row
-    .col-md-6
-      form
-        h4
-          i.icon-tag
-          |  Brands
-        .row-fluid
-          .col-md-6
-            label.checkbox
-              input[type="checkbox"]
-              |  Any Brands 
-            label.checkbox
-              input[type="checkbox"]
-              |  4 Start 
-            label.checkbox
-              input[type="checkbox"]
-              |  A Wincester 
-            label.checkbox
-              input[type="checkbox"]
-              |  Adam 
-            label.checkbox
-              input[type="checkbox"]
-              |  Alumline 
-            label.checkbox
-              input[type="checkbox"]
-              |  All American 
-            label.checkbox
-              input[type="checkbox"]
-              |  American 
-            label.checkbox
-              input[type="checkbox"]
-              |  American Spirit 
-            label.checkbox
-              input[type="checkbox"]
-              |  Anderson 
-            label.checkbox
-              input[type="checkbox"]
-              |  Arndt 
-          .col-md-6
-            label.checkbox
-              input[type="checkbox"]
-              |  B&J 
-            label.checkbox
-              input[type="checkbox"]
-              |  Bales 
-            label.checkbox
-              input[type="checkbox"]
-              |  Barret 
-            label.checkbox
-              input[type="checkbox"]
-              |  Bee 
-            label.checkbox
-              input[type="checkbox"]
-              |  Big Valey 
-            label.checkbox
-              input[type="checkbox"]
-              |  Bison 
-            label.checkbox
-              input[type="checkbox"]
-              |  Bloomer 
-            label.checkbox
-              input[type="checkbox"]
-              |  Blue Ribbon 
-            label.checkbox
-              input[type="checkbox"]
-              |  Boeckmann 
-    .col-md-6
-      form
-        h4
-          i.icon-star
-          |  Features
-        .row-fluid
-          .col-md-6
-            label.checkbox
-              input[type="checkbox"]
-              |  Any Features 
-            label.checkbox
-              input[type="checkbox"]
-              |  Air Conditioning 
-            label.checkbox
-              input[type="checkbox"]
-              |  Awning 
-            label.checkbox
-              input[type="checkbox"]
-              |  Bed 
-            label.checkbox
-              input[type="checkbox"]
-              |  Bunmp Out 
-            label.checkbox
-              input[type="checkbox"]
-              |  Cooktop 
-            label.checkbox
-              input[type="checkbox"]
-              |  Dinette 
-            label.checkbox
-              input[type="checkbox"]
-              |  Dressing Room 
-            label.checkbox
-              input[type="checkbox"]
-              |  Escape Door 
-            label.checkbox
-              input[type="checkbox"]
-              |  Enclosed 
-          .col-md-6
-            label.checkbox
-              input[type="checkbox"]
-              |  Generator 
-            label.checkbox
-              input[type="checkbox"]
-              |  Hayrack 
-            label.checkbox
-              input[type="checkbox"]
-              |  Mangers 
-            label.checkbox
-              input[type="checkbox"]
-              |  Midtack 
-            label.checkbox
-              input[type="checkbox"]
-              |  Living Quarters 
-            label.checkbox
-              input[type="checkbox"]
-              |  Radio 
-            label.checkbox
-              input[type="checkbox"]
-              |  Ramp 
-            label.checkbox
-              input[type="checkbox"]
-              |  Refrigerator 
-            label.checkbox
-              input[type="checkbox"]
-              |  Shortwall 
-            label.checkbox
-              input[type="checkbox"]
-              |  Shower 
-  hr.divider
-  = render "shared/locations_search_category"
-  = render "shared/search_category_button"
+  #spin style="display:none;"
+  = search_form_for @search_trailers, url: trailers_result_path, :html => {role: "form"} do |f|
+
+    .row
+      h4 Hauls
+      - @hauls.each do |haul|
+        = check_box_tag "q_hauls_cont_any_#{haul}", haul, false, name: 'q[hauls_cont_any][]'
+        = label_tag "q_hauls_cont_any_#{haul}", "#{haul} horse"
+        br
+
+    .row
+      h4 Locations
+      - @states.in_groups_of(20).each do |state_group|
+        .col-md-3
+          - state_group.each do |state|
+            - unless state.nil?
+              = check_box_tag "q_state_cont_any_#{state.id}", state.name, state.checked, name: 'q[state_cont_any][]'
+              = label_tag "q_state_cont_any_#{state.id}", state.name
+              br
+
+    = f.submit "Search"
+
+

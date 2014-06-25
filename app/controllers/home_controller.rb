@@ -2,14 +2,17 @@ class HomeController < ApplicationController
 
   before_action :set_search_horses, only: [:horses, :horses_result, :horses_filter]
   before_action :set_search_studs, only: [:studs, :studs_result, :studs_filter]
+  before_action :set_search_trailers, only: [:trailers, :trailers_result, :trailers_filter]
+  before_action :set_search_tacks, only: [:tacks, :tacks_result, :tacks_filter]
 
   before_action :set_search_horses_result, only: [:horses_result, :horses_filter]
   before_action :set_search_studs_result, only: [:studs_result, :studs_filter]
+  before_action :set_search_tack_result, only: [:tacks_result, :tacks_filter]
+  before_action :set_search_trailers_result, only: [:trailers_result, :trailers_filter]
 
   before_action :set_breed_options, only: [:horses , :studs]
-  before_action :set_state_options, only: [:horses , :studs]
-  before_action :set_gender_options, only: [:horses]
-  before_action :set_ai_type_options, only: [:studs]
+  before_action :set_state_options, only: [:horses , :studs, :trailers]
+
 
   def index
     @user = current_user
@@ -33,15 +36,21 @@ class HomeController < ApplicationController
   end
 
   def horses
+    @genders = GenderOption.all.order(name: :asc)
   end
 
   def studs
+    @ai_types = AiTypeOption.all.order(name: :asc)
   end
 
   def trailers
+    @hauls = Trailer.all.map(&:hauls).uniq
   end
 
   def tacks
+    @tack_categories = TackOption.all.order(name: :asc)
+    @tacks_type = TackTypeOption.all.order(name: :asc)
+    @conditions = ConditionOption.all.order(name: :asc)
   end
 
   def real_estates
@@ -49,7 +58,6 @@ class HomeController < ApplicationController
 
 
   def horses_result
-    
   end
 
   def horses_filter
@@ -57,10 +65,21 @@ class HomeController < ApplicationController
 
 
   def studs_result
-   
   end
 
   def studs_filter
+  end
+
+  def trailers_result
+  end
+
+  def trailers_filter
+  end
+
+  def tacks_result
+  end
+
+  def tacks_filter
   end
 
   private 
@@ -70,6 +89,14 @@ class HomeController < ApplicationController
 
     def set_search_studs
       @search_studs = Stud.search(params[:q])
+    end
+
+    def set_search_trailers
+      @search_trailers = Trailer.search(params[:q]) 
+    end
+
+    def set_search_tacks
+      @search_tacks = Tack.search(params[:q])
     end
 
     def set_search_horses_result
@@ -88,21 +115,30 @@ class HomeController < ApplicationController
       end
     end
 
+    def set_search_trailers_result
+      if params[:q] 
+        @trailers = @search_trailers.result
+      else
+        @trailers = nil;
+      end
+    end
+
+    def set_search_tack_result
+      if params[:q] 
+        @tacks = @search_tacks.result
+      else
+        @tacks = nil;
+      end
+    end
+
     def set_breed_options
       @breeds = BreedOption.all.order(name: :asc)
-    end
-
-    def set_gender_options
-      @genders = GenderOption.all.order(name: :asc)
-    end
-
-    def set_ai_type_options
-      @ai_types = AiTypeOption.all.order(name: :asc)
     end
 
     def set_state_options
       @states = StateOption.all.order(name: :asc)
     end
+
 
 end
 
