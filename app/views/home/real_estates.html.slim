@@ -31,3 +31,80 @@
 
 
     = f.submit "Search"
+
+    hr
+
+    - if @real_estates
+      - real_estates_found = @real_estates.count
+    - else 
+      - real_estates_found = 0 
+    h4#result= "#{real_estates_found} Real Estate Found"
+
+
+javascript:
+  var target = $('#spin');
+
+  var house_types = [];
+  $('form :checkbox[id^="q_house_type_cont_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+    if (this.checked) {
+      house_types.push(this.value);
+    } else {
+      house_types.splice( $.inArray(this.value,house_types) ,1 );
+    }
+    
+    console.log(house_types);
+    
+    $.get( '/real_estates-filter', { "q[house_type_cont_any][]": house_types, "q[bedroom_eq_any][]": bedrooms, "q[state_cont_any][]": states }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+      
+    });
+    
+  });
+
+
+  var bedrooms = [];
+  $('form :checkbox[id^="q_bedroom_eq_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+    if (this.checked) {
+      bedrooms.push(this.value);
+    } else {
+      bedrooms.splice( $.inArray(this.value,bedrooms) ,1 );
+    }
+    
+    console.log(bedrooms);
+    
+    $.get( '/real_estates-filter', { "q[house_type_cont_any][]": house_types, "q[bedroom_eq_any][]": bedrooms, "q[state_cont_any][]": states }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+      
+    });
+    
+  });
+
+
+  var states = [];
+  $('form :checkbox[id^="q_state_cont_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+
+    if (this.checked) {
+      states.push(this.value);
+    } else {
+      states.splice( $.inArray(this.value, states) ,1 );
+    }
+    
+    console.log(states);
+    
+    $.get( '/real_estates-filter', { "q[house_type_cont_any][]": house_types, "q[bedroom_eq_any][]": bedrooms, "q[state_cont_any][]": states }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+    });
+    
+  });

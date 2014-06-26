@@ -23,3 +23,56 @@
               br
 
     = f.submit "Search"
+
+  hr
+
+  - if @services
+    - services_found = @services.count
+  - else 
+    - services_found = 0 
+  h4#result= "#{services_found} Services Found"
+
+
+javascript:
+  var target = $('#spin');
+
+  var service_types = [];
+  $('form :checkbox[id^="q_service_type_cont_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+    if (this.checked) {
+      service_types.push(this.value);
+    } else {
+      service_types.splice( $.inArray(this.value,service_types) ,1 );
+    }
+    
+    console.log(service_types);
+    
+    $.get( '/services-filter', { "q[service_type_cont_any][]": service_types, "q[state_cont_any][]": states }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+    });
+    
+  });
+
+  var states = [];
+  $('form :checkbox[id^="q_state_cont_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+
+    if (this.checked) {
+      states.push(this.value);
+    } else {
+      states.splice( $.inArray(this.value, states) ,1 );
+    }
+    
+    console.log(states);
+    
+    $.get( '/services-filter', { "q[service_type_cont_any][]": service_types, "q[state_cont_any][]": states }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+    });
+    
+  });

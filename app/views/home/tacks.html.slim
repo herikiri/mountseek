@@ -20,7 +20,7 @@
           br
          
       .col-md-4
-        h4 Type
+        h4 Condition
         - @conditions.each do |condition|
           = check_box_tag "q_condition_cont_any_#{condition.id}", condition.name, false, name: 'q[condition_cont_any][]'
 
@@ -28,3 +28,76 @@
           br 
 
     = f.submit "Search"
+
+
+  hr
+
+  - if @tacks
+    - tacks_found = @tacks.count
+  - else 
+    - tacks_found = 0 
+  h4#result= "#{tacks_found} Tacks Found"
+
+
+javascript:
+  var target = $('#spin');
+
+  var tacks = [];
+  $('form :checkbox[id^="q_tack_cont_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+    if (this.checked) {
+      tacks.push(this.value);
+    } else {
+      tacks.splice( $.inArray(this.value,tacks) ,1 );
+    }
+    
+    console.log(tacks);
+    
+    $.get( '/tacks-filter', { "q[tack_cont_any][]": tacks, "q[tack_type_cont_any][]": types, "q[condition_cont_any][]": conditions }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+    });
+    
+  });
+
+  var types = [];
+  $('form :checkbox[id^="q_tack_type_cont_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+    if (this.checked) {
+      types.push(this.value);
+    } else {
+      types.splice( $.inArray(this.value,types) ,1 );
+    }
+    
+    console.log(types);
+    
+    $.get( '/tacks-filter', { "q[tack_cont_any][]": tacks, "q[tack_type_cont_any][]": types, "q[condition_cont_any][]": conditions }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+    });
+    
+  });
+
+  var conditions = [];
+  $('form :checkbox[id^="q_condition_cont_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+    if (this.checked) {
+      conditions.push(this.value);
+    } else {
+      conditions.splice( $.inArray(this.value,conditions) ,1 );
+    }
+    
+    console.log(conditions);
+    
+    $.get( '/tacks-filter', { "q[tack_cont_any][]": tacks, "q[tack_type_cont_any][]": types, "q[condition_cont_any][]": conditions }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+    });
+    
+  });

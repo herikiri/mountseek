@@ -427,6 +427,8 @@ Service.connection.execute('ALTER SEQUENCE services_id_seq RESTART WITH 1')
   service = Service.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 
+      city: Faker::Address.city,
+      state: Faker::Address.state, zip_code: Faker::Address.zip_code,
       package_id: packages_id_for_service.sample,
       user_id: User.all.pluck(:id).sample,
       status: "published",

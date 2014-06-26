@@ -1,0 +1,71 @@
+var checkboxes_tack = $('form :checkbox[id^="q_tack_cont_any_"]');
+var checkboxes_tack_type = $('form :checkbox[id^="q_tack_type_cont_any_"]');
+var checkboxes_condition = $('form :checkbox[id^="q_condition_cont_any_"]');
+
+<% if @tacks %>
+	<% tack_count = @tacks.count  %>
+<% else %>	
+	<% tack_count = 0 %>
+<% end %>
+$('h4#result').text("<%= tack_count %> Tack Found");
+
+checkboxes_tack.prop('disabled', false);
+checkboxes_tack_type.prop('disabled', false);
+checkboxes_condition.prop('disabled', false);
+
+
+<% if @tacks %>
+
+	var check_tack = function() {
+		checkboxes_tack.prop('disabled', true);
+		for (index = 0; index < checkboxes_tack.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_tack_cont_any_"]:eq('+index+')');
+			<% @tacks.each do |tack| %>
+				if (checkbox.is(':checked') || checkboxes_tack[index].value === "<%= tack.tack %>") {
+			  	checkbox.prop('disabled', false);
+				} 
+			<% end %>
+		}
+	}
+
+	var check_tack_type = function() {
+		checkboxes_tack_type.prop('disabled', true);
+		for (index = 0; index < checkboxes_tack_type.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_tack_type_cont_any_"]:eq('+index+')');
+			<% @tacks.each do |tack| %>
+				if (checkbox.is(':checked') || checkboxes_tack_type[index].value === "<%= tack.tack_type %>") {
+			  	checkbox.prop('disabled', false);
+				} 
+			<% end %>
+		}
+	}
+
+	var check_condition =  function() {
+		checkboxes_condition.prop('disabled', true);
+		for (index = 0; index < checkboxes_condition.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_condition_cont_any_"]:eq('+index+')');
+			<% @tacks.each do |tack| %>
+				if (checkbox.is(':checked') || checkboxes_condition[index].value === "<%= tack.condition %>") {
+			  	checkbox.prop('disabled', false);
+				}
+			<% end %>
+		}
+	}
+
+
+	<% if params[:q][:tack_cont_any] %>
+		check_tack_type();	
+		check_condition();
+	<% end %>
+
+	<% if params[:q][:tack_type_cont_any] %>
+		check_tack();
+		check_condition();
+	<% end %>
+
+	<% if params[:q][:condition_cont_any] %>
+		check_tack_type();
+		check_tack();
+	<% end %>
+
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626025843) do
+ActiveRecord::Schema.define(version: 20140626070844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -376,6 +376,9 @@ ActiveRecord::Schema.define(version: 20140626025843) do
     t.string   "country"
     t.string   "viewport"
     t.string   "service_type"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
   end
 
   add_index "services", ["package_id"], name: "index_services_on_package_id", using: :btree

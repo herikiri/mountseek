@@ -1,0 +1,70 @@
+var checkboxes_house_type = $('form :checkbox[id^="q_house_type_cont_any_"]');
+var checkboxes_bedroom = $('form :checkbox[id^="q_bedroom_eq_any_"]');
+var checkboxes_state = $('form :checkbox[id^="q_state_cont_any_"]');
+
+<% if @real_estates %>
+	<% real_estate_count = @real_estates.count  %>
+<% else %>	
+	<% real_estate_count = 0 %>
+<% end %>
+$('h4#result').text("<%= real_estate_count %> Real Estate Found");
+
+checkboxes_house_type.prop('disabled', false);
+checkboxes_bedroom.prop('disabled', false);
+checkboxes_state.prop('disabled', false);
+
+<% if @real_estates %>
+
+	var check_house_type = function() {
+		checkboxes_house_type.prop('disabled', true);
+		for (index = 0; index < checkboxes_house_type.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_house_type_cont_any_"]:eq('+index+')');
+			<% @real_estates.each do |real_estate| %>
+				if (checkbox.is(':checked') || checkboxes_house_type[index].value === "<%= real_estate.house_type %>") {
+			  	checkbox.prop('disabled', false);
+				} 
+			<% end %>
+		}
+	}
+
+	var check_bedroom = function() {
+		checkboxes_bedroom.prop('disabled', true);
+		for (index = 0; index < checkboxes_bedroom.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_bedroom_eq_any_"]:eq('+index+')');
+			<% @real_estates.each do |real_estate| %>
+				if (checkbox.is(':checked') || checkboxes_bedroom[index].value === "<%= real_estate.bedroom %>") {
+			  	checkbox.prop('disabled', false);
+				} 
+			<% end %>
+		}
+	}
+
+	var check_state =  function() {
+		checkboxes_state.prop('disabled', true);
+		for (index = 0; index < checkboxes_state.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_state_cont_any_"]:eq('+index+')');
+			<% @real_estates.each do |real_estate| %>
+				if (checkbox.is(':checked') || checkboxes_state[index].value === "<%= real_estate.state %>") {
+			  	checkbox.prop('disabled', false);
+				}
+			<% end %>
+		}
+	}
+
+
+	<% if params[:q][:house_type_cont_any] %>
+		check_bedroom();	
+		check_state();
+	<% end %>
+
+	<% if params[:q][:bedroom_eq_any] %>
+		check_house_type();
+		check_state();
+	<% end %>
+
+	<% if params[:q][:state_cont_any] %>
+		check_bedroom();
+		check_house_type();
+	<% end %>
+
+<% end %>

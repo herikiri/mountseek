@@ -9,12 +9,9 @@ var checkboxes_state = $('form :checkbox[id^="q_state_cont_any_"]');
 <% end %>
 $('h4#result').text("<%= horse_count %> Horses Found");
 
-
 checkboxes_gender.prop('disabled', false);
 checkboxes_breed.prop('disabled', false);
 checkboxes_state.prop('disabled', false);
-
-
 
 <% if @horses %>
 
