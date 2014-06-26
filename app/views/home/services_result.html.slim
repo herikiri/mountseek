@@ -5,3 +5,12 @@
 		- services_found = 0 
 
 	h4#result= "#{services_found} Services Found"
+
+	- if @services
+		- @services.in_groups_of(4).each do |services_group|
+			.row
+				ul.thumbnails
+					- services_group.each do |service|
+						- unless service.nil?
+							.li.col-md-3
+								= render partial: "shared/service_thumbnail", locals: {service: service}

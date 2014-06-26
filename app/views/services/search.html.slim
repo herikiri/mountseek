@@ -1,0 +1,6 @@
+.container
+  h4= "#{@services.count} Services Found" 
+
+  = smart_listing_render :services
+  
+= javascript_include_tag 'fav_button', 'data-turbolinks-track' => true

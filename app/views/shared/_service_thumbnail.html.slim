@@ -1,0 +1,42 @@
+.ad-thumbnail.thumbnail
+  - if current_user
+    - if current_user.voted_up_on? service
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Remove From My Favorites', id: "fav-service-#{service.id}", class: 'fav-service-button', data: {url: dislike_user_service_path(current_user, service), toggle: 'tooltip', placement: 'bottom'}
+    - else
+        =link_to raw("<i class='fa fa-heart'></i>"), "javascript:void(0)", :title => 'Ad To My Favorites', id: "fav-service-#{service.id}", class: 'fav-service-button', data: {url: like_user_service_path(current_user, service), toggle: 'tooltip', placement: 'bottom'}        
+  - else
+    =link_to raw("<span class='fa fa-heart'></span>"), new_user_session_path , :title => 'Log In To Favorite Horse', class: 'fav-icon like-service-button', data: {toggle: 'tooltip', placement: 'bottom'}
+
+  span.price.pull-right
+  .ad-title= service.title
+  - unless service.ad_banner.nil?
+    =link_to image_tag(service.ad_banner.name.thumb), service
+  - else
+    =link_to image_tag("service1.jpg"), service
+  .row
+    .col-md-6
+      ul
+        li="Type: #{service.service_type}"
+
+    .col-md-6
+      ul
+        li="Company: #{service.company}"
+
+  .ad-properties.pull-right
+    i.fa.fa-eye
+      ="#{service.impressionist_count(:filter=>:ip_address)}"
+      | &nbsp;
+    i.fa.fa-heart class="like-count-#{service.id}"
+      ="#{service.get_likes.size}"
+      | &nbsp;
+    i.fa.fa-camera
+      ="#{service.pictures.size}"
+      | &nbsp;
+    i.fa.fa-video-camera
+      | &nbsp;
+  hr
+  p= truncate service.description, size: 100
+  =social_share_button_tag(service.title, :url => service_url(service))
+
+
+  
