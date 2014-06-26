@@ -1,75 +1,25 @@
 .container.advanced-search
-  .row-fluid
-    .span6
-      form
-        h4
-          i.icon-tag
-          |  Brands
-        .row-fluid
-          .span6
-            label.checkbox
-              input[type="checkbox"]
-              |  Any Types 
-            label.checkbox
-              input[type="checkbox"]
-              |  Acreage With Home 
-            label.checkbox
-              input[type="checkbox"]
-              |  Horse Property 
-            label.checkbox
-              input[type="checkbox"]
-              |  Orchard 
-          .span6
-            label.checkbox
-              input[type="checkbox"]
-              |  Pasture Land 
-            label.checkbox
-              input[type="checkbox"]
-              |  Raw Land 
-            label.checkbox
-              input[type="checkbox"]
-              |  Recreational Land 
-            label.checkbox
-              input[type="checkbox"]
-              |  Vineyard 
-    .span6
-      form
-        h4
-          i.icon-inbox
-          |  Bedrooms
-        .row-fluid
-          .span6
-            label.checkbox
-              input[type="checkbox"]
-              |  1 Bedroom 
-            label.checkbox
-              input[type="checkbox"]
-              |  2 Bedroom 
-            label.checkbox
-              input[type="checkbox"]
-              |  3 Bedroom 
-            label.checkbox
-              input[type="checkbox"]
-              |  4 Bedroom 
-            label.checkbox
-              input[type="checkbox"]
-              |  5 Bedroom 
-          .span6
-            label.checkbox
-              input[type="checkbox"]
-              |  6 Bedroom 
-            label.checkbox
-              input[type="checkbox"]
-              |  7 Bedroom 
-            label.checkbox
-              input[type="checkbox"]
-              |  8 Bedroom 
-            label.checkbox
-              input[type="checkbox"]
-              |  9 Bedroom 
-            label.checkbox
-              input[type="checkbox"]
-              |  10 Bedroom 
-  hr.divider
-  = render "shared/locations_search_category"
-  = render "shared/search_category_button"
+  #spin style="display:none;"
+  = search_form_for @search_real_estates, url: real_estates_result_path, :html => {role: "form"} do |f|
+
+    .row
+      h4 House Type
+      .col-md-3
+        - @house_types.each do |house_type|  
+          = check_box_tag "q_house_type_cont_any_#{house_type.id}", house_type.name, house_type.checked, name: 'q[house_type_cont_any][]'
+          = label_tag "q_house_type_cont_any_#{house_type.id}", house_type.name
+          br
+       
+
+    .row
+      h4 Locations
+      - @states.in_groups_of(20).each do |state_group|
+        .col-md-3
+          - state_group.each do |state|
+            - unless state.nil?
+              = check_box_tag "q_state_cont_any_#{state.id}", state.name, state.checked, name: 'q[state_cont_any][]'
+              = label_tag "q_state_cont_any_#{state.id}", state.name
+              br
+
+
+    = f.submit "Search"

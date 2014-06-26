@@ -1,0 +1,16 @@
+.container
+	- if @real_estates
+		- real_estates_found = @real_estates.count
+	- else 
+		- real_estates_found = 0 
+
+	h4#result= "#{real_estates_found} Real Estates Found"
+
+	- if @real_estates
+			- @real_estates.in_groups_of(4).each do |real_estates_group|
+				.row
+					ul.thumbnails
+						- real_estates_group.each do |real_estate|
+							- unless real_estate.nil?
+								.li.col-md-3
+									= render partial: "shared/real_estate_thumbnail", locals: {real_estate: real_estate}

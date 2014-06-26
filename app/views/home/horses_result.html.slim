@@ -6,7 +6,6 @@
 
 	h4#result= "#{horses_found} Horses Found"
 
-
 	- if @horses
 			- @horses.in_groups_of(4).each do |horses_group|
 				.row

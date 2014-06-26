@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624091703) do
+ActiveRecord::Schema.define(version: 20140626025843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,13 @@ ActiveRecord::Schema.define(version: 20140624091703) do
 
   add_index "horses", ["package_id"], name: "index_horses_on_package_id", using: :btree
   add_index "horses", ["user_id"], name: "index_horses_on_user_id", using: :btree
+
+  create_table "house_type_options", force: true do |t|
+    t.string   "name"
+    t.boolean  "checked"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"

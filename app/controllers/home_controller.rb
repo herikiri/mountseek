@@ -4,14 +4,16 @@ class HomeController < ApplicationController
   before_action :set_search_studs, only: [:studs, :studs_result, :studs_filter]
   before_action :set_search_trailers, only: [:trailers, :trailers_result, :trailers_filter]
   before_action :set_search_tacks, only: [:tacks, :tacks_result, :tacks_filter]
+  before_action :set_search_real_estates, only: [:real_estates, :real_estates_result, :real_estates_filter] 
 
   before_action :set_search_horses_result, only: [:horses_result, :horses_filter]
   before_action :set_search_studs_result, only: [:studs_result, :studs_filter]
-  before_action :set_search_tack_result, only: [:tacks_result, :tacks_filter]
+  before_action :set_search_tacks_result, only: [:tacks_result, :tacks_filter]
   before_action :set_search_trailers_result, only: [:trailers_result, :trailers_filter]
+  before_action :set_search_real_estates_result, only: [:real_estates_result, :real_estates_filter]
 
   before_action :set_breed_options, only: [:horses , :studs]
-  before_action :set_state_options, only: [:horses , :studs, :trailers]
+  before_action :set_state_options, only: [:horses , :studs, :trailers, :real_estates]
 
 
   def index
@@ -54,15 +56,14 @@ class HomeController < ApplicationController
   end
 
   def real_estates
+    @house_types = HouseTypeOption.all.order(name: :asc)
   end
-
 
   def horses_result
   end
 
   def horses_filter
   end
-
 
   def studs_result
   end
@@ -82,6 +83,12 @@ class HomeController < ApplicationController
   def tacks_filter
   end
 
+  def real_estates_result
+  end
+
+  def real_estates_filter
+  end
+
   private 
     def set_search_horses
       @search_horses = Horse.search(params[:q])
@@ -97,6 +104,10 @@ class HomeController < ApplicationController
 
     def set_search_tacks
       @search_tacks = Tack.search(params[:q])
+    end
+
+    def set_search_real_estates
+      @search_real_estates = RealEstate.search(params[:q])
     end
 
     def set_search_horses_result
@@ -123,11 +134,19 @@ class HomeController < ApplicationController
       end
     end
 
-    def set_search_tack_result
+    def set_search_tacks_result
       if params[:q] 
         @tacks = @search_tacks.result
       else
         @tacks = nil;
+      end
+    end
+
+    def set_search_real_estates_result
+      if params[:q] 
+        @real_estates = @search_real_estates.result
+      else
+        @real_estates = nil;
       end
     end
 

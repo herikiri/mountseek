@@ -78,5 +78,8 @@ Rails.application.routes.draw do
   get 'tacks-result' => 'home#tacks_result', as: :tacks_result
   get 'tacks-filter' => 'home#tacks_filter', as: :tacks_filter
 
+  get 'real_estates-result' => 'home#real_estates_result', as: :real_estates_result
+  get 'real_estates-filter' => 'home#real_estates_filter', as: :real_estates_filter
+
 
 end
