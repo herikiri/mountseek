@@ -1,0 +1,14 @@
+- unless smart_listing.empty? 
+  .row.filter
+    .col-md-4
+      = smart_listing.paginate
+    .col-md-6
+    .col-md-2
+
+  - smart_listing.collection.in_groups_of(4).each do |tacks_group|
+    .row
+      ul.thumbnails
+        - tacks_group.each do |tack|
+          - unless tack.nil?
+            .li.col-md-3
+              = render partial: "shared/tack_thumbnail", locals: {tack: tack}

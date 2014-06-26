@@ -6,12 +6,4 @@
 
 	h4#result= "#{studs_found} Studs Found"
 
-
-	- if @studs
-			- @studs.in_groups_of(4).each do |studs_group|
-				.row
-					ul.thumbnails
-						- studs_group.each do |horse|
-							- unless horse.nil?
-								.li.col-md-3
-									= render partial: "shared/horse_thumbnail", locals: {horse: horse}
+	= smart_listing_render :studs

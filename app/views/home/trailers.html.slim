@@ -21,4 +21,56 @@
 
     = f.submit "Search"
 
+  hr
 
+  - if @trailers
+    - trailers_found = @trailers.count
+  - else 
+    - trailers_found = 0 
+  h4#result= "#{trailers_found} Trailer Found"
+
+
+javascript:
+  var target = $('#spin');
+
+  var hauls = [];
+  $('form :checkbox[id^="q_hauls_eq_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+    if (this.checked) {
+      hauls.push(this.value);
+    } else {
+      hauls.splice( $.inArray(this.value,hauls) ,1 );
+    }
+    
+    console.log(hauls);
+    
+    $.get( '/trailers-filter', { "q[hauls_eq_any][]": hauls, "q[state_cont_any][]": states }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+      
+    });
+    
+  });
+
+  var states = [];
+  $('form :checkbox[id^="q_state_cont_any_"]').click(function() {
+    target.show();
+    new Spinner().spin(target[0]);
+    $('.advanced-search').css({opacity: '0.3'});
+
+    if (this.checked) {
+      states.push(this.value);
+    } else {
+      states.splice( $.inArray(this.value, states) ,1 );
+    }
+    
+    console.log(states);
+    
+    $.get( '/trailers-filter', { "q[state_cont_any][]": states }, function(data) {
+      target.hide();
+      $('.advanced-search').css({opacity: '1'});
+    });
+    
+  });

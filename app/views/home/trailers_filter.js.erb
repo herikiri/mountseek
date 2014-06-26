@@ -1,0 +1,49 @@
+var checkboxes_hauls = $('form :checkbox[id^="q_hauls_eq_any_"]');
+var checkboxes_state = $('form :checkbox[id^="q_state_cont_any_"]');
+
+<% if @trailers %>
+	<% trailers_count = @trailers.count  %>
+<% else %>	
+	<% trailers_count = 0 %>
+<% end %>
+$('h4#result').text("<%= trailers_count %> Trailers Found");
+
+checkboxes_hauls.prop('disabled', false);
+checkboxes_state.prop('disabled', false);
+
+<% if @trailers %>
+
+	var check_hauls = function() {
+		checkboxes_hauls.prop('disabled', true);
+		for (index = 0; index < checkboxes_hauls.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_hauls_eq_any_"]:eq('+index+')');
+			<% @trailers.each do |trailer| %>
+				if (checkbox.is(':checked') || checkboxes_hauls[index].value === "<%= trailer.hauls %>") {
+			  	checkbox.prop('disabled', false);
+				} 
+			<% end %>
+		}
+	}
+
+	var check_state =  function() {
+		checkboxes_state.prop('disabled', true);
+		for (index = 0; index < checkboxes_state.length; ++index) {
+			var checkbox = $('form :checkbox[id^="q_state_cont_any_"]:eq('+index+')');
+			<% @trailers.each do |trailer| %>
+				if (checkbox.is(':checked') || checkboxes_state[index].value === "<%= trailer.state %>") {
+			  	checkbox.prop('disabled', false);
+				}
+			<% end %>
+		}
+	}
+
+
+	<% if params[:q][:hauls_eq_any] %>
+		check_state();
+	<% end %>
+
+	<% if params[:q][:state_cont_any] %>
+		check_hauls();
+	<% end %>
+
+<% end %>

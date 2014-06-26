@@ -18,6 +18,9 @@ class HomeController < ApplicationController
   before_action :set_state_options, only: [:horses , :studs, :trailers, :real_estates, :services]
 
 
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
+
   def index
     @user = current_user
     @featured_horses = Horse.published.featured_ad.limit(20)
@@ -67,36 +70,42 @@ class HomeController < ApplicationController
   end
 
   def horses_result
+    smart_listing_create(:horses, @horses, partial: "home/horses/horse_list")
+  end
+
+  def studs_result
+    smart_listing_create(:studs, @studs, partial: "home/studs/stud_list")
+  end
+
+  def trailers_result
+    smart_listing_create(:trailers, @trailers, partial: "home/trailers/trailer_list")
+  end
+
+  def tacks_result
+    smart_listing_create(:tacks, @tacks, partial: "home/tacks/tack_list")
+  end
+
+  def real_estates_result
+    smart_listing_create(:real_estates, @real_estates, partial: "home/real_estates/real_estate_list")
+  end
+
+  def services_result
+    smart_listing_create(:services, @services, partial: "home/services/service_list")
   end
 
   def horses_filter
   end
 
-  def studs_result
-  end
-
   def studs_filter
-  end
-
-  def trailers_result
   end
 
   def trailers_filter
   end
 
-  def tacks_result
-  end
-
   def tacks_filter
   end
 
-  def real_estates_result
-  end
-
   def real_estates_filter
-  end
-
-  def services_result
   end
 
   def services_filter
