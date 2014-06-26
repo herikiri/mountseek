@@ -7,9 +7,9 @@ class Service < ActiveRecord::Base
 	has_many :videos, as: :videoable, dependent: :destroy
 	has_many :disciplines, as: :discipline, dependent: :destroy
 
-	validates :title, :description, :service_type, :user_name, :email, presence: true
+	#validates :title, :description, :service_type, :user_name, :email, presence: true
 
-	validates :email, :email_format => {:message => 'is not looking good'}
+	#validates :email, :email_format => {:message => 'is not looking good'}
 
 	has_and_belongs_to_many :disciplines
 

@@ -4,16 +4,18 @@ class HomeController < ApplicationController
   before_action :set_search_studs, only: [:studs, :studs_result, :studs_filter]
   before_action :set_search_trailers, only: [:trailers, :trailers_result, :trailers_filter]
   before_action :set_search_tacks, only: [:tacks, :tacks_result, :tacks_filter]
-  before_action :set_search_real_estates, only: [:real_estates, :real_estates_result, :real_estates_filter] 
+  before_action :set_search_real_estates, only: [:real_estates, :real_estates_result, :real_estates_filter]
+  before_action :set_search_services, only: [:services, :services_result, :services_filter]
 
   before_action :set_search_horses_result, only: [:horses_result, :horses_filter]
   before_action :set_search_studs_result, only: [:studs_result, :studs_filter]
   before_action :set_search_tacks_result, only: [:tacks_result, :tacks_filter]
   before_action :set_search_trailers_result, only: [:trailers_result, :trailers_filter]
   before_action :set_search_real_estates_result, only: [:real_estates_result, :real_estates_filter]
+  before_action :set_search_services_result, only: [:services_result, :services_filter]
 
   before_action :set_breed_options, only: [:horses , :studs]
-  before_action :set_state_options, only: [:horses , :studs, :trailers, :real_estates]
+  before_action :set_state_options, only: [:horses , :studs, :trailers, :real_estates, :services]
 
 
   def index
@@ -57,6 +59,11 @@ class HomeController < ApplicationController
 
   def real_estates
     @house_types = HouseTypeOption.all.order(name: :asc)
+    @bedrooms = RealEstate.all.map(&:bedroom).uniq.sort()
+  end
+
+  def services
+    @service_types = ServiceTypeOption.all.order(name: :asc)
   end
 
   def horses_result
@@ -89,6 +96,12 @@ class HomeController < ApplicationController
   def real_estates_filter
   end
 
+  def services_result
+  end
+
+  def services_filter
+  end
+
   private 
     def set_search_horses
       @search_horses = Horse.search(params[:q])
@@ -108,6 +121,10 @@ class HomeController < ApplicationController
 
     def set_search_real_estates
       @search_real_estates = RealEstate.search(params[:q])
+    end
+
+    def set_search_services
+      @search_services = Service.search(params[:q])
     end
 
     def set_search_horses_result
@@ -147,6 +164,14 @@ class HomeController < ApplicationController
         @real_estates = @search_real_estates.result
       else
         @real_estates = nil;
+      end
+    end
+
+    def set_search_services_result
+      if params[:q] 
+        @services = @search_services.result
+      else
+        @services = nil;
       end
     end
 

@@ -1,6 +1,17 @@
 .container
-	h4 Trailer Result
-	p= @trailers
+	- if @trailers
+		- trailers_found = @trailers.count
+	- else 
+		- trailers_found = 0 
 
+	h4#result= "#{trailers_found} Trailer Found"
 
+	- if @trailers
+		- @trailers.in_groups_of(4).each do |trailers_group|
+			.row
+				ul.thumbnails
+					- trailers_group.each do |trailer|
+						- unless trailer.nil?
+							.li.col-md-3
+								= render partial: "shared/trailer_thumbnail", locals: {trailer: trailer}
 

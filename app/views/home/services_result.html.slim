@@ -1,0 +1,7 @@
+.container
+	- if @services
+		- services_found = @services.count
+	- else 
+		- services_found = 0 
+
+	h4#result= "#{services_found} Services Found"

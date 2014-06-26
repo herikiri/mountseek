@@ -9,6 +9,14 @@
           = check_box_tag "q_house_type_cont_any_#{house_type.id}", house_type.name, house_type.checked, name: 'q[house_type_cont_any][]'
           = label_tag "q_house_type_cont_any_#{house_type.id}", house_type.name
           br
+
+    .row
+      h4 Bedroom
+      .col-md-3
+        - @bedrooms.each do |bedroom|  
+          = check_box_tag "q_bedroom_eq_any_#{bedroom}", bedroom, false, name: 'q[bedroom_eq_any][]'
+          = label_tag "q_bedroom_eq_any_#{bedroom}", "#{bedroom} Bedroom"
+          br
        
 
     .row

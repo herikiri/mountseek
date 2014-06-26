@@ -7,7 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 items = [Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, 
-  TemperamentOption, ExperienceOption, AiTypeOption, TackOption, TackTypeOption, ConditionOption, ServiceTypeOption, StateOption]
+  TemperamentOption, ExperienceOption, AiTypeOption, TackOption, 
+  TackTypeOption, ConditionOption, ServiceTypeOption, StateOption,
+  HouseTypeOption]
+
 items.each(&:delete_all)
 
 Type.connection.execute('ALTER SEQUENCE types_id_seq RESTART WITH 1')
@@ -25,6 +28,7 @@ TackTypeOption.connection.execute('ALTER SEQUENCE tack_type_options_id_seq RESTA
 ConditionOption.connection.execute('ALTER SEQUENCE condition_options_id_seq RESTART WITH 1')
 ServiceTypeOption.connection.execute('ALTER SEQUENCE service_type_options_id_seq RESTART WITH 1')
 StateOption.connection.execute('ALTER SEQUENCE state_options_id_seq RESTART WITH 1')
+HouseTypeOption.connection.execute('ALTER SEQUENCE house_type_options_id_seq RESTART WITH 1')
 
 horse = Type.create(name: "Horse")
 stud = Type.create(name: "Stud")
@@ -101,11 +105,13 @@ packages_id_for_stud = [5, 6, 7, 8]
 packages_id_for_trailer = [11, 12]
 
 packages_id_for_tack = [9, 10]
+packages_id_for_real_estate = [13, 14, 15]
+packages_id_for_service = [16, 17]
 
 ad_status = ["published", "draft"]
 month_durations = [0, 1, 3, 4, 5, 6]
 
-packages_id_for_real_estate = [13, 14, 15]
+
 house_styles = ["Contemporary", "Victorian", "Cape Cod", "Ranch"]
 days_duration = [0, 7, 30]
 
@@ -113,11 +119,13 @@ horse_images = []
 trailer_images = []
 real_estate_images = []
 tack_images = []
+service_images = []
 (1..4).each do |num|
   horse_images << File.open(Rails.application.config.assets.paths[0]+"/horse"+num.to_s+".jpg")
   trailer_images << File.open(Rails.application.config.assets.paths[0]+"/trailer"+num.to_s+".jpg")
   real_estate_images << File.open(Rails.application.config.assets.paths[0]+"/real_estate"+num.to_s+".jpg")
   tack_images << File.open(Rails.application.config.assets.paths[0]+"/tack"+num.to_s+".jpg")
+  service_images << File.open(Rails.application.config.assets.paths[0]+"/service"+num.to_s+".jpg")
 end
 
 
@@ -336,8 +344,42 @@ Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
 end
 
 
+RealEstate.delete_all
+RealEstate.connection.execute('ALTER SEQUENCE real_estates_id_seq RESTART WITH 1')
+(1..200).each do |num|
+  real_estate = RealEstate.create(
+    { title: Faker::Company.catch_phrase, 
+      description: Faker::Lorem.paragraphs(3, true).join(","), 
+      city: Faker::Address.city,
+      state: Faker::Address.state, zip_code: Faker::Address.zip_code,
+      price: random_dec(5, 200).round(2),
+      private_treaty: false,
+      package_id: packages_id_for_real_estate.sample,
+      user_id: User.all.pluck(:id).sample,
+      status: "published",
+      published_at: DateTime.now - days_duration.sample.days,
+      published_end: DateTime.now + month_durations.sample.month,
+      house_type: house_types.sample, house_style: house_styles.sample,
+      year: birth, sqft: random_dec(5, 200).round(2), bedroom: (1..6).to_a.sample, 
+      floor: (1..4).to_a.sample, garage: (1..4).to_a.sample, bathroom: (1..3).to_a.sample,
+      total_acres: (20..400).to_a.sample
+    })
 
 
+  real_estate.user_name = real_estate.user.profile_name 
+  real_estate.farm_name = real_estate.user.profile_farm_name
+  real_estate.website = real_estate.user.profile_website
+  real_estate.email = real_estate.user.email
+  real_estate.phone_number = real_estate.user.profile_phone_number
+
+  real_estate_images.each do |img|
+    real_estate.pictures.create(name: img)
+  end
+
+  real_estate.banner = real_estate.pictures.sample.id
+  real_estate.save!
+
+end
 
 
 
@@ -379,40 +421,37 @@ end
 
 
 
-RealEstate.delete_all
-RealEstate.connection.execute('ALTER SEQUENCE real_estates_id_seq RESTART WITH 1')
+Service.delete_all
+Service.connection.execute('ALTER SEQUENCE services_id_seq RESTART WITH 1')
 (1..200).each do |num|
-  real_estate = RealEstate.create(
+  service = Service.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 
-      city: Faker::Address.city,
-      state: Faker::Address.state, zip_code: Faker::Address.zip_code,
-      price: random_dec(5, 200).round(2),
-      private_treaty: false,
-      package_id: packages_id_for_real_estate.sample,
+      package_id: packages_id_for_service.sample,
       user_id: User.all.pluck(:id).sample,
       status: "published",
       published_at: DateTime.now - days_duration.sample.days,
       published_end: DateTime.now + month_durations.sample.month,
-      house_type: house_types.sample, house_style: house_styles.sample,
-      year: birth, sqft: random_dec(5, 200).round(2), bedroom: (1..6).to_a.sample, 
-      floor: (1..4).to_a.sample, garage: (1..4).to_a.sample, bathroom: (1..3).to_a.sample,
-      total_acres: (20..400).to_a.sample
+      company: Faker::Company.catch_phrase,
+      company_description: Faker::Lorem.paragraphs(3, true).join(","),
+      service_type: service_types.sample
     })
 
 
-  real_estate.user_name = real_estate.user.profile_name 
-  real_estate.farm_name = real_estate.user.profile_farm_name
-  real_estate.website = real_estate.user.profile_website
-  real_estate.email = real_estate.user.email
-  real_estate.phone_number = real_estate.user.profile_phone_number
+  service.user_name = service.user.profile_name 
+  service.farm_name = service.user.profile_farm_name
+  service.website = service.user.profile_website
+  service.email = service.user.email
+  service.phone_number = service.user.profile_phone_number
 
-  real_estate_images.each do |img|
-    real_estate.pictures.create(name: img)
+  #service.disciplines.create(name: disciplines.sample, experience: experiences.sample)
+
+
+  service_images.each do |img|
+    service.pictures.create(name: img)
   end
 
-  real_estate.banner = real_estate.pictures.sample.id
-  real_estate.save!
-
+  service.banner = service.pictures.sample.id
+  service.save!
+  
 end
-

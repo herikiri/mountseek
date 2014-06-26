@@ -1,138 +1,25 @@
 .container.advanced-search
-  .row
-    .col-md-6
-      form
-        h4
-          i.icon-user
-          |  Services
-        .row
-          .col-md-6
-            label.checkbox
-              input[type="checkbox"]
-              |  All Services 
-            label.checkbox
-              input[type="checkbox"]
-              |  Accountants 
-            label.checkbox
-              input[type="checkbox"]
-              |  Appraisers 
-            label.checkbox
-              input[type="checkbox"]
-              |  Construction 
-            label.checkbox
-              input[type="checkbox"]
-              |  Auctions 
-            label.checkbox
-              input[type="checkbox"]
-              |  Boardings 
-            label.checkbox
-              input[type="checkbox"]
-              |  Breeders 
-            label.checkbox
-              input[type="checkbox"]
-              |  Brokers 
-            label.checkbox
-              input[type="checkbox"]
-              |  Burial Services 
-            label.checkbox
-              input[type="checkbox"]
-              |  Care & Sitters 
-          .col-md-6
-            label.checkbox
-              input[type="checkbox"]
-              |  Clubs 
-            label.checkbox
-              input[type="checkbox"]
-              |  Dentist 
-            label.checkbox
-              input[type="checkbox"]
-              |  Education 
-            label.checkbox
-              input[type="checkbox"]
-              |  Employment 
-            label.checkbox
-              input[type="checkbox"]
-              |  Entertainment 
-            label.checkbox
-              input[type="checkbox"]
-              |  Equipment 
-            label.checkbox
-              input[type="checkbox"]
-              |  Events 
-            label.checkbox
-              input[type="checkbox"]
-              |  Exercise Riders 
-            label.checkbox
-              input[type="checkbox"]
-              |  Farriers 
-            label.checkbox
-              input[type="checkbox"]
-              |  Feed Supply 
-    .col-md-6
-      form
-        h4
-          i.icon-fire
-          |  Disciplines
-        .row
-          .col-md-6
-            label.checkbox
-              input[type="checkbox"]
-              |  All Disciplines 
-            label.checkbox
-              input[type="checkbox"]
-              |  All Around 
-            label.checkbox
-              input[type="checkbox"]
-              |  All Purpose 
-            label.checkbox
-              input[type="checkbox"]
-              |  Barel Racing 
-            label.checkbox
-              input[type="checkbox"]
-              |  Cutting 
-            label.checkbox
-              input[type="checkbox"]
-              |  Dressage 
-            label.checkbox
-              input[type="checkbox"]
-              |  Endurance 
-            label.checkbox
-              input[type="checkbox"]
-              |  Eventing 
-            label.checkbox
-              input[type="checkbox"]
-              |  Hunter 
-            label.checkbox
-              input[type="checkbox"]
-              |  Show 
-          .col-md-6
-            label.checkbox
-              input[type="checkbox"]
-              |  Polo 
-            label.checkbox
-              input[type="checkbox"]
-              |  Racing 
-            label.checkbox
-              input[type="checkbox"]
-              |  Reining 
-            label.checkbox
-              input[type="checkbox"]
-              |  Roping 
-            label.checkbox
-              input[type="checkbox"]
-              |  Trail 
-            label.checkbox
-              input[type="checkbox"]
-              |  Training 
-            label.checkbox
-              input[type="checkbox"]
-              |  Plesure 
-            label.checkbox
-              input[type="checkbox"]
-              |  Youth 
-            label.checkbox
-              input[type="checkbox"]
-              |  Other 
-  hr.divider
-  = render "shared/locations_search_category"
-  = render "shared/search_category_button"
+  #spin style="display:none;"
+  = search_form_for @search_services, url: services_result_path, :html => {role: "form"} do |f|
+
+
+    .row
+      .col-md-4
+        h4 Service Type
+        - @service_types.each do |service_type|
+          = check_box_tag "q_service_type_cont_any_#{service_type.id}", service_type.name, false, name: 'q[service_type_cont_any][]'
+
+          = label_tag "q_service_type_cont_any_#{service_type.id}", service_type.name
+          br
+
+    .row
+      h4 Locations
+      - @states.in_groups_of(20).each do |state_group|
+        .col-md-3
+          - state_group.each do |state|
+            - unless state.nil?
+              = check_box_tag "q_state_cont_any_#{state.id}", state.name, state.checked, name: 'q[state_cont_any][]'
+              = label_tag "q_state_cont_any_#{state.id}", state.name
+              br
+
+    = f.submit "Search"

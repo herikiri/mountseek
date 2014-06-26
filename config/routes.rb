@@ -81,5 +81,7 @@ Rails.application.routes.draw do
   get 'real_estates-result' => 'home#real_estates_result', as: :real_estates_result
   get 'real_estates-filter' => 'home#real_estates_filter', as: :real_estates_filter
 
+  get 'services-result' => 'home#services_result', as: :services_result
+  get 'services-filter' => 'home#services_filter', as: :services_filter
 
 end
