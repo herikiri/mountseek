@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
  
+  match '/oauth2callback', :to => 'oauth2_callbacks#google', :as => 'google_oauth2', :via => [:get]
+
   match '/payments/payment', :to => 'payments#payment', :as => 'paymentspayment', :via => [:get]
   match '/payments/relay_response', :to => 'payments#relay_response', :as => 'payments_relay_response', :via => [:post]
   match '/payments/receipt', :to => 'payments#receipt', :as => 'payments_receipt', :via => [:get]

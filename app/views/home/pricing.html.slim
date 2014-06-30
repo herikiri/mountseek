@@ -1,7 +1,7 @@
 .container
   br/
   h4 Select Ad Type
-  ul.nav.nav-tabs
+  ul.nav.nav-pills
     li.active
       a href="#horses" data-toggle="tab" Horses
     li
@@ -18,73 +18,24 @@
   .tab-content
     #horses.row.tab-pane.fade.in.active
       - @horsePackages.each do |package|
-        dl.col-md-3.pricing-wrapper
-          dt= link_to "Package #{package.name}", new_package_horse_path(package)
-          dd
-            | Price: #{package.price}
-          dd
-            | Duration: #{package.duration}
-          dd
-            | Max Photo Upload: #{package.max_photo_upload}
-          dd
-            | Max Video Upload: #{package.max_video_upload}
+        = render partial: "pricing_section", locals: {package: package} 
+
     #studs.row.tab-pane.fade
       - @studPackages.each do |package|
-        dl.col-md-3.pricing-wrapper
-          dt= link_to "Package #{package.name}", new_package_stud_path(package)
-          dd
-            | Price: #{package.price}
-          dd
-            | Duration: #{package.duration}
-          dd
-            | Max Photo Upload: #{package.max_photo_upload}
-          dd
-            | Max Video Upload: #{package.max_video_upload}
+        = render partial: "pricing_section", locals: {package: package}
+
     #trailers.row.tab-pane.fade
       - @trailerPackages.each do |package|
-        dl.col-md-3.pricing-wrapper
-          dt= link_to "Package #{package.name}", new_package_trailer_path(package)
-          dd
-            | Price: #{package.price}
-          dd
-            | Duration: #{package.duration}
-          dd
-            | Max Photo Upload: #{package.max_photo_upload}
-          dd
-            | Max Video Upload: #{package.max_video_upload}
+        = render partial: "pricing_section", locals: {package: package}
+
     #tacks.row.tab-pane.fade
       - @tackPackages.each do |package|
-        dl.col-md-3.pricing-wrapper
-          dt= link_to "Package #{package.name}", new_package_tack_path(package)
-          dd
-            | Price: #{package.price}
-          dd
-            | Duration: #{package.duration}
-          dd
-            | Max Photo Upload: #{package.max_photo_upload}
-          dd
-            | Max Video Upload: #{package.max_video_upload}
+        = render partial: "pricing_section", locals: {package: package}
+
     #real-estates.row.tab-pane.fade
       - @realEstatePackages.each do |package|
-        dl.col-md-3.pricing-wrapper
-          dt= link_to "Package #{package.name}", new_package_real_estate_path(package)
-          dd
-            | Price: #{package.price}
-          dd
-            | Duration: #{package.duration}
-          dd
-            | Max Photo Upload: #{package.max_photo_upload}
-          dd
-            | Max Video Upload: #{package.max_video_upload}
+        = render partial: "pricing_section", locals: {package: package}
+
     #services.row.tab-pane.fade
       - @servicePackages.each do |package|
-        dl.col-md-3.pricing-wrapper
-          dt= link_to "Package #{package.name}", new_package_service_path(package)
-          dd
-            | Price: #{package.price}
-          dd
-            | Duration: #{package.duration}
-          dd
-            | Max Photo Upload: #{package.max_photo_upload}
-          dd
-            | Max Video Upload: #{package.max_video_upload}
+        = render partial: "pricing_section", locals: {package: package}

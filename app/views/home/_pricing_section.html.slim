@@ -1,0 +1,39 @@
+section.col-md-3
+  .option-outer
+    a href= new_package_horse_path(package) class="ad-option"
+      span.count= package.name
+      span.followon
+      	span.dollar $
+      	- if package.price > 0
+      		=package.price
+      	- else
+      		=package.price.floor
+    .outer
+      ul.inner.pt-0
+        li
+          p="#{package.duration} Month Duration"
+        - if package.max_photo_upload == 0 && package.max_video_upload == 0
+          li 
+            p="Text Only"
+        - else
+          - unless package.max_photo_upload == 0
+            li 
+              p="Up To #{package.max_photo_upload} Photo"
+          - unless package.max_video_upload == 0
+            li
+              p="Up To #{package.max_video_upload} Video"
+        li
+          p="Buyer Interest Statistic"
+        li
+          p="Share to all social media"
+        - if package.name == "Premium"
+          li
+            p="Placed Above Text Ads"
+        - if package.name == "Deluxe" || package.name == "Exclusive"
+          li
+            p="Placed on top of the page as a Exclusive listing" 
+        - unless package.price == 0
+          li 
+            p="$1 from this Ad will go to our Sponsored Cause"
+        li.place-container
+          =link_to "List Your Horse", new_package_horse_path(package), class: "btn btn-gold"

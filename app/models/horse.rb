@@ -66,6 +66,5 @@ class Horse < ActiveRecord::Base
 	def ad_banner
 		self.pictures.find(self.banner) if self.pictures.present?
 	end
-
 	
 end

@@ -71,3 +71,83 @@
 	}
 
 }
+
+.ad-option {
+	background: #444;
+	display: block;
+	width: 100%;
+	padding: 25px 0;
+	text-decoration: none;
+	text-align: center;
+	.count {
+		text-align: center;
+		display: block;
+		padding: 0 14px 5px;
+		text-transform: uppercase;
+		font-size: .9em!important;
+		letter-spacing: .3em;
+		color: #999;
+		line-height: 1.25em;
+	}
+	.followon {
+		font-size: 3.6em;
+		position: relative;
+		display: inline-block;
+		margin-bottom: 0;
+		line-height: 1em;
+		letter-spacing: .025em;
+		padding-bottom: 0;
+		color: #B7853D;
+		line-height: 1.5em;
+		font-family: georgia,serif;
+		font-style: normal;
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: .09em;
+		padding: 0 0 12px;
+		margin-bottom: 35px;
+		text-align: center;
+
+		.dollar {
+			font-size: .35em;
+			position: absolute;
+			top: -7px;
+			text-indent: -17px;
+		}
+	}
+}
+
+ul.inner {
+	border: 1px solid #e2e2e2;
+	max-width: 960px;
+	margin: 0 auto;
+	position: relative;
+	li {
+		list-style: none;
+		border-bottom: 1px solid #e2e2e2;
+		p {
+			font-size: 1em;
+			color: #999;
+			margin: 0;
+			padding: 12px 8%;
+		}
+
+	}
+	li.place-container {
+
+		a {
+			width: 100%;
+			padding: 16px 0 14px;
+			text-decoration: none;
+			display: block;
+			text-align: center;
+		}
+
+		.btn-gold {
+			background-color: #B7853D!important;
+			color: #f6f6f6;
+		}
+	}
+
+
+}
