@@ -78,3 +78,5 @@ gem 'html2slim'
 gem "nested_form"
 gem 'validates_email_format_of'
 gem 'mailboxer'
+gem 'youtube_it'
+gem 'authorize-net'

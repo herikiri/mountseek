@@ -1,0 +1,8 @@
+default:
+  api_login_id: 6KT8xnfr442
+  api_transaction_key: 8Cqj9L3627vNeWy6
+  merchant_hash_value: 6KT8xnfr442
+
+development: 
+test: 
+production: 
