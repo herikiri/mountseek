@@ -1,4 +1,7 @@
-.container
-  .form-wrapper
-  	h4 THE BASICS ABOUT YOUR STUD
-  	= render "form"
+section#profile
+	.container
+		header.profile_header
+			h1= "Create Your #{@stud.package.name} Stud Ad"
+		.outer
+			.inner.pt-0
+				= render "form"

@@ -1,8 +1,9 @@
-script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" 
-
-.container
-  .form-wrapper
-  	h4 THE BASICS ABOUT YOUR HORSE
-  	= render "form"
-
+section#profile
+	.container
+		header.profile_header
+			h1= "Create Your #{@horse.package.name} Horse Ad"
+			h2 And Find Your Horse a Good Home
+		.outer
+			.inner.pt-0
+				= render "form"
 

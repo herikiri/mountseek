@@ -1,5 +1,5 @@
-.container
-  section.pricing
+section.pricing  
+  .container
     header.profile_header.center
       h1 Showcase Your Horse
       h2 
@@ -26,24 +26,252 @@
     .tab-content
       #horses.row.tab-pane.fade.in.active
         - @horsePackages.each do |package|
-          = render partial: "pricing_section", locals: {package: package} 
+          section.col-md-3
+            .option-outer
+              a href= new_package_horse_path(package) class="ad-option"
+                span.count= package.name
+                span.followon
+                  span.dollar $
+                  - if package.price > 0
+                    =package.price
+                  - else
+                    =package.price.floor
+              .outer
+                ul.inner.pt-0
+                  li
+                    p="#{package.duration} Month Duration"
+                  - if package.max_photo_upload == 0 && package.max_video_upload == 0
+                    li 
+                      p="Text Only"
+                  - else
+                    - unless package.max_photo_upload == 0
+                      li 
+                        p="Up To #{package.max_photo_upload} Photo"
+                    - unless package.max_video_upload == 0
+                      li
+                        p="Up To #{package.max_video_upload} Video"
+                  li
+                    p="Buyer Interest Statistic"
+                  li
+                    p="Share to all social media"
+                  - if package.name == "Premium"
+                    li
+                      p="Placed Above Text Ads"
+                  - if package.name == "Deluxe" || package.name == "Exclusive"
+                    li
+                      p="Placed on top of the page as a Exclusive listing" 
+                  - unless package.price == 0
+                    li 
+                      p="$1 from this Ad will go to our Sponsored Cause"
+                  li.place-container
+                    =link_to "List Your Horse", new_package_horse_path(package), class: "btn btn-gold" 
 
       #studs.row.tab-pane.fade
         - @studPackages.each do |package|
-          = render partial: "pricing_section", locals: {package: package}
+          section.col-md-3
+            .option-outer
+              a href= new_package_stud_path(package) class="ad-option"
+                span.count= package.name
+                span.followon
+                  span.dollar $
+                  - if package.price > 0
+                    =package.price
+                  - else
+                    =package.price.floor
+              .outer
+                ul.inner.pt-0
+                  li
+                    p="#{package.duration} Month Duration"
+                  - if package.max_photo_upload == 0 && package.max_video_upload == 0
+                    li 
+                      p="Text Only"
+                  - else
+                    - unless package.max_photo_upload == 0
+                      li 
+                        p="Up To #{package.max_photo_upload} Photo"
+                    - unless package.max_video_upload == 0
+                      li
+                        p="Up To #{package.max_video_upload} Video"
+                  li
+                    p="Buyer Interest Statistic"
+                  li
+                    p="Share to all social media"
+                  - if package.name == "Premium"
+                    li
+                      p="Placed Above Text Ads"
+                  - if package.name == "Deluxe" || package.name == "Exclusive"
+                    li
+                      p="Placed on top of the page as a Exclusive listing" 
+                  - unless package.price == 0
+                    li 
+                      p="$1 from this Ad will go to our Sponsored Cause"
+                  li.place-container
+                    =link_to "List Your Horse", new_package_stud_path(package), class: "btn btn-gold"
 
       #trailers.row.tab-pane.fade
         - @trailerPackages.each do |package|
-          = render partial: "pricing_section", locals: {package: package}
+          section.col-md-3
+            .option-outer
+              a href= new_package_trailer_path(package) class="ad-option"
+                span.count= package.name
+                span.followon
+                  span.dollar $
+                  - if package.price > 0
+                    =package.price
+                  - else
+                    =package.price.floor
+              .outer
+                ul.inner.pt-0
+                  li
+                    p="#{package.duration} Month Duration"
+                  - if package.max_photo_upload == 0 && package.max_video_upload == 0
+                    li 
+                      p="Text Only"
+                  - else
+                    - unless package.max_photo_upload == 0
+                      li 
+                        p="Up To #{package.max_photo_upload} Photo"
+                    - unless package.max_video_upload == 0
+                      li
+                        p="Up To #{package.max_video_upload} Video"
+                  li
+                    p="Buyer Interest Statistic"
+                  li
+                    p="Share to all social media"
+                  - if package.name == "Premium"
+                    li
+                      p="Placed Above Text Ads"
+                  - if package.name == "Deluxe" || package.name == "Exclusive"
+                    li
+                      p="Placed on top of the page as a Exclusive listing" 
+                  - unless package.price == 0
+                    li 
+                      p="$1 from this Ad will go to our Sponsored Cause"
+                  li.place-container
+                    =link_to "List Your Horse", new_package_trailer_path(package), class: "btn btn-gold"
 
       #tacks.row.tab-pane.fade
         - @tackPackages.each do |package|
-          = render partial: "pricing_section", locals: {package: package}
+          section.col-md-3
+            .option-outer
+              a href= new_package_tack_path(package) class="ad-option"
+                span.count= package.name
+                span.followon
+                  span.dollar $
+                  - if package.price > 0
+                    =package.price
+                  - else
+                    =package.price.floor
+              .outer
+                ul.inner.pt-0
+                  li
+                    p="#{package.duration} Month Duration"
+                  - if package.max_photo_upload == 0 && package.max_video_upload == 0
+                    li 
+                      p="Text Only"
+                  - else
+                    - unless package.max_photo_upload == 0
+                      li 
+                        p="Up To #{package.max_photo_upload} Photo"
+                    - unless package.max_video_upload == 0
+                      li
+                        p="Up To #{package.max_video_upload} Video"
+                  li
+                    p="Buyer Interest Statistic"
+                  li
+                    p="Share to all social media"
+                  - if package.name == "Premium"
+                    li
+                      p="Placed Above Text Ads"
+                  - if package.name == "Deluxe" || package.name == "Exclusive"
+                    li
+                      p="Placed on top of the page as a Exclusive listing" 
+                  - unless package.price == 0
+                    li 
+                      p="$1 from this Ad will go to our Sponsored Cause"
+                  li.place-container
+                    =link_to "List Your Horse", new_package_tack_path(package), class: "btn btn-gold"
 
       #real-estates.row.tab-pane.fade
         - @realEstatePackages.each do |package|
-          = render partial: "pricing_section", locals: {package: package}
+          section.col-md-3
+            .option-outer
+              a href= new_package_real_estate_path(package) class="ad-option"
+                span.count= package.name
+                span.followon
+                  span.dollar $
+                  - if package.price > 0
+                    =package.price
+                  - else
+                    =package.price.floor
+              .outer
+                ul.inner.pt-0
+                  li
+                    p="#{package.duration} Month Duration"
+                  - if package.max_photo_upload == 0 && package.max_video_upload == 0
+                    li 
+                      p="Text Only"
+                  - else
+                    - unless package.max_photo_upload == 0
+                      li 
+                        p="Up To #{package.max_photo_upload} Photo"
+                    - unless package.max_video_upload == 0
+                      li
+                        p="Up To #{package.max_video_upload} Video"
+                  li
+                    p="Buyer Interest Statistic"
+                  li
+                    p="Share to all social media"
+                  - if package.name == "Premium"
+                    li
+                      p="Placed Above Text Ads"
+                  - if package.name == "Deluxe" || package.name == "Exclusive"
+                    li
+                      p="Placed on top of the page as a Exclusive listing" 
+                  - unless package.price == 0
+                    li 
+                      p="$1 from this Ad will go to our Sponsored Cause"
+                  li.place-container
+                    =link_to "List Your Horse", new_package_real_estate_path(package), class: "btn btn-gold"
 
       #services.row.tab-pane.fade
         - @servicePackages.each do |package|
-          = render partial: "pricing_section", locals: {package: package}
+          section.col-md-3
+            .option-outer
+              a href= new_package_service_path(package) class="ad-option"
+                span.count= package.name
+                span.followon
+                  span.dollar $
+                  - if package.price > 0
+                    =package.price
+                  - else
+                    =package.price.floor
+              .outer
+                ul.inner.pt-0
+                  li
+                    p="#{package.duration} Month Duration"
+                  - if package.max_photo_upload == 0 && package.max_video_upload == 0
+                    li 
+                      p="Text Only"
+                  - else
+                    - unless package.max_photo_upload == 0
+                      li 
+                        p="Up To #{package.max_photo_upload} Photo"
+                    - unless package.max_video_upload == 0
+                      li
+                        p="Up To #{package.max_video_upload} Video"
+                  li
+                    p="Buyer Interest Statistic"
+                  li
+                    p="Share to all social media"
+                  - if package.name == "Premium"
+                    li
+                      p="Placed Above Text Ads"
+                  - if package.name == "Deluxe" || package.name == "Exclusive"
+                    li
+                      p="Placed on top of the page as a Exclusive listing" 
+                  - unless package.price == 0
+                    li 
+                      p="$1 from this Ad will go to our Sponsored Cause"
+                  li.place-container
+                    =link_to "List Your Horse", new_package_service_path(package), class: "btn btn-gold"

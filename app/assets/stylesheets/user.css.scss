@@ -1,11 +1,6 @@
 // Place all the styles related to the user controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-section#container {
-	background-color: #f1f1f1;
-	margin-top: -20px;
-	height: 100%;
-}
 
 .form-signin {
 	max-width: 300px;
@@ -53,46 +48,6 @@ section#container {
 		font-style: normal;
 	}
 
-	.profile_header {
-		width: 100%;
-		padding: 50px 0;
-		margin: 0 auto;
-		text-align: center;
-
-		h1 {
-			color: #444;
-			font-size: 3em;
-			max-width: 700px;
-			line-height: 1.1em;
-			text-transform: uppercase;
-			margin: 0 auto -8px;
-			border: none;
-			padding: 0;
-			letter-spacing: .05em;
-			font-family: Baskerville,georgia,serif;
-			font-style: italic;
-			font-weight: 400;
-		}
-
-		h2 {
-			margin: 20px auto 0;
-			color: #B7853D;
-			font-size: 1em;
-			max-width: 500px;
-			line-height: 1.5em;
-			font-family: Proxima,sans-serif;
-			font-style: normal;
-			font-weight: 400;
-			padding: 0;
-			text-transform: uppercase;
-			letter-spacing: .1em;
-		}
-		
-		a {
-			text-decoration: underline;
-			color: #B7853D;
-		}
-	}
 
 	.document {
 		max-width: 440px;
@@ -217,12 +172,7 @@ section#container {
 
 	}
 
-	.terms_cond {
-		padding-top: 15px;
-		margin: 0;
-		font-size: .9em!important;
-		color: #999;
-	}
+	
 }
 
 

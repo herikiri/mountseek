@@ -1,4 +1,8 @@
-.container
-  .form-wrapper
-  	h4 THE BASICS ABOUT YOUR SERVICE
-  	== render "form"
+section#profile
+	.container
+		header.profile_header
+			h1= "Create Your #{@service.package.name} Service Ad"
+		.outer
+			.inner.pt-0
+				= render "form"
+

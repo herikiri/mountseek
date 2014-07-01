@@ -1,3 +1,7 @@
-.container
-  .form-wrapper
-  	= render "form"
+section#profile
+	.container
+		header.profile_header
+			h1= "Create Your #{@real_estate.package.name} Real Estate Ad"
+		.outer
+			.inner.pt-0
+				= render "form"

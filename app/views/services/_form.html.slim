@@ -7,76 +7,93 @@
         - @service.errors.full_messages.each do |message|
           li = message
 
-  = f.hidden_field :package_id, value: @service.package_id      
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon The Basics About Your Service
 
-  .row
-    = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
-    = f.input :description, label: false,  placeholder: "Description", input_html: { rows: 8 }
+        .row
+          = f.hidden_field :package_id, value: @service.package_id
+          = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
+          = f.input :description, label: false,  placeholder: "Description", input_html: { rows: 8 }
 
-    = f.input :service_type, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Service Type *", collection: ServiceTypeOption.all, value_method: :name
+          = f.input :service_type, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Service Type *", collection: ServiceTypeOption.all, value_method: :name
 
-  = f.simple_fields_for :disciplines do |fd|
-    .row
-      = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: DisciplineOption.all, value_method: :name
-      = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all, value_method: :name
-      = fd.link_to_remove "Remove this discipline"
+        h3 Disciplines
 
-  = f.link_to_add "Add a Discipline", :disciplines
+        = f.simple_fields_for :disciplines do |fd|
+          .row
+            = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: DisciplineOption.all, value_method: :name
+            = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all, value_method: :name
+
+        p.count.cap 
+          = f.link_to_add "+ Add Another Discipline", :disciplines
   
-  hr
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon Company Detail
 
-  h4 COMPANY DETAIL
+        .row
+          = f.input :company, label: false, placeholder: "Company Name"
+          = f.input :company_description, label: false, placeholder: "Company Description", input_html: { rows: 8 }
 
-  .row
-    = f.input :company, label: false, placeholder: "Company Name"
-    = f.input :company_description, label: false, placeholder: "Company Description", input_html: { rows: 8 }
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon Bring Your Ad To Life With Photos & Videos
+        .row
+          = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
 
-
-  .row
-    = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true } 
-
-    = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
-
-  hr 
-
-  h4 YOUR CONTACT INFORMATIOIN
-
-  .row
-
-    - if current_user.profile_name.present?
-      = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *", input_html: { value: current_user.profile_name}
-    - else
-      = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *"
-
-    - if current_user.profile_farm_name.present?
-      = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)", input_html: { value: current_user.profile_farm_name}
-    - else
-      = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)"
-   
-
-  .row
-    - if current_user.email.present?
-      = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *", input_html: { value: current_user.email}
-    - else
-      = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *"
-
-    - if current_user.profile_website.present?
-      = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)", input_html: { value: current_user.profile_website }
-    - else
-      = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)"
+          = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
 
 
-  .row
-    - if current_user.profile_phone_number.present?
-      = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)", input_html: { value: current_user.profile_phone_number }
-    - else
-      = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)"
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon Your Contact Information
 
-    - if current_user.profile_alt_phone_number.present?
-      = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)", input_html: { value: current_user.profile_alt_phone_number }
-    - else
-      = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"
-    
-  hr
- 
-  = f.button :submit, 'Save & Preview'
+        .row
+
+          - if current_user.profile_name.present?
+            = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *", input_html: { value: current_user.profile_name}
+          - else
+            = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *"
+
+          - if current_user.profile_farm_name.present?
+            = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)", input_html: { value: current_user.profile_farm_name}
+          - else
+            = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)"
+         
+
+        .row
+          - if current_user.email.present?
+            = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *", input_html: { value: current_user.email}
+          - else
+            = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *"
+
+          - if current_user.profile_website.present?
+            = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)", input_html: { value: current_user.profile_website }
+          - else
+            = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)"
+
+
+        .row
+          - if current_user.profile_phone_number.present?
+            = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)", input_html: { value: current_user.profile_phone_number }
+          - else
+            = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)"
+
+          - if current_user.profile_alt_phone_number.present?
+            = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)", input_html: { value: current_user.profile_alt_phone_number }
+          - else
+            = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"
+          
+
+  p.count.terms_cond.center 
+    | By clicking Save &amp; Preview, you are agreeing to Mountseek's 
+    br
+    = link_to "Terms & Conditions", "#"
+
+  .button-container
+    = f.button :submit, 'Save & Preview', class: "btn btn-lg btn-submit"

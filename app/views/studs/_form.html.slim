@@ -7,126 +7,140 @@
         - @stud.errors.full_messages.each do |message|
           li = message
 
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon The Basics About Your Horse
+        .row
+          = f.hidden_field :package_id, value: @stud.package_id
+          = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
+          = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 } 
 
-  = f.hidden_field :package_id, value: @stud.package_id
-  .row
-    = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
-    = f.input :description, label: false,  placeholder: "About Your Horse * - Personality, Talents & Experience", input_html: { rows: 8 } 
+        .row
+          = f.input :name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Horse's Name (optional)"
+          = f.input :ai_type, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "AI Type *", collection: AiTypeOption.all, value_method: :name
 
-  .row
-    = f.input :name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Horse's Name (optional)"
-    = f.input :ai_type, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "AI Type *", collection: AiTypeOption.all, value_method: :name
+        .row
+          = f.input :zip_code, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "*Zip Code*"
+          = f.input :city, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "City"
+          = f.input :state, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "State/Province*"
+          
 
-  .row
-    = f.input :zip_code, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "*Zip Code*"
-    = f.input :city, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "City"
-    = f.input :state, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "State/Province*"
-    
+        .row
+          = f.input :stud_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Stud Fee *"
+          = f.input :booking_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ booking Fee *"
 
-  .row
-    = f.input :stud_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Stud Fee *"
-    = f.input :booking_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ booking Fee *"
+        .row
+          = f.input :shipping_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Shipping Fee"
+          = f.input :private_treaty, label: false, inline_label: true, wrapper_html: { class: 'col-md-4' }
 
-  .row
-    = f.input :shipping_fee, label: false, wrapper_html: { class: 'col-md-4' }, placeholder: "$ Shipping Fee"
-    = f.input :private_treaty, label: false, inline_label: true, wrapper_html: { class: 'col-md-4' }
+        h3 Breeding Available
 
-  h4 Breeding Available
+        .row
+          = f.input :available, label: false, discard_year: true, prompt: { month: 'Month Available (optional)', day: 'Day Available (optional)' }
 
-  .row
-    = f.input :available, label: false, discard_year: true, prompt: { month: 'Month Available (optional)', day: 'Day Available (optional)' }
+          = f.input :until, label: false, discard_year: true, prompt: { month: 'Month Until (optional)', day: 'Day Until (optional)' }
 
-    = f.input :until, label: false, discard_year: true, prompt: { month: 'Month Until (optional)', day: 'Day Until (optional)' }
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon Details & Breed Information
+        .row
+          = f.input :birth, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true, prompt: { month: 'Birth Month (optional)', year: 'Birth Year *' }
+
+        .row
+          = f.input :color, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Color (optional)", collection: ColorOption.all, value_method: :name
+          = f.input :other_markings, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Other Markings (optional)"
+
+        .row
+          = f.input :height, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Height (optional)"
+          = f.input :weight, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Weight (lbs) (optional)"
+
+        .row
+          = f.input :breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Breed *", collection: BreedOption.all, value_method: :name
+          = f.input :second_breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Secondary Breed (optional)", collection: BreedOption.all, value_method: :name
+
+        h3 Registry Information
+
+        .row
+          = f.input :registration, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration (optional)"
+          = f.input :registration_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
+
+        .row
+          = f.input :second_reg, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Second Registration (optional)"
+          = f.input :second_reg_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
+
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon Personality & Experience
+        .row
+          = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: TemperamentOption.all, value_method: :name
+        
+        = f.simple_fields_for :disciplines do |fd|
+          .row
+            = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: DisciplineOption.all, value_method: :name
+            = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all, value_method: :name
+        p.count.cap
+          = f.link_to_add "+ Add Another Discipline", :disciplines
+
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon Bring Your Ad To Life With Photos & Videos
+        .row
+          = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true }
+
+          = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
+
+  .document.border-bottom
+    .document-wrapper.border
+      .text.ten
+        h2.followon Your Contact Information
+
+        .row
+          - if current_user.profile_name.present?
+            = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *", input_html: { value: current_user.profile_name}
+          - else
+            = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *"
+
+          - if current_user.profile_farm_name.present?
+            = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)", input_html: { value: current_user.profile_farm_name}
+          - else
+            = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)"
+         
+
+        .row
+          - if current_user.email.present?
+            = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *", input_html: { value: current_user.email}
+          - else
+            = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *"
+
+          - if current_user.profile_website.present?
+            = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)", input_html: { value: current_user.profile_website }
+          - else
+            = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)"
 
 
-  hr
+        .row
+          - if current_user.profile_phone_number.present?
+            = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)", input_html: { value: current_user.profile_phone_number }
+          - else
+            = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)"
 
-  h4 DETAILS & BREED INFORMATION
-
-  .row
-    = f.input :birth, label: false, :start_year => Date.today.year - 12, :end_year => Date.today.year, discard_day: true, prompt: { month: 'Birth Month (optional)', year: 'Birth Year *' }
-
-  .row
-    = f.input :color, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Color (optional)", collection: ColorOption.all, value_method: :name
-    = f.input :other_markings, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Other Markings (optional)"
-
-  .row
-    = f.input :height, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Height (optional)"
-    = f.input :weight, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Weight (lbs) (optional)"
-
-  .row
-    = f.input :breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Breed *", collection: BreedOption.all, value_method: :name
-    = f.input :second_breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Secondary Breed (optional)", collection: BreedOption.all, value_method: :name
-
-  hr
-
-  h4 REGISTRY INFORMATIOIN
-  .row
-    = f.input :registration, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration (optional)"
-    = f.input :registration_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
-
-  .row
-    = f.input :second_reg, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Second Registration (optional)"
-    = f.input :second_reg_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
-
-  h4 PERSONALITY & EXPERIENCE
-  .row
-    = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: TemperamentOption.all, value_method: :name
-  
-  = f.simple_fields_for :disciplines do |fd|
-    .row
-      = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: DisciplineOption.all, value_method: :name
-      = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all, value_method: :name
-      = fd.link_to_remove "Remove this discipline"
-
-  = f.link_to_add "Add a Discipline", :disciplines
-
-  .row
-    = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true }
-
-    = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
-  hr
-
-  h4 YOUR CONTACT INFORMATIOIN
-
-  .row
-
-    - if current_user.profile_name.present?
-      = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *", input_html: { value: current_user.profile_name}
-    - else
-      = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *"
-
-    - if current_user.profile_farm_name.present?
-      = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)", input_html: { value: current_user.profile_farm_name}
-    - else
-      = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)"
-   
-
-  .row
-    - if current_user.email.present?
-      = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *", input_html: { value: current_user.email}
-    - else
-      = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *"
-
-    - if current_user.profile_website.present?
-      = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)", input_html: { value: current_user.profile_website }
-    - else
-      = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)"
-
-
-  .row
-    - if current_user.profile_phone_number.present?
-      = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)", input_html: { value: current_user.profile_phone_number }
-    - else
-      = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)"
-
-    - if current_user.profile_alt_phone_number.present?
-      = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)", input_html: { value: current_user.profile_alt_phone_number }
-    - else
-      = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"
+          - if current_user.profile_alt_phone_number.present?
+            = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)", input_html: { value: current_user.profile_alt_phone_number }
+          - else
+            = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"
     
  
-  = f.button :submit, 'Save & Preview'
+  p.count.terms_cond.center 
+    | By clicking Save &amp; Preview, you are agreeing to Mountseek's 
+    br
+    = link_to "Terms & Conditions", "#"
+
+  .button-container
+    = f.button :submit, 'Save & Preview', class: "btn btn-lg btn-submit"
 
 javascript:
   $('select[id*="stud_birth"]').wrap('<div class="col-md-6">');

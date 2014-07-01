@@ -1,4 +1,8 @@
-.container
-  .form-wrapper
-  	h4 THE BASICS ABOUT YOUR TACK
-  	=render "form"
+section#profile
+	.container
+		header.profile_header
+			h1= "Create Your #{@tack.package.name} Tack Ad"
+		.outer
+			.inner.pt-0
+				= render "form"
+
