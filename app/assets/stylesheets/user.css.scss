@@ -34,6 +34,23 @@ section#container {
 		letter-spacing: .125em;
 		text-transform: uppercase;
 		text-align: center;
+
+		a {
+			text-decoration: underline;
+			line-height: 1.5em;
+			color: #999;
+			font-size: .9em!important;
+		}
+	}
+
+	span.count.url {
+		margin: 15px auto 27px;
+		display: block;
+		text-align: center;
+		line-height: 1.5em;
+		color: #999;
+		font-family: Proxima,sans-serif;
+		font-style: normal;
 	}
 
 	.profile_header {
@@ -98,79 +115,113 @@ section#container {
 				margin-bottom: 30px;
 			}
 
-			.document-wrapper {
-				padding: 0 40px;
+		}
+	}
+
+	.document-wrapper {
+		padding: 0 40px;
+		position: relative;
+		max-width: 800px;
+		margin: 0 auto;
+		
+		.facebook-login-container {
+			width: 100%;
+			display: block;
+			position: relative;
+			cursor: pointer;
+			overflow: hidden;
+			max-height: 45px;
+			margin-bottom: 32px;
+
+			.facebook-login-btn {
+				padding: 14px 25px 11px;
+				font-size: .9em;
+				background: #425f9c!important;
 				position: relative;
-				max-width: 800px;
+				z-index: 1;
+				color: #f1f1f1;
+				cursor: pointer;
+				margin-bottom: 0!important;
+				border: none;
+				text-align: center;
+				text-transform: uppercase;
+				font-family: Proxima,sans-serif;
+				font-style: normal;
+				letter-spacing: .15em;
+				line-height: 18px;
+				text-decoration: none!important;
+				width: 100%;
 				
-				.facebook-login-container {
-					width: 100%;
-					display: block;
-					position: relative;
-					cursor: pointer;
-					overflow: hidden;
-					max-height: 45px;
-					margin-bottom: 32px;
 
-					.facebook-login-btn {
-						padding: 14px 25px 11px;
-						font-size: .9em;
-						background: #425f9c!important;
-						position: relative;
-						z-index: 1;
-						color: #f1f1f1;
-						cursor: pointer;
-						margin-bottom: 0!important;
-						border: none;
-						text-align: center;
-						text-transform: uppercase;
-						font-family: Proxima,sans-serif;
-						font-style: normal;
-						letter-spacing: .15em;
-						line-height: 18px;
-						text-decoration: none!important;
-						width: 100%;
-						
-
-						a {
-							text-decoration: none;
-							color: #f1f1f1;
-							margin-left: 8px;
-						}
-					}
-				}
-
-				.email-text {
-					font-family: georgia;
-					color: #666;
-					margin-bottom: 30px;
-					padding: 0;
-				}
-
-				input {
-					margin: 0 auto 35px;
-					color: #666;
-					font-family: georgia,serif;
-					font-style: normal;
-					border: 1px solid #bbb;
-					line-height: 1.5em;
-					height: 49px;
-					background: 0 0;
-					padding: 12px 10px 11px;
-				}
-
-				input.btn-block {
-					background: #619b43!important;
+				a {
+					text-decoration: none;
 					color: #f1f1f1;
-					text-transform: uppercase;
-					font-size: .9em;
-					font-style: normal;
-					letter-spacing: .15em;
-					line-height: 18px;
+					margin-left: 8px;
 				}
-
 			}
 		}
+
+		.email-text {
+			font-family: georgia;
+			color: #666;
+			margin-bottom: 30px;
+			padding: 0;
+		}
+
+		input {
+			margin: 0 auto 35px;
+			color: #666;
+			font-family: georgia,serif;
+			font-style: normal;
+			border: 1px solid #bbb;
+			line-height: 1.5em;
+			height: 49px;
+			background: 0 0;
+			padding: 12px 10px 11px;
+			width: 100%;
+		}
+
+		input.btn-block {
+			background: #619b43!important;
+			color: #f1f1f1;
+			text-transform: uppercase;
+			font-size: .9em;
+			font-style: normal;
+			letter-spacing: .15em;
+			line-height: 18px;
+		}
+
+		h2 {
+			color: #444;
+			font-size: 1em;
+			line-height: 1.5em;
+			text-align: center;
+			font-family: Proxima,sans-serif;
+			font-style: normal;
+			font-weight: 400;
+			padding: 0;
+			text-transform: uppercase;
+			letter-spacing: .1em;
+
+			a {
+				text-decoration: underline;
+				line-height: 1.5em;
+				color: #444;
+			}
+
+			a:hover {
+				color: #444;
+				text-decoration: none;
+			}
+		}
+
+	}
+
+	.terms_cond {
+		padding-top: 15px;
+		margin: 0;
+		font-size: .9em!important;
+		color: #999;
 	}
 }
 
