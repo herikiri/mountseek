@@ -1,0 +1,21 @@
+section#container
+	= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, id: "login_form" }) do |f|
+
+		#login
+			.profile_header
+				h1 Forgot Your Password?
+				h2 No Worries. It is easy to Reset Your Password
+			.document
+				.inner
+					.document-wrapper
+						h2 Please Enter Your Email Address To Verify Your Account
+						br
+						= f.email_field :email, autofocus: true, placeholder: "Email address", class: 'input-block-level'
+
+						= f.submit "Verify My Account", class: "btn btn-lg btn-primary btn-block"
+
+			.clearfix.document-wrapper
+				h2.join
+					| Return To 
+					- if controller_name != 'sessions'
+						= link_to "Login", new_session_path(resource_name)
