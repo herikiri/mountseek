@@ -1,6 +1,11 @@
 // Place all the styles related to the user controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+section#container {
+	background-color: #f1f1f1;
+	margin-top: -20px;
+	height: 100%;
+}
 
 .form-signin {
 	max-width: 300px;
@@ -15,4 +20,159 @@
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
 	box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
+
+#login {
+	margin: 0 auto 60px;
+	display: block;
+	width: 100%;
+
+	p {
+		display: block;
+		font-family: Proxima,sans-serif;
+		font-style: normal;
+		font-size: 1em;
+		letter-spacing: .125em;
+		text-transform: uppercase;
+		text-align: center;
+	}
+
+	.profile_header {
+		width: 100%;
+		padding: 50px 0;
+		margin: 0 auto;
+		text-align: center;
+
+		h1 {
+			color: #444;
+			font-size: 3em;
+			max-width: 700px;
+			line-height: 1.1em;
+			text-transform: uppercase;
+			margin: 0 auto -8px;
+			border: none;
+			padding: 0;
+			letter-spacing: .05em;
+			font-family: Baskerville,georgia,serif;
+			font-style: italic;
+			font-weight: 400;
+		}
+
+		h2 {
+			margin: 20px auto 0;
+			color: #B7853D;
+			font-size: 1em;
+			max-width: 500px;
+			line-height: 1.5em;
+			font-family: Proxima,sans-serif;
+			font-style: normal;
+			font-weight: 400;
+			padding: 0;
+			text-transform: uppercase;
+			letter-spacing: .1em;
+		}
+		
+		a {
+			text-decoration: underline;
+			color: #B7853D;
+		}
+	}
+
+	.document {
+		max-width: 440px;
+		margin-bottom: 60px;
+		padding: 20px;
+		width: 100%;
+		margin: 0 auto;
+		background: #fff;
+
+		.inner {
+			border: 1px solid #e2e2e2;
+			padding: 30px 0;
+			max-width: 960px;
+			margin: 0 auto;
+			position: relative;
+
+
+			.facebook-login {
+				border-bottom: 1px solid #e2e2e2;
+				margin-bottom: 30px;
+			}
+
+			.document-wrapper {
+				padding: 0 40px;
+				position: relative;
+				max-width: 800px;
+				
+				.facebook-login-container {
+					width: 100%;
+					display: block;
+					position: relative;
+					cursor: pointer;
+					overflow: hidden;
+					max-height: 45px;
+					margin-bottom: 32px;
+
+					.facebook-login-btn {
+						padding: 14px 25px 11px;
+						font-size: .9em;
+						background: #425f9c!important;
+						position: relative;
+						z-index: 1;
+						color: #f1f1f1;
+						cursor: pointer;
+						margin-bottom: 0!important;
+						border: none;
+						text-align: center;
+						text-transform: uppercase;
+						font-family: Proxima,sans-serif;
+						font-style: normal;
+						letter-spacing: .15em;
+						line-height: 18px;
+						text-decoration: none!important;
+						width: 100%;
+						
+
+						a {
+							text-decoration: none;
+							color: #f1f1f1;
+							margin-left: 8px;
+						}
+					}
+				}
+
+				.email-text {
+					font-family: georgia;
+					color: #666;
+					margin-bottom: 30px;
+					padding: 0;
+				}
+
+				input {
+					margin: 0 auto 35px;
+					color: #666;
+					font-family: georgia,serif;
+					font-style: normal;
+					border: 1px solid #bbb;
+					line-height: 1.5em;
+					height: 49px;
+					background: 0 0;
+					padding: 12px 10px 11px;
+				}
+
+				input.btn-block {
+					background: #619b43!important;
+					color: #f1f1f1;
+					text-transform: uppercase;
+					font-size: .9em;
+					font-style: normal;
+					letter-spacing: .15em;
+					line-height: 18px;
+				}
+
+			}
+		}
+	}
+}
+
+
 

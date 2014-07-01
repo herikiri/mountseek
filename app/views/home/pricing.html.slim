@@ -1,41 +1,49 @@
 .container
-  br/
-  h4 Select Ad Type
-  ul.nav.nav-pills
-    li.active
-      a href="#horses" data-toggle="tab" Horses
-    li
-      a href="#studs" data-toggle="tab" Studs
-    li
-      a href="#trailers" data-toggle="tab" Trailers
-    li
-      a href="#tacks" data-toggle="tab" Tacks
-    li
-      a href="#real-estates" data-toggle="tab" Real Estates
-    li
-      a href="#services" data-toggle="tab" Services
-  h4 Select Ad Package
-  .tab-content
-    #horses.row.tab-pane.fade.in.active
-      - @horsePackages.each do |package|
-        = render partial: "pricing_section", locals: {package: package} 
+  section.pricing
+    header.profile_header.center
+      h1 Showcase Your Horse
+      h2 
+        | Free options for the next
+        strong 117
+        | Ads!
+      hr 
 
-    #studs.row.tab-pane.fade
-      - @studPackages.each do |package|
-        = render partial: "pricing_section", locals: {package: package}
+    p.count.pricing-steps Select Ad Type
+    ul.nav.nav-pills
+      li.active.left
+        a href="#horses" data-toggle="tab" Horses
+      li
+        a href="#studs" data-toggle="tab" Studs
+      li
+        a href="#trailers" data-toggle="tab" Trailers
+      li
+        a href="#tacks" data-toggle="tab" Tacks
+      li
+        a href="#real-estates" data-toggle="tab" Real Estates
+      li
+        a href="#services" data-toggle="tab" Services
+    p.count.pricing-steps Select Ad Package
+    .tab-content
+      #horses.row.tab-pane.fade.in.active
+        - @horsePackages.each do |package|
+          = render partial: "pricing_section", locals: {package: package} 
 
-    #trailers.row.tab-pane.fade
-      - @trailerPackages.each do |package|
-        = render partial: "pricing_section", locals: {package: package}
+      #studs.row.tab-pane.fade
+        - @studPackages.each do |package|
+          = render partial: "pricing_section", locals: {package: package}
 
-    #tacks.row.tab-pane.fade
-      - @tackPackages.each do |package|
-        = render partial: "pricing_section", locals: {package: package}
+      #trailers.row.tab-pane.fade
+        - @trailerPackages.each do |package|
+          = render partial: "pricing_section", locals: {package: package}
 
-    #real-estates.row.tab-pane.fade
-      - @realEstatePackages.each do |package|
-        = render partial: "pricing_section", locals: {package: package}
+      #tacks.row.tab-pane.fade
+        - @tackPackages.each do |package|
+          = render partial: "pricing_section", locals: {package: package}
 
-    #services.row.tab-pane.fade
-      - @servicePackages.each do |package|
-        = render partial: "pricing_section", locals: {package: package}
+      #real-estates.row.tab-pane.fade
+        - @realEstatePackages.each do |package|
+          = render partial: "pricing_section", locals: {package: package}
+
+      #services.row.tab-pane.fade
+        - @servicePackages.each do |package|
+          = render partial: "pricing_section", locals: {package: package}
