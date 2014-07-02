@@ -407,7 +407,7 @@ Tack.connection.execute('ALTER SEQUENCE tacks_id_seq RESTART WITH 1')
   tack.email = tack.user.email
   tack.phone_number = tack.user.profile_phone_number
 
-  tack_discipline = tack.disciplines.name(name: disciplines.sample, experience: experiences.sample)
+  tack_discipline = tack.disciplines.new(name: disciplines.sample, experience: experiences.sample)
   tack_discipline.save!
 
   tack_images.each do |img|
