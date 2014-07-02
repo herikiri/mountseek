@@ -11,6 +11,7 @@
     .document-wrapper.border
       .text.ten
         h2.followon The Basics About Your Horse
+        
         .row
           = f.hidden_field :package_id, value: @stud.package_id
           = f.input :title, label: false, placeholder: "Ad Title * - Captive Your Buyer"
@@ -60,87 +61,21 @@
           = f.input :breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Breed *", collection: BreedOption.all, value_method: :name
           = f.input :second_breed, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Secondary Breed (optional)", collection: BreedOption.all, value_method: :name
 
-        h3 Registry Information
-
-        .row
-          = f.input :registration, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration (optional)"
-          = f.input :registration_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
-
-        .row
-          = f.input :second_reg, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Second Registration (optional)"
-          = f.input :second_reg_num, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Registration Number (optional)"
+        = render "shared/form/registry_info", f: f
 
   .document.border-bottom
     .document-wrapper.border
       .text.ten
-        h2.followon Personality & Experience
-        .row
-          = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: TemperamentOption.all, value_method: :name
-        
-        = f.simple_fields_for :disciplines do |fd|
-          .row
-            = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: DisciplineOption.all, value_method: :name
-            = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all, value_method: :name
-        p.count.cap
-          = f.link_to_add "+ Add Another Discipline", :disciplines
+        = render "shared/form/personality_and_experience", f: f
 
-  .document.border-bottom
-    .document-wrapper.border
-      .text.ten
-        h2.followon Bring Your Ad To Life With Photos & Videos
-        .row
-          = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true }
-
-          = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
-
-  .document.border-bottom
-    .document-wrapper.border
-      .text.ten
-        h2.followon Your Contact Information
-
-        .row
-          - if current_user.profile_name.present?
-            = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *", input_html: { value: current_user.profile_name}
-          - else
-            = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *"
-
-          - if current_user.profile_farm_name.present?
-            = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)", input_html: { value: current_user.profile_farm_name}
-          - else
-            = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)"
-         
-
-        .row
-          - if current_user.email.present?
-            = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *", input_html: { value: current_user.email}
-          - else
-            = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *"
-
-          - if current_user.profile_website.present?
-            = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)", input_html: { value: current_user.profile_website }
-          - else
-            = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)"
-
-
-        .row
-          - if current_user.profile_phone_number.present?
-            = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)", input_html: { value: current_user.profile_phone_number }
-          - else
-            = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)"
-
-          - if current_user.profile_alt_phone_number.present?
-            = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)", input_html: { value: current_user.profile_alt_phone_number }
-          - else
-            = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"
+  - unless @stud.package.name == "Basic"
+    = render "shared/form/input_file", f: f
     
- 
-  p.count.terms_cond.center 
-    | By clicking Save &amp; Preview, you are agreeing to Mountseek's 
-    br
-    = link_to "Terms & Conditions", "#"
+  = render "shared/form/contact_info", f: f
+  
+  = render "shared/form/terms_and_conditions", f: f
 
-  .button-container
-    = f.button :submit, 'Save & Preview', class: "btn btn-lg btn-submit"
+  = render "shared/form/submit_button", f: f
 
 javascript:
   $('select[id*="stud_birth"]').wrap('<div class="col-md-6">');

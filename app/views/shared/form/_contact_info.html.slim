@@ -1,0 +1,39 @@
+.document.border-bottom
+  .document-wrapper.border
+    .text.ten
+      h2.followon Your Contact Information
+
+      .row
+        - if current_user.profile_name.present?
+          = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *", input_html: { value: current_user.profile_name}
+        - else
+          = f.input :user_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Name *"
+
+        - if current_user.profile_farm_name.present?
+          = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)", input_html: { value: current_user.profile_farm_name}
+        - else
+          = f.input :farm_name, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Farm Name (optional)"
+       
+
+      .row
+        - if current_user.email.present?
+          = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *", input_html: { value: current_user.email}
+        - else
+          = f.input :email, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Email Address *"
+
+        - if current_user.profile_website.present?
+          = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)", input_html: { value: current_user.profile_website }
+        - else
+          = f.input :website, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Website (optional)"
+
+
+      .row
+        - if current_user.profile_phone_number.present?
+          = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)", input_html: { value: current_user.profile_phone_number }
+        - else
+          = f.input :phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Phone Number (optional)"
+
+        - if current_user.profile_alt_phone_number.present?
+          = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)", input_html: { value: current_user.profile_alt_phone_number }
+        - else
+          = f.input :alt_phone_number, label: false, wrapper_html: { class: 'col-md-6' }, placeholder: "Alternate Phone Number (optional)"

@@ -23,6 +23,8 @@ class HorsesController < ApplicationController
     @horse = Package.find(params[:package_id]).horses.new
     @horse.disciplines.new
     @horse.rideabilities.new
+    gon.image_upload_limit = @horse.package.max_photo_upload
+    gon.video_upload_limit = @horse.package.max_video_upload
   end
 
     # GET /horses/:id/edit
@@ -36,10 +38,8 @@ class HorsesController < ApplicationController
     respond_to do |format|
       if @horse.save 
         unless params[:horse][:pictures].nil?
-          params[:horse][:pictures].each do |picture|
-            @horse.pictures.create(name: picture)
-          end
-          @horse.update(banner: @horse.pictures.first.id)
+          horse_pictures = @horse.pictures.new horse_pictures_param
+          @horse.update(banner: @horse.pictures.first.id) if horse_pictures
         end
 
         unless @rideability_params.empty?
@@ -190,6 +190,14 @@ class HorsesController < ApplicationController
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament,
         :user_name, :farm_name, :email, :website, :phone_number, :alt_phone_number,
         disciplines_attributes: [:id, :name, :experience, :_destroy])
+    end
+
+    def horse_pictures_param
+      pictures = []
+      params[:horse][:pictures].each do |picture|
+        pictures << {name: picture}
+      end
+      pictures
     end
 
     def set_rideability_params

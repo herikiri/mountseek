@@ -20,6 +20,8 @@ class RealEstatesController < ApplicationController
   # GET /packages/:package_id/real_estates/new
   def new
     @real_estate = Package.find(params[:package_id]).real_estates.new
+    gon.image_upload_limit = @real_estate.max_photo_upload
+    gon.video_upload_limit = @real_estate.package.max_video_upload
   end
 
   # GET /real_estates/:id/edit

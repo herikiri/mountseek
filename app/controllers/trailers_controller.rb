@@ -20,6 +20,8 @@ class TrailersController < ApplicationController
   # GET /packages/:package_id/trailers/new
   def new
   	@trailer = Package.find(params[:package_id]).trailers.new
+    gon.image_upload_limit = @trailer.package.max_photo_upload
+    gon.video_upload_limit = @trailer.package.max_video_upload
   end
 
 
