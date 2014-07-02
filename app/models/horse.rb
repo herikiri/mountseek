@@ -7,6 +7,7 @@ class Horse < ActiveRecord::Base
 	has_many :videos, as: :videoable, dependent: :destroy
 
 	has_many :disciplines, as: :discipline, dependent: :destroy
+
 	has_many :rideabilities, dependent: :destroy
 
 	accepts_nested_attributes_for :disciplines

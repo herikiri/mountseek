@@ -70,6 +70,7 @@
           = f.simple_fields_for :rideabilities do |fr|
             = fr.collection_check_boxes :name, [['beginner', 'BEGINNER'] ,['intermediate', 'INTERMEDIATE'], ['advanced', 'ADVANCED']], :first, :last
 
+
   - unless @horse.package.name == "Basic"
     = render "shared/form/input_file", f: f
 

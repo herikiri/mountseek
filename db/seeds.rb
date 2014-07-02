@@ -11,7 +11,7 @@ DATA_COUNT = 200;
 items = [Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, 
   TemperamentOption, ExperienceOption, AiTypeOption, TackOption, 
   TackTypeOption, ConditionOption, ServiceTypeOption, StateOption,
-  HouseTypeOption]
+  HouseTypeOption, RideabilityOption]
 
 items.each(&:delete_all)
 
@@ -31,6 +31,8 @@ ConditionOption.connection.execute('ALTER SEQUENCE condition_options_id_seq REST
 ServiceTypeOption.connection.execute('ALTER SEQUENCE service_type_options_id_seq RESTART WITH 1')
 StateOption.connection.execute('ALTER SEQUENCE state_options_id_seq RESTART WITH 1')
 HouseTypeOption.connection.execute('ALTER SEQUENCE house_type_options_id_seq RESTART WITH 1')
+RideabilityOption.connection.execute('ALTER SEQUENCE rideability_options_id_seq RESTART WITH 1')
+
 
 horse = Type.create(name: "Horse")
 stud = Type.create(name: "Stud")
@@ -99,6 +101,8 @@ conditions = ["New", "Excellent", "Used"]
 service_types = ["Trainer", "Boarding Facility", "Farrier", 
   "Veterinarian", "Chiropractor", "Hauling", "Photographer", "Feed store", "Tack Store"]
 house_types = ["Acreage With Home", "Horse Property", "Orchard", "Pasture Land", "Raw Land", "Recreational Land", "Vineyard"]
+rideabilities = ["Beginner", "Intermediate", "Advanced"]
+
 
 birth = "2004-03-01"
 
@@ -179,6 +183,9 @@ house_types.each do |house_type|
   HouseTypeOption.create(name: house_type, checked: false)
 end
 
+rideabilities.each do |rideability|
+  RideabilityOption.create(name: rideability)
+end
 
 Carmen::Country.named('United States').subregions.each do |carmen_obj|
   StateOption.create(name: carmen_obj.name, checked: false)
@@ -189,7 +196,7 @@ def random_dec (min, max)
   rand * (max-min) + min
 end
 
-
+=begin
 
 User.delete_all
 User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
@@ -220,6 +227,7 @@ Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
 Discipline.delete_all
 Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1')
 
+=end
 
 Horse.delete_all
 Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
@@ -260,7 +268,7 @@ Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
 end
 
 
-
+=begin
 Stud.delete_all
 Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
 (1..DATA_COUNT).each do |num|
@@ -458,3 +466,5 @@ Service.connection.execute('ALTER SEQUENCE services_id_seq RESTART WITH 1')
   service.save!
   
 end
+
+=end

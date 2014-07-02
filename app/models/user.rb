@@ -52,9 +52,8 @@ class User < ActiveRecord::Base
         if user.save!
           user_profile = user.create_profile
           #user_avatar = user_profile.build_user_picture
-          user_avatar = user_profile.avatar
-          user_avatar.remote_avatar_url = auth[:info][:image]
-          user_avatar.save!
+          user_profile.remote_avatar_url = auth[:info][:image]
+          user_profile.save!
         end
         
       end

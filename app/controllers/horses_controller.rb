@@ -3,7 +3,7 @@ class HorsesController < ApplicationController
   before_action :set_horse, except: [:index, :create, :search, :new]
   before_action :authenticate_user!, only: [:new, :like, :dislike]
   before_action :set_items_gallery, only: [:show, :preview]
-  before_action :set_rideability_params, only: [:create]
+  #before_action :set_rideability_params, only: [:create]
 
   impressionist :actions=>[:show]
 
@@ -38,11 +38,12 @@ class HorsesController < ApplicationController
     respond_to do |format|
       if @horse.save 
         unless params[:horse][:pictures].nil?
-          horse_pictures = @horse.pictures.new horse_pictures_param
-          @horse.update(banner: @horse.pictures.first.id) if horse_pictures
+          sliced_horse_pictures = horse_pictures_param
+          sliced_horse_pictures = horse_pictures_param.slice(0, @horse.package.max_photo_upload) if horse_pictures_param.size > @horse.package.max_photo_upload
+          @horse.update(banner: @horse.pictures.first.id) if @horse.pictures.create(sliced_horse_pictures)
         end
 
-        unless @rideability_params.empty?
+        unless @rideability_params.blank?
           @horse.rideabilities.create(@rideability_params) 
         end
 
