@@ -23,6 +23,8 @@ class ServicesController < ApplicationController
   def new
     @service = Package.find(params[:package_id]).services.new
     @service.disciplines.new
+    gon.image_upload_limit = @service.package.max_photo_upload
+    gon.video_upload_limit = @service.package.max_video_upload
   end
 
   # GET /services/1/edit

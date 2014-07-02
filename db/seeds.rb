@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+DATA_COUNT = 200;
+
 items = [Type, Package, DisciplineOption, GenderOption, BreedOption, ColorOption, 
   TemperamentOption, ExperienceOption, AiTypeOption, TackOption, 
   TackTypeOption, ConditionOption, ServiceTypeOption, StateOption,
@@ -189,8 +191,6 @@ end
 
 
 
-=begin
-
 User.delete_all
 User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
 
@@ -215,7 +215,6 @@ User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
 end
 
 
-
 Picture.delete_all
 Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
 Discipline.delete_all
@@ -224,7 +223,7 @@ Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1'
 
 Horse.delete_all
 Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
-(1..200).each do |num|
+(1..DATA_COUNT).each do |num|
   horse = Horse.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 
@@ -242,28 +241,29 @@ Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
     })
 
 
-  horse.user_name = horse.user.profile_name 
+  horse.user_name = horse.user.username
   horse.farm_name = horse.user.profile_farm_name
   horse.website = horse.user.profile_website
   horse.email = horse.user.email
   horse.phone_number = horse.user.profile_phone_number
 
-  horse.disciplines.create(name: disciplines.sample, experience: experiences.sample)
+  horse_discipline = horse.disciplines.new(name: disciplines.sample, experience: experiences.sample)
+  horse_discipline.save!
 
   horse_images.each do |img|
-    horse.pictures.create(name: img)
+    horse_picture = horse.pictures.new(name: img)
+    horse_picture.save!
   end
 
   horse.banner = horse.pictures.sample.id
   horse.save!
-  
 end
 
 
 
 Stud.delete_all
 Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
-(1..200).each do |num|
+(1..DATA_COUNT).each do |num|
   stud = Stud.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 
@@ -281,24 +281,24 @@ Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
     })
 
 
-  stud.user_name = stud.user.profile_name 
+  stud.user_name = stud.user.username
   stud.farm_name = stud.user.profile_farm_name
   stud.website = stud.user.profile_website
   stud.email = stud.user.email
   stud.phone_number = stud.user.profile_phone_number
 
-  stud.disciplines.create(name: disciplines.sample, experience: experiences.sample)
+  stud_discipline = stud.disciplines.new(name: disciplines.sample, experience: experiences.sample)
+  stud_discipline.save!
 
   horse_images.each do |img|
-    stud.pictures.create(name: img)
+    stud_picture = stud.pictures.new(name: img)
+    stud_picture.save!
   end
 
   stud.banner = stud.pictures.sample.id
   stud.save!
   
 end
-
-
 
 
 models = ["Classic", "Stratus Express", "Ranchhand", "Baron" ,"Renegade"]
@@ -309,7 +309,7 @@ axles = ["One", "Two", "Three", "Four"]
 
 Trailer.delete_all
 Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
-(1..200).each do |num|
+(1..DATA_COUNT).each do |num|
   trailer = Trailer.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 
@@ -335,7 +335,8 @@ Trailer.connection.execute('ALTER SEQUENCE trailers_id_seq RESTART WITH 1')
   trailer.phone_number = trailer.user.profile_phone_number
 
   trailer_images.each do |img|
-    trailer.pictures.create(name: img)
+    trailer_picture = trailer.pictures.new(name: img)
+    trailer_picture.save!
   end
 
   trailer.banner = trailer.pictures.sample.id
@@ -346,7 +347,7 @@ end
 
 RealEstate.delete_all
 RealEstate.connection.execute('ALTER SEQUENCE real_estates_id_seq RESTART WITH 1')
-(1..200).each do |num|
+(1..DATA_COUNT).each do |num|
   real_estate = RealEstate.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 
@@ -373,7 +374,8 @@ RealEstate.connection.execute('ALTER SEQUENCE real_estates_id_seq RESTART WITH 1
   real_estate.phone_number = real_estate.user.profile_phone_number
 
   real_estate_images.each do |img|
-    real_estate.pictures.create(name: img)
+    real_estate_picture = real_estate.pictures.new(name: img)
+    real_estate_picture.save!
   end
 
   real_estate.banner = real_estate.pictures.sample.id
@@ -385,7 +387,7 @@ end
 
 Tack.delete_all
 Tack.connection.execute('ALTER SEQUENCE tacks_id_seq RESTART WITH 1')
-(1..200).each do |num|
+(1..DATA_COUNT).each do |num|
   tack = Tack.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 
@@ -405,11 +407,12 @@ Tack.connection.execute('ALTER SEQUENCE tacks_id_seq RESTART WITH 1')
   tack.email = tack.user.email
   tack.phone_number = tack.user.profile_phone_number
 
-  #tack.disciplines.create(name: disciplines.sample, experience: experiences.sample)
-
+  tack_discipline = tack.disciplines.name(name: disciplines.sample, experience: experiences.sample)
+  tack_discipline.save!
 
   tack_images.each do |img|
-    tack.pictures.create(name: img)
+    tack_picture = tack.pictures.new(name: img)
+    tack_picture.save!
   end
 
   tack.banner = tack.pictures.sample.id
@@ -417,13 +420,10 @@ Tack.connection.execute('ALTER SEQUENCE tacks_id_seq RESTART WITH 1')
   
 end
 
-=end
-
-
 
 Service.delete_all
 Service.connection.execute('ALTER SEQUENCE services_id_seq RESTART WITH 1')
-(1..200).each do |num|
+(1..DATA_COUNT).each do |num|
   service = Service.create(
     { title: Faker::Company.catch_phrase, 
       description: Faker::Lorem.paragraphs(3, true).join(","), 
@@ -446,11 +446,12 @@ Service.connection.execute('ALTER SEQUENCE services_id_seq RESTART WITH 1')
   service.email = service.user.email
   service.phone_number = service.user.profile_phone_number
 
-  #service.disciplines.create(name: disciplines.sample, experience: experiences.sample)
-
+  service_discipline = service.disciplines.new(name: disciplines.sample, experience: experiences.sample)
+  service_discipline.save!
 
   service_images.each do |img|
-    service.pictures.create(name: img)
+    service_picture = service.pictures.new(name: img)
+    service_picture.save!
   end
 
   service.banner = service.pictures.sample.id

@@ -21,6 +21,8 @@ class StudsController < ApplicationController
   def new
     @stud = Package.find(params[:package_id]).studs.new
     @stud.disciplines.new
+    gon.image_upload_limit = @stud.package.max_photo_upload
+    gon.video_upload_limit = @stud.package.max_video_upload
   end
 
   # GET /studs/:id/edit

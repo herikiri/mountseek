@@ -22,6 +22,8 @@ class TacksController < ApplicationController
   def new
     @tack = Package.find(params[:package_id]).tacks.new
     @tack.disciplines.new
+    gon.image_upload_limit = @tack.package.max_photo_upload
+    gon.video_upload_limit = @tack.package.max_video_upload
   end
 
   # GET /tacks/:id/edit

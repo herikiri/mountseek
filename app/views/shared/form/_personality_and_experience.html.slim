@@ -1,0 +1,11 @@
+h2.followon Personality & Experience
+.row
+  = f.input :temperament, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Temperament (optional)", collection: TemperamentOption.all, value_method: :name
+
+= f.simple_fields_for :disciplines do |fd|
+  .row
+    = fd.input :name, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Discipline (optional)", collection: DisciplineOption.all, value_method: :name
+    = fd.input :experience, label: false, wrapper_html: { class: 'col-md-6' }, prompt: "Experience (optional)", collection: ExperienceOption.all, value_method: :name
+
+p.count.cap 
+  = f.link_to_add "+ Add Another Discipline", :disciplines

@@ -1,0 +1,9 @@
+.document.border-bottom
+  .document-wrapper.border
+    .text.ten
+      h2.followon Bring Your Ad To Life With Photos & Videos
+      .row
+        = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true }
+        .alert.alert-danger.image-upload-alert role="alert" style="display:none" Image upload count reach limit!
+
+        = f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
