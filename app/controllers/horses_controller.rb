@@ -48,19 +48,11 @@ class HorsesController < ApplicationController
         end
 
         unless params[:horse][:videos].nil?
-          params[:horse][:videos].each do |video|
-            @horse.videos.create(name: video)
-          end
+          url = "https://accounts.google.com/o/oauth2/auth?client_id=886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com&redirect_uri=http://lvh.me:3000/oauth2callback&scope=https://gdata.youtube.com&response_type=code&approval_prompt=force&access_type=offline"
+          format.html { redirect_to url }
+        else
+          format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
         end
-        
-        format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
-
-        #unless params[:horse][:videos].nil?
-        #  url = "https://accounts.google.com/o/oauth2/auth?client_id=886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com&redirect_uri=http://lvh.me:3000/oauth2callback&scope=https://gdata.youtube.com&response_type=code&approval_prompt=force&access_type=offline"
-        #  format.html { redirect_to url }
-        #else
-        #  format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
-        #end
         
       else
         format.html { render :new, notice: 'Save Horse Failed!' }

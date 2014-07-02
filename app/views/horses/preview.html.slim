@@ -7,4 +7,6 @@ section#profile
 				= render "horse_detail"
 	        
 	  
-
+= link_to 'Edit', edit_horse_path(@horse), class: "btn btn-primary btn-inverse"
+	  | &nbsp;
+= link_to 'Continue', publish_horse_path(@horse), class: "btn btn-primary btn-inverse"

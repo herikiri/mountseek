@@ -27,7 +27,11 @@ class Oauth2CallbacksController < ApplicationController
       refresh_token = refresh_token_value.gsub(/"/, "").gsub(/,/,"")
   
       client = YouTubeIt::AuthSubClient.new(:token => access_token , :dev_key => "AIzaSyAq1ngA0WP73hu-3Mdr6dVpA5-nPmT5kjo")
-      
+      #client.video_upload("http://media.railscasts.com/assets/episodes/videos/412-fast-rails-commands.mp4", :title => "test",:description => 'some description', :category => 'People',:keywords => %w[cool blah test])
+
+      puts "********************************************"
+      puts client.my_videos
+      puts "********************************************"
     end
 
     

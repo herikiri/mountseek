@@ -1,12 +1,4 @@
 = simple_nested_form_for @horse, html: {multipart: true, class: 'form-horizontal'} do |f|
-
-  - if @horse.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@horse.errors.count, "error")} prohibited this horse from being saved:"
-      ul
-        - @horse.errors.full_messages.each do |message|
-          li = message
-
   .document.border-bottom
     .document-wrapper.border
       .text.ten
@@ -62,6 +54,7 @@
       .text.ten
         = render "shared/form/personality_and_experience", f: f
 
+      /!
         h3 
           | RIDEABILITY
           br
