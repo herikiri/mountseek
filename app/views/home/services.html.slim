@@ -2,25 +2,7 @@
   #spin style="display:none;"
   = search_form_for @search_services, url: services_result_path, :html => {role: "form"} do |f|
 
-
-    .row
-      .col-md-4
-        h4 Service Type
-        - @service_types.each do |service_type|
-          = check_box_tag "q_service_type_cont_any_#{service_type.id}", service_type.name, false, name: 'q[service_type_cont_any][]'
-
-          = label_tag "q_service_type_cont_any_#{service_type.id}", service_type.name
-          br
-
-    .row
-      h4 Locations
-      - @states.in_groups_of(20).each do |state_group|
-        .col-md-3
-          - state_group.each do |state|
-            - unless state.nil?
-              = check_box_tag "q_state_cont_any_#{state.id}", state.name, state.checked, name: 'q[state_cont_any][]'
-              = label_tag "q_state_cont_any_#{state.id}", state.name
-              br
+    = render "home/shared/services_checkbox"
 
     = f.submit "Search"
 

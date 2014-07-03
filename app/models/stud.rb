@@ -45,12 +45,10 @@ class Stud < ActiveRecord::Base
 
   end
 
-
-  # Ad Stud in range of duration
-	scope :live, -> { where("published_end > ?", "%#{DateTime.now}%" ) }
-
 	# Ad Stud in range of duration
 	scope :published, -> { where(status: 'published') }
+
+	scope :live, -> { where("published_end > ?", "%#{DateTime.now}%" ) }
 
 	featured_packages = ["Deluxe", "Premium"]
 	scope :featured_ad, -> { where(package_id: Package.where(name: featured_packages).map(&:id)) }

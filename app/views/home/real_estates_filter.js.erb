@@ -52,19 +52,20 @@ checkboxes_state.prop('disabled', false);
 	}
 
 
-	<% if params[:q][:house_type_cont_any] %>
-		check_bedroom();	
-		check_state();
-	<% end %>
+	<% if params[:q] %>
+		<% if params[:q][:house_type_cont_any] %>
+			check_bedroom();	
+			check_state();
+		<% end %>
 
-	<% if params[:q][:bedroom_eq_any] %>
-		check_house_type();
-		check_state();
-	<% end %>
+		<% if params[:q][:bedroom_eq_any] %>
+			check_house_type();
+			check_state();
+		<% end %>
 
-	<% if params[:q][:state_cont_any] %>
-		check_bedroom();
-		check_house_type();
+		<% if params[:q][:state_cont_any] %>
+			check_bedroom();
+			check_house_type();
+		<% end %>
 	<% end %>
-
 <% end %>

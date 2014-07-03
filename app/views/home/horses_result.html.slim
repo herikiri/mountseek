@@ -1,9 +1,23 @@
 .container
+	= smart_listing_controls_for(:horses) do
+		= render "home/shared/horses_checkbox"
+
 	- if @horses
-		- horses_found = @horses.count
-	- else 
-		- horses_found = 0 
+		h4#result= "#{@horses.count} Horses Found"
+	- else
+		h4#result Horses Not Found
 
-	h4#result= "#{horses_found} Horses Found"
-
+	hr 
 	= smart_listing_render :horses
+
+
+= include_gon
+javascript:
+	//var values = gon.params_value
+	//var values = ["Arabian", "Baroque"]
+	/*
+	console.log(values);
+	var find = '[value=' + values.join('], [value=') + ']'
+	console.log(find)
+	$('.smart-listing-controls').find(find).prop("checked", true);
+	*/

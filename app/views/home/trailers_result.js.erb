@@ -1,2 +1,9 @@
 <%# Render list for XHR requests %>
 <%= smart_listing_update :trailers %>
+
+<% if @trailers %>
+	<% trailer_count = @trailers.count  %>
+<% else %>	
+	<% trailer_count = 0 %>
+<% end %>
+$('h4#result').text("<%= trailer_count %> Trailers Found");

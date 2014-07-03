@@ -52,20 +52,21 @@ checkboxes_condition.prop('disabled', false);
 		}
 	}
 
+	<% if params[:q] %>
+		<% if params[:q][:tack_cont_any] %>
+			check_tack_type();	
+			check_condition();
+		<% end %>
 
-	<% if params[:q][:tack_cont_any] %>
-		check_tack_type();	
-		check_condition();
-	<% end %>
+		<% if params[:q][:tack_type_cont_any] %>
+			check_tack();
+			check_condition();
+		<% end %>
 
-	<% if params[:q][:tack_type_cont_any] %>
-		check_tack();
-		check_condition();
-	<% end %>
-
-	<% if params[:q][:condition_cont_any] %>
-		check_tack_type();
-		check_tack();
+		<% if params[:q][:condition_cont_any] %>
+			check_tack_type();
+			check_tack();
+		<% end %>
 	<% end %>
 
 <% end %>

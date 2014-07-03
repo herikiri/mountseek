@@ -156,7 +156,7 @@ class HorsesController < ApplicationController
     sort_by = {price: :desc} if params[:sort_by] == "high_to_low"
     sort_by = {price: :asc} if params[:sort_by] == "low_to_high"
 
-    @horses = @horses.order(sort_by).published.live
+    @horses = @horses.order(sort_by).live
 
     smart_listing_create(:horses, @horses, partial: "horses/horse_list")
   end

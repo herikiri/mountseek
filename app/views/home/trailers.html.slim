@@ -2,22 +2,7 @@
   #spin style="display:none;"
   = search_form_for @search_trailers, url: trailers_result_path, :html => {role: "form"} do |f|
 
-    .row
-      h4 Hauls
-      - @hauls.each do |haul|
-        = check_box_tag "q_hauls_eq_any_#{haul}", haul, false, name: 'q[hauls_eq_any][]'
-        = label_tag "q_hauls_eq_any_#{haul}", "#{haul} horse"
-        br
-
-    .row
-      h4 Locations
-      - @states.in_groups_of(20).each do |state_group|
-        .col-md-3
-          - state_group.each do |state|
-            - unless state.nil?
-              = check_box_tag "q_state_cont_any_#{state.id}", state.name, state.checked, name: 'q[state_cont_any][]'
-              = label_tag "q_state_cont_any_#{state.id}", state.name
-              br
+    = render "home/shared/trailers_checkbox"
 
     = f.submit "Search"
 

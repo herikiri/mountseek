@@ -1,4 +1,7 @@
 .container
+	= smart_listing_controls_for(:trailers) do
+		= render "home/shared/trailers_checkbox"
+
 	- if @trailers
 		- trailers_found = @trailers.count
 	- else 
@@ -6,5 +9,6 @@
 
 	h4#result= "#{trailers_found} Trailer Found"
 
+	hr
 	= smart_listing_render :trailers
 

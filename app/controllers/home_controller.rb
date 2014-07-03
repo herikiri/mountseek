@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-
   before_action :set_search_horses, only: [:horses, :horses_result, :horses_filter]
   before_action :set_search_studs, only: [:studs, :studs_result, :studs_filter]
   before_action :set_search_trailers, only: [:trailers, :trailers_result, :trailers_filter]
@@ -14,9 +13,14 @@ class HomeController < ApplicationController
   before_action :set_search_real_estates_result, only: [:real_estates_result, :real_estates_filter]
   before_action :set_search_services_result, only: [:services_result, :services_filter]
 
-  before_action :set_breed_options, only: [:horses , :studs]
-  before_action :set_state_options, only: [:horses , :studs, :trailers, :real_estates, :services]
-
+  before_action :set_breed_options, only: [:horses, :horses_result, :studs, :studs_result]
+  before_action :set_gender_options, only: [:horses, :horses_result]
+  before_action :set_state_options, only: [:horses , :horses_result, :studs, :studs_result, :trailers, :trailers_result, :real_estates, :real_estates_result, :services, :services_result]
+  before_action :set_ai_type_options, only: [:studs, :studs_result]
+  before_action :set_hauls_options, only: [:trailers, :trailers_result]
+  before_action :set_tacks_options, only: [:tacks, :tacks_result]
+  before_action :set_house_options, only: [:real_estates, :real_estates_result]
+  before_action :set_service_options, only: [:services, :services_result]
 
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
@@ -43,34 +47,27 @@ class HomeController < ApplicationController
   end
 
   def horses
-    @genders = GenderOption.all.order(name: :asc)
   end
 
   def studs
-    @ai_types = AiTypeOption.all.order(name: :asc)
   end
 
   def trailers
-    @hauls = Trailer.all.map(&:hauls).uniq
   end
 
   def tacks
-    @tack_categories = TackOption.all.order(name: :asc)
-    @tacks_type = TackTypeOption.all.order(name: :asc)
-    @conditions = ConditionOption.all.order(name: :asc)
   end
 
   def real_estates
-    @house_types = HouseTypeOption.all.order(name: :asc)
-    @bedrooms = RealEstate.all.map(&:bedroom).uniq.sort()
+    
   end
 
   def services
-    @service_types = ServiceTypeOption.all.order(name: :asc)
   end
 
   def horses_result
     smart_listing_create(:horses, @horses, partial: "home/horses/horse_list")
+    gon.params_value = params[:q][:breed_cont_any] if params[:q]
   end
 
   def studs_result
@@ -140,58 +137,91 @@ class HomeController < ApplicationController
       if params[:q] 
         @horses = @search_horses.result
       else
-        @horses = nil;
+        @horses = Horse.all;
       end
+      @horses = @horses.live
     end
 
     def set_search_studs_result
       if params[:q] 
         @studs = @search_studs.result
       else
-        @studs = nil;
+        @studs = Stud.all;
       end
+      @studs = @studs.live
     end
 
     def set_search_trailers_result
       if params[:q] 
         @trailers = @search_trailers.result
       else
-        @trailers = nil;
+        @trailers = Trailer.all;
       end
+      @trailers = @trailers.live
     end
 
     def set_search_tacks_result
       if params[:q] 
         @tacks = @search_tacks.result
       else
-        @tacks = nil;
+        @tacks = Tack.all;
       end
+      @tacks = @tacks.live
     end
 
     def set_search_real_estates_result
       if params[:q] 
         @real_estates = @search_real_estates.result
       else
-        @real_estates = nil;
+        @real_estates = RealEstate.all;
       end
+      @real_estates = @real_estates.live
     end
 
     def set_search_services_result
       if params[:q] 
         @services = @search_services.result
       else
-        @services = nil;
+        @services = Service.all;
       end
+      @services = @services.live
     end
 
     def set_breed_options
       @breeds = BreedOption.all.order(name: :asc)
     end
 
-    def set_state_options
-      @states = StateOption.all.order(name: :asc)
+    def set_gender_options
+      @genders = GenderOption.all.order(name: :asc)
     end
 
+    def set_state_options
+      @us_states = Carmen::Country.named('United States').subregions
+      @ca_states = Carmen::Country.named('Canada').subregions
+    end
+
+    def set_ai_type_options
+      @ai_types = AiTypeOption.all.order(name: :asc)
+    end
+
+    def set_hauls_options
+      @hauls = Trailer.all.map(&:hauls).uniq
+    end
+
+    def set_tacks_options
+      @tack_categories = TackOption.all.order(name: :asc)
+      @tacks_type = TackTypeOption.all.order(name: :asc)
+      @conditions = ConditionOption.all.order(name: :asc)
+    end
+
+    def set_house_options
+      @house_types = HouseTypeOption.all.order(name: :asc)
+      @bedrooms = RealEstate.all.map(&:bedroom).uniq.sort()
+    end
+
+    def set_service_options
+      @service_types = ServiceTypeOption.all.order(name: :asc)
+    end
 
 end
 

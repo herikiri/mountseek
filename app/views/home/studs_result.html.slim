@@ -1,9 +1,11 @@
 .container
+	= smart_listing_controls_for(:studs) do
+		= render "home/shared/studs_checkbox"
+
 	- if @studs
-		- studs_found = @studs.count
-	- else 
-		- studs_found = 0 
+		h4#result= "#{@studs.count} Stud Found"
+	- else
+		h4#result Stud Not Found
 
-	h4#result= "#{studs_found} Studs Found"
-
+	hr
 	= smart_listing_render :studs

@@ -40,14 +40,16 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :horses do
-      member do
-        get "like"
-        get "dislike"
+    items.each do |item|
+      resources item.to_sym do
+        member do
+          get "like"
+          get "dislike"
+        end
       end
-    end
+    end 
   end
-  
+
   resources :profiles do
     member do
       get 'ads'

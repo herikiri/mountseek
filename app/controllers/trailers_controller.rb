@@ -152,7 +152,7 @@ class TrailersController < ApplicationController
     sort_by = {price: :desc} if params[:sort_by] == "high_to_low"
     sort_by = {price: :asc} if params[:sort_by] == "low_to_high"
 
-    @trailers = @trailers.order(sort_by).published.live
+    @trailers = @trailers.order(sort_by).live
 
     smart_listing_create(:trailers, @trailers, partial: "trailers/trailer_list")
   end

@@ -1,2 +1,9 @@
 <%# Render list for XHR requests %>
 <%= smart_listing_update :real_estates %>
+
+<% if @real_estates %>
+	<% real_estate_count = @real_estates.count  %>
+<% else %>	
+	<% real_estate_count = 0 %>
+<% end %>
+$('h4#result').text("<%= real_estate_count %> Real Estate Found");

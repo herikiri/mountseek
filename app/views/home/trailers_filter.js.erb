@@ -37,13 +37,14 @@ checkboxes_state.prop('disabled', false);
 		}
 	}
 
+	<% if params[:q] %>
+		<% if params[:q][:hauls_eq_any] %>
+			check_state();
+		<% end %>
 
-	<% if params[:q][:hauls_eq_any] %>
-		check_state();
-	<% end %>
-
-	<% if params[:q][:state_cont_any] %>
-		check_hauls();
+		<% if params[:q][:state_cont_any] %>
+			check_hauls();
+		<% end %>
 	<% end %>
 
 <% end %>

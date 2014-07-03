@@ -38,13 +38,14 @@ checkboxes_state.prop('disabled', false);
 	}
 
 
-	<% if params[:q][:service_type_cont_any] %>
-		check_state();
-	<% end %>
+	<% if params[:q] %>
+		<% if params[:q][:service_type_cont_any] %>
+			check_state();
+		<% end %>
 
-
-	<% if params[:q][:state_cont_any] %>
-		check_service_type();
+		<% if params[:q][:state_cont_any] %>
+			check_service_type();
+		<% end %>
 	<% end %>
 
 <% end %>

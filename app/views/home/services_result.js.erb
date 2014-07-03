@@ -1,2 +1,9 @@
 <%# Render list for XHR requests %>
 <%= smart_listing_update :services %>
+
+<% if @services %>
+	<% service_count = @services.count  %>
+<% else %>	
+	<% service_count = 0 %>
+<% end %>
+$('h4#result').text("<%= service_count %> Services Found");

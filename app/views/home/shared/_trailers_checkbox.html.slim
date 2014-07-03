@@ -1,0 +1,8 @@
+.row
+  h4 Hauls
+  - @hauls.each do |haul|
+    = check_box_tag "q_hauls_eq_any_#{haul}", haul, false, name: 'q[hauls_eq_any][]'
+    = label_tag "q_hauls_eq_any_#{haul}", "#{haul} horse"
+    br
+
+= render "home/shared/locations_checkbox"

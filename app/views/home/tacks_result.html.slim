@@ -1,4 +1,7 @@
 .container
+	= smart_listing_controls_for(:tacks) do
+		= render "home/shared/tacks_checkbox"
+
 	- if @tacks
 		- tacks_found = @tacks.count
 	- else 

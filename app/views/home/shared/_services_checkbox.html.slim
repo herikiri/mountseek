@@ -1,0 +1,10 @@
+.row
+  .col-md-4
+    h4 Service Type
+    - @service_types.each do |service_type|
+      = check_box_tag "q_service_type_cont_any_#{service_type.id}", service_type.name, false, name: 'q[service_type_cont_any][]'
+
+      = label_tag "q_service_type_cont_any_#{service_type.id}", service_type.name
+      br
+
+= render "home/shared/locations_checkbox"

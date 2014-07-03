@@ -1,19 +1,5 @@
 - unless smart_listing.empty? 
-  .row.filter
-    .col-md-4
-      = smart_listing.paginate
-    .col-md-6
-
-    .col-md-2
-      = smart_listing_controls_for(:trailers, {class: "form-inline text-right"}) do
-        =select_tag :sort_by, options_for_select([["Newest", "newest"], ["Oldest", "oldest"], ["Price High to Low", "high_to_low"], ["Price Low to High", "low_to_high"] ], "newest"), { class: 'form-control' } 
-
-        - unless @params_q.nil?
-          =hidden_field_tag "q[state_cont]", @params_q["state_cont"]
-          =hidden_field_tag "q[city_cont]", @params_q["city_cont"]
-          =hidden_field_tag "q[year_cont]", @params_q["year_cont"]
-          =hidden_field_tag "q[hauls_eq]", @params_q["hauls_eq"]
-
+  
   - smart_listing.collection.in_groups_of(4).each do |trailers_group|
     .row
       ul.thumbnails
@@ -21,3 +7,6 @@
           - unless trailer.nil?
             .li.col-md-3
               = render partial: "shared/trailer_thumbnail", locals: {trailer: trailer}
+
+  = smart_listing.paginate
+

@@ -1,4 +1,7 @@
 .container
+	= smart_listing_controls_for(:services) do
+		= render "home/shared/services_checkbox"
+
 	- if @services
 		- services_found = @services.count
 	- else 
@@ -6,4 +9,5 @@
 
 	h4#result= "#{services_found} Services Found"
 
+	hr
 	= smart_listing_render :services

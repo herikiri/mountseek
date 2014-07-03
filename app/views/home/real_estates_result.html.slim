@@ -1,4 +1,7 @@
 .container
+	= smart_listing_controls_for(:real_estates) do
+		= render "home/shared/real_estate_checkbox"
+
 	- if @real_estates
 		- real_estates_found = @real_estates.count
 	- else 
@@ -6,4 +9,5 @@
 
 	h4#result= "#{real_estates_found} Real Estates Found"
 
+	hr 
 	= smart_listing_render :real_estates

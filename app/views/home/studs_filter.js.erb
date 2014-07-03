@@ -55,19 +55,21 @@ checkboxes_ai_type.prop('disabled', false);
 	}
 
 
-	<% if params[:q][:breed_cont_any] %>
-		check_ai_type();
-		check_state();
-	<% end %>
+	<% if params[:q] %>
+		<% if params[:q][:breed_cont_any] %>
+			check_ai_type();
+			check_state();
+		<% end %>
 
-	<% if params[:q][:ai_type_cont_any] %>
-		check_breed();
-		check_state();
-	<% end %>
+		<% if params[:q][:ai_type_cont_any] %>
+			check_breed();
+			check_state();
+		<% end %>
 
-	<% if params[:q][:state_cont_any] %>
-		check_breed();
-		check_ai_type();
+		<% if params[:q][:state_cont_any] %>
+			check_breed();
+			check_ai_type();
+		<% end %>
 	<% end %>
 
 <% end %>

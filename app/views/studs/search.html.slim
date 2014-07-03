@@ -1,6 +1,21 @@
 .container
   h4= "#{@studs.count} Stallion Found" 
 
+  .row.filter
+    .col-md-10
+
+    .col-md-2
+      = smart_listing_controls_for(:studs, {class: "form-inline text-right"}) do
+        =select_tag :sort_by, options_for_select([["Newest", "newest"], ["Oldest", "oldest"], ["Price High to Low", "high_to_low"], ["Price Low to High", "low_to_high"] ], "newest"), { class: 'form-control' } 
+
+        - unless @params_q.nil?
+          =hidden_field_tag "q[breed_cont]", @params_q["breed_cont"]
+          =hidden_field_tag "q[state_cont]", @params_q["state_cont"]
+          =hidden_field_tag "q[city_cont]", @params_q["city_cont"]
+          =hidden_field_tag "q[price_gteq]", @params_q["price_gteq"]
+          =hidden_field_tag "q[price_lteq]", @params_q["price_lteq"]
+
+
   = smart_listing_render :studs
   
 = javascript_include_tag 'fav_button', 'data-turbolinks-track' => true

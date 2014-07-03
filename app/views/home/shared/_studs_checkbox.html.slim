@@ -1,0 +1,9 @@
+= render "home/shared/breeds_checkbox"
+    
+h4 Ai Types
+- @ai_types.each do |ai_type|
+	= check_box_tag "q_ai_type_cont_any_#{ai_type.id}", ai_type.name, ai_type.checked, name: 'q[ai_type_cont_any][]'
+	= label_tag "q_ai_type_cont_any_#{ai_type.id}", ai_type.name
+	br
+
+= render "home/shared/locations_checkbox"

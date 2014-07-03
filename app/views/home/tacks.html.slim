@@ -2,30 +2,7 @@
   #spin style="display:none;"  
   = search_form_for @search_tacks, url: tacks_result_path, :html => {role: "form"} do |f|
 
-    .row
-      .col-md-4
-        h4 Tack
-        - @tack_categories.each do |tack_category|
-          = check_box_tag "q_tack_cont_any_#{tack_category.id}", tack_category.name, false, name: 'q[tack_cont_any][]'
-
-          = label_tag "q_tack_cont_any_#{tack_category.id}", tack_category.name
-          br
-
-      .col-md-4
-        h4 Type
-        - @tacks_type.each do |type|
-          = check_box_tag "q_tack_type_cont_any_#{type.id}", type.name, false, name: 'q[tack_type_cont_any][]'
-
-          = label_tag "q_tack_type_cont_any_#{type.id}", type.name
-          br
-         
-      .col-md-4
-        h4 Condition
-        - @conditions.each do |condition|
-          = check_box_tag "q_condition_cont_any_#{condition.id}", condition.name, false, name: 'q[condition_cont_any][]'
-
-          = label_tag "q_condition_cont_any_#{condition.id}", condition.name
-          br 
+    = render "home/shared/tacks_checkbox"
 
     = f.submit "Search"
 

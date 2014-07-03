@@ -1,0 +1,26 @@
+.row
+	h4 Locations
+	ul.nav.nav-tabs role="tablist"
+		li.active
+			a href="#us" role="tab" data-toggle="tab" United States
+		li
+			a href="#ca" role="tab" data-toggle="tab" Canada
+
+	.tab-content
+		.tab-pane.fade.in.active id="us"
+			- @us_states.in_groups_of(20).each do |state_group|
+				.col-md-3
+					- state_group.each do |state|
+						- unless state.nil?
+							= check_box_tag "q_state_cont_any_#{state.code.downcase}", state.name, false, name: 'q[state_cont_any][]'
+							= label_tag "q_state_cont_any_#{state.code.downcase}", state.name
+							br
+		.tab-pane.fade id="ca"
+			- @ca_states.in_groups_of(20).each do |state_group|
+				.col-md-3
+					- state_group.each do |state|
+						- unless state.nil?
+							= check_box_tag "q_state_cont_any_#{state.code.downcase}", state.name, false, name: 'q[state_cont_any][]'
+							= label_tag "q_state_cont_any_#{state.code.downcase}", state.name
+							br
+			

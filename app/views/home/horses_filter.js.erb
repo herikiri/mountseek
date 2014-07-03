@@ -51,22 +51,22 @@ checkboxes_state.prop('disabled', false);
 		}
 	}
 
+	<% if params[:q] %>
+		<% if params[:q][:breed_cont_any] %>
+			check_gender();	
+			check_state();
+		<% end %>
 
-	<% if params[:q][:breed_cont_any] %>
-		check_gender();	
-		check_state();
+		<% if params[:q][:gender_cont_any] %>
+			check_breed();
+			check_state();
+		<% end %>
+
+		<% if params[:q][:state_cont_any] %>
+			check_gender();
+			check_breed();
+		<% end %>
 	<% end %>
-
-	<% if params[:q][:gender_cont_any] %>
-		check_breed();
-		check_state();
-	<% end %>
-
-	<% if params[:q][:state_cont_any] %>
-		check_gender();
-		check_breed();
-	<% end %>
-
 <% end %>
 
 

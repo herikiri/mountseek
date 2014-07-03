@@ -1,13 +1,5 @@
 - unless smart_listing.empty? 
-  .row.filter
-    .col-md-4
-      = smart_listing.paginate
-    .col-md-6
-
-    .col-md-2
-      = smart_listing_controls_for(:services, {class: "form-inline text-right"}) do
-        =select_tag :sort_by, options_for_select([["Newest", "newest"], ["Oldest", "oldest"], ["Price High to Low", "high_to_low"], ["Price Low to High", "low_to_high"] ], "newest"), { class: 'form-control' } 
-
+  
   - smart_listing.collection.in_groups_of(4).each do |services_group|
     .row
       ul.thumbnails
@@ -16,3 +8,4 @@
             .li.col-md-3
               = render partial: "shared/service_thumbnail", locals: {service: service}
 
+  = smart_listing.paginate

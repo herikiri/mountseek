@@ -1,2 +1,9 @@
 <%# Render list for XHR requests %>
 <%= smart_listing_update :horses %>
+
+<% if @horses %>
+	<% horse_count = @horses.count  %>
+<% else %>	
+	<% horse_count = 0 %>
+<% end %>
+$('h4#result').text("<%= horse_count %> Horses Found");

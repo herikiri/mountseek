@@ -1,2 +1,9 @@
 <%# Render list for XHR requests %>
 <%= smart_listing_update :tacks %>
+
+<% if @tacks %>
+	<% tack_count = @tacks.count  %>
+<% else %>	
+	<% tack_count = 0 %>
+<% end %>
+$('h4#result').text("<%= tack_count %> Tacks Found");
