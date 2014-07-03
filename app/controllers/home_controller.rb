@@ -67,27 +67,56 @@ class HomeController < ApplicationController
 
   def horses_result
     smart_listing_create(:horses, @horses, partial: "home/horses/horse_list")
-    gon.params_value = params[:q][:breed_cont_any] if params[:q]
+    if params[:q]
+      gon.params_value = params[:q][:breed_cont_any] if params[:q][:breed_cont_any]
+      gon.params_value += params[:q][:gender_cont_any] if params[:q][:gender_cont_any]
+      gon.params_value += params[:q][:state_cont_any] if params[:q][:state_cont_any]
+    end
   end
 
   def studs_result
     smart_listing_create(:studs, @studs, partial: "home/studs/stud_list")
+    if params[:q]
+      gon.params_value = params[:q][:breed_cont_any] if params[:q][:breed_cont_any]
+      gon.params_value += params[:q][:ai_type_cont_any] if params[:q][:ai_type_cont_any]
+      gon.params_value += params[:q][:state_cont_any] if params[:q][:state_cont_any]
+    end
   end
 
   def trailers_result
     smart_listing_create(:trailers, @trailers, partial: "home/trailers/trailer_list")
+    if params[:q]
+      gon.params_value = params[:q][:hauls_eq_any] if params[:q][:hauls_eq_any]
+      gon.params_value += params[:q][:state_cont_any] if params[:q][:state_cont_any]
+    end
   end
 
   def tacks_result
     smart_listing_create(:tacks, @tacks, partial: "home/tacks/tack_list")
+    if params[:q]
+      gon.params_value = params[:q][:tack_cont_any] if params[:q][:tack_cont_any]
+      gon.params_value += params[:q][:tack_type_cont_any] if params[:q][:tack_type_cont_any]
+      gon.params_value += params[:q][:condition_cont_any] if params[:q][:condition_cont_any]
+    end
+
   end
 
   def real_estates_result
     smart_listing_create(:real_estates, @real_estates, partial: "home/real_estates/real_estate_list")
+    if params[:q]
+      gon.params_value = params[:q][:house_type_cont_any] if params[:q][:house_type_cont_any]
+      gon.params_value += params[:q][:bedroom_eq_any] if params[:q][:bedroom_eq_any]
+      gon.params_value += params[:q][:state_cont_any] if params[:q][:state_cont_any]
+    end
+  
   end
 
   def services_result
     smart_listing_create(:services, @services, partial: "home/services/service_list")
+    if params[:q]
+      gon.params_value = params[:q][:service_type_cont_any] if params[:q][:service_type_cont_any]
+      gon.params_value += params[:q][:state_cont_any] if params[:q][:state_cont_any]
+    end
   end
 
   def horses_filter

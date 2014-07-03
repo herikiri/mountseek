@@ -10,3 +10,6 @@
 	h4#result= "#{tacks_found} Tack Found"
 
 	= smart_listing_render :tacks
+
+= include_gon
+= javascript_include_tag 'inspect_initial_checkbox', 'data-turbolinks-track' => true
