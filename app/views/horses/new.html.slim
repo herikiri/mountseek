@@ -9,3 +9,13 @@ section#profile
 
 = include_gon
 = javascript_include_tag 'inspect_file_upload_limit', 'data-turbolinks-track' => true
+
+
+javascript:
+
+
+	$('#horse_videos').change(function() {
+		$.get( '/horses/youtube_upload', function( data ) {
+			console.log('data');
+  	});
+	});

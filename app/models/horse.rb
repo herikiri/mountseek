@@ -12,12 +12,13 @@ class Horse < ActiveRecord::Base
 
 	accepts_nested_attributes_for :disciplines
 	accepts_nested_attributes_for :rideabilities
+	accepts_nested_attributes_for :videos
 	
-	validates :title, :description, :city, :state, :ad_for, :zip_code, :breed, :gender, :birth, :price, :user_name, :email, presence: true
+	#validates :title, :description, :city, :state, :ad_for, :zip_code, :breed, :gender, :birth, :price, :user_name, :email, presence: true
 
-	validates :email, :email_format => {:message => 'is not looking good'}
+	#validates :email, :email_format => {:message => 'is not looking good'}
 
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  #validates :price, numericality: { greater_than_or_equal_to: 0 }
 
 	is_impressionable :counter_cache => true, :column_name => :views_count, :unique => :ip_address
 	acts_as_votable

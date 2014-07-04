@@ -29,6 +29,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     acts_as_votable (0.9.0)
+    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     authorize-net (1.5.2)
       nokogiri (~> 1.4)
@@ -64,6 +65,8 @@ GEM
     coffee-script-source (1.7.0)
     colored (1.2)
     columnize (0.8.9)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     debugger (1.6.8)
@@ -139,7 +142,7 @@ GEM
     jquery-turbolinks (2.0.2)
       railties (>= 3.1.0)
       turbolinks
-    json (1.8.1)
+    json (1.7.7)
     jwt (1.0.0)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
@@ -234,22 +237,18 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.0.0)
-    rdoc (4.1.1)
-      json (~> 1.4)
     ref (1.0.5)
     request_store (1.0.6)
     require_all (1.3.2)
     rmagick (2.13.2)
     ruby-progressbar (1.5.1)
+    safe_yaml (1.0.3)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
-    sdoc (0.4.0)
-      json (~> 1.8)
-      rdoc (~> 4.0, < 5.0)
     sexp_processor (4.4.3)
     simple_form (3.1.0.rc1)
       actionpack (~> 4.0)
@@ -299,23 +298,23 @@ GEM
       coffee-rails
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
-    uglifier (2.5.1)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
     unicode_utils (1.4.0)
     validates_email_format_of (1.5.3)
     warden (1.2.3)
       rack (>= 1.0)
-    youtube_it (2.1.1)
+    webmock (1.18.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+    youtube_it (2.4.0)
       builder
-      builder
-      faraday
-      faraday (>= 0.7.3)
-      nokogiri
-      oauth
-      oauth (>= 0.4.4)
-      simple_oauth
+      excon
+      faraday (~> 0.8)
+      json (~> 1.7.7)
+      nokogiri (~> 1.6.0)
+      oauth (~> 0.4.4)
+      oauth2 (~> 0.6)
       simple_oauth (>= 0.1.5)
+      webmock
 
 PLATFORMS
   ruby
@@ -343,10 +342,12 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   jquery-turbolinks
+  json (~> 1.7.7)
   jwt
   mailboxer
   nested_form
   nprogress-rails (~> 0.1.2.3)
+  oauth2
   omniauth
   omniauth-facebook
   owlcarousel-rails
@@ -359,7 +360,6 @@ DEPENDENCIES
   ransack
   rmagick
   sass-rails (~> 4.0.3)
-  sdoc (~> 0.4.0)
   simple_form (= 3.1.0.rc1)
   slim-rails
   smart_listing
@@ -368,6 +368,5 @@ DEPENDENCIES
   thin
   turbolinks
   turbolinks_transitions
-  uglifier (>= 1.3.0)
   validates_email_format_of
-  youtube_it
+  youtube_it (~> 2.4.0)

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources item.to_sym do
       collection do
         get 'search'
+        get 'youtube_upload'
       end
       member do
         get 'search'

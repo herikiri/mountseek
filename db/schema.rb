@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702063418) do
+ActiveRecord::Schema.define(version: 20140704025343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -584,8 +584,15 @@ ActiveRecord::Schema.define(version: 20140702063418) do
     t.string   "description"
     t.string   "category"
     t.string   "keywords"
+    t.string   "link"
+    t.string   "uid"
+    t.string   "author"
+    t.string   "duration"
+    t.integer  "likes"
+    t.integer  "dislikes"
   end
 
+  add_index "videos", ["uid"], name: "index_videos_on_uid", unique: true, using: :btree
   add_index "videos", ["videoable_id"], name: "index_videos_on_videoable_id", using: :btree
   add_index "videos", ["videoable_type"], name: "index_videos_on_videoable_type", using: :btree
 

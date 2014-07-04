@@ -1,6 +1,6 @@
 class HorsesController < ApplicationController
   before_action :set_user, only: [:like, :dislike]
-  before_action :set_horse, except: [:index, :create, :search, :new]
+  before_action :set_horse, except: [:index, :create, :search, :new, :youtube_upload]
   before_action :authenticate_user!, only: [:new, :like, :dislike]
   before_action :set_items_gallery, only: [:show, :preview]
   #before_action :set_rideability_params, only: [:create]
@@ -47,13 +47,13 @@ class HorsesController < ApplicationController
           @horse.rideabilities.create(@rideability_params) 
         end
 
-        unless params[:horse][:videos].nil?
-          url = "https://accounts.google.com/o/oauth2/auth?client_id=886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com&redirect_uri=http://lvh.me:3000/oauth2callback&scope=https://gdata.youtube.com&response_type=code&approval_prompt=force&access_type=offline"
-          format.html { redirect_to url }
-        else
-          format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
-        end
-        
+        #unless params[:horse][:videos].nil?
+        #  url = "https://accounts.google.com/o/oauth2/auth?client_id=886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com&redirect_uri=http://lvh.me:3000/oauth2callback&scope=https://gdata.youtube.com&response_type=code&approval_prompt=force&access_type=offline"
+        #  format.html { redirect_to url }
+        #else
+        #  format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
+        #end
+        format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
       else
         format.html { render :new, notice: 'Save Horse Failed!' }
       end
@@ -161,6 +161,11 @@ class HorsesController < ApplicationController
     smart_listing_create(:horses, @horses, partial: "horses/horse_list")
   end
 
+  def youtube_upload
+
+    redirect_to "/"
+  end
+
   private 
     # Use callbacks to share common setup or constraints between actions.
     def set_horse
@@ -182,7 +187,8 @@ class HorsesController < ApplicationController
         :birth, :color, :height, :weight, :package_id, :registration, :registration_num,
         :second_reg, :second_reg_num, :other_markings, :second_breed, :temperament,
         :user_name, :farm_name, :email, :website, :phone_number, :alt_phone_number,
-        disciplines_attributes: [:id, :name, :experience, :_destroy])
+        disciplines_attributes: [:id, :name, :experience, :_destroy],
+        videos_attributes: [:id, :link, :_destroy])
     end
 
     def horse_pictures_param

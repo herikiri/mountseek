@@ -2,7 +2,8 @@ require 'youtube_it'
 
 class Oauth2CallbacksController < ApplicationController
   def google
-    render :text => params[:code]
+    #render :text => params[:code]
+    #request.env["HTTP_REFERER"] = '/packages/2/horses/new'
 
     conn = Faraday.new(:url => 'https://accounts.google.com',:ssl => {:verify => false}) do |faraday|
      faraday.request  :url_encoded
@@ -23,15 +24,18 @@ class Oauth2CallbacksController < ApplicationController
       key, refresh_token_value = refresh_token_line.split ': ', 2
 
       access_token = access_token_value.gsub(/"/, "").gsub(/,/,"")
-      expires_in = expires_in_value.gsub(/"/, "").gsub(/,/,"")
+      expires_at = expires_in_value.gsub(/"/, "").gsub(/,/,"")
       refresh_token = refresh_token_value.gsub(/"/, "").gsub(/,/,"")
   
-      client = YouTubeIt::AuthSubClient.new(:token => access_token , :dev_key => "AIzaSyAq1ngA0WP73hu-3Mdr6dVpA5-nPmT5kjo")
-      #client.video_upload("http://media.railscasts.com/assets/episodes/videos/412-fast-rails-commands.mp4", :title => "test",:description => 'some description', :category => 'People',:keywords => %w[cool blah test])
+      client = YouTubeIt::OAuth2Client.new(client_access_token: access_token, client_refresh_token: refresh_token, client_id: "886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com", client_secret: "0xAKK6ObS9ljy1NT9Fsq1934", dev_key: "AIzaSyAq1ngA0WP73hu-3Mdr6dVpA5-nPmT5kjo", expires_at: expires_at)
+
+      video = File.open(Rails.application.config.assets.paths[0]+"/sample.mp4")
+      client.video_upload(video, :title => "test",:description => 'some description', :category => 'People',:keywords => %w[cool blah test])
 
       puts "********************************************"
       puts client.my_videos
       puts "********************************************"
+      redirect_to :back
     end
 
     
