@@ -10,8 +10,8 @@ class Horse < ActiveRecord::Base
 
 	has_many :rideabilities, dependent: :destroy
 
-	accepts_nested_attributes_for :disciplines, allow_destroy: true
-	accepts_nested_attributes_for :rideabilities, allow_destroy: true, reject_if: :reject_blank_disciplines
+	accepts_nested_attributes_for :disciplines, allow_destroy: true, reject_if: :reject_blank_disciplines
+	accepts_nested_attributes_for :rideabilities, allow_destroy: true
 	accepts_nested_attributes_for :videos, allow_destroy: true, reject_if: :reject_blank_videos
 
 
