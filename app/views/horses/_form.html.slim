@@ -86,7 +86,7 @@ javascript:
 
 
   $('#horse_videos').change(function() {
-    
+    if (!gon.session_oauth2_result) {
       window.location.href = url;
-    
+    }  
   });
