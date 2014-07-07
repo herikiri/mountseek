@@ -12,22 +12,38 @@ class Video < ActiveRecord::Base
       self.errors.add(:link, 'is invalid.')
       false
     end
-    get_additional_info
+
+    get_additional_info if uid
+    
   end
 
+
   #validates :link, presence: true, format: YT_LINK_FORMAT
+
+  def self.yt_client(session) 
+    @@client = YouTubeIt::OAuth2Client.new(
+            client_access_token: session[0], 
+            client_refresh_token: session[2], 
+            client_id: "886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com", 
+            client_secret: "0xAKK6ObS9ljy1NT9Fsq1934", 
+            dev_key: "AIzaSyAq1ngA0WP73hu-3Mdr6dVpA5-nPmT5kjo", 
+            expires_at: session[1])
+  end
+
 
   private
 
   def get_additional_info
     begin
-      client = YouTubeIt::AuthSubClient.new(dev_key: "AIzaSyAq1ngA0WP73hu-3Mdr6dVpA5-nPmT5kjo")
-      video = client.video_by(uid)
+      video = @@client.video_by(uid)
       self.title = video.title
+      self.description = video.description
       self.duration = parse_duration(video.duration)
       self.author = video.author.name
-      self.likes = video.rating.likes
-      self.dislikes = video.rating.dislikes
+      unless video.rating.nil?
+        self.likes = video.rating.likes 
+        self.dislikes = video.rating.dislikes
+      end
     rescue
       self.title = '' ; self.duration = '00:00:00' ; self.author = '' ; self.likes = 0 ; self.dislikes = 0
     end

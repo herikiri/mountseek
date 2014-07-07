@@ -11,20 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704025343) do
+ActiveRecord::Schema.define(version: 20140707160212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "adisciplines", force: true do |t|
-    t.string   "name"
-    t.string   "experience"
-    t.integer  "horse_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "adisciplines", ["horse_id"], name: "index_adisciplines_on_horse_id", using: :btree
 
   create_table "ads", force: true do |t|
     t.integer  "user_id"
@@ -37,8 +27,6 @@ ActiveRecord::Schema.define(version: 20140704025343) do
     t.datetime "updated_at"
   end
 
-  add_index "ads", ["adable_id"], name: "index_ads_on_adable_id", using: :btree
-  add_index "ads", ["adable_type"], name: "index_ads_on_adable_type", using: :btree
   add_index "ads", ["package_id"], name: "index_ads_on_package_id", using: :btree
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
 
@@ -82,26 +70,6 @@ ActiveRecord::Schema.define(version: 20140704025343) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "disciplines_services", id: false, force: true do |t|
-    t.integer  "service_id"
-    t.integer  "discipline_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "disciplines_services", ["discipline_id"], name: "index_disciplines_services_on_discipline_id", using: :btree
-  add_index "disciplines_services", ["service_id"], name: "index_disciplines_services_on_service_id", using: :btree
-
-  create_table "disciplines_tacks", force: true do |t|
-    t.integer  "tack_id"
-    t.integer  "discipline_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "disciplines_tacks", ["discipline_id"], name: "index_disciplines_tacks_on_discipline_id", using: :btree
-  add_index "disciplines_tacks", ["tack_id"], name: "index_disciplines_tacks_on_tack_id", using: :btree
 
   create_table "experience_options", force: true do |t|
     t.string   "name"
@@ -269,9 +237,6 @@ ActiveRecord::Schema.define(version: 20140704025343) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "pictures", ["imageable_id"], name: "index_pictures_on_imageable_id", using: :btree
-  add_index "pictures", ["imageable_type"], name: "index_pictures_on_imageable_type", using: :btree
 
   create_table "profiles", force: true do |t|
     t.string   "name"
@@ -581,7 +546,7 @@ ActiveRecord::Schema.define(version: 20140704025343) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.string   "category"
     t.string   "keywords"
     t.string   "link"
@@ -593,8 +558,6 @@ ActiveRecord::Schema.define(version: 20140704025343) do
   end
 
   add_index "videos", ["uid"], name: "index_videos_on_uid", unique: true, using: :btree
-  add_index "videos", ["videoable_id"], name: "index_videos_on_videoable_id", using: :btree
-  add_index "videos", ["videoable_type"], name: "index_videos_on_videoable_type", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"

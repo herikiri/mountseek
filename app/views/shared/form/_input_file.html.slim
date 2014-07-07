@@ -6,14 +6,12 @@
         = f.input :pictures, as: :file, label: 'Browse Image', input_html: { multiple: true }
         .alert.alert-danger.image-upload-alert role="alert" style="display:none" Image upload count reach limit!
 
-
-        /!
-        	= f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
-
+      	= f.input :videos, as: :file, label: 'Browse Video', input_html: { multiple: true }
 
         = f.simple_fields_for :videos do |fv|
         	.row
 				    = fv.input :link, label: false, placeholder: "Enter Youtube Video URL Here"
+
         p.count.cap
         	= f.link_to_add "+ Add Another Video Url", :videos
         	

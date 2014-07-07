@@ -10,9 +10,11 @@ class Horse < ActiveRecord::Base
 
 	has_many :rideabilities, dependent: :destroy
 
-	accepts_nested_attributes_for :disciplines
-	accepts_nested_attributes_for :rideabilities
-	accepts_nested_attributes_for :videos
+	accepts_nested_attributes_for :disciplines, allow_destroy: true
+	accepts_nested_attributes_for :rideabilities, allow_destroy: true, reject_if: :reject_blank_disciplines
+	accepts_nested_attributes_for :videos, allow_destroy: true, reject_if: :reject_blank_videos
+
+
 	
 	#validates :title, :description, :city, :state, :ad_for, :zip_code, :breed, :gender, :birth, :price, :user_name, :email, presence: true
 
@@ -68,5 +70,14 @@ class Horse < ActiveRecord::Base
 	def ad_banner
 		self.pictures.find(self.banner) if self.pictures.present?
 	end
+
+	private 
+		def reject_blank_videos(attributed)
+			attributed['link'].blank?
+		end
+
+		def reject_blank_disciplines(attributed)
+			attributed['name'].blank? || attributed['experience'].blank? 
+		end
 	
 end

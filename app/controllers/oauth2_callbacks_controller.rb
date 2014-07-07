@@ -2,9 +2,6 @@ require 'youtube_it'
 
 class Oauth2CallbacksController < ApplicationController
   def google
-    #render :text => params[:code]
-    #request.env["HTTP_REFERER"] = '/packages/2/horses/new'
-
     conn = Faraday.new(:url => 'https://accounts.google.com',:ssl => {:verify => false}) do |faraday|
      faraday.request  :url_encoded
      faraday.response :logger
@@ -13,7 +10,7 @@ class Oauth2CallbacksController < ApplicationController
 
     if params[:code]
       result = conn.post '/o/oauth2/token', {'code' => params[:code], 'client_id' => "886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com",
-    'client_secret' => "0xAKK6ObS9ljy1NT9Fsq1934",'redirect_uri' => 'http://lvh.me:3000/oauth2callback','grant_type' => 'authorization_code'}
+        'client_secret' => "0xAKK6ObS9ljy1NT9Fsq1934",'redirect_uri' => 'http://lvh.me:3000/oauth2callback','grant_type' => 'authorization_code'}
     
       access_token_line = result.body.lines.second
       expires_in_line = result.body.lines.fourth
@@ -23,23 +20,18 @@ class Oauth2CallbacksController < ApplicationController
       key, expires_in_value = expires_in_line.split ': ', 2
       key, refresh_token_value = refresh_token_line.split ': ', 2
 
-      access_token = access_token_value.gsub(/"/, "").gsub(/,/,"")
-      expires_at = expires_in_value.gsub(/"/, "").gsub(/,/,"")
-      refresh_token = refresh_token_value.gsub(/"/, "").gsub(/,/,"")
+      access_token = access_token_value.gsub(/"/, "").gsub(/,/,"").gsub("\n","")
+      expires_at = expires_in_value.gsub(/"/, "").gsub(/,/,"").gsub("\n","")
+      refresh_token = refresh_token_value.gsub(/"/, "").gsub(/,/,"").gsub("\n","")
+
+      session[:oauth2_result] = []
+      session[:oauth2_result][0] = access_token
+      session[:oauth2_result][1] = expires_at
+      session[:oauth2_result][2] = refresh_token
   
-      client = YouTubeIt::OAuth2Client.new(client_access_token: access_token, client_refresh_token: refresh_token, client_id: "886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com", client_secret: "0xAKK6ObS9ljy1NT9Fsq1934", dev_key: "AIzaSyAq1ngA0WP73hu-3Mdr6dVpA5-nPmT5kjo", expires_at: expires_at)
-
-      video = File.open(Rails.application.config.assets.paths[0]+"/sample.mp4")
-      client.video_upload(video, :title => "test",:description => 'some description', :category => 'People',:keywords => %w[cool blah test])
-
-      puts "********************************************"
-      puts client.my_videos
-      puts "********************************************"
-      redirect_to :back
+      redirect_to session[:redirect_uri]
     end
 
-    
   end
 
-  
 end

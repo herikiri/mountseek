@@ -72,11 +72,21 @@
   = render "shared/form/terms_and_conditions", f: f
 
   = render "shared/form/submit_button", f: f
-  
+
+= include_gon
+= javascript_include_tag 'inspect_file_upload_limit', 'data-turbolinks-track' => true
 
 javascript:
   $('select[id*="horse_birth"]').wrap('<div class="col-md-6">');
 
+  var google_client_id = "886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com";
+  var google_redirect_uri = "http://lvh.me:3000/oauth2callback";
+
+  var url = "https://accounts.google.com/o/oauth2/auth?client_id="+google_client_id+"&redirect_uri="+google_redirect_uri+"&scope=https://gdata.youtube.com&response_type=code&approval_prompt=force&access_type=offline"
 
 
-  
+  $('#horse_videos').change(function() {
+    
+      window.location.href = url;
+    
+  });

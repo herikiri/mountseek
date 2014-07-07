@@ -196,7 +196,7 @@ def random_dec (min, max)
   rand * (max-min) + min
 end
 
-=begin
+
 
 User.delete_all
 User.connection.execute('ALTER SEQUENCE users_id_seq RESTART WITH 1')
@@ -227,7 +227,6 @@ Picture.connection.execute('ALTER SEQUENCE pictures_id_seq RESTART WITH 1')
 Discipline.delete_all
 Discipline.connection.execute('ALTER SEQUENCE disciplines_id_seq RESTART WITH 1')
 
-=end
 
 Horse.delete_all
 Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
@@ -268,7 +267,7 @@ Horse.connection.execute('ALTER SEQUENCE horses_id_seq RESTART WITH 1')
 end
 
 
-=begin
+
 Stud.delete_all
 Stud.connection.execute('ALTER SEQUENCE studs_id_seq RESTART WITH 1')
 (1..DATA_COUNT).each do |num|
@@ -467,4 +466,3 @@ Service.connection.execute('ALTER SEQUENCE services_id_seq RESTART WITH 1')
   
 end
 
-=end

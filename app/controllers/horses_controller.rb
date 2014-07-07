@@ -3,6 +3,7 @@ class HorsesController < ApplicationController
   before_action :set_horse, except: [:index, :create, :search, :new, :youtube_upload]
   before_action :authenticate_user!, only: [:new, :like, :dislike]
   before_action :set_items_gallery, only: [:show, :preview]
+  before_action :set_yt_client, only: [:create]
   #before_action :set_rideability_params, only: [:create]
 
   impressionist :actions=>[:show]
@@ -23,8 +24,11 @@ class HorsesController < ApplicationController
     @horse = Package.find(params[:package_id]).horses.new
     @horse.disciplines.new
     @horse.rideabilities.new
+    @horse.videos.new
     gon.image_upload_limit = @horse.package.max_photo_upload
     gon.video_upload_limit = @horse.package.max_video_upload
+    gon.session_oauth2_result = session[:oauth2_result] if session[:oauth2_result].size > 0 || session[:oauth2_result]
+    session[:redirect_uri] = "/packages/"+params[:package_id]+"/horses/new"
   end
 
     # GET /horses/:id/edit
@@ -47,12 +51,18 @@ class HorsesController < ApplicationController
           @horse.rideabilities.create(@rideability_params) 
         end
 
-        #unless params[:horse][:videos].nil?
-        #  url = "https://accounts.google.com/o/oauth2/auth?client_id=886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com&redirect_uri=http://lvh.me:3000/oauth2callback&scope=https://gdata.youtube.com&response_type=code&approval_prompt=force&access_type=offline"
-        #  format.html { redirect_to url }
-        #else
-        #  format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
-        #end
+        unless params[:horse][:videos].nil?
+          regex_format = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/i
+          
+          params[:horse][:videos].each do |horse_video|
+            video = File.open(horse_video.tempfile)
+            video_result = @yt_client.video_upload(video, :title => "test",:description => 'some description', :category => 'People',:keywords => %w[cool blah test])
+
+            @horse.videos.create(link: video_result.media_content[0].url)            
+          end
+
+
+        end
         format.html { redirect_to preview_horse_url(@horse), notice: 'Ad Horse Saved!' }
       else
         format.html { render :new, notice: 'Save Horse Failed!' }
@@ -205,6 +215,10 @@ class HorsesController < ApplicationController
         @rideability_params << {name: rideability}
       end
       
+    end
+
+    def set_yt_client
+      @yt_client = Video.yt_client(session[:oauth2_result]) if session[:oauth2_result]
     end
 
 end
