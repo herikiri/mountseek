@@ -1,2 +1,6 @@
 facebook_key: "1493304457550489"
 facebook_secret: "3fa2556c982794917f949a571510c6c7"
+google_client_id: "886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com"
+google_client_secret: "0xAKK6ObS9ljy1NT9Fsq1934"
+google_api_key: "AIzaSyAq1ngA0WP73hu-3Mdr6dVpA5-nPmT5kjo"
+google_redirect_uri: "http://lvh.me:3000/oauth2callback"

@@ -24,9 +24,9 @@ class Video < ActiveRecord::Base
     @@client = YouTubeIt::OAuth2Client.new(
             client_access_token: session[0], 
             client_refresh_token: session[2], 
-            client_id: "886645300352-eqrmcrbjv1hkraj3eu3heg4u14cdqbk0.apps.googleusercontent.com", 
-            client_secret: "0xAKK6ObS9ljy1NT9Fsq1934", 
-            dev_key: "AIzaSyAq1ngA0WP73hu-3Mdr6dVpA5-nPmT5kjo", 
+            client_id: Settings.google_client_id, 
+            client_secret: Settings.google_client_secret, 
+            dev_key: Settings.google_api_key, 
             expires_at: session[1])
   end
 

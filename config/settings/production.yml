@@ -1,2 +1,6 @@
 facebook_key: "1491968337684101"
 facebook_secret: "1124f546fd7b0e86ce7c80083dc68d78"
+google_client_id: "886645300352-f7dglrdob88cg4dgbi9a93adrr2036ig.apps.googleusercontent.com"
+google_client_secret: "-oXWRDtYAINmvWOob7P16gls"
+google_api_key: "AIzaSyDfFYxaahYDptzwk4V96bx6W9giK0UeD9s"
+google_redirect_uri: "http://mountseek.herokuapp.com/oauth2callback"

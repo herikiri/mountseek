@@ -25,9 +25,15 @@ class HorsesController < ApplicationController
     @horse.disciplines.new
     @horse.rideabilities.new
     @horse.videos.new
+
+    # Initialize for javascript variables
     gon.image_upload_limit = @horse.package.max_photo_upload
     gon.video_upload_limit = @horse.package.max_video_upload
     gon.session_oauth2_result = session[:oauth2_result] if session[:oauth2_result].size > 0 || session[:oauth2_result]
+    gon.google_client_id = Settings.google_client_id
+    gon.google_redirect_uri = Settings.google_redirect_uri
+
+    # Redirect URI from oauth2 callback
     session[:redirect_uri] = "/packages/"+params[:package_id]+"/horses/new"
   end
 
@@ -219,6 +225,7 @@ class HorsesController < ApplicationController
 
     def set_yt_client
       @yt_client = Video.yt_client(session[:oauth2_result]) if session[:oauth2_result]
+      @yt_client.refresh_access_token!
     end
 
 end
